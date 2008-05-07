@@ -22,11 +22,13 @@ namespace LibZES
 		System.Data.Common.DbConnection con = new System.Data.SqlClient.SqlConnection();
         string username = null;
         string password = null;
-        int userid=0;
+        int userId=0;
         
         System.Collections.Hashtable options = new System.Collections.Hashtable();
         private StatusCode ConnectDb()
         {
+            if (con.State == System.Data.ConnectionState.Open)
+                con.Close();
         	string cs = "Server="+GetOption("Server")+";Database="+GetOption("Database")+";Uid="+GetOption("Uid")+";Pwd="+GetOption("Pwd")+";";
             con.ConnectionString = cs;
             StatusCode status = StatusCode.DB_CONNECTION_FAILED;
@@ -47,7 +49,17 @@ namespace LibZES
         
         private StatusCode ValidateUserCredentials(string p_username, string p_password)
         {
-        	return StatusCode.USER_VALIDATION_SUCCESSFULL;
+            
+            System.Data.Common.DbCommand cmd = con.CreateCommand(); 
+            cmd.CommandText = String.Format("SELECT LoginPasswort FROM dbo.Mitarbeiter WHERE LoginNamen = '{0}';",p_username);
+            string pw = (string)cmd.ExecuteScalar();
+            //System.Windows.Forms.MessageBox.Show(pw);
+            if (pw == p_password)
+                return StatusCode.USER_VALIDATION_SUCCESSFULL;
+            else
+                return StatusCode.USER_VALIDATION_FAILED;
+            
+        	
         	
         }
 

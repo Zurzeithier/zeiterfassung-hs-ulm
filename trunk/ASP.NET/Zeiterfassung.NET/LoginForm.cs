@@ -62,7 +62,7 @@ namespace Zeiterfassung.NET
             btnLogin.Enabled = false;
             System.Threading.Thread.Sleep(1000);
             ApplyOptions();
-            backend.Login("", "");
+            backend.Login(this.textBox2.Text, this.textBox3.Text);
             btnLogin.Enabled = true;
         }
 

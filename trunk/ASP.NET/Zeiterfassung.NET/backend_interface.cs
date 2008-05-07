@@ -62,7 +62,7 @@ namespace LibZES
             {
                 username = p_username;
                 password = p_password;
-                userid = GetUserId(username);
+                userId = GetUserId(username);
                 userLoggedIn = true;
                 status = StatusCode.LOGIN_SUCCESSFULL;
             }
@@ -137,10 +137,34 @@ namespace LibZES
         public String QueryTest1()
         {
             System.Data.Common.DbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT Namen FROM dbo.Mitarbeiter WHERE MId = 1";
+            cmd.CommandText = "SELECT LoginNamen FROM dbo.Mitarbeiter WHERE MId = 1";
             String erg = (String)cmd.ExecuteScalar();
             return erg;
 
+        }
+
+        public void DBX()
+        {
+
+
+        }
+
+        public void NewZeitBuchung(ZBTyp typ)
+        {
+
+        }
+
+        public ZeitBuchung[] QueryRecentZeitBuchungenForEmployee()
+        {
+            System.Collections.ArrayList al = new System.Collections.ArrayList();
+            System.Data.Common.DbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT BId,TypId,Datum,MId,KstId,KoaId FROM dbo.ZeitBuchung WHERE MId = " + userId + " LIMIT 5";
+            System.Data.Common.DbDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                al.Add(ZeitBuchung.FromReader(rdr));
+            }
+            return (ZeitBuchung[])al.ToArray();
         }
 
 	}
