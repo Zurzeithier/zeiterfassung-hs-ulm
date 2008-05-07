@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="backend_interface.cs" />
     <Compile Include="backend_internal.cs" />
+    <Compile Include="dtypes.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -15,7 +15,7 @@ namespace Zeiterfassung.NET
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
-            textBox1.Text = (backend.QueryTest1());
+            
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -32,6 +32,27 @@ namespace Zeiterfassung.NET
         private void MainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            backend.Logout();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            LibZES.ZeitBuchung[] buchungen = backend.QueryRecentZeitBuchungenForEmployee();
+            foreach (LibZES.ZeitBuchung b in buchungen)
+            {
+                listBox1.Items.Add(b.ToString());
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            backend.DBX();
+            textBox1.Text = (backend.QueryTest1());
         }
     }
 }
