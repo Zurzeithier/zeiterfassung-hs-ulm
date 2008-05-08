@@ -4,14 +4,29 @@ using System.Text;
 
 namespace LibZES
 {
-    public enum ZBTyp
-    {
-        UNBEKANNT,
-        KOMMEN,
-        GEHEN
-    }
+    
     public class ZeitBuchung
     {
+        public enum ZBTyp
+        {
+            UNBEKANNT,
+            KOMMEN,
+            GEHEN
+        }
+        public static int ZBTypToOrdinal(ZBTyp typ)
+        {
+            switch (typ)
+            {
+                case ZBTyp.KOMMEN:
+                    return 1;
+                break;
+                case ZBTyp.GEHEN:
+                    return 2;
+                break;
+                default:
+                    return 0;
+            }
+        }
         public static string ZBTypToString(ZBTyp typ)
         {
             switch (typ)
@@ -35,6 +50,54 @@ namespace LibZES
         public ZeitBuchung()
         {
 
+        }
+        public void ToDatabase(System.Data.Common.DbConnection con)
+        {
+            System.Data.Common.DbCommand cmd = con.CreateCommand();
+            if (bId == -1)
+            {
+                cmd.CommandText = "INSERT INTO dbo.Zeitbuchung (TypId,Datum,MId,KstId,KoaId) VALUES (@TypId,@Datum,@MId,@KstId,@KoaId)";
+            }
+            else
+            {
+                cmd.CommandText = "INSERT INTO dbo.Zeitbuchung (BId,TypId,Datum,MId,KstId,KoaId) VALUES (@BId,@TypId,@Datum,@MId,@KstId,@KoaId)";
+                cmd.Parameters["@BId"].Value = bId;
+                cmd.Parameters["@BId"].DbType = System.Data.DbType.Int32;
+            }
+
+            System.Data.Common.DbParameter p;
+
+            p = new System.Data.SqlClient.SqlParameter();
+            p.DbType = System.Data.DbType.Int32;
+            p.ParameterName = "@TypId";
+            p.Value = typ;
+            cmd.Parameters.Add(p);
+
+            p = new System.Data.SqlClient.SqlParameter();
+            p.DbType = System.Data.DbType.DateTime;
+            p.ParameterName = "@Datum";
+            p.Value = datum;
+            cmd.Parameters.Add(p);
+
+            p = new System.Data.SqlClient.SqlParameter();
+            p.DbType = System.Data.DbType.Int32;
+            p.ParameterName = "@MId";
+            p.Value = mId;
+            cmd.Parameters.Add(p);
+
+            p = new System.Data.SqlClient.SqlParameter();
+            p.DbType = System.Data.DbType.Int32;
+            p.ParameterName = "@KstId";
+            p.Value = kstId;
+            cmd.Parameters.Add(p);
+
+            p = new System.Data.SqlClient.SqlParameter();
+            p.DbType = System.Data.DbType.Int32;
+            p.ParameterName = "@KoaId";
+            p.Value = koaId;
+            cmd.Parameters.Add(p);
+
+            cmd.ExecuteNonQuery();
         }
 
         public string ToString()

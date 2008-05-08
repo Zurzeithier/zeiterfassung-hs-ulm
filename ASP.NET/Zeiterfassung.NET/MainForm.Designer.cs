@@ -96,6 +96,7 @@ namespace Zeiterfassung.NET
             this.button1.TabIndex = 3;
             this.button1.Text = "Kommen";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -105,6 +106,7 @@ namespace Zeiterfassung.NET
             this.button2.TabIndex = 4;
             this.button2.Text = "Gehen";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // listBox1
             // 
@@ -120,7 +122,7 @@ namespace Zeiterfassung.NET
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 6;
-            this.button3.Text = "button3";
+            this.button3.Text = "Update LIst";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
