@@ -51,8 +51,19 @@ namespace Zeiterfassung.NET
 
         private void button4_Click(object sender, EventArgs e)
         {
-            backend.DBX();
-            textBox1.Text = (backend.QueryTest1());
+            
+            //backend.DBX();
+            //textBox1.Text = (backend.QueryTest1());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            backend.NewZeitBuchungForNow(LibZES.ZeitBuchung.ZBTyp.KOMMEN);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            backend.NewZeitBuchungForNow(LibZES.ZeitBuchung.ZBTyp.GEHEN);
         }
     }
 }

@@ -149,22 +149,32 @@ namespace LibZES
 
         }
 
-        public void NewZeitBuchung(ZBTyp typ)
+        public void NewZeitBuchungForNow(LibZES.ZeitBuchung.ZBTyp typ)
         {
-
+            ZeitBuchung b = new ZeitBuchung();
+            b.bId = -1; // Auto Increment
+            b.datum = System.DateTime.Now;
+            b.koaId = 0;
+            b.kstId = 0;
+            b.mId = 1;
+            b.typ = typ;
+            b.ToDatabase(con);
         }
 
         public ZeitBuchung[] QueryRecentZeitBuchungenForEmployee()
         {
             System.Collections.ArrayList al = new System.Collections.ArrayList();
             System.Data.Common.DbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT BId,TypId,Datum,MId,KstId,KoaId FROM dbo.ZeitBuchung WHERE MId = " + userId + " LIMIT 5";
+            cmd.CommandText = "SELECT BId,TypId,Datum,MId,KstId,KoaId FROM dbo.ZeitBuchung WHERE MId = 1";
             System.Data.Common.DbDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
                 al.Add(ZeitBuchung.FromReader(rdr));
             }
-            return (ZeitBuchung[])al.ToArray();
+            rdr.Close();
+            ZeitBuchung[] erg = new ZeitBuchung[al.Count];
+            al.CopyTo(erg);
+            return erg;
         }
 
 	}
