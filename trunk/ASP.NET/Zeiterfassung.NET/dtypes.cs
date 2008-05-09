@@ -13,19 +13,9 @@ namespace LibZES
             KOMMEN,
             GEHEN
         }
-        public static int ZBTypToOrdinal(ZBTyp typ)
+        public static int ZBTypToInt(ZBTyp typ)
         {
-            switch (typ)
-            {
-                case ZBTyp.KOMMEN:
-                    return 1;
-                break;
-                case ZBTyp.GEHEN:
-                    return 2;
-                break;
-                default:
-                    return 0;
-            }
+            return (int)typ;
         }
         public static string ZBTypToString(ZBTyp typ)
         {
@@ -41,12 +31,40 @@ namespace LibZES
                     return "???";
             }
         }
+
+        public static ZBTyp IntToZBTyp(int no)
+        {
+            return (ZBTyp)no;
+        }
+
         public int bId;
         public System.DateTime datum;
         public ZBTyp typ;
         public int mId;
         public int kstId;
         public int koaId;
+        /*
+        public ZeitBuchung GetCorrespondingTransaction(System.Data.Common.DbConnection con)
+        {
+            System.Data.Common.DbCommand cmd = con.CreateCommand();
+            if (typ = ZBTyp.GEHEN)
+                cmd.CommandText = "SELECT * FROM dbo.ZeitBuchung WHERE Datum < @Datum";
+            if (typ = ZBTyp.KOMMEN)
+                cmd.CommandText = "SELECT * FROM dbo.ZeitBuchung WHERE Datum > @Datum";
+            
+            System.Data.SqlClient.SqlParameter p;
+            p = new System.Data.SqlClient.SqlParameter();
+            p.DbType = System.Data.DbType.DateTime;
+            p.ParameterName = "@Datum";
+            p.Value = datum;
+            cmd.Parameters.Add(p);
+
+            System.Data.Common.DbDataReader rdr = cmd.ExecuteReader();
+            ZeitBuchung b = ZeitBuchung.FromReader(rdr);
+
+            return b;
+        }
+         * */
         public ZeitBuchung()
         {
 
@@ -70,7 +88,7 @@ namespace LibZES
             p = new System.Data.SqlClient.SqlParameter();
             p.DbType = System.Data.DbType.Int32;
             p.ParameterName = "@TypId";
-            p.Value = typ;
+            p.Value = ZeitBuchung.ZBTypToInt(typ);
             cmd.Parameters.Add(p);
 
             p = new System.Data.SqlClient.SqlParameter();
@@ -100,7 +118,7 @@ namespace LibZES
             cmd.ExecuteNonQuery();
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return datum.ToString() + ": " + ZBTypToString(typ);
         }
@@ -114,14 +132,18 @@ namespace LibZES
 
             ZeitBuchung b = new ZeitBuchung();
 
-            b.bId = rdr.GetInt32(0);
+            try
+            {
+                b.bId = rdr.GetInt32(0);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
 
             b.typ = ZBTyp.UNBEKANNT;
             int typId = rdr.GetInt32(1);
-            /*switch (typId)
-            {
-
-            }*/
+            b.typ = IntToZBTyp(typId);
 
             b.datum = rdr.GetDateTime(2);
             b.mId = rdr.GetInt32(3);

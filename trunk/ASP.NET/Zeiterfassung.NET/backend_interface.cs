@@ -84,14 +84,18 @@ namespace LibZES
         public int GetUserId(string p_username)
 		{
         	int erg = 0;
-			/*
-			con.Open();
 			
 			System.Data.Common.DbCommand cmd = con.CreateCommand();
-			cmd.CommandText = "SELECT MId FROM dbo.Mitarbeiter WHERE an LIKE \"p_username\";";
-			int erg = (int)cmd.ExecuteScalar();
-			cmd.Dispose();
-			con.Close();*/
+			cmd.CommandText = "SELECT MId FROM dbo.Mitarbeiter WHERE LoginNamen = @UserName";
+            System.Data.SqlClient.SqlParameter p;
+            p = new System.Data.SqlClient.SqlParameter();
+            p.DbType = System.Data.DbType.String;
+            p.ParameterName = "@UserName";
+            p.Value = p_username;
+            cmd.Parameters.Add(p);
+            
+            erg = (int)cmd.ExecuteScalar();
+			
 			return erg;
 		}
         
@@ -134,23 +138,44 @@ namespace LibZES
         public bool IsUserLoggedIn {
 			get { return userLoggedIn; }
 		}
-        public String QueryTest1()
+        public String GetFullUsername()
         {
             System.Data.Common.DbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT LoginNamen FROM dbo.Mitarbeiter WHERE MId = 1";
-            String erg = (String)cmd.ExecuteScalar();
+            cmd.CommandText = "SELECT Vornamen,Namen FROM dbo.Mitarbeiter WHERE MId = 1";
+            
+            System.Data.SqlClient.SqlParameter p;
+            p = new System.Data.SqlClient.SqlParameter();
+            p.DbType = System.Data.DbType.Int32;
+            p.ParameterName = "@MId";
+            p.Value = 1;
+            cmd.Parameters.Add(p);
+
+            System.Data.Common.DbDataReader rdr = cmd.ExecuteReader();
+            rdr.Read();
+            string erg = "";
+            try
+            {
+                erg = rdr.GetString(0) + " " + rdr.GetString(1);
+            }
+            catch (Exception e)
+            {
+            }
+            rdr.Close();
             return erg;
 
         }
 
         public void DBX()
         {
-
+            System.Data.Common.DbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "DELETE FROM dbo.ZeitBuchung";
+            cmd.ExecuteNonQuery();
 
         }
 
         public void NewZeitBuchungForNow(LibZES.ZeitBuchung.ZBTyp typ)
         {
+            ZeitBuchung a = GetLastZeitBuchungForEmployee();
             ZeitBuchung b = new ZeitBuchung();
             b.bId = -1; // Auto Increment
             b.datum = System.DateTime.Now;
@@ -158,14 +183,54 @@ namespace LibZES
             b.kstId = 0;
             b.mId = 1;
             b.typ = typ;
+            switch (typ)
+            {
+                case ZeitBuchung.ZBTyp.GEHEN:
+                    if (a == null || a.typ != ZeitBuchung.ZBTyp.KOMMEN)
+                        return;
+                break;
+                case ZeitBuchung.ZBTyp.KOMMEN:
+                    if (a != null && a.typ != ZeitBuchung.ZBTyp.GEHEN)
+                        return;
+                    break;
+
+            }
             b.ToDatabase(con);
         }
 
-        public ZeitBuchung[] QueryRecentZeitBuchungenForEmployee()
+        public ZeitBuchung GetLastZeitBuchungForEmployee()
+        {
+            System.Data.Common.DbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT BId,TypId,Datum,MId,KstId,KoaId FROM dbo.ZeitBuchung WHERE MId = @MId ORDER BY Datum DESC";
+
+            System.Data.SqlClient.SqlParameter p;
+            p = new System.Data.SqlClient.SqlParameter();
+            p.DbType = System.Data.DbType.Int32;
+            p.ParameterName = "@MId";
+            p.Value = 1;
+            cmd.Parameters.Add(p);
+            
+            System.Data.Common.DbDataReader rdr = cmd.ExecuteReader();
+            rdr.Read();
+            ZeitBuchung b = ZeitBuchung.FromReader(rdr);
+            
+            rdr.Close();
+            return b;
+        }
+
+        public ZeitBuchung[] GetRecentZeitBuchungenForEmployee()
         {
             System.Collections.ArrayList al = new System.Collections.ArrayList();
             System.Data.Common.DbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT BId,TypId,Datum,MId,KstId,KoaId FROM dbo.ZeitBuchung WHERE MId = 1";
+            cmd.CommandText = "SELECT BId,TypId,Datum,MId,KstId,KoaId FROM dbo.ZeitBuchung WHERE MId = @MId";
+            
+            System.Data.SqlClient.SqlParameter p;
+            p = new System.Data.SqlClient.SqlParameter();
+            p.DbType = System.Data.DbType.Int32;
+            p.ParameterName = "@MId";
+            p.Value = userId;
+            cmd.Parameters.Add(p);
+
             System.Data.Common.DbDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
