@@ -37,7 +37,7 @@ namespace Zeiterfassung.NET
         {
             backend.delLoginStatusChanged += new Action<LibZES.StatusCode>(loginForm.LoginStatusChanged);
             backend.delLoginStatusChanged += new Action<LibZES.StatusCode>(this.OnLoginStatusChanged);
-
+            backend.delLoginStatusChanged += new Action<LibZES.StatusCode>(mainForm.OnLoginStatusChanged);
         }
         private void SetModelSubscriptionsOnView()
         {
