@@ -137,11 +137,26 @@ namespace Zeiterfassung.NET
 
         public void NewZeitBuchungForNow(ZeitBuchung.ZBTyp typ)
         {
+
+            ZeitBuchung a = GetLastZeitBuchungForEmployee();
+
+            switch (typ)
+            {
+                case ZeitBuchung.ZBTyp.GEHEN:
+                    if (a == null || a.Typ != ZeitBuchung.ZBTyp.KOMMEN)
+                        return;
+                    break;
+                case ZeitBuchung.ZBTyp.KOMMEN:
+                    if (a != null && a.Typ != ZeitBuchung.ZBTyp.GEHEN)
+                        return;
+                    break;
+            }
+
             ZeitBuchung b = npcontext.CreateObject<ZeitBuchung>();
             b.Mid = userId;
             b.TypId = ZeitBuchung.ZBTypToInt(typ);
             b.Datum = System.DateTime.Now;
-            System.Windows.Forms.MessageBox.Show(b.Bid.ToString()+": "+b.ToString());
+
             npcontext.CommitObject(b);
         }
 
@@ -158,7 +173,7 @@ namespace Zeiterfassung.NET
         public ZeitBuchung[] GetRecentZeitBuchungenForEmployee()
         {
 
-            string queryString = "SELECT TOP 5 * FROM Mitarbeiter WHERE MId = ? ORDER BY Datum DESC";
+            string queryString = "SELECT * FROM Mitarbeiter WHERE MId = ? ORDER BY Datum DESC";
 	        NPathQuery npathQuery = new NPathQuery(queryString, typeof(ZeitBuchung));
 	        npathQuery.Parameters.Add(new QueryParameter(DbType.Int32, userId));
 
