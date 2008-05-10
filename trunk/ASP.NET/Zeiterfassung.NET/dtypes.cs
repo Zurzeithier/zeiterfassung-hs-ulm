@@ -2,9 +2,58 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LibZES
+using Puzzle.NPersist.Framework.Attributes;
+
+namespace Zeiterfassung.NET
 {
-    
+    [ClassMap(Table = "Mitarbeiter")]
+    public class Mitarbeiter
+    {
+        string m_Namen;
+        [PropertyMap(Columns = "Namen")]
+        public virtual string Namen
+        {
+            get { return m_Namen; }
+            set { m_Namen = value; }
+        }
+        string m_Vornamen;
+        [PropertyMap(Columns = "Vornamen")]
+        public virtual string Vornamen
+        {
+            get { return m_Vornamen; }
+            set { m_Vornamen = value; }
+        }
+        string m_LoginNamen;
+        [PropertyMap(Columns = "LoginNamen")]
+        public virtual string LoginNamen
+        {
+            get { return m_LoginNamen; }
+            set { m_LoginNamen = value; }
+        }
+        string m_LoginPasswort;
+        [PropertyMap(Columns = "LoginPasswort")]
+        public virtual string LoginPasswort
+        {
+            get { return m_LoginPasswort; }
+            set { m_LoginPasswort = value; }
+        }
+        System.Int32 m_Mid;
+        [PropertyMap(Columns = "Mid", IsIdentity = true, IsAssignedBySource = true)]
+        public virtual System.Int32 Mid
+        {
+            get { return m_Mid; }
+            //set { m_Mid = value; }
+        }
+
+
+
+    }
+
+
+
+
+
+    [ClassMap(Table = "ZeitBuchung")]
     public class ZeitBuchung
     {
         public enum ZBTyp
@@ -37,131 +86,64 @@ namespace LibZES
             return (ZBTyp)no;
         }
 
-        public int bId;
-        public System.DateTime datum;
-        public ZBTyp typ;
-        public int mId;
-        public int kstId;
-        public int koaId;
-        /*
-        public ZeitBuchung GetCorrespondingTransaction(System.Data.Common.DbConnection con)
+        private int m_Bid;
+
+        [PropertyMap(Columns = "Bid",
+        IsIdentity = true, IsAssignedBySource = true)]
+        public virtual int Bid
         {
-            System.Data.Common.DbCommand cmd = con.CreateCommand();
-            if (typ = ZBTyp.GEHEN)
-                cmd.CommandText = "SELECT * FROM dbo.ZeitBuchung WHERE Datum < @Datum";
-            if (typ = ZBTyp.KOMMEN)
-                cmd.CommandText = "SELECT * FROM dbo.ZeitBuchung WHERE Datum > @Datum";
-            
-            System.Data.SqlClient.SqlParameter p;
-            p = new System.Data.SqlClient.SqlParameter();
-            p.DbType = System.Data.DbType.DateTime;
-            p.ParameterName = "@Datum";
-            p.Value = datum;
-            cmd.Parameters.Add(p);
-
-            System.Data.Common.DbDataReader rdr = cmd.ExecuteReader();
-            ZeitBuchung b = ZeitBuchung.FromReader(rdr);
-
-            return b;
+            get { return m_Bid; }
+            //set { m_Bid = value; }
         }
-         * */
-        public ZeitBuchung()
+        private System.DateTime m_Datum;
+
+
+        [PropertyMap(Columns = "Datum")]
+        public virtual System.DateTime Datum
         {
-
+            get { return m_Datum; }
+            set { m_Datum = value; }
         }
-        public void ToDatabase(System.Data.Common.DbConnection con)
+        private int m_TypId;
+
+        [PropertyMap(Columns = "TypId")]
+        public virtual int TypId
         {
-            System.Data.Common.DbCommand cmd = con.CreateCommand();
-            if (bId == -1)
-            {
-                cmd.CommandText = "INSERT INTO dbo.Zeitbuchung (TypId,Datum,MId,KstId,KoaId) VALUES (@TypId,@Datum,@MId,@KstId,@KoaId)";
-            }
-            else
-            {
-                cmd.CommandText = "INSERT INTO dbo.Zeitbuchung (BId,TypId,Datum,MId,KstId,KoaId) VALUES (@BId,@TypId,@Datum,@MId,@KstId,@KoaId)";
-                cmd.Parameters["@BId"].Value = bId;
-                cmd.Parameters["@BId"].DbType = System.Data.DbType.Int32;
-            }
-
-            System.Data.Common.DbParameter p;
-
-            p = new System.Data.SqlClient.SqlParameter();
-            p.DbType = System.Data.DbType.Int32;
-            p.ParameterName = "@TypId";
-            p.Value = ZeitBuchung.ZBTypToInt(typ);
-            cmd.Parameters.Add(p);
-
-            p = new System.Data.SqlClient.SqlParameter();
-            p.DbType = System.Data.DbType.DateTime;
-            p.ParameterName = "@Datum";
-            p.Value = datum;
-            cmd.Parameters.Add(p);
-
-            p = new System.Data.SqlClient.SqlParameter();
-            p.DbType = System.Data.DbType.Int32;
-            p.ParameterName = "@MId";
-            p.Value = mId;
-            cmd.Parameters.Add(p);
-
-            p = new System.Data.SqlClient.SqlParameter();
-            p.DbType = System.Data.DbType.Int32;
-            p.ParameterName = "@KstId";
-            p.Value = kstId;
-            cmd.Parameters.Add(p);
-
-            p = new System.Data.SqlClient.SqlParameter();
-            p.DbType = System.Data.DbType.Int32;
-            p.ParameterName = "@KoaId";
-            p.Value = koaId;
-            cmd.Parameters.Add(p);
-
-            cmd.ExecuteNonQuery();
+            get { return m_TypId; }
+            set { m_TypId = value;  }
         }
+        private int m_Mid;
+
+        [PropertyMap(Columns = "Mid")]
+        public virtual int Mid
+        {
+            get { return m_Mid; }
+            set { m_Mid = value; }
+        }
+        private int m_KstId;
+
+        [PropertyMap(Columns = "KstId")]
+        public virtual int KstId
+        {
+            get { return m_KstId; }
+            set { m_KstId = value; }
+        }
+        private int m_KoaId;
+
+        [PropertyMap(Columns = "KoaId")]
+        public virtual int KoaId
+        {
+            get { return m_KoaId; }
+            set { m_KoaId = value; }
+        }
+        
 
         public override string ToString()
         {
-            return datum.ToString() + ": " + ZBTypToString(typ);
+            return Datum.ToString() + ": " + ZBTypToString(IntToZBTyp(m_TypId));
         }
 
         
-        public static ZeitBuchung FromReader(System.Data.Common.DbDataReader rdr)
-        {
-            
-            if (rdr == null || !rdr.HasRows)
-                return null;
-
-            ZeitBuchung b = new ZeitBuchung();
-
-            try
-            {
-                b.bId = rdr.GetInt32(0);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-
-            b.typ = ZBTyp.UNBEKANNT;
-            int typId = rdr.GetInt32(1);
-            b.typ = IntToZBTyp(typId);
-
-            b.datum = rdr.GetDateTime(2);
-            b.mId = rdr.GetInt32(3);
-            b.kstId = rdr.GetInt32(4);
-            b.koaId = rdr.GetInt32(5);
-
-            return b;
-        }
-        
-    }
-    public class ZeitKonto
-    {
-        public int jahr;
-        public int periode;
-        public int mId;
-        public int minSoll;
-        public int minHaben;
-        public int minSaldo;
         
     }
 

@@ -7,9 +7,14 @@
  * Public Interfaces for business model (back-end)
  */
 
-using System;
 
-namespace LibZES
+using System;
+using Puzzle.NPersist.Framework;
+using Puzzle.NPersist.Framework.Querying;
+using System.Data;
+using System.Data.Common;
+
+namespace Zeiterfassung.NET
 {
     public enum StatusCode
     {
@@ -50,6 +55,10 @@ namespace LibZES
 			if (userLoggedIn)
 				Logout();
 
+
+
+
+
         	if (ConnectDb() != StatusCode.DB_CONNECTION_SUCCESSFULL)
             {
                 status = StatusCode.DB_CONNECTION_FAILED;
@@ -62,7 +71,7 @@ namespace LibZES
             {
                 username = p_username;
                 password = p_password;
-                userId = GetUserId(username);
+                userId = user.Mid;
                 userLoggedIn = true;
                 status = StatusCode.LOGIN_SUCCESSFULL;
             }
@@ -72,7 +81,6 @@ namespace LibZES
 
         public StatusCode Logout()
         {
-            con.Close();
             userLoggedIn = false;
             username = null;
             password = null;
@@ -83,20 +91,7 @@ namespace LibZES
         
         public int GetUserId(string p_username)
 		{
-        	int erg = 0;
-			
-			System.Data.Common.DbCommand cmd = con.CreateCommand();
-			cmd.CommandText = "SELECT MId FROM dbo.Mitarbeiter WHERE LoginNamen = @UserName";
-            System.Data.SqlClient.SqlParameter p;
-            p = new System.Data.SqlClient.SqlParameter();
-            p.DbType = System.Data.DbType.String;
-            p.ParameterName = "@UserName";
-            p.Value = p_username;
-            cmd.Parameters.Add(p);
-            
-            erg = (int)cmd.ExecuteScalar();
-			
-			return erg;
+            return 0;
 		}
         
         public void SetOption(string name, string value)
@@ -117,182 +112,70 @@ namespace LibZES
         	options.Clear();
         }
 
-        public void LoadOptionsFromFile(string fn)
-        {
-            System.IO.StreamReader file = new System.IO.StreamReader(fn);
-            string line = null;
-            string[] line_split;
-            while ((line = file.ReadLine()) != null)
-            {
-                if (line.Contains("="))
-                {
-                    line_split = line.Split("=".ToCharArray());
-                    SetOption(line_split[0],line_split[1]);
-                }
-
-                
-            }
-            file.Close();
-        }
         
         public bool IsUserLoggedIn {
 			get { return userLoggedIn; }
 		}
         public String GetFullUsername()
         {
-            System.Data.Common.DbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT Vornamen,Namen FROM dbo.Mitarbeiter WHERE MId = 1";
-            
-            System.Data.SqlClient.SqlParameter p;
-            p = new System.Data.SqlClient.SqlParameter();
-            p.DbType = System.Data.DbType.Int32;
-            p.ParameterName = "@MId";
-            p.Value = userId;
-            cmd.Parameters.Add(p);
-
-            System.Data.Common.DbDataReader rdr = cmd.ExecuteReader();
-            rdr.Read();
-            string erg = "";
-            erg = rdr.GetString(0) + " " + rdr.GetString(1);
-            rdr.Close();
-
-            return erg;
+            return user.Vornamen + " " + user.Namen;
 
         }
 
         public void DBX()
         {
-            System.Data.Common.DbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "DELETE FROM dbo.ZeitBuchung";
-            cmd.ExecuteNonQuery();
+            /*
+            Mitarbeiter u1 = npcontext.CreateObject<Mitarbeiter>();
+            u1.LoginNamen = "RAGRE";
+            u1.Namen = "Greschner";
+            u1.Vornamen = "Ralph";
+            u1.LoginPasswort = "";
+            npcontext.CommitObject(u1);
+             * */
 
         }
 
-        public void NewZeitBuchungForNow(LibZES.ZeitBuchung.ZBTyp typ)
+        public void NewZeitBuchungForNow(ZeitBuchung.ZBTyp typ)
         {
-            ZeitBuchung a = GetLastZeitBuchungForEmployee();
-            ZeitBuchung b = new ZeitBuchung();
-            b.bId = -1; // Auto Increment
-            b.datum = System.DateTime.Now;
-            b.koaId = 0;
-            b.kstId = 0;
-            b.mId = 1;
-            b.typ = typ;
-            switch (typ)
-            {
-                case ZeitBuchung.ZBTyp.GEHEN:
-                    if (a == null || a.typ != ZeitBuchung.ZBTyp.KOMMEN)
-                        return;
-                break;
-                case ZeitBuchung.ZBTyp.KOMMEN:
-                    if (a != null && a.typ != ZeitBuchung.ZBTyp.GEHEN)
-                        return;
-                    break;
-
-            }
-            b.ToDatabase(con);
+            ZeitBuchung b = npcontext.CreateObject<ZeitBuchung>();
+            b.Mid = userId;
+            b.TypId = ZeitBuchung.ZBTypToInt(typ);
+            b.Datum = System.DateTime.Now;
+            System.Windows.Forms.MessageBox.Show(b.Bid.ToString()+": "+b.ToString());
+            npcontext.CommitObject(b);
         }
 
         public ZeitBuchung GetLastZeitBuchungForEmployee()
         {
-            System.Data.Common.DbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT TOP 1 BId,TypId,Datum,MId,KstId,KoaId FROM dbo.ZeitBuchung WHERE MId = @MId ORDER BY Datum DESC";
+            string queryString = "SELECT TOP 1 * FROM Mitarbeiter WHERE MId = ? ORDER BY Datum DESC";
+            NPathQuery npathQuery = new NPathQuery(queryString, typeof(ZeitBuchung));
+            npathQuery.Parameters.Add(new QueryParameter(DbType.Int32, userId));
 
-            System.Data.SqlClient.SqlParameter p;
-            p = new System.Data.SqlClient.SqlParameter();
-            p.DbType = System.Data.DbType.Int32;
-            p.ParameterName = "@MId";
-            p.Value = userId;
-            cmd.Parameters.Add(p);
-            
-            System.Data.Common.DbDataReader rdr = cmd.ExecuteReader();
-            rdr.Read();
-            ZeitBuchung b = ZeitBuchung.FromReader(rdr);
-            
-            rdr.Close();
-            return b;
+            return (ZeitBuchung)npcontext.GetObjectByNPath(npathQuery);
+
         }
 
         public ZeitBuchung[] GetRecentZeitBuchungenForEmployee()
         {
-            System.Collections.ArrayList al = new System.Collections.ArrayList();
-            System.Data.Common.DbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT TOP 5 BId,TypId,Datum,MId,KstId,KoaId FROM dbo.ZeitBuchung WHERE MId = @MId ORDER BY Datum DESC";
-            
-            System.Data.SqlClient.SqlParameter p;
-            p = new System.Data.SqlClient.SqlParameter();
-            p.DbType = System.Data.DbType.Int32;
-            p.ParameterName = "@MId";
-            p.Value = userId;
-            cmd.Parameters.Add(p);
 
-            System.Data.Common.DbDataReader rdr = cmd.ExecuteReader();
-            while (rdr.Read())
-            {
-                al.Add(ZeitBuchung.FromReader(rdr));
-            }
-            rdr.Close();
-            ZeitBuchung[] erg = new ZeitBuchung[al.Count];
-            al.CopyTo(erg);
-            return erg;
+            string queryString = "SELECT TOP 5 * FROM Mitarbeiter WHERE MId = ? ORDER BY Datum DESC";
+	        NPathQuery npathQuery = new NPathQuery(queryString, typeof(ZeitBuchung));
+	        npathQuery.Parameters.Add(new QueryParameter(DbType.Int32, userId));
+
+            System.Collections.IList l = npcontext.GetObjectsByNPath(npathQuery);
+            ZeitBuchung[] erg = new ZeitBuchung[l.Count];
+            l.CopyTo(erg, 0) ;
+            return erg; 
         }
         
         public char GetTagesSymbolForDay(System.DateTime day)
         {
-            if (day.DayOfWeek == DayOfWeek.Sunday)
-                return '#';
-
-            System.DateTime day_start = System.DateTime.Parse(day.Date.ToShortDateString());
-            System.DateTime day_end = System.DateTime.Parse(day.AddDays(1).Date.ToShortDateString());
-            System.Data.Common.DbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT TOP 1 BId,TypId,Datum,MId,KstId,KoaId FROM dbo.ZeitBuchung WHERE MId = @MId AND Datum >= @Datum1 AND Datum <= @Datum2 ORDER BY Datum DESC";
-        
-            System.Data.SqlClient.SqlParameter p;
-            p = new System.Data.SqlClient.SqlParameter();
-            p.DbType = System.Data.DbType.Int32;
-            p.ParameterName = "@MId";
-            p.Value = userId;
-            cmd.Parameters.Add(p);
-
-            p = new System.Data.SqlClient.SqlParameter();
-            p.DbType = System.Data.DbType.Int32;
-            p.ParameterName = "@Typ";
-            p.Value = ZeitBuchung.ZBTypToInt(ZeitBuchung.ZBTyp.KOMMEN);
-            cmd.Parameters.Add(p);
-
-            p = new System.Data.SqlClient.SqlParameter();
-            p.DbType = System.Data.DbType.Date;
-            p.ParameterName = "@Datum1";
-            p.Value = day_start;
-            cmd.Parameters.Add(p);
-
-            p = new System.Data.SqlClient.SqlParameter();
-            p.DbType = System.Data.DbType.Date;
-            p.ParameterName = "@Datum2";
-            p.Value = day_end;
-            cmd.Parameters.Add(p);
-
-            System.Data.Common.DbDataReader rdr = cmd.ExecuteReader();
-            rdr.Read();
-            ZeitBuchung a = ZeitBuchung.FromReader(rdr);
-            rdr.Close();
-            if (a != null)
-            {
-                System.Windows.Forms.MessageBox.Show(a.ToString());
-            }
-
             return '?';
         }
 
         public char[] GetTagesSymboleForMonth(int year, int month)
         {
-            if (month < 1 || month > 12)
-                return null;
-            int anzTage = System.DateTime.DaysInMonth(year, month);
-            char[] erg = new char[anzTage];
-            for (int i = 0; i < anzTage; ++i)
-                erg[i] = GetTagesSymbolForDay(System.DateTime.Parse(year + "-" + month + "-" + i));
-            return erg;
+            return null;
         }
 	}
 }

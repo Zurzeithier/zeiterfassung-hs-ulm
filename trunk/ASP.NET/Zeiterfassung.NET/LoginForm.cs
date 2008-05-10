@@ -11,7 +11,7 @@ namespace Zeiterfassung.NET
     public partial class LoginForm : Form
     {
         public Action<int> delExitApp;
-        public LibZES.Backend backend;
+        public Backend backend;
         public LoginForm()
         {
             InitializeComponent();
@@ -71,17 +71,17 @@ namespace Zeiterfassung.NET
             delExitApp(0);
         }
 
-        public void LoginStatusChanged(LibZES.StatusCode status)
+        public void LoginStatusChanged(StatusCode status)
         {
             switch (status)
             {
-                case LibZES.StatusCode.LOGIN_SUCCESSFULL:
+                case StatusCode.LOGIN_SUCCESSFULL:
                     Hide();
                     break;
-                case LibZES.StatusCode.LOGOUT_SUCCESSFULL:
+                case StatusCode.LOGOUT_SUCCESSFULL:
                     Show();
                     break;
-                case LibZES.StatusCode.DB_CONNECTION_FAILED:
+                case StatusCode.DB_CONNECTION_FAILED:
                     lblStatus.Text = "Database Connection Failed";
                     break;
             }

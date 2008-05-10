@@ -28,6 +28,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Puzzle.NAspect.Framework.NET2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a8e5914f83beaab3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Puzzle.NAspect.Framework.NET2.dll</HintPath>
+    </Reference>
+    <Reference Include="Puzzle.NCore.Framework.NET2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a8e5914f83beaab3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Puzzle.NCore.Framework.NET2.dll</HintPath>
+    </Reference>
+    <Reference Include="Puzzle.NFactory.Framework.NET2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a8e5914f83beaab3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Puzzle.NFactory.Framework.NET2.dll</HintPath>
+    </Reference>
+    <Reference Include="Puzzle.NPath.Framework.NET2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Puzzle.NPath.Framework.NET2.dll</HintPath>
+    </Reference>
+    <Reference Include="Puzzle.NPersist.Framework.NET2, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Puzzle.NPersist.Framework.NET2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -86,6 +106,7 @@
     <None Include="Resources\LoginPic.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="libzes.npersist" />
     <None Include="Resources\door_in.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
