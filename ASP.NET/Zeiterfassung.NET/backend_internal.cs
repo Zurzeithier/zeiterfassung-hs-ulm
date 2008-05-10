@@ -8,39 +8,42 @@
  */
 
 using System;
+using Puzzle.NPersist.Framework;
+using Puzzle.NPersist.Framework.Querying;
+using System.Data;
+using System.Data.Common;
 
-namespace LibZES
+namespace Zeiterfassung.NET
 {
 	/// <summary>
 	/// Description of libzeitesys_main.
 	/// </summary>
 	public partial class Backend
 	{
-		                                                                    
+        public Mitarbeiter user;                                                      
 		bool userLoggedIn = false;
 		
-		System.Data.Common.DbConnection con = new System.Data.SqlClient.SqlConnection();
         string username = null;
         string password = null;
         int userId=0;
         
         System.Collections.Hashtable options = new System.Collections.Hashtable();
+
+
+        //The connection string to the database
+
+        private IContext npcontext;
+
         private StatusCode ConnectDb()
         {
-            if (con.State == System.Data.ConnectionState.Open)
-                con.Close();
+
+            
         	string cs = "Server="+GetOption("Server")+";Database="+GetOption("Database")+";Uid="+GetOption("Uid")+";Pwd="+GetOption("Pwd")+";";
-            con.ConnectionString = cs;
-            StatusCode status = StatusCode.DB_CONNECTION_FAILED;
-            try
-            {
-                con.Open();
-                status = StatusCode.DB_CONNECTION_SUCCESSFULL;
-            }
-            catch (Exception e)
-            {
-                
-            }
+
+            npcontext = new Context(this.GetType().Assembly);
+
+            npcontext.SetConnectionString(cs);
+            StatusCode status = StatusCode.DB_CONNECTION_SUCCESSFULL;
             if (this.delDatabaseConnectionStateChanged != null)
                 delDatabaseConnectionStateChanged(status);
             return status;
@@ -50,14 +53,26 @@ namespace LibZES
         private StatusCode ValidateUserCredentials(string p_username, string p_password)
         {
             
-            System.Data.Common.DbCommand cmd = con.CreateCommand(); 
-            cmd.CommandText = String.Format("SELECT LoginPasswort FROM dbo.Mitarbeiter WHERE LoginNamen = '{0}';",p_username);
-            string pw = (string)cmd.ExecuteScalar();
-            //System.Windows.Forms.MessageBox.Show(pw);
-            if (pw == p_password)
-                return StatusCode.USER_VALIDATION_SUCCESSFULL;
-            else
-                return StatusCode.USER_VALIDATION_FAILED;
+	    //Create the npath query string
+	    string queryString = "SELECT TOP 1 * FROM Mitarbeiter WHERE LoginNamen = ? AND LoginPasswort = ?";
+	    NPathQuery npathQuery = new NPathQuery(queryString, typeof(Mitarbeiter));
+	    npathQuery.Parameters.Add(new QueryParameter(DbType.String, p_username));
+    	npathQuery.Parameters.Add(new QueryParameter(DbType.String, p_password));
+
+	    //Ask the context to fetch all authors matching the npath query
+        user = null;
+        try
+        {
+            user = npcontext.GetObjectByNPath<Mitarbeiter>(queryString, npathQuery.Parameters);
+        }
+        catch (Exception e)
+        {
+        }
+        //System.Windows.Forms.MessageBox.Show(pw);
+        if (user != null)
+            return StatusCode.USER_VALIDATION_SUCCESSFULL;
+        else
+            return StatusCode.USER_VALIDATION_FAILED;
             
         	
         	

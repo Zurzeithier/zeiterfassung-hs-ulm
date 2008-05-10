@@ -17,12 +17,12 @@ namespace Zeiterfassung.NET
     {
         private LoginForm loginForm;
         private MainForm mainForm;
-        private LibZES.Backend backend;
+        private Backend backend;
 
         public MainController()
         {
             // Create business model
-            backend = new LibZES.Backend();
+            backend = new Backend();
 
             // Create views
             loginForm = new LoginForm();
@@ -35,9 +35,9 @@ namespace Zeiterfassung.NET
         }
         private void SetViewSubscriptionsOnModel()
         {
-            backend.delLoginStatusChanged += new Action<LibZES.StatusCode>(loginForm.LoginStatusChanged);
-            backend.delLoginStatusChanged += new Action<LibZES.StatusCode>(this.OnLoginStatusChanged);
-            backend.delLoginStatusChanged += new Action<LibZES.StatusCode>(mainForm.OnLoginStatusChanged);
+            backend.delLoginStatusChanged += new Action<StatusCode>(loginForm.LoginStatusChanged);
+            backend.delLoginStatusChanged += new Action<StatusCode>(this.OnLoginStatusChanged);
+            backend.delLoginStatusChanged += new Action<StatusCode>(mainForm.OnLoginStatusChanged);
         }
         private void SetModelSubscriptionsOnView()
         {
@@ -55,14 +55,14 @@ namespace Zeiterfassung.NET
             System.Windows.Forms.MessageBox.Show("blubb");
             Application.Exit();
         }
-        public void OnLoginStatusChanged(LibZES.StatusCode status)
+        public void OnLoginStatusChanged(StatusCode status)
         {
             switch (status)
             {
-                case LibZES.StatusCode.LOGIN_SUCCESSFULL:
+                case StatusCode.LOGIN_SUCCESSFULL:
                     mainForm.Show();
                     break;
-                case LibZES.StatusCode.LOGOUT_SUCCESSFULL:
+                case StatusCode.LOGOUT_SUCCESSFULL:
                     mainForm.Hide();
                     break;
             }

@@ -11,7 +11,7 @@ namespace Zeiterfassung.NET
     public partial class MainForm : Form
     {
         public Action<int> delExitApp;
-        public LibZES.Backend backend;
+        public Backend backend;
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
@@ -42,18 +42,18 @@ namespace Zeiterfassung.NET
         private void button3_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
-            LibZES.ZeitBuchung[] buchungen = backend.GetRecentZeitBuchungenForEmployee();
-            foreach (LibZES.ZeitBuchung b in buchungen)
+            ZeitBuchung[] buchungen = backend.GetRecentZeitBuchungenForEmployee();
+            foreach (ZeitBuchung b in buchungen)
             {
                 listBox1.Items.Add(b.ToString());
             }
         }
 
-        public void OnLoginStatusChanged(LibZES.StatusCode status)
+        public void OnLoginStatusChanged(StatusCode status)
         {
             switch (status)
             {
-                case LibZES.StatusCode.LOGIN_SUCCESSFULL:
+                case StatusCode.LOGIN_SUCCESSFULL:
                     this.toolStripLabel2.Text = backend.GetFullUsername();
                 break;
             }
@@ -68,13 +68,13 @@ namespace Zeiterfassung.NET
 
         private void button1_Click(object sender, EventArgs e)
         {
-            backend.NewZeitBuchungForNow(LibZES.ZeitBuchung.ZBTyp.KOMMEN);
+            backend.NewZeitBuchungForNow(ZeitBuchung.ZBTyp.KOMMEN);
             button3_Click(null, null);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            backend.NewZeitBuchungForNow(LibZES.ZeitBuchung.ZBTyp.GEHEN);
+            backend.NewZeitBuchungForNow(ZeitBuchung.ZBTyp.GEHEN);
             button3_Click(null, null);
         }
 
@@ -85,7 +85,8 @@ namespace Zeiterfassung.NET
 
         private void button5_Click(object sender, EventArgs e)
         {
-            backend.GetTagesSymbolForDay(System.DateTime.Now);
+            backend.DBX();
+            //backend.GetTagesSymbolForDay(System.DateTime.Now);
         }
     }
 }
