@@ -147,20 +147,15 @@ namespace LibZES
             p = new System.Data.SqlClient.SqlParameter();
             p.DbType = System.Data.DbType.Int32;
             p.ParameterName = "@MId";
-            p.Value = 1;
+            p.Value = userId;
             cmd.Parameters.Add(p);
 
             System.Data.Common.DbDataReader rdr = cmd.ExecuteReader();
             rdr.Read();
             string erg = "";
-            try
-            {
-                erg = rdr.GetString(0) + " " + rdr.GetString(1);
-            }
-            catch (Exception e)
-            {
-            }
+            erg = rdr.GetString(0) + " " + rdr.GetString(1);
             rdr.Close();
+
             return erg;
 
         }
@@ -201,13 +196,13 @@ namespace LibZES
         public ZeitBuchung GetLastZeitBuchungForEmployee()
         {
             System.Data.Common.DbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT BId,TypId,Datum,MId,KstId,KoaId FROM dbo.ZeitBuchung WHERE MId = @MId ORDER BY Datum DESC";
+            cmd.CommandText = "SELECT TOP 1 BId,TypId,Datum,MId,KstId,KoaId FROM dbo.ZeitBuchung WHERE MId = @MId ORDER BY Datum DESC";
 
             System.Data.SqlClient.SqlParameter p;
             p = new System.Data.SqlClient.SqlParameter();
             p.DbType = System.Data.DbType.Int32;
             p.ParameterName = "@MId";
-            p.Value = 1;
+            p.Value = userId;
             cmd.Parameters.Add(p);
             
             System.Data.Common.DbDataReader rdr = cmd.ExecuteReader();
@@ -222,7 +217,7 @@ namespace LibZES
         {
             System.Collections.ArrayList al = new System.Collections.ArrayList();
             System.Data.Common.DbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT BId,TypId,Datum,MId,KstId,KoaId FROM dbo.ZeitBuchung WHERE MId = @MId";
+            cmd.CommandText = "SELECT TOP 5 BId,TypId,Datum,MId,KstId,KoaId FROM dbo.ZeitBuchung WHERE MId = @MId ORDER BY Datum DESC";
             
             System.Data.SqlClient.SqlParameter p;
             p = new System.Data.SqlClient.SqlParameter();
@@ -241,6 +236,63 @@ namespace LibZES
             al.CopyTo(erg);
             return erg;
         }
+        
+        public char GetTagesSymbolForDay(System.DateTime day)
+        {
+            if (day.DayOfWeek == DayOfWeek.Sunday)
+                return '#';
 
+            System.DateTime day_start = System.DateTime.Parse(day.Date.ToShortDateString());
+            System.DateTime day_end = System.DateTime.Parse(day.AddDays(1).Date.ToShortDateString());
+            System.Data.Common.DbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT TOP 1 BId,TypId,Datum,MId,KstId,KoaId FROM dbo.ZeitBuchung WHERE MId = @MId AND Datum >= @Datum1 AND Datum <= @Datum2 ORDER BY Datum DESC";
+        
+            System.Data.SqlClient.SqlParameter p;
+            p = new System.Data.SqlClient.SqlParameter();
+            p.DbType = System.Data.DbType.Int32;
+            p.ParameterName = "@MId";
+            p.Value = userId;
+            cmd.Parameters.Add(p);
+
+            p = new System.Data.SqlClient.SqlParameter();
+            p.DbType = System.Data.DbType.Int32;
+            p.ParameterName = "@Typ";
+            p.Value = ZeitBuchung.ZBTypToInt(ZeitBuchung.ZBTyp.KOMMEN);
+            cmd.Parameters.Add(p);
+
+            p = new System.Data.SqlClient.SqlParameter();
+            p.DbType = System.Data.DbType.Date;
+            p.ParameterName = "@Datum1";
+            p.Value = day_start;
+            cmd.Parameters.Add(p);
+
+            p = new System.Data.SqlClient.SqlParameter();
+            p.DbType = System.Data.DbType.Date;
+            p.ParameterName = "@Datum2";
+            p.Value = day_end;
+            cmd.Parameters.Add(p);
+
+            System.Data.Common.DbDataReader rdr = cmd.ExecuteReader();
+            rdr.Read();
+            ZeitBuchung a = ZeitBuchung.FromReader(rdr);
+            rdr.Close();
+            if (a != null)
+            {
+                System.Windows.Forms.MessageBox.Show(a.ToString());
+            }
+
+            return '?';
+        }
+
+        public char[] GetTagesSymboleForMonth(int year, int month)
+        {
+            if (month < 1 || month > 12)
+                return null;
+            int anzTage = System.DateTime.DaysInMonth(year, month);
+            char[] erg = new char[anzTage];
+            for (int i = 0; i < anzTage; ++i)
+                erg[i] = GetTagesSymbolForDay(System.DateTime.Parse(year + "-" + month + "-" + i));
+            return erg;
+        }
 	}
 }

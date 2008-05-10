@@ -82,5 +82,10 @@ namespace Zeiterfassung.NET
         {
             delExitApp(0);
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            backend.GetTagesSymbolForDay(System.DateTime.Now);
+        }
     }
 }
