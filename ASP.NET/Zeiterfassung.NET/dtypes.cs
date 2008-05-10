@@ -86,6 +86,12 @@ namespace Zeiterfassung.NET
             return (ZBTyp)no;
         }
 
+        public ZBTyp Typ
+        {
+            get { return IntToZBTyp(m_TypId); }
+            //set { m_Bid = value; }
+        }
+
         private int m_Bid;
 
         [PropertyMap(Columns = "Bid",

@@ -29,9 +29,6 @@ namespace Zeiterfassung.NET
         
         System.Collections.Hashtable options = new System.Collections.Hashtable();
 
-
-        //The connection string to the database
-
         private IContext npcontext;
 
         private StatusCode ConnectDb()
@@ -53,13 +50,11 @@ namespace Zeiterfassung.NET
         private StatusCode ValidateUserCredentials(string p_username, string p_password)
         {
             
-	    //Create the npath query string
 	    string queryString = "SELECT TOP 1 * FROM Mitarbeiter WHERE LoginNamen = ? AND LoginPasswort = ?";
 	    NPathQuery npathQuery = new NPathQuery(queryString, typeof(Mitarbeiter));
 	    npathQuery.Parameters.Add(new QueryParameter(DbType.String, p_username));
     	npathQuery.Parameters.Add(new QueryParameter(DbType.String, p_password));
 
-	    //Ask the context to fetch all authors matching the npath query
         user = null;
         try
         {
@@ -68,7 +63,6 @@ namespace Zeiterfassung.NET
         catch (Exception e)
         {
         }
-        //System.Windows.Forms.MessageBox.Show(pw);
         if (user != null)
             return StatusCode.USER_VALIDATION_SUCCESSFULL;
         else
