@@ -28,18 +28,16 @@ namespace Zeiterfassung.NET
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.lblFullUserName = new System.Windows.Forms.ToolStripLabel();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnKommen = new System.Windows.Forms.Button();
+            this.btnGehen = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,8 +46,8 @@ namespace Zeiterfassung.NET
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
-            this.toolStripLabel2,
-            this.toolStripButton1});
+            this.lblFullUserName,
+            this.btnLogout});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(292, 25);
@@ -62,23 +60,12 @@ namespace Zeiterfassung.NET
             this.toolStripLabel1.Size = new System.Drawing.Size(112, 22);
             this.toolStripLabel1.Text = "Sie sind eingeloggt als";
             // 
-            // toolStripLabel2
+            // lblFullUserName
             // 
-            this.toolStripLabel2.ForeColor = System.Drawing.Color.DarkGreen;
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(22, 22);
-            this.toolStripLabel2.Text = "???";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.lblFullUserName.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblFullUserName.Name = "lblFullUserName";
+            this.lblFullUserName.Size = new System.Drawing.Size(22, 22);
+            this.lblFullUserName.Text = "???";
             // 
             // listBox1
             // 
@@ -88,27 +75,20 @@ namespace Zeiterfassung.NET
             this.listBox1.Size = new System.Drawing.Size(256, 134);
             this.listBox1.TabIndex = 5;
             // 
-            // button3
+            // btnUpdate
             // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(174, 189);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Update LIst";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(112, 239);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(142, 20);
-            this.textBox1.TabIndex = 7;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.Location = new System.Drawing.Point(193, 189);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.TabIndex = 6;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 236);
+            this.button4.Location = new System.Drawing.Point(13, 229);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 8;
@@ -116,37 +96,48 @@ namespace Zeiterfassung.NET
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button1
+            // btnKommen
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(12, 189);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Kommen";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnKommen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnKommen.Location = new System.Drawing.Point(12, 189);
+            this.btnKommen.Name = "btnKommen";
+            this.btnKommen.Size = new System.Drawing.Size(75, 23);
+            this.btnKommen.TabIndex = 3;
+            this.btnKommen.Text = "Kommen";
+            this.btnKommen.UseVisualStyleBackColor = true;
+            this.btnKommen.Click += new System.EventHandler(this.btnKommen_Click);
             // 
-            // button2
+            // btnGehen
             // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(93, 189);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Gehen";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnGehen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGehen.Location = new System.Drawing.Point(103, 189);
+            this.btnGehen.Name = "btnGehen";
+            this.btnGehen.Size = new System.Drawing.Size(75, 23);
+            this.btnGehen.TabIndex = 4;
+            this.btnGehen.Text = "Gehen";
+            this.btnGehen.UseVisualStyleBackColor = true;
+            this.btnGehen.Click += new System.EventHandler(this.btnGehen_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(94, 240);
+            this.button5.Location = new System.Drawing.Point(103, 229);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 9;
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnLogout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLogout.Image = global::Zeiterfassung.NET.Properties.Resources.user_delete;
+            this.btnLogout.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(23, 22);
+            this.btnLogout.Text = "toolStripButton1";
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // MainForm
             // 
@@ -155,11 +146,10 @@ namespace Zeiterfassung.NET
             this.ClientSize = new System.Drawing.Size(292, 273);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnGehen);
+            this.Controls.Add(this.btnKommen);
             this.Controls.Add(this.toolStrip1);
             this.Name = "MainForm";
             this.Text = "MainForm";
@@ -176,14 +166,13 @@ namespace Zeiterfassung.NET
 
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripLabel lblFullUserName;
+        private System.Windows.Forms.ToolStripButton btnLogout;
+        private System.Windows.Forms.Button btnKommen;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnGehen;
         private System.Windows.Forms.Button button5;
     }
 }
