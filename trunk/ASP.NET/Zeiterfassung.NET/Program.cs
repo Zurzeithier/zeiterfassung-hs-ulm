@@ -57,15 +57,7 @@ namespace Zeiterfassung.NET
         }
         public void OnLoginStatusChanged(StatusCode status)
         {
-            switch (status)
-            {
-                case StatusCode.LOGIN_SUCCESSFULL:
-                    mainForm.Show();
-                    break;
-                case StatusCode.LOGOUT_SUCCESSFULL:
-                    mainForm.Hide();
-                    break;
-            }
+
         }
 
         // Start of application flow

@@ -81,7 +81,7 @@ namespace Zeiterfassung.NET
                 case StatusCode.LOGOUT_SUCCESSFULL:
                     Show();
                     break;
-                case StatusCode.DB_CONNECTION_FAILED:
+                case StatusCode.DB_CONNECT_FAILED:
                     lblStatus.Text = "Database Connection Failed";
                     break;
             }

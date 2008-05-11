@@ -6,6 +6,7 @@ using Puzzle.NPersist.Framework.Attributes;
 
 namespace Zeiterfassung.NET
 {
+    // Represents an employee ( = system user )
     [ClassMap(Table = "Mitarbeiter")]
     public class Mitarbeiter
     {
@@ -49,23 +50,36 @@ namespace Zeiterfassung.NET
 
     }
 
-
-
-
-
+    // Represents a ZeitBuchung (action on given time)
     [ClassMap(Table = "ZeitBuchung")]
     public class ZeitBuchung
     {
+        // Gets the time difference in hours for the current and
+        // a supplied ZeitBuchung
+        public int GetHourDiff(ZeitBuchung b)
+        {
+            System.TimeSpan d;
+            if (b.Datum > Datum)
+                d = b.Datum - Datum;
+            else
+                d = Datum - b.Datum;
+            return d.Hours;
+        }
+
+        // Type for ZeitBuchung
         public enum ZBTyp
         {
             UNBEKANNT,
             KOMMEN,
             GEHEN
         }
+        // Convert ZBTyp to integer (same as column
+        // value in database)
         public static int ZBTypToInt(ZBTyp typ)
         {
             return (int)typ;
         }
+        // Convert ZBTyp to string
         public static string ZBTypToString(ZBTyp typ)
         {
             switch (typ)
@@ -81,6 +95,7 @@ namespace Zeiterfassung.NET
             }
         }
 
+        // Convert int to ZBTyp
         public static ZBTyp IntToZBTyp(int no)
         {
             return (ZBTyp)no;
@@ -88,8 +103,8 @@ namespace Zeiterfassung.NET
 
         public ZBTyp Typ
         {
-            get { return IntToZBTyp(m_TypId); }
-            //set { m_Bid = value; }
+            get { return IntToZBTyp(TypId); }
+            set { TypId = ZBTypToInt(value); }
         }
 
         private int m_Bid;
@@ -148,9 +163,73 @@ namespace Zeiterfassung.NET
         {
             return Datum.ToString() + ": " + ZBTypToString(IntToZBTyp(m_TypId));
         }
+        string m_Zid;
 
         
         
     }
+
+    // Represents the ZeitKonto for the employee
+    // in a given year and quarter
+    [ClassMap(Table = "ZeitKonto")]
+    public class ZeitKonto
+    {
+        int m_Jahr;
+
+        [PropertyMap(Columns = "Jahr", IsIdentity = true, IdentityIndex = 2)]
+        public virtual int Jahr
+        {
+          get { return m_Jahr; }
+          set { m_Jahr = value; }
+        }
+
+        int m_Periode;
+
+        [PropertyMap(Columns = "Periode", IsIdentity=true, IdentityIndex=1)]
+        public virtual int Periode
+        {
+            get { return m_Periode; }
+            set { m_Periode = value; }
+        }
+
+        int m_MId;
+
+        [PropertyMap(Columns = "MId", IsIdentity = true, IdentityIndex = 0)]
+        public virtual int MId
+        {
+            get { return m_MId; }
+            set { m_MId = value; }
+        }
+
+        int m_MinSoll;
+
+        [PropertyMap(Columns = "MinSoll")]
+        public virtual int MinSoll
+        {
+            get { return m_MinSoll; }
+            set { m_MinSoll = value; }
+        }
+
+        int m_MinHaben;
+
+        [PropertyMap(Columns = "MinHaben")]
+        public virtual int MinHaben
+        {
+            get { return m_MinHaben; }
+            set { m_MinHaben = value; }
+        }
+
+        int m_MinSaldo;
+
+        [PropertyMap(Columns = "MinSaldo")]
+        public virtual int MinSaldo
+        {
+            get { return m_MinSaldo; }
+            set { m_MinSaldo = value; }
+        }
+        
+
+    }
+ 
 
 }
