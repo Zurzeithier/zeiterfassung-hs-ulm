@@ -67,6 +67,8 @@ namespace Zeiterfassung.NET
             u1.LoginPasswort = "";
             npcontext.CommitObject(u1);
              * */
+            if (!userLoggedIn)
+                return;
             foreach (ZeitBuchung b in GetRecentZeitBuchungen())
                 npcontext.DeleteObject(b);
             npcontext.Commit();
@@ -118,6 +120,9 @@ namespace Zeiterfassung.NET
             return StatusCode.LOGOUT_SUCCESSFULL;
 
         }
+
+
+
         #endregion
 
         #region Methods for manipulating back-end options
@@ -155,9 +160,34 @@ namespace Zeiterfassung.NET
         // Returns full name of the user
         public String GetFullUsername()
         {
+            if (!userLoggedIn)
+                return null;
             return user.Vornamen + " " + user.Namen;
 
         }
+        public String[] GetUserLoginNames()
+        {
+            if (!userLoggedIn)
+                return null;
+
+            string queryString = "SELECT * FROM Mitarbeiter";
+            NPathQuery npathQuery = new NPathQuery(queryString, typeof(Mitarbeiter));
+            string[] erg = null;
+            try
+            {
+                System.Collections.IList l = npcontext.GetObjectsByNPath(npathQuery);
+                erg = new string[l.Count];
+                for (int i = 0; i < l.Count; ++i)
+                {
+                    erg[i] = ((Mitarbeiter)l[i]).LoginNamen;
+                }
+            }
+            catch (Exception e)
+            { }
+            return erg;
+
+        }
+
         #endregion
 
         #region Methods for transaction control and information retrieval (all that has anything to do with ZeitBuchung)
@@ -165,7 +195,8 @@ namespace Zeiterfassung.NET
         // Creates a new Zeitbuchung for now.
         public void NewZeitBuchungForNow(ZeitBuchung.ZBTyp typ)
         {
-
+            if (!userLoggedIn)
+                return;
             ZeitBuchung a = GetLastZeitBuchung();
 
             switch (typ)
@@ -193,6 +224,8 @@ namespace Zeiterfassung.NET
         // the corresponding "Kommen" Buchung and vice versa.
         public ZeitBuchung GetCorrespondingZeitBuchungFor(ZeitBuchung b)
         {
+            if (!userLoggedIn)
+                return null;
             if (b == null)
                 return null;
             ZeitBuchung erg = null;
@@ -234,6 +267,8 @@ namespace Zeiterfassung.NET
         // Gets the last registered ZeitBuchung for the user
         public ZeitBuchung GetLastZeitBuchung()
         {
+            if (!userLoggedIn)
+                return null;
             string queryString = "SELECT TOP 1 * FROM Mitarbeiter WHERE MId = ? ORDER BY Datum DESC";
             NPathQuery npathQuery = new NPathQuery(queryString, typeof(ZeitBuchung));
             npathQuery.Parameters.Add(new QueryParameter(DbType.Int32, userId));
@@ -252,7 +287,8 @@ namespace Zeiterfassung.NET
         // Get the last 5 ZeitBuchungen for the user
         public ZeitBuchung[] GetRecentZeitBuchungen()
         {
-
+            if (!userLoggedIn)
+                return null;
             string queryString = "SELECT * FROM Mitarbeiter WHERE MId = ? ORDER BY Datum DESC";
             NPathQuery npathQuery = new NPathQuery(queryString, typeof(ZeitBuchung));
             npathQuery.Parameters.Add(new QueryParameter(DbType.Int32, userId));
@@ -302,6 +338,8 @@ namespace Zeiterfassung.NET
         // of a year
         public int GetWorkingHoursForQuarter(int q, int y)
         {
+            if (!userLoggedIn)
+                return 0;
             return GetWorkingHoursForInterval(GetQuarterStart(q, y), GetQuarterEnd(q, y));
         }
 
@@ -313,7 +351,9 @@ namespace Zeiterfassung.NET
         // e.g. recalculate the working hour count.
         public void UpdateZeitKontoForQuarter(int q, int y)
         {
-            
+            if (!userLoggedIn)
+                return;
+
             ZeitKonto k = null;
 
             string idS = String.Format("{0}|{1}|{2}", userId, q, y);
@@ -353,4 +393,6 @@ namespace Zeiterfassung.NET
         #endregion
         
 	}
+
+    
 }

@@ -101,5 +101,13 @@ namespace Zeiterfassung.NET
         {
             backend.Logout();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (string s in backend.GetUserLoginNames())
+            {
+                listBox1.Items.Add("UserLogin: "+s);
+            }
+        }
     }
 }
