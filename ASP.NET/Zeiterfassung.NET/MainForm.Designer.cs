@@ -31,13 +31,14 @@ namespace Zeiterfassung.NET
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.lblFullUserName = new System.Windows.Forms.ToolStripLabel();
+            this.btnLogout = new System.Windows.Forms.ToolStripButton();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.btnKommen = new System.Windows.Forms.Button();
             this.btnGehen = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.btnLogout = new System.Windows.Forms.ToolStripButton();
+            this.button1 = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +68,17 @@ namespace Zeiterfassung.NET
             this.lblFullUserName.Size = new System.Drawing.Size(22, 22);
             this.lblFullUserName.Text = "???";
             // 
+            // btnLogout
+            // 
+            this.btnLogout.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnLogout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLogout.Image = global::Zeiterfassung.NET.Properties.Resources.user_delete;
+            this.btnLogout.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(23, 22);
+            this.btnLogout.Text = "toolStripButton1";
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
@@ -92,7 +104,7 @@ namespace Zeiterfassung.NET
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 8;
-            this.button4.Text = "button4";
+            this.button4.Text = "blubb";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -124,26 +136,26 @@ namespace Zeiterfassung.NET
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 9;
-            this.button5.Text = "button5";
+            this.button5.Text = "Test";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // btnLogout
+            // button1
             // 
-            this.btnLogout.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnLogout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLogout.Image = global::Zeiterfassung.NET.Properties.Resources.user_delete;
-            this.btnLogout.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(23, 22);
-            this.btnLogout.Text = "toolStripButton1";
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            this.button1.Location = new System.Drawing.Point(193, 229);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Loginnamen";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 273);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.btnUpdate);
@@ -174,5 +186,6 @@ namespace Zeiterfassung.NET
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button btnGehen;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button1;
     }
 }
