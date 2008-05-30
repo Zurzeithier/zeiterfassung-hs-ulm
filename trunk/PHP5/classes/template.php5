@@ -20,6 +20,15 @@
   public static $sql_perform  = "";
   public static $tpl_folder   = "./templates/";
   
+/**
+ * constructor read config-file and initializes the vars
+ *
+ * @param   string  config-file-location
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function __construct( $config_file = "./configs/template.conf.php5" )
   {
    if ( file_exists( $config_file ) )
@@ -36,16 +45,40 @@
    self::$mysql_active = in_array( "MySql", $classes );
   }
   
+/**
+ * destructor (nop)
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function __destruct()
   {
   }
   
+/**
+ * starts new clean output buffer
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function clean_ob()
   {
    if(!ob_get_length() || !ob_get_level()) ob_start();
    session_cache_limiter( 'must-revalidate' );
   }
   
+/**
+ * loads template with $name in internal buffer-array 
+ *
+ * @param   string  template file name
+ * @param   boolean force overwriting buffer content
+ *  * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function load( $name, $force_reload = false )
   {
    // if template loaded, don't waste time and return
@@ -67,6 +100,17 @@
    }
   }
   
+/**
+ * assign a replacement in template $name
+ *
+ * @param   string  template file name
+ * @param   string  search for something
+ * @param   string  replace with something
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function assign( $name, $search, $replace = "EMPTY" )
   {
    if ( is_array( $search ) )
@@ -79,6 +123,16 @@
    }
   }
   
+/**
+ * returns parsed content of template in buffer
+ *
+ * @param   string  template file name
+ * @param   boolean force reloading buffer content
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function get( $name, $force_reload = false )
   {
    if ( ! isset( self::$template[$name] ) || $force_reload ) self::load( $name, $force_reload );
@@ -87,6 +141,15 @@
    return self::$template[$name];
   }
   
+/**
+ * compress template (remove not needed chars)
+ *
+ * @param   string  template file name
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function compress( $name )
   {
    $length = strlen( self::$template[$name] );
@@ -99,6 +162,17 @@
    self::restore_newlines( self::$template[$name] );
   }
   
+/**
+ * finally sends complete template $name, parsed 
+ * and compressed (if setup in config-file)
+ *
+ * @param   string  template file name
+ * @param   string  type of output (html,js,css...)
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function output( $name, $type = "html" )
   {
    if ( ! isset( $name ) ) 
@@ -145,6 +219,15 @@
    echo self::$template[$name];
   }
   
+/**
+ * replace array of assigned replacements (if using 'assign')
+ *
+ * @param   string  template file name
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function parsed( $name )
   {
    if ( count ( self::$assigned[$name] ) > 0 )
@@ -153,6 +236,15 @@
    }
   }
   
+/**
+ * send headers to browser (no cookies after this point!)
+ *
+ * @param   string  type of output (html,css,js,...)
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function headers( $type = "html" )
   {
    // send all headers to the browser
@@ -177,6 +269,16 @@
    }
   }
   
+/**
+ * wrap long words from $text at $maxlen (=64 default)
+ *
+ * @param   string  text to wrap
+ * @param   string  maximum length to wrap at
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function wraplongwords( &$text, $maxlen = 64 )
   {
    $mytext  = explode( " ", trim( $text ) );
@@ -192,11 +294,30 @@
    $text = implode( " ", $newtext );
   }
   
+/**
+ * replace newlines with invisible character (to save newlines in
+ * textareas for example)
+ *
+ * @param   string  text to save newlines
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function save_newlines( &$text )
   {
    $text = str_replace( "\n", chr(31), $text );
   }
   
+/**
+ * revert saved newlines to visible
+ *
+ * @param   string  text to restore newlines from
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function restore_newlines( &$text )
   {
    $text = str_replace( chr(31), "\n", $text );
@@ -219,6 +340,15 @@
    return ( in_array( "gzip", $accept ) === true );
   }
   
+/**
+ * replace special chars to html-wellformed equivalents
+ *
+ * @param   string  text to transform
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function special_chars( &$content )
   {
    $trans = array(
@@ -235,6 +365,19 @@
    $content = strtr( $content, $trans );
   }
   
+/**
+ * return a generated select-html-tag with $selected
+ *
+ * @param   mixed   array or list of names separated with '|' to
+ * 					 create a select menu from
+ * @param   string  name of item selected (optional)
+ * 
+ * @return  string  html select menu
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function create_select( $array, $selected = "" )
   {
    $ret = "";
@@ -252,6 +395,16 @@
    return $ret;
   }
   
+/**
+ * the assign method for complete arrays
+ *
+ * @param   array   index {{KEY}} is set to $value from 
+ * @param   array   contains keys and values to set data
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function replace_data_from_array( &$data, &$array )
   {
    foreach( $array as $key => $value )
@@ -260,6 +413,18 @@
    }
   }
   
+/**
+ * return a right trimmed text with estimated $maxlen width
+ *
+ * @param   string  text to align right
+ * @param   int     width of line (=16 default)
+ * 
+ * @return  string  aligned text (filled with spaces)
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function align_right( $text, $maxlen = 16 )
   {
    $len = strlen( $text );
@@ -267,6 +432,15 @@
    return str_repeat( " ", $maxlen - $len ).$text;
   }
   
+/**
+ * set php performance measuring (to output hidden in output)
+ *
+ * @param   string  template name  
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function set_php_performance( $name )
   {
    $size = _from_bytes( strlen( self::$template[$name] ) );
@@ -282,6 +456,13 @@
    self::$php_perform .= $ret;
   }
   
+/**
+ * set sql performance measuring (to output hidden in output)
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function set_sql_performance()
   {
    if ( self::$mssql_active || self::$mysql_active )
