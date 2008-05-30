@@ -7,7 +7,6 @@
  *
  * @author  Patrick Kracht <patrick.kracht@googlemail.com>
  */
- 
  class Template
  {
   public static $template     = array();
@@ -203,12 +202,21 @@
    $text = str_replace( chr(31), "\n", $text );
   }
   
+/**
+ * check, if browser is accepting gzip or not an return boolean
+ *
+ * @return  boolean   returns TRUE or FALSE
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function accepts_gzip()
   {
    if ( ! isset( $_SERVER['HTTP_ACCEPT_ENCODING'] ) ) return false;
    $accept = str_replace( " ", "", strtolower( $_SERVER['HTTP_ACCEPT_ENCODING'] ) );
    $accept = explode( ",", $accept );
-   return in_array( "gzip", $accept );
+   return ( in_array( "gzip", $accept ) === true );
   }
   
   public function special_chars( &$content )

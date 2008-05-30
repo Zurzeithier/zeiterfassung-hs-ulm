@@ -1,4 +1,4 @@
-﻿<?
+<?
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
  * The iSql:: interface declares the SQL-Server-Connection.

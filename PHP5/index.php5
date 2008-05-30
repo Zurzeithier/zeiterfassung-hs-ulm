@@ -27,7 +27,7 @@
  */
  
  // create needed objects
- $MYS = new MySql;
+ $MYS = new MySql; //TEST ONLY
  $SQL = new MsSql;
  $TPL = new Template;
  
@@ -35,7 +35,7 @@
  $TPL->load( "index.html" );
  
  // do some sql-queries...
- $result = $MYS->query( "SELECT * FROM Mitarbeiter;" );
+ $result = $MYS->query( "SELECT * FROM Mitarbeiter;" ); //TEST ONLY
  $result = $SQL->query( "SELECT * FROM Mitarbeiter;" );
  while( $row = $SQL->fetch_array( $result ) )
  {
