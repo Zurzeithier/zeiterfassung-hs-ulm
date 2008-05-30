@@ -9,8 +9,6 @@
  * @author          Patrick Kracht <patrick.kracht@googlemail.com>
  *                  Thorsten Moll  <thorsten.moll@googlemail.com>
  * 
- * @url          https://www.omega2k.de/WEBE/
- *  
  * @version         0.3_alpha         
  */
  
