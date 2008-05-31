@@ -36,6 +36,16 @@
  */
   public function init();
 /**
+ * returns boolean active flag
+ * 
+ * @return  boolean  flag of activity
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
+  public function is_active();
+/**
  * connect creates the MySQL connection and returns status
  *
  * @return  boolean  status

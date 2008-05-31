@@ -9,19 +9,20 @@
  */
  class MsSql implements iSql
  {
-  private static $link_id;
-  private static $query_id;
-  private static $query_key;
-  private static $query_list;
-  private static $mssql_error;
-  private static $select_db;
-  private static $hostname;
-  private static $hostport;
-  private static $database;
-  private static $password;
-  private static $username;
-  private static $logging;
-  private static $query_time;
+  protected static $link_id;
+  protected static $query_id;
+  protected static $query_key;
+  protected static $query_list;
+  protected static $mssql_error;
+  protected static $select_db;
+  protected static $hostname;
+  protected static $hostport;
+  protected static $database;
+  protected static $password;
+  protected static $username;
+  protected static $logging;
+  protected static $query_time;
+  protected static $is_active = false;
   
 /**
  * constructor read config-file and initializes the vars
@@ -34,6 +35,7 @@
  */
   public function __construct( $config_file = "./configs/mssql.conf.php" )
   {
+   self::$is_active = false;
    if ( file_exists( $config_file ) )
    {
     // import settings for connection
@@ -83,6 +85,21 @@
   }
   
 /**
+ * returns boolean active flag
+ * 
+ * @return  boolean  flag of activity
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
+  public function is_active()
+  {
+   return self::$is_active;
+  }
+  
+  
+/**
  * connect creates the MySQL connection and returns status
  *
  * @return  boolean  status
@@ -101,6 +118,7 @@
     self::$mssql_error = mssql_get_last_message();
     return false;
    }
+   self::$is_active = true;
    return true;
   }
   
@@ -345,6 +363,7 @@
   {
    if( $link_id!=-1 ) self::$link_id = $link_id;
    @mssql_close( self::$link_id );
+   self::$is_active = false;
   }
   
 /**
