@@ -26,7 +26,7 @@
                     <file>${file.reference.webui-jsf-suntheme_de.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
-                <library>
+                <library files="1">
                     <file>${reference.TimeCapturingLibrary.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
