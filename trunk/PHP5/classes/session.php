@@ -10,8 +10,8 @@
  class Session
  {
   protected static $mdate;
-  protected static $current_page  = 0;
-  protected static $previous_page = 0;
+  protected static $current_page  = "";
+  protected static $previous_page = "";
   
 /**
  * constructor initializes session, sets ini-values
@@ -35,32 +35,32 @@
    // save post or get value from "page"
    if ( isset( $_POST["page"] ) )
    {
-    $_SESSION["PageID_OLD"] = isset( $_SESSION["PageID_NOW"] ) ? $_SESSION["PageID_NOW"] : 0;
-    $_SESSION["PageID_NOW"] = intval( $_POST["page"] );
+    $_SESSION["PageID_OLD"] = isset( $_SESSION["PageID_NOW"] ) ? $_SESSION["PageID_NOW"] : "login";
+    $_SESSION["PageID_NOW"] = $_POST["page"];
    }
    else if ( isset( $_GET["page"] ) )
    {
-   	$_SESSION["PageID_OLD"] = isset( $_SESSION["PageID_NOW"] ) ? $_SESSION["PageID_NOW"] : 0;
-   	$_SESSION["PageID_NOW"] = intval( $_GET["page"] );
+   	$_SESSION["PageID_OLD"] = isset( $_SESSION["PageID_NOW"] ) ? $_SESSION["PageID_NOW"] : "login";
+   	$_SESSION["PageID_NOW"] = $_GET["page"];
    }
    else
    {
-   	$_SESSION["PageID_NOW"] = 0;
-   	$_SESSION["PageID_OLD"] = 0;
+   	$_SESSION["PageID_NOW"] = "login";
+   	$_SESSION["PageID_OLD"] = "login";
    }
    
    // save post or get value from "action"
    if ( isset( $_POST["action"] ) )
    {
-    $_SESSION["Action"] = intval( $_POST["action"] );
+    $_SESSION["Action"] = $_POST["action"];
    }
    else if ( isset( $_GET["action"] ) )
    {
-    $_SESSION["Action"] = intval( $_GET["action"] );
+    $_SESSION["Action"] = $_GET["action"];
    }
    else
    {
-    $_SESSION["Action"] = 0;
+    $_SESSION["Action"] = "";
    }
    
    if ( ! isset( $_SESSION["ValidMailsArray"] ) ) $_SESSION["ValidMailsArray"] = array();
@@ -83,6 +83,7 @@
    session_regenerate_id();
    
    // reset default values
+   $_SESSION = array();
    $_SESSION["GroupID"]   = 1;
    $_SESSION["GroupNAME"] = "Gast";
    
@@ -116,24 +117,46 @@
   public function is_admin()
   {
    if ( ! isset( $_SESSION["GroupID"] ) ) return false;
-   return ( $_SESSION["GroupID"] == 2 );
+   return ( $_SESSION["GroupID"] == 0 );
   }
   
   public function is_user()
   {
    if ( ! isset( $_SESSION["GroupID"] ) ) return false;
-   return ( $_SESSION["GroupID"] != 1 && $_SESSION["GroupID"] != 2 );
+   return ( $_SESSION["GroupID"] != 0 && $_SESSION["GroupID"] != 1 );
   }
   
   public function reload()
   {
-   header( "Location: ./?page=" . intval( $_POST["page"] ) );
+   header( "Location: ./" );
    exit();
   }
   
-  public function login()
+  public function login( &$SQL )
   {
-   // TODO !!!!
+   if ( isset( $_POST["LoginUsername"] ) && isset( $_POST["LoginPassword"] ) )
+   {
+   	$username = trim( $_POST["LoginUsername"] );
+   	$password = md5( trim( $_POST["LoginPassword"] ) );
+   }
+   else
+   {
+   	trigger_error( 'Login ohne Benutzername und Passwort nicht möglich!' );
+    return false;
+   }
+   $query = "SELECT * FROM Mitarbeiter WHERE LoginNamen = '$username' AND LoginPasswort = '$password';";
+   $found = $SQL->query_first( $query );
+   if ( ! isset( $found["MId"] ) )
+   {
+    trigger_error( 'Fehlerhafter Loginversuch von "'.$username.'" mit IP '.$_SERVER["REMOTE_ADDR"].'!' );
+    return false;
+   }
+   $_SESSION["SessionTimer"] = time();
+   $_SESSION["UserID"]       = $found["MId"];
+   $_SESSION["UserNAME"]     = $found["Vornamen"]." ".$found["Namen"];
+   $_SESSION["GroupID"]      = 2;
+   $_SESSION["GroupNAME"]    = "Mitarbeiter";
+   return true;
   }
   
   public function extend()
