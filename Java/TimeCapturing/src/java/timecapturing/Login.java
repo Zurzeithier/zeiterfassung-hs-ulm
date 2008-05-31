@@ -7,9 +7,6 @@ package timecapturing;
 
 import beans.UserBean;
 import business_logik.UserHandling;
-import com.sun.data.provider.impl.CachedRowSetDataProvider;
-import com.sun.data.provider.impl.ListDataProvider;
-import com.sun.rave.faces.data.CachedRowSetDataModel;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import com.sun.webui.jsf.model.DefaultOptionsList;
 import javax.faces.FacesException;
@@ -279,6 +276,21 @@ public class Login extends AbstractPageBean
         }
 
         return null;
+    }
+
+    public String tab2_action()
+    {
+        // TODO: Process the action. Return value is a navigation
+        // case name where null will return to the same page.
+        return null;
+    }
+
+    public String forgotPasswordHyperlink_action()
+    {
+        // TODO: Process the action. Return value is a navigation
+        // case name where null will return to the same page.
+                
+        return "forgotPassword";
     }
 
 }
