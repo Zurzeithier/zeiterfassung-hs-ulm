@@ -33,8 +33,6 @@ public class Login extends AbstractPageBean
      */
     private void _init() throws Exception
     {
-        personDataProvider.setCachedRowSet((javax.sql.rowset.CachedRowSet) getValue("#{SessionBean1.personRowSet}"));
-        dataTable1Model.setCachedRowSet((javax.sql.rowset.CachedRowSet) getValue("#{SessionBean1.personRowSet}"));
     }    // </editor-fold>
 
     private String newPassword;
@@ -99,54 +97,6 @@ public class Login extends AbstractPageBean
     public void setMenu2DefaultOptions(DefaultOptionsList dol)
     {
         this.menu2DefaultOptions = dol;
-    }
-
-    private ListDataProvider listDataProvider1 = new ListDataProvider();
-
-    public ListDataProvider getListDataProvider1()
-    {
-        return listDataProvider1;
-    }
-
-    public void setListDataProvider1(ListDataProvider ldp)
-    {
-        this.listDataProvider1 = ldp;
-    }
-
-    private ListDataProvider listDataProvider2 = new ListDataProvider();
-
-    public ListDataProvider getListDataProvider2()
-    {
-        return listDataProvider2;
-    }
-
-    public void setListDataProvider2(ListDataProvider ldp)
-    {
-        this.listDataProvider2 = ldp;
-    }
-
-    private CachedRowSetDataProvider personDataProvider = new CachedRowSetDataProvider();
-
-    public CachedRowSetDataProvider getPersonDataProvider()
-    {
-        return personDataProvider;
-    }
-
-    public void setPersonDataProvider(CachedRowSetDataProvider crsdp)
-    {
-        this.personDataProvider = crsdp;
-    }
-
-    private CachedRowSetDataModel dataTable1Model = new CachedRowSetDataModel();
-
-    public CachedRowSetDataModel getDataTable1Model()
-    {
-        return dataTable1Model;
-    }
-
-    public void setDataTable1Model(CachedRowSetDataModel crsdm)
-    {
-        this.dataTable1Model = crsdm;
     }
 
     /**
@@ -232,7 +182,6 @@ public class Login extends AbstractPageBean
     @Override
     public void destroy()
     {
-        personDataProvider.close();
     }
 
     /**
