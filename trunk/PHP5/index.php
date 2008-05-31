@@ -43,10 +43,17 @@
  // include page specific program parts (subprograms)
  switch( $_SESSION["PageID_NOW"] )
  {
-  case 1:  include( "./pages/auth.php" ); break;
-  case 2:  include( "./pages/stat.php" ); break;
-  default: include( "./pages/home.php" ); break;
+  case 1:
+   $page_output = $TPL->get( "page_auth.html" );
+  break;
+  case 2:
+   $page_output = $TPL->get( "page_stat.html" );
+  break;
+  default:
+   $page_output = $TPL->get( "page_home.html" );
+  break;
  }
+ 
  // assing content to specific replacement vars
  $TPL->assign( "index.html", "{{PAGE_OUTPUT}}", $page_output );
  
