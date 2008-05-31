@@ -26,66 +26,66 @@
  
  
  $output = ""; // initialize output var
- $template_name = "page_home.html"; // default subpage template
+ $template_name = "page_auth.html"; // default subpage template
  
 /**
  * MAIN PROGRAM STARTS HERE
  */
  
  // create needed objects
- $SID = new Session;
+ $SES = new Session;
  $SQL = new MsSql;
  $TPL = new Template;
+ 
+ switch( $_SESSION["Action"] )
+ {
+  case "login":  $SES->login( $SQL ); break;
+  case "logout": $SES->logout(); break;
+ }
  
  // load template index.html
  $TPL->load( "index.html" );
  
- // include page specific program parts (subprograms)
- switch( $_SESSION["PageID_NOW"] )
+ // if logged in, show specific pages
+ if ( $SES->started() )
  {
-  // PAGE 1 : AUTHENTIFICATION
-  case 1:
-   $template_name = "page_auth.html";
-   
-   // TODO
-   
-   // authentification page (login, logout)
-   $page_output = $TPL->get( $template_name );
-  break;
-  // PAGE 2 : STATISTICS
-  case 2:
-   // statistics page
-   $template_name = "page_stat.html";
-   
-   // TODO
-   
-   // read all rows from table 'Mitarbeiter'
-   $buffer = "";
-   $result = $SQL->query( "SELECT * FROM Mitarbeiter" );
-   while( $row = $SQL->fetch_array( $result ) )
-   {
-    $buffer .= nl2br( print_r( $row, true ) );
-   }
-   $SQL->free_result( $result );
-   
-   // set replacement for RESULT in page_stat.html
-   $TPL->assign( $template_name, "{{RESULT}}", $buffer );
-  break;
-  // PAGE 0 : DEFAULT
-  default:
-   
-   // TODO
-   
-  break;
+  // choose template from session "PageID_NOW"
+  switch( $_SESSION["PageID_NOW"] )
+  {
+   case "home":
+    $template_name = "page_home.html";
+    
+    // TODO
+    
+   break;
+   case "stats":
+    // statistics page
+    $template_name = "page_stat.html";
+    
+    // TODO
+    
+   break;
+   default:
+   	// login page (default)
+    $template_name = "page_home.html";
+    
+    // TODO
+    
+   break;
+  }
+ }
+ else
+ {
+  
  }
  
  // load subpage content and insert in index.html
  $page_output = $TPL->get( $template_name );
- $TPL->assign( "index.html", "{{PAGE_OUTPUT}}", $page_output );
  
- // DEBUG
- print_r( $_SESSION );
- echo "SessionID = ".session_id();
+ $page_output .= nl2br( print_r( $_SESSION, true ) );
+ $page_output .= "<br/>".session_id();
+ 
+ $TPL->assign( "index.html", "{{PAGE_OUTPUT}}", $page_output );
  
 /**
  * MAIN PROGRAM ENDS HERE
