@@ -13,8 +13,6 @@
   protected static $assigned     = array();
   protected static $debugoff     = true;
   protected static $performance  = true;
-  protected static $mssql_active = false;
-  protected static $mysql_active = false;
   protected static $debugout     = "";
   protected static $php_perform  = "";
   protected static $sql_perform  = "";
@@ -38,11 +36,6 @@
     self::$tpl_folder = $tpl_folder;
    }
    self::$debugoff     = ( isset( $tpl_compress ) ? $tpl_compress : true );
-   
-   // check, if mysql or mssql is loaded
-   $classes = get_declared_classes();
-   self::$mssql_active = in_array( "MsSql", $classes );
-   self::$mysql_active = in_array( "MySql", $classes );
   }
   
 /**
@@ -466,10 +459,10 @@
  */
   public function set_sql_performance()
   {
-   if ( self::$mssql_active || self::$mysql_active )
+   if ( MsSql::is_active() || MySql::is_active() )
    {
    	// append MsSql-performance-output 
-    if ( self::$mssql_active )
+    if ( MsSql::is_active() )
     {
      $ret   = "\nPERFORMANCE ( MSSQL )\n";
      $tick  = MsSql::get_query_count()." QS";
@@ -479,7 +472,7 @@
      self::$sql_perform .= $ret;
     }
     // append MySql-performance-output 
-    if ( self::$mysql_active )
+    if ( MySql::is_active() )
     {
      $ret   = "\nPERFORMANCE ( MYSQL )\n";
      $tick  = MySql::get_query_count()." QS";
