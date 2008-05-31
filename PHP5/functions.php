@@ -290,7 +290,7 @@
  *
  * @author  patrick.kracht
  */
- function randomize()
+ function _randomize()
  {
   list( $usec, $sec ) = explode( ' ', microtime() );
   mt_srand( (float) $sec + ((float) $usec * 100000) );

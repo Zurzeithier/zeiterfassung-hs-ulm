@@ -24,7 +24,9 @@
  require_once "./functions.php" ;
  __init_main();
  
- $output = "";
+ 
+ $output = ""; // initialize output var
+ $template_name = "page_home.html"; // default subpage template
  
 /**
  * MAIN PROGRAM STARTS HERE
@@ -41,21 +43,42 @@
  // include page specific program parts (subprograms)
  switch( $_SESSION["PageID_NOW"] )
  {
+  // PAGE 1 : AUTHENTIFICATION
   case 1:
+   $template_name = "page_auth.html";
+   
+   // TODO
+   
    // authentification page (login, logout)
-   $page_output = $TPL->get( "page_auth.html" );
+   $page_output = $TPL->get( $template_name );
   break;
+  // PAGE 2 : STATISTICS
   case 2:
    // statistics page
-   $page_output = $TPL->get( "page_stat.html" );
+   $template_name = "page_stat.html";
+   
+   // read all rows from table 'Mitarbeiter'
+   $buffer = "";
+   $result = $SQL->query( "SELECT * FROM Mitarbeiter" );
+   while( $row = $SQL->fetch_array( $result ) )
+   {
+    $buffer .= nl2br( print_r( $row, true ) );
+   }
+   $SQL->free_result( $result );
+   
+   // set replacement for RESULT in page_stat.html
+   $TPL->assign( $template_name, "{{RESULT}}", $buffer );
   break;
+  // PAGE 0 : DEFAULT
   default:
-   // default page
-   $page_output = $TPL->get( "page_home.html" );
+
+   // TODO
+   
   break;
  }
  
- // assing content to specific replacement vars
+ // load subpage content and insert in index.html
+ $page_output = $TPL->get( $template_name );
  $TPL->assign( "index.html", "{{PAGE_OUTPUT}}", $page_output );
  
  // DEBUG
