@@ -9,7 +9,9 @@
  */
  class Session
  {
-  private static $mdate;
+  protected static $mdate;
+  protected static $current_page  = 0;
+  protected static $previous_page = 0;
   
 /**
  * constructor initializes session, sets ini-values
@@ -33,23 +35,43 @@
    // initialize session
    session_start();
    
+   // save post or get value from "page"
+   if ( isset( $_POST["page"] ) )
+   {
+    $_SESSION["PageID_OLD"] = isset( $_SESSION["PageID_NOW"] ) ? $_SESSION["PageID_NOW"] : 0;
+    $_SESSION["PageID_NOW"] = intval( $_POST["page"] );
+   }
+   else if ( isset( $_GET["page"] ) )
+   {
+   	$_SESSION["PageID_OLD"] = isset( $_SESSION["PageID_NOW"] ) ? $_SESSION["PageID_NOW"] : 0;
+   	$_SESSION["PageID_NOW"] = intval( $_GET["page"] );
+   }
+   else
+   {
+   	$_SESSION["PageID_NOW"] = 0;
+   	$_SESSION["PageID_OLD"] = 0;
+   }
+   
+   // save post or get value from "action"
+   if ( isset( $_POST["page"] ) )
+   {
+    $_SESSION["Action"] = intval( $_POST["page"] );
+   }
+   else if ( isset( $_GET["page"] ) )
+   {
+    $_SESSION["Action"] = intval( $_GET["page"] );
+   }
+   else
+   {
+    $_SESSION["Action"] = 0;
+   }
+   
    if ( ! isset( $_SESSION["ValidMailsArray"] ) ) $_SESSION["ValidMailsArray"] = array();
    if ( ! isset( $_SESSION["GroupID"] ) )         $_SESSION["GroupID"]         = 1;
    if ( ! isset( $_SESSION["GroupNAME"] ) )       $_SESSION["GroupNAME"]       = "Gast";
    
    // extend session timer 
    self::extend();
-   
-   if ( isset( $_POST["action"] ) )
-   {
-   	switch( intval( $_POST["action"] ) )
-   	{
-     case 1 : self::login(); break;
-     case 2 : self::logout(); break;
-   	}
-   }
-   else if ( isset( $_GET["logout"] ) ) self::logout();
-   
   }
   
   public function __destruct()

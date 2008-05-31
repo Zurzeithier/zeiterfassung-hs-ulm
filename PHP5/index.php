@@ -31,21 +31,26 @@
  */
  
  // create needed objects
- //$MYS = new MySql; //TEST ONLY
  $SID = new Session;
  $SQL = new MsSql;
  $TPL = new Template;
- //$EML = new Email( "index.html" );
  
  // load template index.html
  $TPL->load( "index.html" );
  
- // do some sql-queries...
- //$result = $MYS->query( "SELECT * FROM Mitarbeiter;" ); //TEST ONLY
- $result = $SQL->query( "SELECT * FROM Mitarbeiter;" );
- while( $row = $SQL->fetch_array( $result ) )
+ $SQL->connect();
+ 
+ switch( $_SESSION["PageID_NOW"] )
  {
-  $output .= "MSSQL : " . nl2br( print_r( $row, true ) ); 
+ 	case 1:
+ 	 $output = $TPL->get( "page_auth.html" );
+ 	break;
+ 	case 2:
+ 	 $output = $TPL->get( "page_stat.html" );
+ 	break;
+ 	default:
+     $output = $TPL->get( "page_home.html" );
+ 	break;
  }
  
  // DEBUG

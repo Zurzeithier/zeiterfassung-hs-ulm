@@ -130,6 +130,8 @@
   public function get( $name, $force_reload = false )
   {
    if ( ! isset( self::$template[$name] ) || $force_reload ) self::load( $name, $force_reload );
+   self::assign( $name, "{{PAGE}}", $_SESSION["PageID_NOW"] );
+   self::assign( $name, "{{ACTION}}", $_SESSION["Action"] );
    self::parsed( $name );
    self::special_chars( self::$template[$name] );
    return self::$template[$name];
