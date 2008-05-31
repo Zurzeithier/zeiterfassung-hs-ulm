@@ -9,16 +9,16 @@
  */
  class Template
  {
-  public static $template     = array();
-  public static $assigned     = array();
-  public static $debugoff     = true;
-  public static $performance  = true;
-  public static $mssql_active = false;
-  public static $mysql_active = false;
-  public static $debugout     = "";
-  public static $php_perform  = "";
-  public static $sql_perform  = "";
-  public static $tpl_folder   = "./templates/";
+  protected static $template     = array();
+  protected static $assigned     = array();
+  protected static $debugoff     = true;
+  protected static $performance  = true;
+  protected static $mssql_active = false;
+  protected static $mysql_active = false;
+  protected static $debugout     = "";
+  protected static $php_perform  = "";
+  protected static $sql_perform  = "";
+  protected static $tpl_folder   = "./templates/";
   
 /**
  * constructor read config-file and initializes the vars
@@ -104,8 +104,9 @@
  * assign a replacement in template $name
  *
  * @param   string  template file name
- * @param   string  search for something
- * @param   string  replace with something
+ * @param   mixed   string (search for something) OR 
+ * 					 array key = search, value = replace
+ * @param   string  replace with something (if $search is string) 
  * 
  * @access  public
  *
