@@ -74,6 +74,10 @@
  */
   public function load( $name, $force_reload = false )
   {
+   // default replacements PAGE and ACTION
+   self::assign( $name, "{{PAGE}}", $_SESSION["PageID_NOW"] );
+   self::assign( $name, "{{ACTION}}", $_SESSION["Action"] );
+   
    // if template loaded, don't waste time and return
    if ( isset( self::$template[$name] ) && ! $force_reload ) return;
    
@@ -130,8 +134,6 @@
   public function get( $name, $force_reload = false )
   {
    if ( ! isset( self::$template[$name] ) || $force_reload ) self::load( $name, $force_reload );
-   self::assign( $name, "{{PAGE}}", $_SESSION["PageID_NOW"] );
-   self::assign( $name, "{{ACTION}}", $_SESSION["Action"] );
    self::parsed( $name );
    self::special_chars( self::$template[$name] );
    return self::$template[$name];
@@ -226,7 +228,7 @@
  */
   public function parsed( $name )
   {
-   if ( count ( self::$assigned[$name] ) > 0 )
+   if ( array_key_exists( $name, self::$assigned ) )
    {
    	self::$template[$name] = str_replace( array_keys( self::$assigned[$name] ), array_values( self::$assigned[$name] ), self::$template[$name] );
    }

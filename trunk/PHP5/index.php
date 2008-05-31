@@ -26,7 +26,6 @@
  
  
  $output = ""; // initialize output var
- $template_name = "page_auth.html"; // default subpage template
  
 /**
  * MAIN PROGRAM STARTS HERE
@@ -43,12 +42,12 @@
   case "logout": $SES->logout(); break;
  }
  
- // load template index.html
- $TPL->load( "index.html" );
- 
  // if logged in, show specific pages
  if ( $SES->started() )
  {
+  // load template index.html
+  $TPL->load( "index.html" );
+  
   // choose template from session "PageID_NOW"
   switch( $_SESSION["PageID_NOW"] )
   {
@@ -73,27 +72,23 @@
     
    break;
   }
+  
+  // load subpage content and insert in index.html
+  $page_output = $TPL->get( $template_name );
+  $page_output .= nl2br( print_r( $_SESSION, true ) );
+  $page_output .= "<br/>".session_id();
+  
+  $TPL->assign( "index.html", "{{PAGE_OUTPUT}}", $page_output );
+  $TPL->output( "index.html" );
  }
  else
  {
-  
+  // load template login.html
+  $TPL->load( "login.html" );
+  $TPL->output( "login.html" );
  }
- 
- // load subpage content and insert in index.html
- $page_output = $TPL->get( $template_name );
- 
- $page_output .= nl2br( print_r( $_SESSION, true ) );
- $page_output .= "<br/>".session_id();
- 
- $TPL->assign( "index.html", "{{PAGE_OUTPUT}}", $page_output );
  
 /**
  * MAIN PROGRAM ENDS HERE
- * 
- * SEND PAGE TO BROWSER
  */
- 
- // send page to browser using output method
- $TPL->output( "index.html" );
-   
 ?>
