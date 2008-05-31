@@ -13,7 +13,7 @@
  * 
  * @see             http://www.omega2k.de/~omega2k/WEBE/
  * 
- * @version         0.3_alpha         
+ * @version         0.4_beta
  */
  
  
