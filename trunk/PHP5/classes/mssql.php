@@ -57,6 +57,8 @@
    self::$hostport   = ( isset( $hostport ) ? $hostport : '1433' );
    self::$logging    = ( isset( $logging )  ? $logging  : false );
    self::$username   = ( isset( $username ) ? $username : self::$database );
+   
+   self::init();
   }
   
 /**

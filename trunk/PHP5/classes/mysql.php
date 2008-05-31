@@ -55,6 +55,8 @@
    self::$hostname   = ( isset( $hostname ) ? $hostname : 'localhost' );
    self::$logging    = ( isset( $logging )  ? $logging  : false );
    self::$username   = ( isset( $username ) ? $username : self::$database );
+   
+   self::init();
   }
   
 /**

@@ -38,17 +38,9 @@
  // load template index.html
  $TPL->load( "index.html" );
  
-<<<<<<< .mine
  // include page specific program parts (subprograms)
  switch( $_SESSION["PageID_NOW"] )
-=======
- $SQL->connect();
- 
- // include page specific program parts (subprograms)
- switch( $_SESSION["PageID_NOW"] )
->>>>>>> .r49
  {
-<<<<<<< .mine
   case 1:
    // authentification page (login, logout)
    $page_output = $TPL->get( "page_auth.html" );
@@ -62,32 +54,14 @@
    $page_output = $TPL->get( "page_home.html" );
   break;
  }
-=======
-  case 1:
-   $page_output = $TPL->get( "page_auth.html" );
-  break;
-  case 2:
-   $page_output = $TPL->get( "page_stat.html" );
-  break;
-  default:
-   $page_output = $TPL->get( "page_home.html" );
-  break;
- }
->>>>>>> .r49
  
  // assing content to specific replacement vars
  $TPL->assign( "index.html", "{{PAGE_OUTPUT}}", $page_output );
  
-<<<<<<< .mine
  // DEBUG
  print_r( $_SESSION );
  echo "SessionID = ".session_id();
  
-=======
- // DEBUG
- print_r( $_SESSION ); 
- 
->>>>>>> .r49
 /**
  * MAIN PROGRAM ENDS HERE
  * 
