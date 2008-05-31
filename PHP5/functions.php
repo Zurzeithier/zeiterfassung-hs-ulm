@@ -33,6 +33,7 @@
   // define some values
   setlocale ( LC_ALL, 'de_DE' );
   define( "PHP_SCRIPT_START", microtime() );
+  define( "SESSION_TIMEOUT", 900 );
   
   // create output buffer (for suppressing error messages) 
   ob_start();

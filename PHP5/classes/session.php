@@ -1,7 +1,7 @@
 <?
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- * The Session:: class manages login functions and security
+ * The Session:: class manages login functions and security using sessions
  *
  * Copyright 2008 Patrick Kracht <patrick.kracht@googlemail.com>
  *
@@ -71,10 +71,24 @@
    self::extend();
   }
   
+/**
+ * destructor (nop)
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function __destruct()
   {
   }
   
+/**
+ * logout destroys session and starts a new one in guest mode and reload page
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function logout()
   {
    // destroy session and start new one
@@ -91,11 +105,33 @@
    self::reload();
   }
   
+/**
+ * resets a password for a given username (email) and returns new generated password
+ *
+ * @param  string   username (email)
+ *
+ * @return  string   new generated password
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function reset_password( $user )
   {
    // TODO !!!!
   }
   
+/**
+ * generates a new random password with $length
+ *
+ * @param  int   length of the generated password
+ *
+ * @return  string   new generated password
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function generate_password( $length = 8 )
   {
    self::randomize();
@@ -114,24 +150,60 @@
    return $password;
   }
   
+/**
+ * checks current user for admin rights
+ *
+ * @return  boolean   TRUE = is admin
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function is_admin()
   {
    if ( ! isset( $_SESSION["GroupID"] ) ) return false;
    return ( $_SESSION["GroupID"] == 0 );
   }
   
+/**
+ * checks current user for user rights
+ *
+ * @return  boolean   TRUE = is user
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function is_user()
   {
    if ( ! isset( $_SESSION["GroupID"] ) ) return false;
    return ( $_SESSION["GroupID"] != 0 && $_SESSION["GroupID"] != 1 );
   }
   
+/**
+ * reload page without parameters (do not send headers before)
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function reload()
   {
    header( "Location: ./" );
    exit();
   }
   
+/**
+ * perform login with POST values $_POST["LoginUsername"] and $_POST["LoginPassword"]
+ *
+ * @param  object   SQL-Object (MySql or MsSql)
+ *
+ * @return  boolean   success of login action
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function login( &$SQL )
   {
    if ( isset( $_POST["LoginUsername"] ) && isset( $_POST["LoginPassword"] ) )
@@ -141,9 +213,11 @@
    }
    else
    {
-   	trigger_error( 'Login ohne Benutzername und Passwort nicht möglich!' );
-    return false;
+    // if no post values for user and pass, init save state (guest)
+   	self::logout();
    }
+   
+   // check, if user with md5-pass exists in database
    $query = "SELECT * FROM Mitarbeiter WHERE LoginNamen = '$username' AND LoginPasswort = '$password';";
    $found = $SQL->query_first( $query );
    if ( ! isset( $found["MId"] ) )
@@ -159,6 +233,13 @@
    return true;
   }
   
+/**
+ * extend current session, if valid anymore, or logout after timeout const SESSION_TIMEOUT seconds
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function extend()
   {
    if ( self::started() )
@@ -180,29 +261,73 @@
    }
   }
   
+/**
+ * checks, if current session is started and valid (logout after timeout const SESSION_TIMEOUT seconds)
+ *
+ * @return  boolean   returns true, if session is valid
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function valid()
   {
    if ( ! self::started() ) return false;
-   return ( $_SERVER["REMOTE_ADDR"] == $_SESSION["ClientIP"] && time() - $_SESSION["SessionTimer"] < 900 );
+   return ( $_SERVER["REMOTE_ADDR"] == $_SESSION["ClientIP"] && time() - $_SESSION["SessionTimer"] < SESSION_TIMEOUT );
   }
   
+/**
+ * checks, if current session is started
+ *
+ * @return  boolean   returns true, if session is started
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function started()
   {
    return ( isset( $_SESSION["SessionTimer"] ) && isset( $_SESSION["ClientIP"] ) );
   }
   
+/**
+ * redirect to any $url using header-location
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function return_to( $url )
   {
    header( "Location: ".$url );
    exit();    
   }
   
+/**
+ * restarts the mt_srand with some better randomized init values
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function randomize()
   {
    list( $usec, $sec ) = explode( ' ', microtime() );
    mt_srand( (float) $sec + ((float) $usec * 100000) );
   }
   
+/**
+ * check, is an $email is valid (RegEx, DB and MX-check)
+ *
+ * @param  string   email address for checking
+ * @param  boolean   check email in database too?
+ *
+ * @return  boolean   if the $email is a valid one
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function valid_email( $email, $check_db = false )
   {
    $error = false;
@@ -282,15 +407,18 @@
    return false;
   }
   
-  public function valid_user( $username )
-  {
-   // no empty username
-   if ( empty( $username ) ) return false;
-   
-   // TODO !!!!
-   return true;
-  }
-  
+/**
+ * get mx-records from host (optional: $type)
+ *
+ * @param  string   host to contact and query MX
+ * @param  string   (optional) type of record
+ *
+ * @return  array   complete list of records using nslookup
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */  
   protected function get_mx_records( $host, $type = "MX" )
   {
    if( ! empty( $host ) )
@@ -309,6 +437,18 @@
    return false;
   }
   
+/**
+ * proof choosen password for a better security
+ *
+ * @param  string   password to check
+ * @param  int        minimum length of password
+ *
+ * @return  boolean   if the $password is a good one
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
   public function is_secure_password( $password, $min_len = 8 )
   {
    return ( strlen( $password ) >= $min_len
