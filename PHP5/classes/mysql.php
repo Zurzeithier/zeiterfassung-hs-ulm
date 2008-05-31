@@ -108,8 +108,14 @@
  */
   public function connect()
   {
+   $reconnects = 0;
    self::start( "CONNECT" );
-   self::$link_id = @mysql_pconnect( self::$hostname, self::$username, self::$password, MYSQL_CLIENT_COMPRESS );
+
+   do
+   {
+    self::$link_id = @mysql_pconnect( self::$hostname, self::$username, self::$password );
+   }while ( ! self::$link_id && $reconnects++ < 3 );
+   
    self::stop();
    if( ! self::$link_id )
    {
