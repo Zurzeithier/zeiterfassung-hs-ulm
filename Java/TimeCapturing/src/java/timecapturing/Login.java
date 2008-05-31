@@ -10,11 +10,9 @@ import business_logik.UserHandling;
 import com.sun.data.provider.impl.CachedRowSetDataProvider;
 import com.sun.data.provider.impl.ListDataProvider;
 import com.sun.rave.faces.data.CachedRowSetDataModel;
-import com.sun.rave.faces.data.DefaultTableDataModel;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import com.sun.webui.jsf.model.DefaultOptionsList;
 import javax.faces.FacesException;
-import javax.faces.component.html.HtmlDataTable;
 
 /**
  * <p>Page bean that corresponds to a similarly named JSP page.  This
@@ -102,6 +100,7 @@ public class Login extends AbstractPageBean
     {
         this.menu2DefaultOptions = dol;
     }
+
     private ListDataProvider listDataProvider1 = new ListDataProvider();
 
     public ListDataProvider getListDataProvider1()
@@ -113,6 +112,7 @@ public class Login extends AbstractPageBean
     {
         this.listDataProvider1 = ldp;
     }
+
     private ListDataProvider listDataProvider2 = new ListDataProvider();
 
     public ListDataProvider getListDataProvider2()
@@ -124,6 +124,7 @@ public class Login extends AbstractPageBean
     {
         this.listDataProvider2 = ldp;
     }
+
     private CachedRowSetDataProvider personDataProvider = new CachedRowSetDataProvider();
 
     public CachedRowSetDataProvider getPersonDataProvider()
@@ -135,6 +136,7 @@ public class Login extends AbstractPageBean
     {
         this.personDataProvider = crsdp;
     }
+
     private CachedRowSetDataModel dataTable1Model = new CachedRowSetDataModel();
 
     public CachedRowSetDataModel getDataTable1Model()
