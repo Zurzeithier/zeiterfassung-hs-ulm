@@ -195,7 +195,7 @@
     self::$template[$name] .= "\n\n<!--\n";
     if ( ! empty( self::$debugout ) )
     {
-     self::$template[$name] .= "\nERROR MESSAGES\n".self::$debugout."\n\n";
+     self::$template[$name] .= "\nDEBUG MESSAGES\n\n".self::$debugout."\n\n";
     }
     self::$template[$name] .= self::$php_perform;
     self::$template[$name] .= self::$sql_perform;
