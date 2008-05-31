@@ -16,9 +16,6 @@
 /**
  * constructor initializes session, sets ini-values
  *
- * @param   string  template name for html-email
- * @param   string  (optional) subject of mail
- * 
  * @access  public
  *
  * @author  patrick.kracht
@@ -162,8 +159,7 @@
   
   public function valid()
   {
-   if ( ! isset ( $_SESSION["ClientIP"] ) ) return false;
-   if ( ! isset ( $_SESSION["SessionTimer"] ) ) return false;
+   if ( ! self::started() ) return false;
    return ( $_SERVER["REMOTE_ADDR"] == $_SESSION["ClientIP"] && time() - $_SESSION["SessionTimer"] < 900 );
   }
   
@@ -172,7 +168,7 @@
    return ( isset( $_SESSION["SessionTimer"] ) && isset( $_SESSION["ClientIP"] ) );
   }
   
-  public function return2( $url )
+  public function return_to( $url )
   {
    header( "Location: ".$url );
    exit();    
@@ -182,37 +178,6 @@
   {
    list( $usec, $sec ) = explode( ' ', microtime() );
    mt_srand( (float) $sec + ((float) $usec * 100000) );
-  }
-  
-  public function anti_spam( &$html, &$md5 )
-  {
-   $value = 0;
-   $html  = intval( $html );
-   $md5   = trim( $md5 );
-   if ( ! empty( $html ) && ! empty( $md5 ) && $html > 0 && strlen( $md5 ) == 32 )
-   {
-   	if ( md5( $html * self::$mdate ) == $md5 )
-   	{
-   	 $html = "";
-   	 $md5  = "";
-   	 return true;
-   	}
-   	$html = "";
-   	$md5  = "";
-   	return false;
-   }
-   self::randomize();
-   $oper1 = ( mt_rand( 0, 1 ) == 0 ) ? "+" : "-";
-   $multi = mt_rand( 3, 7 );
-   $addi3 = mt_rand( 2, 9 );
-   $addi2 = mt_rand( 2, 4 );
-   if ( $oper1 == "-" ) $addi1 = $addi2 + mt_rand( 2, 5 );
-   else $addi1 = mt_rand( 2, 5 );
-   
-   $html  = "&#40;&nbsp;$addi1&nbsp;$oper1&nbsp;$addi2&nbsp;&#41;&nbsp;&middot;&nbsp;$multi&nbsp;&#61;&nbsp;";
-   eval( "\$value = ( $addi1 $oper1 $addi2 ) * $multi;" );
-   $md5 = md5( self::$mdate * $value );
-   return 2;
   }
   
   public function valid_email( $email, $check_db = false )
