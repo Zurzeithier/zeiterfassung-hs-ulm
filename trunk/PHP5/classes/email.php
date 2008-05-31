@@ -32,7 +32,7 @@
  */
   public function __construct( $template, $subject = "" )
   {
-   randomize();
+   _randomize();
    self::set_newlines();
    
    self::$template = $template;
