@@ -14,7 +14,7 @@
                 </webuijsf:head>
                 <webuijsf:body id="body1" style="-rave-layout: grid">
                     <webuijsf:form id="form1">
-                        <webuijsf:tabSet id="tabSet1" selected="loginTab" style="height: 262px; left: 48px; top: 48px; position: absolute; width: 406px">
+                        <webuijsf:tabSet id="tabSet1" selected="tab2" style="height: 262px; left: 48px; top: 48px; position: absolute; width: 406px">
                             <webuijsf:tab id="loginTab" text="Login">
                                 <webuijsf:panelLayout id="layoutPanel1" style="width: 100%; height: 128px;">
                                     <webuijsf:label for="textField1" id="label1" style="height: 24px; left: 24px; top: 48px; position: absolute; width: 94px" text="Username"/>
@@ -28,8 +28,10 @@
                                         styleClass="errorMessage" text="#{Login.statusLogin}"/>
                                 </webuijsf:panelLayout>
                             </webuijsf:tab>
-                            <webuijsf:tab id="tab2" text="Change Password">
+                            <webuijsf:tab actionExpression="#{Login.tab2_action}" id="tab2" text="Change Password">
                                 <webuijsf:panelLayout id="layoutPanel2" style="height: 227px; position: relative; width: 383px; -rave-layout: grid">
+                                    <webuijsf:hyperlink actionExpression="#{Login.forgotPasswordHyperlink_action}" id="forgotPasswordHyperlink"
+                                        style="left: 144px; top: 192px; position: absolute" text="click here" toolTip="If you forgot your Password"/>
                                     <webuijsf:textField id="textField2" style="left: 120px; top: 48px; position: absolute" text="#{Login.userBean.username}"/>
                                     <webuijsf:label for="textField1" id="label4" style="height: 24px; left: 24px; top: 48px; position: absolute; width: 94px" text="Username"/>
                                     <webuijsf:label for="passwordField1" id="label5"
@@ -42,6 +44,7 @@
                                         style="height: 24px; left: 119px; top: 155px; position: absolute; width: 120px" text="Change Password"/>
                                     <webuijsf:label id="statusChangePwdLabel" style="height: 24px; left: 24px; top: 10px; position: absolute; width: 264px"
                                         styleClass="errorMessage" text="#{Login.statusChangePWD}"/>
+                                    <webuijsf:label id="label8" style="height: 24px; left: 24px; top: 192px; position: absolute; width: 118px" text="forgot password? "/>
                                 </webuijsf:panelLayout>
                             </webuijsf:tab>
                             <webuijsf:tab id="tab1" text="Buchung">

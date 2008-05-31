@@ -37,5 +37,14 @@
             <from-outcome>loginSucessfull</from-outcome>
             <to-view-id>/Bookings.jsp</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>forgotPassword</from-outcome>
+            <to-view-id>/ForgotPassword.jsp</to-view-id>
+        </navigation-case>
     </navigation-rule>
+    <managed-bean>
+        <managed-bean-name>ForgotPassword</managed-bean-name>
+        <managed-bean-class>timecapturing.ForgotPassword</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>
