@@ -14,7 +14,8 @@
                 </webuijsf:head>
                 <webuijsf:body id="body1" style="-rave-layout: grid">
                     <webuijsf:form id="form1" virtualFormsConfig="">
-                        <webuijsf:table augmentTitle="false" id="table1" style="position: absolute; left: 120px; top: 48px; height: 168px" title="Table" width="360">
+                        <webuijsf:table augmentTitle="false" id="table1" style="height: 149px; left: 48px; top: 120px; position: absolute; width: 384px"
+                            title="Table" width="384">
                             <webuijsf:tableRowGroup id="tableRowGroup1" rows="10" sourceData="#{Bookings.defaultTableDataProvider}" sourceVar="currentRow">
                                 <webuijsf:tableColumn binding="#{Bookings.tableColumn1}" headerText="column1" id="tableColumn1" sort="column1">
                                     <webuijsf:staticText id="staticText1" text="#{currentRow.value['column1']}"/>
@@ -27,6 +28,12 @@
                                 </webuijsf:tableColumn>
                             </webuijsf:tableRowGroup>
                         </webuijsf:table>
+                        <webuijsf:button actionExpression="#{Bookings.logoutButton_action}" id="logoutButton"
+                            style="height: 24px; left: 47px; top: 24px; position: absolute; width: 120px" text="Logout"/>
+                        <webuijsf:button actionExpression="#{Bookings.kommenButton_action}" id="kommenButton"
+                            style="height: 24px; left: 47px; top: 72px; position: absolute; width: 120px" text="Kommen"/>
+                        <webuijsf:button actionExpression="#{Bookings.gehenButton_action}" id="gehenButton"
+                            style="height: 24px; left: 215px; top: 72px; position: absolute; width: 120px" text="Gehen"/>
                     </webuijsf:form>
                 </webuijsf:body>
             </webuijsf:html>

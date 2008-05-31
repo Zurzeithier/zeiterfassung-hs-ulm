@@ -167,5 +167,26 @@ public class Bookings extends AbstractPageBean
     {
         return (RequestBean1) getBean("RequestBean1");
     }
+
+    public String logoutButton_action()
+    {
+        // TODO: Process the action. Return value is a navigation
+        // case name where null will return to the same page.
+        return "logout";
+    }
+
+    public String kommenButton_action()
+    {
+        // TODO: Process the action. Return value is a navigation
+        // case name where null will return to the same page.
+        return null;
+    }
+
+    public String gehenButton_action()
+    {
+        // TODO: Process the action. Return value is a navigation
+        // case name where null will return to the same page.
+        return null;
+    }
 }
 
