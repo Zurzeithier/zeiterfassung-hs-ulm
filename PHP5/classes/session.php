@@ -53,13 +53,13 @@
    }
    
    // save post or get value from "action"
-   if ( isset( $_POST["page"] ) )
+   if ( isset( $_POST["action"] ) )
    {
-    $_SESSION["Action"] = intval( $_POST["page"] );
+    $_SESSION["Action"] = intval( $_POST["action"] );
    }
-   else if ( isset( $_GET["page"] ) )
+   else if ( isset( $_GET["action"] ) )
    {
-    $_SESSION["Action"] = intval( $_GET["page"] );
+    $_SESSION["Action"] = intval( $_GET["action"] );
    }
    else
    {
