@@ -227,7 +227,7 @@
    if( $limit!=0 )$qstring .= " LIMIT $offset,$limit";
    if( !self::$link_id ) self::init();
    self::start( "UNBUFFERED_QUERY : " . $qstring );
-   self::$query_id = mssql_unbuffered_query( $qstring, self::$link_id );
+   self::$query_id = mssql_query( $qstring, self::$link_id );
    self::stop();
    return self::$query_id;
   }
