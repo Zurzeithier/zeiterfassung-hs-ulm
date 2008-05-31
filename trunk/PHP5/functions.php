@@ -282,5 +282,18 @@
   if ( $len > $maxlen ) return $text;
   return str_repeat( " ", $maxlen - $len ).$text;
  }
+
+/**
+ * start new mt_srand randomizer
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
+ function randomize()
+ {
+  list( $usec, $sec ) = explode( ' ', microtime() );
+  mt_srand( (float) $sec + ((float) $usec * 100000) );
+ }
  
 ?>
