@@ -57,6 +57,8 @@
    // statistics page
    $template_name = "page_stat.html";
    
+   // TODO
+   
    // read all rows from table 'Mitarbeiter'
    $buffer = "";
    $result = $SQL->query( "SELECT * FROM Mitarbeiter" );
