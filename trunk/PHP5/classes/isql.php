@@ -262,6 +262,7 @@
  * @author  patrick.kracht
  */
   public function get_query_timer();
+  
  }
 
 ?>

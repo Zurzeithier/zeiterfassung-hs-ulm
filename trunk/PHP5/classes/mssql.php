@@ -100,7 +100,6 @@
    return self::$is_active;
   }
   
-  
 /**
  * connect creates the MySQL connection and returns status
  *
