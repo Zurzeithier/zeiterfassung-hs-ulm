@@ -40,24 +40,18 @@
  
  $SQL->connect();
  
+ // include page specific program parts (subprograms)
  switch( $_SESSION["PageID_NOW"] )
  {
- 	case 1:
- 	 $output = $TPL->get( "page_auth.html" );
- 	break;
- 	case 2:
- 	 $output = $TPL->get( "page_stat.html" );
- 	break;
- 	default:
-     $output = $TPL->get( "page_home.html" );
- 	break;
+  case 1:  include( "./pages/auth.php" ); break;
+  case 2:  include( "./pages/stat.php" ); break;
+  default: include( "./pages/home.php" ); break;
  }
+ // assing content to specific replacement vars
+ $TPL->assign( "index.html", "{{PAGE_OUTPUT}}", $page_output );
  
  // DEBUG
- print_r( $_SESSION );
- 
- // assing content to specific replacement vars
- $TPL->assign( "index.html", "{{OUTPUT}}", $output );
+ print_r( $_SESSION ); 
  
 /**
  * MAIN PROGRAM ENDS HERE
