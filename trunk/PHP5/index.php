@@ -9,11 +9,11 @@
  * @filesource      http://code.google.com/p/zeiterfassung-hs-ulm/source/browse/trunk/PHP5/
  *
  * @author          Patrick Kracht <patrick.kracht@googlemail.com>
- *                  Thorsten Moll  <thorsten.moll@googlemail.com>
+ * @author          Thorsten Moll  <thorsten.moll@googlemail.com>
  * 
  * @see             http://www.omega2k.de/~omega2k/WEBE/
  * 
- * @version         0.3_alpha         
+ * @version         0.5_beta         
  */
  
  
@@ -77,9 +77,12 @@
     
     foreach( $tables as $table_name )
     {
-     $query  = "SELECT * FROM $table_name";
+     // first fetch result from query
      $first  = true;
+     $query  = "SELECT * FROM $table_name";
      $result = $SQL->query( $query );
+     
+     // append title and start table
      $dump  .= "<br/><b>$query</b><table border=\"1\">";
      while( $row = $SQL->fetch_array( $result ) )
      {
@@ -91,13 +94,16 @@
        $dump .= "</td></tr>";
        $first = false;
       }
+      // append data rows
       $dump .= "<tr><td>";
       $dump .= implode( "</td><td>", $row );
       $dump .= "</td></tr>";     
      }
+     // close table
      $dump  .= "</table>";
     }
     
+    // include the generated html source in template
     $TPL->assign( $template_name, "{{DUMP}}", $dump );
    break;
    default:
