@@ -218,7 +218,7 @@ public class Login extends AbstractPageBean
 
         if (UserHandling.getInstance().LoginUser(userBean))
         {
-            return "loginSucessfull";
+            return null;
         }
         else
         {
@@ -278,7 +278,7 @@ public class Login extends AbstractPageBean
         return null;
     }
 
-    public String tab2_action()
+    public String changePWDTab_action()
     {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
@@ -291,6 +291,20 @@ public class Login extends AbstractPageBean
         // case name where null will return to the same page.
                 
         return "forgotPassword";
+    }
+
+    public String loginTab_action()
+    {
+        // TODO: Process the action. Return value is a navigation
+        // case name where null will return to the same page.
+        return null;
+    }
+
+    public String buchungTab_action()
+    {
+        // TODO: Process the action. Return value is a navigation
+        // case name where null will return to the same page.
+        return null;
     }
 
 }
