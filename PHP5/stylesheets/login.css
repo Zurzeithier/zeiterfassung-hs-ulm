@@ -67,3 +67,9 @@ BODY {
     color:            red;
     font-weight:      bold;
 }
+
+#footer {
+    position:         absolute;
+    right:            5px;
+    bottom:           5px;
+}
