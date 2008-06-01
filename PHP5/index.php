@@ -13,7 +13,7 @@
  * 
  * @see             http://www.omega2k.de/~omega2k/WEBE/
  * 
- * @version         0.4_beta
+ * @version         0.3_alpha         
  */
  
  
@@ -40,6 +40,9 @@
  {
   case "login":  $SES->login( $SQL ); break;
   case "logout": $SES->logout(); break;
+  case "create":
+   //$SQL->query( "INSERT INTO Mitarbeiter (Namen,Vornamen,LoginNamen,LoginPasswort) VALUES ('Nachname','Vorname','PHP5','".md5("PHP5")."');" );
+  break;
  }
  
  // if logged in, show specific pages
@@ -75,6 +78,7 @@
   
   // load subpage content and insert in index.html
   $page_output = $TPL->get( $template_name );
+  
   $page_output .= nl2br( print_r( $_SESSION, true ) );
   $page_output .= "<br/>".session_id();
   
