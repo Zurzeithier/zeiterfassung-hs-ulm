@@ -458,7 +458,7 @@
          && preg_match("@[a-z]@", $password )
          && preg_match("@[0-9]@", $password ) );
   }
- 
+  
 /**
  * look for the choosen terminal-function and call the adequate function
  *  
@@ -471,7 +471,7 @@
   public function terminal_functions( &$SQL )
   {
    if( isset( $_POST['submit_comming'] ) ) self::terminal_coming( $SQL );	
-  }	
+  }
   
 /**
  * do a comming-booking for the current user
@@ -487,7 +487,7 @@
    //asynchronous booking?
    $array = $SQL->query_first( "SELECT TOP 1 TypId FROM ZeitBuchung WHERE MId = '".$_SESSION ['UserID']."' ORDER BY Bid DESC;" );
    if($array != false AND $array['TypId'] == 1)
-     //------------- FRAGEN, OB ASYNCHRONE BUCHUNG DURCHF�HREN
+     //------------- FRAGEN, OB ASYNCHRONE BUCHUNG DURCHFUEHREN
      ;
    $SQL->query( "INSERT INTO ZeitBuchung (TypId, Datum, Mid) VALUES (1, getdate(), ".$_SESSION['UserID'].")"); 	
   }
