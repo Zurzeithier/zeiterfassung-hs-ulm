@@ -6,6 +6,7 @@
  * Copyright 2008 Patrick Kracht <patrick.kracht@googlemail.com>
  *
  * @author  Patrick Kracht <patrick.kracht@googlemail.com>
+ * 
  */
  class Session
  {
@@ -456,7 +457,40 @@
          && preg_match("@[a-z]@", $password )
          && preg_match("@[0-9]@", $password ) );
   }
-  
- }
  
+ 
+ /**
+ * look for the choosen terminal-function and call the adequate function
+ *  
+ * @param  object   SQL-Object (MySql or MsSql)
+ *
+ * @access  public
+ *
+ * @author  thorsten.moll
+ */
+ public function terminal_functions( &$SQL ) {
+  if(isset($_POST['submit_comming']))
+   self::terminal_coming( $SQL );	
+ }	
+ 
+ /**
+ * do a comming-booking for the current user
+ *  
+ * @param  object   SQL-Object (MySql or MsSql)
+ *
+ * @access  protected
+ *
+ * @author  thorsten.moll
+ */
+  protected function terminal_coming( &$SQL ) {
+   //asynchronous booking?
+   $array = $SQL->query_first( "SELECT TOP 1 TypId FROM ZeitBuchung WHERE MId = '".$_SESSION ['UserID']."' ORDER BY Bid DESC;" );
+   if($array != false AND $array['TypId'] == 1)
+     //------------- FRAGEN, OB ASYNCHRONE BUCHUNG DURCHFÜHREN
+     ;
+   $SQL->query( "INSERT INTO ZeitBuchung (TypId, Datum, Mid) VALUES (1, getdate(), ".$_SESSION['UserID'].")"); 	
+  }
+ 
+ 
+ }
 ?>
