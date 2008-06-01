@@ -1,0 +1,51 @@
+@CHARSET "UTF-8";
+
+/*CSS for home   */
+
+#statusbox {
+	background-color: 	#ECE9D8;
+	width:				500px;
+}
+#statusbox_left {
+	width:		250px;
+	float: 		left;
+	padding:	5px;
+}
+#statusbox_right {
+	width:		200px;
+	float:		left;
+	padding:	5px;
+}
+#functions {
+	background-color: 	#ECE9D8;
+	width:				500px;
+	margin-top:			15px;
+}
+#currentdate {
+	width:				150px;
+	float:				left;
+	padding:			5px;
+}
+#function_buttons {
+	float:				left;
+	width:				300px;
+	padding:			5px;
+}
+#lastbookings {
+	background-color: 	#ECE9D8;
+	width:				500px;
+	margin-top:			15px;
+}
+#lastbookings_table {
+	width:				490px;
+	margin:				5px;
+}
+	
+#lastbookings_head_datum {
+	background-color:	#99CDFE;
+	width:				300px;
+}
+#lastbookings_head_buchung {
+	background-color:	#99CDFE;
+	width:				150px;
+}
