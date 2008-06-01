@@ -19,17 +19,13 @@
 <meta name="content-language" content="de" />
 <meta name="generator" content="Ecplipe PHP IDE 3.3.2" />
 <link type="text/css" rel="stylesheet" href="./stylesheets/index.css" />
+<link type="text/css" rel="stylesheet" href="./stylesheets/menu.css" />
 <script language="javascript" type="text/javascript" src="./scripts/standard.js"></script>
 <link rev="home" href="./" type="text/html" title="index" />
 </head>
 <body>
  <div id="menu">
-  <ul id="main_menu">
-   <li><a accesskey="A" href="./?action=logout" target="_self">Abmelden</a></li>
-   <li><a accesskey="H" href="./?page=home" target="_self">Startseite</a></li>
-   <li><a accesskey="S" href="./?page=stats" target="_self">Statistiken</a></li>
-   <li><a accesskey="D" href="./?page=dump" target="_self">Datenbank</a></li>
-  </ul>
+  {{MENU}}
  </div>
  <div id="main">
   {{PAGE_OUTPUT}}

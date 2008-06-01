@@ -16,6 +16,7 @@
   protected static $debugout     = "";
   protected static $php_perform  = "";
   protected static $sql_perform  = "";
+  protected static $menu         = "";
   protected static $tpl_folder   = "./templates/";
   
 /**
@@ -490,6 +491,28 @@
    {
     return trigger_error( 'Bitte laden Sie eine Datenbank-Klasse vor der Ausgabe durch die Template-Klasse!' );
    }
+  }
+  
+/**
+ * return menu entry
+ *
+ * @param   string    name of the menu entry
+ * @param   string    href of link
+ * @param   char      access key
+ * @param   boolean   changes class of entry, if true
+ * @param   string    target of link (default:_self) 
+ * 
+ * @return  string    menu entry
+ * 
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
+  public function menu_get_entry( $name, $href, $access_key = false, $selected = false, $target = "_self" )
+  {
+   $return  = '<li><a '.(is_string($access_key)?'accesskey="'.$access_key.'" ':'');
+   $return .= ($selected?'class="selected" ':'').'href="'.$href.'" target="'.$target.'">'.$name.'</a></li>';
+   return $return;
   }
   
  }

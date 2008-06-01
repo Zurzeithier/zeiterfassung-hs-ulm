@@ -36,18 +36,18 @@
    // save post or get value from "page"
    if ( isset( $_POST["page"] ) )
    {
-    $_SESSION["PageID_OLD"] = isset( $_SESSION["PageID_NOW"] ) ? $_SESSION["PageID_NOW"] : "login";
+    $_SESSION["PageID_OLD"] = isset( $_SESSION["PageID_NOW"] ) ? $_SESSION["PageID_NOW"] : "home";
     $_SESSION["PageID_NOW"] = $_POST["page"];
    }
    else if ( isset( $_GET["page"] ) )
    {
-   	$_SESSION["PageID_OLD"] = isset( $_SESSION["PageID_NOW"] ) ? $_SESSION["PageID_NOW"] : "login";
+   	$_SESSION["PageID_OLD"] = isset( $_SESSION["PageID_NOW"] ) ? $_SESSION["PageID_NOW"] : "home";
    	$_SESSION["PageID_NOW"] = $_GET["page"];
    }
    else
    {
-   	$_SESSION["PageID_NOW"] = "login";
-   	$_SESSION["PageID_OLD"] = "login";
+   	$_SESSION["PageID_NOW"] = "home";
+   	$_SESSION["PageID_OLD"] = "home";
    }
    
    // save post or get value from "action"
@@ -486,7 +486,7 @@
    //asynchronous booking?
    $array = $SQL->query_first( "SELECT TOP 1 TypId FROM ZeitBuchung WHERE MId = '".$_SESSION ['UserID']."' ORDER BY Bid DESC;" );
    if($array != false AND $array['TypId'] == 1)
-     //------------- FRAGEN, OB ASYNCHRONE BUCHUNG DURCHFÜHREN
+     //------------- FRAGEN, OB ASYNCHRONE BUCHUNG DURCHFï¿½HREN
      ;
    $SQL->query( "INSERT INTO ZeitBuchung (TypId, Datum, Mid) VALUES (1, getdate(), ".$_SESSION['UserID'].")"); 	
   }

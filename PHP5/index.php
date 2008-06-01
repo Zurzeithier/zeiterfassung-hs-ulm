@@ -52,30 +52,19 @@
   // load template index.html
   $TPL->load( "index.html" );
   
+  // create menu and highlight active page
+  $menu  = '<ul id="main_menu">';
+  $menu .= $TPL->menu_get_entry( "Abmelden", "./?action=logout", "Q" );
+  $menu .= $TPL->menu_get_entry( "&Uuml;bersicht", "./?page=home", "H", ($_SESSION["PageID_NOW"]=="home") );
+  $menu .= $TPL->menu_get_entry( "Statistiken", "./?page=stats", "S", ($_SESSION["PageID_NOW"]=="stats") );
+  $menu .= $TPL->menu_get_entry( "Datenbank", "./?page=dump", "D", ($_SESSION["PageID_NOW"]=="dump") );
+  $menu .= '</ul>';
+  $TPL->assign( "index.html", "{{MENU}}", $menu );
+  unset( $menu );
+  
   // choose template from session "PageID_NOW"
   switch( $_SESSION["PageID_NOW"] )
   {
-   case "home":
-    $template_name = "page_home.html";
-    $TPL->assign( "page_home.html", "{{USERNAME}}", $_SESSION['UserNAME'] );
-    $array = $SQL->query_first( "SELECT TOP 1 TypId FROM ZeitBuchung WHERE MId = '".$_SESSION ['UserID']."' ORDER BY Bid DESC;" );
-    if(array_key_exists('TypID', $array) AND $array['TypId'] == 1)
-     $status = 'anwesend';
-    else
-     $status = 'abwesend';
-    $TPL->assign( "page_home.html", "{{USERSTATUS}}", $status );
-    $wt = array("So","Mo","Di","Mi","Do","Fr","Sa");
-    $tag = date("w");
-    $TPL->assign( "page_home.html", "{{CURRENTDATE}}", $wt[$tag].date(" d.m.Y H:i") );
-    $content = '';
-    $SQL->query( "SELECT TOP 15 Bezeichnung, Datum FROM ZeitBuchung b JOIN ZBTyp z ON (b.TypID = z.TypID) WHERE MId = '".$_SESSION ['UserID']."' ORDER BY Bid DESC;" );
-    while($row = $SQL->fetch_array()) {
-    	$content .= "<tr><td>".$row['Datum']."</td><TD>".$row['Bezeichnung']."</td></tr>";
-    }
-    $TPL->assign( "page_home.html", "{{TABLE_LASTBOOKINGS}}", $content );      
-    // TODO
-    
-   break;
    case "stats":
     // statistics page
     $template_name = "page_stat.html";
@@ -122,12 +111,28 @@
     // include the generated html source in template
     $TPL->assign( $template_name, "{{DUMP}}", $dump );
    break;
+   case "home":
    default:
-   	// login page (default)
+   	// standard index page (home)
     $template_name = "page_home.html";
+     
+    $array  = $SQL->query_first( "SELECT TOP 1 TypId FROM ZeitBuchung WHERE MId = '".$_SESSION ['UserID']."' ORDER BY Bid DESC;" );
+    $status = ( array_key_exists('TypID', $array ) AND $array['TypId'] == 1 ) ? 'anwesend' : 'abwesend';
+    $wt     = array("So","Mo","Di","Mi","Do","Fr","Sa");
+    $tag    = date("w");
     
-    // TODO
+    $content = '';
+    $result = $SQL->query( "SELECT TOP 15 Bezeichnung, Datum FROM ZeitBuchung b JOIN ZBTyp z ON (b.TypID = z.TypID) WHERE MId = '".$_SESSION ['UserID']."' ORDER BY Bid DESC;" );
+    while( $row = $SQL->fetch_array( $result ) )
+    {
+     $content .= "<tr><td>".$row['Datum']."</td><td>".$row['Bezeichnung']."</td></tr>";
+    }
     
+    $TPL->assign( "page_home.html", "{{CURRENTDATE}}", $wt[$tag].date(" d.m.Y H:i") );
+    $TPL->assign( "page_home.html", "{{USERNAME}}", $_SESSION['UserNAME'] );
+    $TPL->assign( "page_home.html", "{{USERSTATUS}}", $status );
+    $TPL->assign( "page_home.html", "{{TABLE_LASTBOOKINGS}}", $content );
+    // end of case 'home' and default      
    break;
   }
   
