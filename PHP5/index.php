@@ -67,6 +67,39 @@
     // TODO
     
    break;
+   case "dump":
+    // dump of complete db
+    $template_name = "page_dump.html";
+    $dump = "";
+    
+    // define multiple selects
+    $tables = explode( ",", "Mitarbeiter,ZeitBuchung,ZeitKonto,ZBTyp" );
+    
+    foreach( $tables as $table_name )
+    {
+     $query  = "SELECT * FROM $table_name";
+     $first  = true;
+     $result = $SQL->query( $query );
+     $dump  .= "<br/><b>$query</b><table border=\"1\">";
+     while( $row = $SQL->fetch_array( $result ) )
+     {
+      // append only keys on first line
+      if ( $first )
+      {
+       $dump .= "<tr><td>";
+       $dump .= implode( "</td><td>", array_keys( $row ) );
+       $dump .= "</td></tr>";
+       $first = false;
+      }
+      $dump .= "<tr><td>";
+      $dump .= implode( "</td><td>", $row );
+      $dump .= "</td></tr>";     
+     }
+     $dump  .= "</table>";
+    }
+    
+    $TPL->assign( $template_name, "{{DUMP}}", $dump );
+   break;
    default:
    	// login page (default)
     $template_name = "page_home.html";
@@ -79,7 +112,7 @@
   // load subpage content and insert in index.html
   $page_output = $TPL->get( $template_name );
   
-  $page_output .= nl2br( print_r( $_SESSION, true ) );
+  $page_output .= "<hr/>".nl2br( print_r( $_SESSION, true ) );
   $page_output .= "<br/>".session_id();
   
   $TPL->assign( "index.html", "{{PAGE_OUTPUT}}", $page_output );
