@@ -458,25 +458,24 @@
          && preg_match("@[0-9]@", $password ) );
   }
  
- 
- /**
+/**
  * look for the choosen terminal-function and call the adequate function
  *  
- * @param  object   SQL-Object (MySql or MsSql)
+ * @param   object   SQL-Object (MySql or MsSql)
  *
  * @access  public
  *
  * @author  thorsten.moll
  */
- public function terminal_functions( &$SQL ) {
-  if(isset($_POST['submit_comming']))
-   self::terminal_coming( $SQL );	
- }	
- 
- /**
+  public function terminal_functions( &$SQL )
+  {
+   if( isset( $_POST['submit_comming'] ) ) self::terminal_coming( $SQL );	
+  }	
+  
+/**
  * do a comming-booking for the current user
  *  
- * @param  object   SQL-Object (MySql or MsSql)
+ * @param   object   SQL-Object (MySql or MsSql)
  *
  * @access  protected
  *

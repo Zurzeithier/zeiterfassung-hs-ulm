@@ -1,77 +1,87 @@
 @CHARSET "UTF-8";
 
+/* CSS for login site */
 BODY {
 	background-color: navy;
-	font-family:      verdana, arial;
-	font-size:        11px;
-	margin:           0px;
-	padding:          0px;
+	font-family: verdana, arial;
+	font-size: 11px;
+	margin: 0px;
+	padding: 0px;
 }
 
 .logintext {
-	width:            50%;
+	width: 50%;
 }
+
 #login_window {
-	position:         absolute;
-	right:            36%;
-	bottom:           42%;
-	width:            326px;
-	height:           210px;
-	background:       url(../images/login_bg_top.png) top left no-repeat;
+	position: absolute;
+	right: 36%;
+	bottom: 42%;
+	width: 326px;
+	height: 210px;
+	background: url(../images/login_bg_top.png) top left no-repeat;
 }
+
 #login_window_top {
-	position:         relative;
-    width:            326px;
-    height:           89px;
-    font-size:        14px;
-    font-weight:      bold;
-    color:            white;
-    top:              6px;
-    left:             12px;
+	position: relative;
+	width: 326px;
+	height: 89px;
+	font-size: 14px;
+	font-weight: bold;
+	color: white;
+	top: 6px;
+	left: 12px;
 }
+
 #login_window_center {
-    width:            326px;
-    height:           213px;
-    background:       url(../images/login_bg_center.png) top left repeat-y;
+	width: 326px;
+	height: 213px;
+	background: url(../images/login_bg_center.png) top left repeat-y;
 }
+
 #login_window_bottom {
-	font-size:        0px;
-    width:            326px;
-    height:           4px;
-    background:       url(../images/login_bg_bottom.png) bottom left no-repeat;
+	font-size: 0px;
+	width: 326px;
+	height: 4px;
+	background: url(../images/login_bg_bottom.png) bottom left no-repeat;
 }
 
 #loginform fieldset {
-    padding:          10px;
-    padding-left:     20px;
-    border:           none;
+	padding: 10px;
+	padding-left: 20px;
+	border: none;
 }
+
 #loginform legend {
-    font-weight:      bold;
-    font-size:        9pt;
+	font-weight: bold;
+	font-size: 9pt;
 }
+
 #loginform label {
-    display:          block;
-    height:           2em;
-    padding:          10px 10px 0;
+	display: block;
+	height: 2em;
+	padding: 10px 10px 0;
 }
+
 #loginform input {
-    margin-right:     20px;
-    border:           1px solid #999999;
-    float:            right;
-    clear:            right;
-    background:       #CCCCCC;
+	margin-right: 20px;
+	border: 1px solid #999999;
+	float: right;
+	clear: right;
+	background: #CCCCCC;
 }
+
 #loginform input:focus,#loginform input:hover {
-    border:           1px solid #333333;
+	border: 1px solid #333333;
 }
-.error{
-    color:            red;
-    font-weight:      bold;
+
+.error {
+	color: red;
+	font-weight: bold;
 }
 
 #footer {
-    position:         absolute;
-    right:            5px;
-    bottom:           5px;
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
 }
