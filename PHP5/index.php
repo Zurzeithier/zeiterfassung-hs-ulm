@@ -59,7 +59,7 @@
   $menu .= $TPL->menu_get_entry( "Statistiken", "./?page=stats", "S", ($_SESSION["PageID_NOW"]=="stats") );
   $menu .= $TPL->menu_get_entry( "Datenbank", "./?page=dump", "D", ($_SESSION["PageID_NOW"]=="dump") );
   $menu .= '</ul>';
-  $TPL->assign( "index.html", "{{MENU}}", $menu );
+  $TPL->assign( "index.html", "<!--MENU-->", $menu );
   unset( $menu );
   
   // choose template from session "PageID_NOW"
@@ -109,7 +109,7 @@
     }
     
     // include the generated html source in template
-    $TPL->assign( $template_name, "{{DUMP}}", $dump );
+    $TPL->assign( $template_name, "<!--DUMP-->", $dump );
    break;
    case "home":
    default:
@@ -128,10 +128,10 @@
      $content .= "<tr><td>".$row['Datum']."</td><td>".$row['Bezeichnung']."</td></tr>";
     }
     
-    $TPL->assign( "page_home.html", "{{CURRENTDATE}}", $wt[$tag].date(" d.m.Y H:i") );
-    $TPL->assign( "page_home.html", "{{USERNAME}}", $_SESSION['UserNAME'] );
-    $TPL->assign( "page_home.html", "{{USERSTATUS}}", $status );
-    $TPL->assign( "page_home.html", "{{TABLE_LASTBOOKINGS}}", $content );
+    $TPL->assign( "page_home.html", "<!--CURRENTDATE-->", $wt[$tag].date(" d.m.Y H:i") );
+    $TPL->assign( "page_home.html", "<!--USERNAME-->", $_SESSION['UserNAME'] );
+    $TPL->assign( "page_home.html", "<!--USERSTATUS-->", $status );
+    $TPL->assign( "page_home.html", "<!--TABLE_LASTBOOKINGS-->", $content );
     // end of case 'home' and default      
    break;
   }
@@ -139,10 +139,10 @@
   // load subpage content and insert in index.html
   $page_output = $TPL->get( $template_name );
   
-  $page_output .= "<hr/>".nl2br( print_r( $_SESSION, true ) );
-  $page_output .= "<br/>".session_id();
+  $page_output .= "<hr/><tt id=\"debug\"><u>DEBUG OUTPUT VALUES:</u><br/>".nl2br( print_r( $_SESSION, true ) );
+  $page_output .= "<br/>".session_id()."</tt>";
   
-  $TPL->assign( "index.html", "{{PAGE_OUTPUT}}", $page_output );
+  $TPL->assign( "index.html", "<!--PAGE_OUTPUT-->", $page_output );
   $TPL->output( "index.html" );
  }
  else

@@ -36,7 +36,7 @@
     include( $config_file );
     self::$tpl_folder = $tpl_folder;
    }
-   self::$debugoff     = ( isset( $tpl_compress ) ? $tpl_compress : true );
+   self::$debugoff = ( isset( $tpl_compress ) ? $tpl_compress : true );
   }
   
 /**
@@ -397,7 +397,7 @@
 /**
  * the assign method for complete arrays
  *
- * @param   array   index {{KEY}} is set to $value from 
+ * @param   array   index <!--KEY--> is set to $value from 
  * @param   array   contains keys and values to set data
  * 
  * @access  public
@@ -408,7 +408,7 @@
   {
    foreach( $array as $key => $value )
    {
-   	$data["{{".strtoupper( $key )."}}"] = $value;
+   	$data["<!--".strtoupper( $key )."-->"] = $value;
    }
   }
   

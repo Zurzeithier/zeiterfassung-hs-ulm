@@ -6,6 +6,7 @@
  * Copyright 2008 Patrick Kracht <patrick.kracht@googlemail.com>
  *
  * @author  Patrick Kracht <patrick.kracht@googlemail.com>
+ *
  * 
  */
  class Session
@@ -481,7 +482,8 @@
  *
  * @author  thorsten.moll
  */
-  protected function terminal_coming( &$SQL ) {
+  protected function terminal_coming( &$SQL )
+  {
    //asynchronous booking?
    $array = $SQL->query_first( "SELECT TOP 1 TypId FROM ZeitBuchung WHERE MId = '".$_SESSION ['UserID']."' ORDER BY Bid DESC;" );
    if($array != false AND $array['TypId'] == 1)
@@ -489,7 +491,6 @@
      ;
    $SQL->query( "INSERT INTO ZeitBuchung (TypId, Datum, Mid) VALUES (1, getdate(), ".$_SESSION['UserID'].")"); 	
   }
- 
- 
+  
  }
 ?>
