@@ -1,17 +1,5 @@
 @CHARSET "UTF-8";
 
-#main {
-    position:absolute;
-    top:38px; 
-    left:0px;
-    bottom:0px;
-    right:0px;
-    padding:10px;
-    width:auto;
-    height:auto;
-    border:none;
-    overflow:auto;
-}
 #menu {
     position:absolute;
     top:0px; 
