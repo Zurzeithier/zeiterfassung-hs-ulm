@@ -1,4 +1,3 @@
-<<<<<<< .mine
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xml:lang="de" lang="de" xmlns="http://www.w3.org/1999/xhtml">
 <!--
@@ -29,30 +28,30 @@
    {{USERNAME}}
   </div>
   <div id="statusbox_right">
-   Satus<br />
+   Status<br />
    {{USERSTATUS}}
   </div>
  </div>
  
+ <form enctype="multipart/form-data" action="" method="post" target="_self" id="function_buttons_form">
  <div id="functions">
   <div id="currentdate">
    {{CURRENTDATE}}
   </div>
   <div id="function_buttons">
-  
+   <input type="hidden" name="page" value="home" />
+   <input type="hidden" name="action" value="terminal_functions" />
+   <input name="submit_comming" type="submit" id="submit" tabindex="1" value="Kommen" />      
   </div>
+ </div>
+ </form>
   
-  <div id="lastbookings">
-   <table id="lastbookings_table">
-   <tr><td>Datum</td><td>Bu. -Art</td></tr>
-   {{TABLE_LASTBOOKINGS}}
-   </table>
-  </div> 
+ <div id="lastbookings">
+  <table id="lastbookings_table">
+  <tr><td id="lastbookings_head_datum">Datum</td><td id="lastbookings_head_buchung">Bu. -Art</td></tr>
+  {{TABLE_LASTBOOKINGS}}
+  </table>
+ </div> 
   
 </body>
 </html>
-=======
-<h1>Startseite</h1>
-
-[TODO]
->>>>>>> .r66
