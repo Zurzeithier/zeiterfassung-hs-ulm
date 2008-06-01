@@ -23,11 +23,16 @@
 <link rev="home" href="./" type="text/html" title="index" />
 </head>
 <body>
- <a href="./?action=logout" target="_self">Logout</a>&nbsp;
- <a href="./?page=home" target="_self">Home</a>&nbsp;
- <a href="./?page=stats" target="_self">Stats</a>&nbsp;
- <a href="./?page=dump" target="_self">Dump</a>
- <hr/>
- {{PAGE_OUTPUT}} 
+ <div id="menu">
+  <ul id="main_menu">
+   <li><a accesskey="A" href="./?action=logout" target="_self">Abmelden</a></li>
+   <li><a accesskey="H" href="./?page=home" target="_self">Startseite</a></li>
+   <li><a accesskey="S" href="./?page=stats" target="_self">Statistiken</a></li>
+   <li><a accesskey="D" href="./?page=dump" target="_self">Datenbank</a></li>
+  </ul>
+ </div>
+ <div id="main">
+  {{PAGE_OUTPUT}}
+ </div> 
 </body>
 </html>
