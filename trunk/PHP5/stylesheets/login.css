@@ -2,6 +2,8 @@
 
 BODY {
 	background-color: navy;
+	font-family:      verdana, arial;
+	font-size:        11px;
 }
 
 #login_window {
@@ -33,16 +35,16 @@ BODY {
     background:       url(../images/login_bg_bottom.png) bottom left no-repeat;
 }
 
-#loginform fieldset{
+#loginform fieldset {
     padding:          10px;
     padding-left:     20px;
-    border:           none; 
+    border:           none;
 }
-#loginform legend{
+#loginform legend {
     font-weight:      bold;
     font-size:        9pt;
 }
-#loginform label{
+#loginform label {
     display:          block;
     height:           2em;
     padding:          10px 10px 0;
