@@ -40,6 +40,7 @@
  {
   case "login":  $SES->login( $SQL ); break;
   case "logout": $SES->logout(); break;
+  case "terminal_functions": $SES->terminal_functions( $SQL ); break;
   case "create":
    //$SQL->query( "INSERT INTO Mitarbeiter (Namen,Vornamen,LoginNamen,LoginPasswort) VALUES ('Nachname','Vorname','PHP5','".md5("PHP5")."');" );
   break;
@@ -56,7 +57,22 @@
   {
    case "home":
     $template_name = "page_home.html";
-    
+    $TPL->assign( "page_home.html", "{{USERNAME}}", $_SESSION['UserNAME'] );
+    $array = $SQL->query_first( "SELECT TOP 1 TypId FROM ZeitBuchung WHERE MId = '".$_SESSION ['UserID']."' ORDER BY Bid DESC;" );
+    if(array_key_exists('TypID', $array) AND $array['TypId'] == 1)
+     $status = 'anwesend';
+    else
+     $status = 'abwesend';
+    $TPL->assign( "page_home.html", "{{USERSTATUS}}", $status );
+    $wt = array("So","Mo","Di","Mi","Do","Fr","Sa");
+    $tag = date("w");
+    $TPL->assign( "page_home.html", "{{CURRENTDATE}}", $wt[$tag].date(" d.m.Y H:i") );
+    $content = '';
+    $SQL->query( "SELECT TOP 15 Bezeichnung, Datum FROM ZeitBuchung b JOIN ZBTyp z ON (b.TypID = z.TypID) WHERE MId = '".$_SESSION ['UserID']."' ORDER BY Bid DESC;" );
+    while($row = $SQL->fetch_array()) {
+    	$content .= "<tr><td>".$row['Datum']."</td><TD>".$row['Bezeichnung']."</td></tr>";
+    }
+    $TPL->assign( "page_home.html", "{{TABLE_LASTBOOKINGS}}", $content );      
     // TODO
     
    break;
