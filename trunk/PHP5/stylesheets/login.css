@@ -6,6 +6,9 @@ BODY {
 	font-size:        11px;
 }
 
+.logintext {
+	width:            50%;
+}
 #login_window {
 	position:         absolute;
 	right:            36%;
@@ -26,10 +29,11 @@ BODY {
 }
 #login_window_center {
     width:            326px;
-    height:           100%;
+    height:           213px;
     background:       url(../images/login_bg_center.png) top left repeat-y;
 }
 #login_window_bottom {
+	font-size:        0px;
     width:            326px;
     height:           4px;
     background:       url(../images/login_bg_bottom.png) bottom left no-repeat;
