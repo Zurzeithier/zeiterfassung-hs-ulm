@@ -8,6 +8,10 @@ BODY {
 	padding: 0px;
 }
 
+#debug {
+	color: red;
+}
+
 #main {
 	position: absolute;
 	top: 38px;
