@@ -7,3 +7,15 @@ BODY {
     padding:          0px;
 }
 
+#main {
+    position:absolute;
+    top:38px; 
+    left:5px;
+    bottom:5px;
+    right:5px;
+    padding:10px;
+    width:auto;
+    height:auto;
+    border:none;
+    overflow:auto;
+}
