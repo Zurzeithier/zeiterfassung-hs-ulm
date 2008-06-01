@@ -4,6 +4,8 @@ BODY {
 	background-color: navy;
 	font-family:      verdana, arial;
 	font-size:        11px;
+	margin:           0px;
+	padding:          0px;
 }
 
 .logintext {
