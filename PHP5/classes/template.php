@@ -510,8 +510,8 @@
  */
   public function menu_get_entry( $name, $href, $access_key = false, $selected = false, $target = "_self" )
   {
-   $return  = '<li><a '.(is_string($access_key)?'accesskey="'.$access_key.'" ':'');
-   $return .= ($selected?'class="selected" ':'').'href="'.$href.'" target="'.$target.'">'.$name.'</a></li>';
+   $return  = '<li><a '.( is_string( $access_key ) ? 'accesskey="'.$access_key.'" ' : '' );
+   $return .= ( $selected ? 'class="selected" ' : '' ).'href="'.$href.'" target="'.$target.'">'.$name.'</a></li>';
    return $return;
   }
   
