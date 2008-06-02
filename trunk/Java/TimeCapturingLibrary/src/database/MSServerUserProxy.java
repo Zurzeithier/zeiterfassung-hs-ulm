@@ -35,11 +35,11 @@ public class MSServerUserProxy extends MSServer implements UserProxy
         ResultSet res = sat.executeQuery(query.toString());
 
 
-        if (!res.wasNull())
+        if (res.next())
         {
             returnBean = new UserBean();
 
-            returnBean.setMid(res.getString("Mid"));
+            returnBean.setMid(res.getInt("Mid"));
             returnBean.setFirstname(res.getString("Vornamen"));
             returnBean.setName(res.getString("Namen"));
             returnBean.setUsername(res.getString("LoginNamen"));
