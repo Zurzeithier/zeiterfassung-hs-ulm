@@ -3,6 +3,7 @@
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
         <Node id="Bookings.jsp" x="55" y="45" zoom="true"/>
+        <Node id="error_pages/ServerErrorPage.jsp" x="150" y="150" zoom="true"/>
         <Node id="ForgotPassword.jsp" x="34" y="256" zoom="true"/>
         <Node id="Login.jsp" x="492" y="195" zoom="false"/>
     </Scope>
