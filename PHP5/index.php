@@ -68,6 +68,7 @@
    case "stats":
     // statistics page
     $template_name = "page_stat.html";
+    $TPL->assign( "page_stat.html", "<!--BIS_DATUM-->", date("d.m.Y") );
     
     // TODO
     
@@ -117,15 +118,20 @@
     $template_name = "page_home.html";
      
     $array  = $SQL->query_first( "SELECT TOP 1 TypId FROM ZeitBuchung WHERE MId = '".$_SESSION ['UserID']."' ORDER BY Bid DESC;" );
-    $status = ( array_key_exists('TypID', $array ) AND $array['TypId'] == 1 ) ? 'anwesend' : 'abwesend';
+    $status = ( $array != false AND $array['TypId'] == 1 ) ? 'anwesend' : 'abwesend';
     $wt     = array("So","Mo","Di","Mi","Do","Fr","Sa");
     $tag    = date("w");
     
     $content = '';
-    $result = $SQL->query( "SELECT TOP 15 Bezeichnung, Datum FROM ZeitBuchung b JOIN ZBTyp z ON (b.TypID = z.TypID) WHERE MId = '".$_SESSION ['UserID']."' ORDER BY Bid DESC;" );
+    $result = $SQL->query( "SELECT TOP 15 Bezeichnung, replace(str(day(Datum),2),' ','0')+'.'+replace(str(month(Datum),2),' ','0')+
+      '.'+datename(yyyy,Datum)+' '+replace(str(datepart(hh,Datum),2),' ','0')+':'+replace(str(datepart(mi,Datum),2),' ','0') as datum2
+      FROM ZeitBuchung b JOIN ZBTyp z ON (b.TypID = z.TypID) WHERE MId = '".$_SESSION ['UserID']."' ORDER BY Bid DESC;" );
+    $zaehler = 0;
     while( $row = $SQL->fetch_array( $result ) )
     {
-     $content .= "<tr><td>".$row['Datum']."</td><td>".$row['Bezeichnung']."</td></tr>";
+     $id = ( $zaehler%2 != 0) ? 'col_hervorgehoben' : 'col_normal';
+     $content .= "<tr><td id=\"".$id."\">".$row['datum2']."</td><td id=\"".$id."\">".$row['Bezeichnung']."</td></tr>";
+     $zaehler++;
     }
     
     $TPL->assign( "page_home.html", "<!--CURRENTDATE-->", $wt[$tag].date(" d.m.Y H:i") );

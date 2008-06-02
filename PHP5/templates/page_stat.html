@@ -1,3 +1,27 @@
-<h1>Auswertungsseite</h1>
+<form enctype="multipart/form-data" action="" method="post"
+	target="_self" id="search_form">
+<div id="search">
+ <div id="search_left">
+  Von:<br />
+  <input type="text" name="von" value="<!--VON_DATUM-->" maxlength="10" size="8">
+ </div>
+ <div id="search_middle">
+  Bis:<br />
+  <input type="text" name="bis" value="<!--BIS_DATUM-->" maxlength="10" size="8">
+ </div>
+ <div id="search_right">
+  Mitarbeiter:<br />
+  <select name="mitarbeiter"><!--MITARBEITER_OPTIONS--></select>
+ </div>
+ <input type="submit" name="submitsearch" value="Suchen">
+ 
+</div>
+</form>
 
-[TODO]
+<div id="protocol">
+ <table id="protocol_table">
+  <tr><td id="protocol_head_tag">Tag</td><td id="protocol_head_zeit">Von</td>
+   <td id="protocol_head_zeit">Bis</td><td id="protocol_head_stunden">Stunden</td></tr>
+  <!--TABLE_PROTOCOL-->
+ </table>
+</div>
