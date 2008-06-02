@@ -96,6 +96,7 @@ public class ApplicationBean1 extends AbstractApplicationBean {
      *
      * <p>The default implementation uses the implementation from
      * our superclass, <code>AbstractApplicationBean</code>.</p>
+     * @return 
      */
     @Override
     public String getLocaleCharacterEncoding() {

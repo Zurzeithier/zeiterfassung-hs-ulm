@@ -5,6 +5,7 @@
  */
 package timecapturing;
 
+import com.sun.rave.faces.data.DefaultTableDataModel;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import com.sun.webui.jsf.component.TableColumn;
 import com.sun.webui.jsf.model.DefaultTableDataProvider;

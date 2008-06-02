@@ -6,6 +6,8 @@
  
 package timecapturing.error_pages;
 
+import com.sun.rave.faces.data.CachedRowSetDataModel;
+import com.sun.rave.faces.data.DefaultTableDataModel;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import javax.faces.FacesException;
 
@@ -27,6 +29,18 @@ public class ServerErrorPage extends AbstractPageBean {
      * here is subject to being replaced.</p>
      */
     private void _init() throws Exception {
+        dataTable1Model.setCachedRowSet((javax.sql.rowset.CachedRowSet) getValue("#{SessionBean1.personRowSet}"));
+    }
+    private CachedRowSetDataModel dataTable1Model = new CachedRowSetDataModel();
+
+    public CachedRowSetDataModel getDataTable1Model()
+    {
+        return dataTable1Model;
+    }
+
+    public void setDataTable1Model(CachedRowSetDataModel crsdm)
+    {
+        this.dataTable1Model = crsdm;
     }
 
     // </editor-fold>
