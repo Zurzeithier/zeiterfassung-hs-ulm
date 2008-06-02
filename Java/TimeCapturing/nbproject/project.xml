@@ -37,10 +37,6 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library files="1">
-                    <file>${file.reference.dbConnect.xml}</file>
-                    <path-in-war>config</path-in-war>
-                </library>
-                <library files="1">
                     <file>${libs.sqljdbc.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
