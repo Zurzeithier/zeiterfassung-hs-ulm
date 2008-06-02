@@ -7,7 +7,7 @@ package beans;
 public class UserBean
 {
 
-    private String mid;
+    private int mid;
     private String firstname;
     private String name;
     private String username;
@@ -27,12 +27,12 @@ public class UserBean
         this.firstname = firstname;
     }
 
-    public String getMid()
+    public int getMid()
     {
         return mid;
     }
 
-    public void setMid(String mid)
+    public void setMid(int mid)
     {
         this.mid = mid;
     }
