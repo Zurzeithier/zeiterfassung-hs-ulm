@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+#search {
+	background-color: #ECE9D8;
+	width: 400px;
+}
+#search_left {
+	width: 100px;
+	float: left;
+	padding: 5px;
+}
+#search_middle {
+	width: 100px;
+	float: left;
+	padding: 5px;
+}
+#search_right {
+	width: 100px;
+	float: left;
+	padding: 5px;
+}
+#protocol {
+	background-color: #ECE9D8;
+	width: 400px;
+	margin-top: 15px;
+}
+#protocol_table {
+	width: 390;
+	padding: 5px;
+}
+#protocol_head_tag {
+	background-color: #99CDFE;
+	width: 150px;
+}
+#protocol_head_zeit {
+	background-color: #99CDFE;
+	width: 70px;
+}
+#protocol_head_stunden {
+	background-color: #99CDFE;
+	width: 100px;
+}
