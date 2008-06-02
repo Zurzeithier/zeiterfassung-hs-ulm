@@ -538,7 +538,6 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
         <basename file="${reference.TimeCapturingLibrary.jar}" property="included.lib.reference.TimeCapturingLibrary.jar"/>
         <copy-ear-war file="${reference.TimeCapturingLibrary.jar}" propname="included.lib.reference.TimeCapturingLibrary.jar.X"/>
         <copy file="${libs.exceptionhandler-runtime.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copy file="${file.reference.dbConnect.xml}" todir="${build.web.dir}/config"/>
         <copy file="${libs.sqljdbc.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update">
@@ -560,7 +559,6 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
         <copy file="${file.reference.webui-jsf-suntheme_de.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copy file="${reference.TimeCapturingLibrary.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copy file="${libs.exceptionhandler-runtime.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copy file="${file.reference.dbConnect.xml}" todir="${build.web.dir}/config"/>
         <copy file="${libs.sqljdbc.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
     </target>
     <target depends="init,compile,compile-jsps,-pre-dist,library-inclusion-in-manifest" name="do-ear-dist">
