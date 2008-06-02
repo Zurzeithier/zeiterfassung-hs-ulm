@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!-- dbConnect.xml -->
+
+<dbserver>
+	<url>wwww.illertech.net/Zeiterfassung</url>
+	<user>sa</user>
+	<pw>odysee2001</pw>
+</dbserver>
