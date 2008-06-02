@@ -1,16 +1,12 @@
 package database;
 
+import errors.DBError;
 import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -56,9 +52,15 @@ public class ConnectionDataProvider
 
     private static void initialize()
     {
+        String configFile = "config/dbConnect.xml";
+        
+        m_Adress = "www.illertech.net;databaseName=Zeiterfassung";
+        m_Username = "sa";
+        m_Password = "odysee2001";
+        /*
         try
         {
-            File domFile = new File("setup/dbConnect.xml");
+            File domFile = new File(configFile);
             if (domFile.exists())
             {
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -91,19 +93,15 @@ public class ConnectionDataProvider
                 
                 m_Initialized = true;
             }
+            else 
+            {
+                throw new DBError(configFile + " file does not exist!");
+            }
         }
-        catch (ParserConfigurationException ex)
+        catch (Throwable ex)
         {
-            Logger.getLogger(ConnectionDataProvider.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (SAXException ex)
-        {
-            Logger.getLogger(ConnectionDataProvider.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (IOException ex)
-        {
-            Logger.getLogger(ConnectionDataProvider.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            throw new DBError(ex);
+        }*/
     }
 
 }

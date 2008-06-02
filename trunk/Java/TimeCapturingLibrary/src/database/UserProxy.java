@@ -6,7 +6,7 @@
 package database;
 
 import beans.UserBean;
-import java.sql.SQLException;
+import errors.DBError;
 
 /**
  *
@@ -18,7 +18,7 @@ public interface UserProxy {
 
     boolean insertUser(UserBean user);
     
-    UserBean getUser(String username) throws SQLException;
+    UserBean getUser(String username) throws DBError;
 
     UserBean getUser(int mid);
 
