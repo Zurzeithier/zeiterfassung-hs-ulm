@@ -27,10 +27,12 @@ public class SecurityUtils
             }
 
             return hexString.toString();
-        } catch (Throwable e)
+        }
+        catch (Throwable e)
         {
         }
 
         return "";
     }
+
 }
