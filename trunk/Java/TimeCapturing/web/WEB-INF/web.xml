@@ -90,6 +90,10 @@
         <exception-type>com.sun.rave.web.ui.appbase.ApplicationException</exception-type>
         <location>/error/ExceptionHandler</location>
     </error-page>
+    <error-page>
+        <exception-type>errors.DBError</exception-type>
+        <location>/error_pages/ServerErrorPage.jsp</location>
+    </error-page>
     <jsp-config>
         <jsp-property-group>
             <url-pattern>*.jspf</url-pattern>
