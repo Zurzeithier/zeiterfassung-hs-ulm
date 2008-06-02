@@ -98,6 +98,8 @@ public class Bookings extends AbstractPageBean
     // Perform application initialization that must complete
     // *after* managed components are initialized
     // TODO - add your own initialization code here
+        
+
     }
 
     /**
