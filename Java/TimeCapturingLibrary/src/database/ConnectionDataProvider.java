@@ -44,7 +44,7 @@ public class ConnectionDataProvider
 
     private static void initialize()
     {
-        m_Adress = "wwww.illertech.net/Zeiterfassung";
+        m_Adress = "www.illertech.net;databaseName=Zeiterfassung";
         m_Username = "sa";
         m_Password = "odysee2001";
     }
