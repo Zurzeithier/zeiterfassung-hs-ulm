@@ -218,7 +218,7 @@ public class Login extends AbstractPageBean
 
         if (UserController.getInstance().LoginUser(userBean))
         {
-            return null;
+            return "loginSucessfull";
         }
         else
         {
