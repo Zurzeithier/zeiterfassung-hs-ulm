@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Export serverType="8c91a03d-f9b4-46c0-a305-b5dcc79ff907">
+  <Server name="idefix.illertech.com" description="">
+    <ConnectionInformation>
+      <ServerType>8c91a03d-f9b4-46c0-a305-b5dcc79ff907</ServerType>
+      <ServerName>idefix.illertech.com</ServerName>
+      <AuthenticationType>1</AuthenticationType>
+      <UserName />
+      <Password />
+      <AdvancedOptions>
+        <DATABASE>Zeiterfassung</DATABASE>
+        <CONNECTION_TIMEOUT>15</CONNECTION_TIMEOUT>
+        <EXEC_TIMEOUT>0</EXEC_TIMEOUT>
+        <PACKET_SIZE>4096</PACKET_SIZE>
+        <ENCRYPT_CONNECTION>False</ENCRYPT_CONNECTION>
+      </AdvancedOptions>
+    </ConnectionInformation>
+  </Server>
+</Export>
