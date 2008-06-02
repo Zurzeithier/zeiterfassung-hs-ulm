@@ -14,7 +14,7 @@
                 </webuijsf:head>
                 <webuijsf:body id="body1" style="-rave-layout: grid">
                     <webuijsf:form id="form1">
-                        <webuijsf:tabSet id="loginTabSet" selected="loginTab" style="height: 262px; left: 48px; top: 48px; position: absolute; width: 406px">
+                        <webuijsf:tabSet id="loginTabSet" selected="changePWDTab" style="height: 262px; left: 48px; top: 48px; position: absolute; width: 406px">
                             <webuijsf:tab actionExpression="#{Login.loginTab_action}" id="loginTab" text="Login">
                                 <webuijsf:panelLayout id="loginLayoutPanel" style="width: 100%; height: 128px;">
                                     <webuijsf:label for="loginUsernameTextField" id="loginUsernameLabel"
