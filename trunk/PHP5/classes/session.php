@@ -470,7 +470,8 @@
  */
   public function terminal_functions( &$SQL )
   {
-   if( isset( $_POST['submit_comming'] ) ) self::terminal_coming( $SQL );	
+   if( isset( $_POST['submit_comming'] ) ) self::terminal_coming( $SQL );
+   else if( isset( $_POST['submit_going'] ) ) self::terminal_going( $SQL ); 	
   }
   
 /**
@@ -490,6 +491,25 @@
      //------------- FRAGEN, OB ASYNCHRONE BUCHUNG DURCHFUEHREN
      ;
    $SQL->query( "INSERT INTO ZeitBuchung (TypId, Datum, Mid) VALUES (1, getdate(), ".$_SESSION['UserID'].")"); 	
+  }
+  
+  /**
+ * do a going-booking for the current user
+ *  
+ * @param   object   SQL-Object (MySql or MsSql)
+ *
+ * @access  protected
+ *
+ * @author  thorsten.moll
+ */
+  protected function terminal_going( &$SQL )
+  {
+   //asynchronous booking?
+   $array = $SQL->query_first( "SELECT TOP 1 TypId FROM ZeitBuchung WHERE MId = '".$_SESSION ['UserID']."' ORDER BY Bid DESC;" );
+   if($array != false AND $array['TypId'] == 2)
+     //------------- FRAGEN, OB ASYNCHRONE BUCHUNG DURCHFUEHREN
+     ;
+   $SQL->query( "INSERT INTO ZeitBuchung (TypId, Datum, Mid) VALUES (2, getdate(), ".$_SESSION['UserID'].")"); 	
   }
   
  }

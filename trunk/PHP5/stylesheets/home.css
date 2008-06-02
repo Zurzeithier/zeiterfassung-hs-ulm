@@ -3,27 +3,26 @@
 /* CSS for home site */
 #statusbox {
 	background-color: #ECE9D8;
-	width: 500px;
+	width: 400px;
 }
 
 #statusbox_left {
-	width: 250px;
+	width: 190px;
 	float: left;
 	padding: 5px;
 }
 
 #statusbox_right {
-	width: 200px;
+	width: 190px;
 	float: left;
 	padding: 5px;
 }
 
 #functions {
 	background-color: #ECE9D8;
-	width: 500px;
+	width: 400px;
 	margin-top: 15px;
 }
-
 #currentdate {
 	width: 150px;
 	float: left;
@@ -31,28 +30,37 @@
 }
 
 #function_buttons {
-	float: left;
-	width: 300px;
+	float: right;
+	width: 160px;
+	margin-right: 10px;
 	padding: 5px;
 }
 
 #lastbookings {
 	background-color: #ECE9D8;
-	width: 500px;
+	width: 400px;
 	margin-top: 15px;
 }
 
 #lastbookings_table {
-	width: 490px;
+	width: 390px;
 	margin: 5px;
 }
 
 #lastbookings_head_datum {
 	background-color: #99CDFE;
-	width: 300px;
+	width: 200px;
 }
 
 #lastbookings_head_buchung {
 	background-color: #99CDFE;
-	width: 150px;
+	width: 100px;
+}
+#submit_going {
+	margin-left: 7px;
+}
+#col_hervorgehoben {
+	background-color: #D7E5F7;
+}
+#col_normal {
 }
