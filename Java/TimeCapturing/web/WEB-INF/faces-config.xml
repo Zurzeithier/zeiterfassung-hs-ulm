@@ -54,4 +54,9 @@
             <to-view-id>/Login.jsp</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <managed-bean>
+        <managed-bean-name>error_pages$ServerErrorPage</managed-bean-name>
+        <managed-bean-class>timecapturing.error_pages.ServerErrorPage</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>
