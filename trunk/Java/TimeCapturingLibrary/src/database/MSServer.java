@@ -32,8 +32,8 @@ public class MSServer
     {
         try
         {
-            Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
-            m_Connection = DriverManager.getConnection("jdbc:jtds:sqlserver://" + m_Adress,  m_Username, m_Password);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            m_Connection = DriverManager.getConnection("jdbc:sqlserver://" + m_Adress,  m_Username, m_Password);
         }
         catch (Exception e)
         {
