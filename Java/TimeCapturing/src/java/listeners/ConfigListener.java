@@ -5,7 +5,7 @@
 package listeners;
 
 import application.ConfigDataProvider;
-import application.DBData;
+import application.data_beans.DBData;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 

@@ -539,7 +539,7 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
         <copy-ear-war file="${reference.TimeCapturingLibrary.jar}" propname="included.lib.reference.TimeCapturingLibrary.jar.X"/>
         <copy file="${libs.exceptionhandler-runtime.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copy file="${libs.sqljdbc.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copy file="${file.reference.dbConnect.xml}" todir="${build.web.dir}/WEB-INF/config"/>
+        <copy file="${file.reference.dbConnect.xml}" todir="${build.web.dir}/WEB-INF/classes/config"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update">
             <attribute name="Class-Path" value="${included.lib.libs.jsf12-support.classpath.1.X} ${included.lib.libs.jsf12-support.classpath.2.X} ${included.lib.libs.jsf12-support.classpath.3.X} ${included.lib.libs.jsf12-support.classpath.4.X} ${included.lib.libs.woodstock-components.classpath.1.X} ${included.lib.libs.woodstock-components.classpath.2.X} ${included.lib.libs.woodstock-components.classpath.3.X} ${included.lib.libs.woodstock-components.classpath.4.X} ${included.lib.libs.woodstock-components.classpath.5.X} ${included.lib.libs.woodstock-theme-default.classpath} ${included.lib.file.reference.webui-jsf-suntheme_de.jar} ${included.lib.reference.TimeCapturingLibrary.jar} "/>
@@ -561,7 +561,7 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
         <copy file="${reference.TimeCapturingLibrary.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copy file="${libs.exceptionhandler-runtime.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copy file="${libs.sqljdbc.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copy file="${file.reference.dbConnect.xml}" todir="${build.web.dir}/WEB-INF/config"/>
+        <copy file="${file.reference.dbConnect.xml}" todir="${build.web.dir}/WEB-INF/classes/config"/>
     </target>
     <target depends="init,compile,compile-jsps,-pre-dist,library-inclusion-in-manifest" name="do-ear-dist">
         <dirname file="${dist.ear.war}" property="dist.jar.dir"/>
