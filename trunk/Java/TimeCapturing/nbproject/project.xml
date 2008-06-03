@@ -42,7 +42,7 @@
                 </library>
                 <library files="1">
                     <file>${file.reference.dbConnect.xml}</file>
-                    <path-in-war>WEB-INF/config</path-in-war>
+                    <path-in-war>WEB-INF/classes/config</path-in-war>
                 </library>
             </web-module-additional-libraries>
             <source-roots>
