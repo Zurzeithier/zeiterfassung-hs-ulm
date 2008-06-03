@@ -3,7 +3,6 @@
  *
  * Created on 31.05.2008, 00:19:43
  */
- 
 package timecapturing;
 
 import com.sun.rave.web.ui.appbase.AbstractApplicationBean;
@@ -21,22 +20,23 @@ import javax.faces.FacesException;
  *
  * @author manuel
  */
-public class ApplicationBean1 extends AbstractApplicationBean {
+public class ApplicationBean1 extends AbstractApplicationBean
+{
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
-
     /**
      * <p>Automatically managed component initialization.  <strong>WARNING:</strong>
      * This method is automatically generated, so any user-specified code inserted
      * here is subject to being replaced.</p>
      */
-    private void _init() throws Exception {
+    private void _init() throws Exception
+    {
     }
     // </editor-fold>
-
     /**
      * <p>Construct a new application data bean instance.</p>
      */
-    public ApplicationBean1() {
+    public ApplicationBean1()
+    {
     }
 
     /**
@@ -52,27 +52,33 @@ public class ApplicationBean1 extends AbstractApplicationBean {
      * lifetime of the application.</p>
      */
     @Override
-    public void init() {
+    public void init()
+    {
         // Perform initializations inherited from our superclass
         super.init();
         // Perform application initialization that must complete
         // *before* managed components are initialized
         // TODO - add your own initialiation code here
-        
+
         // <editor-fold defaultstate="collapsed" desc="Managed Component Initialization">
         // Initialize automatically managed components
         // *Note* - this logic should NOT be modified
-        try {
+        try
+        {
             _init();
-        } catch (Exception e) {
-            log("ApplicationBean1 Initialization Failure", e);
-            throw e instanceof FacesException ? (FacesException) e: new FacesException(e);
         }
-        
-        // </editor-fold>
-        // Perform application initialization that must complete
-        // *after* managed components are initialized
-        // TODO - add your own initialization code here
+        catch (Exception e)
+        {
+            log("ApplicationBean1 Initialization Failure", e);
+            throw e instanceof FacesException ? (FacesException) e : new FacesException(e);
+        }
+
+    // </editor-fold>
+    // Perform application initialization that must complete
+    // *after* managed components are initialized
+    // TODO - add your own initialization code here
+
+
     }
 
     /**
@@ -85,7 +91,8 @@ public class ApplicationBean1 extends AbstractApplicationBean {
      * at any later time during the lifetime of the application.</p>
      */
     @Override
-    public void destroy() {
+    public void destroy()
+    {
     }
 
     /**
@@ -99,7 +106,9 @@ public class ApplicationBean1 extends AbstractApplicationBean {
      * @return 
      */
     @Override
-    public String getLocaleCharacterEncoding() {
+    public String getLocaleCharacterEncoding()
+    {
         return super.getLocaleCharacterEncoding();
     }
+
 }

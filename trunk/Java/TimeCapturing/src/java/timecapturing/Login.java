@@ -10,6 +10,7 @@ import controllers.UserController;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import com.sun.webui.jsf.model.DefaultOptionsList;
 import javax.faces.FacesException;
+import listeners.ConfigListener;
 
 /**
  * <p>Page bean that corresponds to a similarly named JSP page.  This
@@ -137,10 +138,11 @@ public class Login extends AbstractPageBean
             throw e instanceof FacesException ? (FacesException) e : new FacesException(e);
         }
 
-    // </editor-fold>
-    // Perform application initialization that must complete
-    // *after* managed components are initialized
-    // TODO - add your own initialization code here
+        // </editor-fold>
+        // Perform application initialization that must complete
+        // *after* managed components are initialized
+        // TODO - add your own initialization code here 
+        
     }
 
     /**
@@ -289,7 +291,7 @@ public class Login extends AbstractPageBean
     {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-                
+
         return "forgotPassword";
     }
 

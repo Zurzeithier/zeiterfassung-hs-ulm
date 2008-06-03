@@ -87,6 +87,7 @@ public class SessionBean1 extends AbstractSessionBean {
         // Perform application initialization that must complete
         // *after* managed components are initialized
         // TODO - add your own initialization code here
+        
     }
 
     /**
