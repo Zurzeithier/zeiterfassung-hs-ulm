@@ -32,9 +32,9 @@
  */
  
  // create needed objects
- $SES = new Session;
- $SQL = new MsSql;
- $TPL = new Template;
+ $SES =& new Session;
+ $SQL =& new MsSql;
+ $TPL =& new Template;
  
  switch( $_SESSION["Action"] )
  {
