@@ -6,13 +6,14 @@
 package database;
 
 import beans.TimePostingBean;
+import java.util.ArrayList;
 
 /**
  *
- * @author manuel
+ * @author manuel, steffen
  */
 public interface TimePostingProxy {
 
-    TimePostingBean getTimePosting();
+    ArrayList getTimePosting(int mid);
 
 }

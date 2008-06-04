@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author manuel
+ * @author manuel, steffen
  */
 public class MSServerUserProxy extends MSServer implements UserProxy
 {
@@ -61,8 +61,42 @@ public class MSServerUserProxy extends MSServer implements UserProxy
 
     public UserBean getUser(int mid)
     {
+        try
+        {
+            connect();
 
-        return null;
+            UserBean returnBean = null;
+            StringBuilder query = new StringBuilder();
+
+            query.append("SELECT *  FROM Mitarbeiter WHERE ");
+            query.append("MId='");
+            query.append(mid);
+            query.append("'");
+
+            Statement sat = m_Connection.createStatement();
+            ResultSet res = sat.executeQuery(query.toString());
+
+
+            if (res.next())
+            {
+                returnBean = new UserBean();
+
+                returnBean.setMid(res.getInt("Mid"));
+                returnBean.setFirstname(res.getString("Vornamen"));
+                returnBean.setName(res.getString("Namen"));
+                returnBean.setUsername(res.getString("LoginNamen"));
+                returnBean.setPassword(res.getString("LoginPasswort"));
+            }
+
+            res.close();
+            disconnect();
+
+            return returnBean;
+        }
+        catch (SQLException ex)
+        {
+            throw new DBError(ex);
+        }
     }
 
     public boolean changeUser(UserBean user)
@@ -70,9 +104,38 @@ public class MSServerUserProxy extends MSServer implements UserProxy
         return false;
     }
 
+    // nicht getestet ob der MSServer die MID automatisch erhöht
     public boolean insertUser(UserBean user)
     {
-        return false;
+        try
+        {
+            connect();
+            
+            StringBuilder query = new StringBuilder();
+
+            query.append("INSERT INTO Mitarbeiter ");
+            query.append("(Namen, Vornamen, LoginNamen, LoginPasswort) VALUES (");
+            query.append(user.getName());
+            query.append(", ");
+            query.append(user.getFirstname());
+            query.append(", ");
+            query.append(user.getUsername());
+            query.append(", ");
+            query.append(user.getPassword());
+            query.append(")");
+
+            Statement sat = m_Connection.createStatement();
+            ResultSet res = sat.executeQuery(query.toString());
+
+            res.close();
+            disconnect();
+
+            return true;
+        }
+        catch (SQLException ex)
+        {
+            throw new DBError(ex);
+        }
     }
 
 }
