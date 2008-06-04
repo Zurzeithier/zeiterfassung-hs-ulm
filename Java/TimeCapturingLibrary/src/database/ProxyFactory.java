@@ -4,7 +4,7 @@ import application.ConfigDataProvider;
 
 /**
  *
- * @author manuel
+ * @author manuel, steffen
  */
 public class ProxyFactory
 {
@@ -17,4 +17,28 @@ public class ProxyFactory
                         ConfigDataProvider.getDBData().password);
     }
 
+    public static TimeAccountProxy getTimeAccountProxy()
+    {
+        return new MSServerTimeAccountProxy(
+                        ConfigDataProvider.getDBData().adress,
+                        ConfigDataProvider.getDBData().user,
+                        ConfigDataProvider.getDBData().password);
+    }
+        
+    public static TimePostingProxy getPostingProxy()
+    {
+        return new MSServerTimePostingProxy(
+                        ConfigDataProvider.getDBData().adress,
+                        ConfigDataProvider.getDBData().user,
+                        ConfigDataProvider.getDBData().password);
+    }
+
+    public static TPTypeProxy getTPTypeProxy()
+    {
+        return new MSServerTPTypeProxy(
+                        ConfigDataProvider.getDBData().adress,
+                        ConfigDataProvider.getDBData().user,
+                        ConfigDataProvider.getDBData().password);
+    }      
 }
+
