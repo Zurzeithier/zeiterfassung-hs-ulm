@@ -1,8 +1,8 @@
 package controllers;
 
 import beans.UserBean;
-import database.ProxyFactory;
-import database.UserProxy;
+import database.ProxyPool;
+import exceptions.DBException;
 import utils.SecurityUtils;
 
 /**
@@ -11,33 +11,16 @@ import utils.SecurityUtils;
  */
 public class UserController
 {
-
-    private final UserProxy m_UserProxy;
-    private final static UserController m_Instance = new UserController();
-
-    /**
-     * 
-     * @return
-     */
-    public static UserController getInstance()
-    {
-        return m_Instance;
-    }
-
-    private UserController()
-    {
-        m_UserProxy = ProxyFactory.getUserProxy();
-    }
-
     /**
      * 
      * @param username
      * @param password
      * @return
+     * @throws DBException 
      */
-    public boolean LoginUser(String username, String password)
+    public static boolean LoginUser(String username, String password) throws DBException
     {
-        UserBean dbBean = m_UserProxy.getUser(username);
+        UserBean dbBean = ProxyPool.getUserProxy().getUser(username);
 
         return (dbBean != null && dbBean.getPassword().equals(SecurityUtils.makeMD5Checksum(password)));
     }
@@ -50,11 +33,12 @@ public class UserController
      * @param password Altes Passwort das geändert werden soll
      * @param newPassword Neues Passwort
      * @return
+     * @throws DBException 
      */
-    public boolean ChangeUserPWD(String username, String password, String newPassword)
+    public static boolean ChangeUserPWD(String username, String password, String newPassword) throws DBException
     {
 
-        UserBean dbBean = m_UserProxy.getUser(username);
+        UserBean dbBean = ProxyPool.getUserProxy().getUser(username);
 
         if (dbBean != null && dbBean.getPassword().equals(SecurityUtils.makeMD5Checksum(password)))
         {
@@ -62,7 +46,7 @@ public class UserController
             bean.setMid(dbBean.getMid());
             bean.setPassword(SecurityUtils.makeMD5Checksum(newPassword));
 
-            return m_UserProxy.changeUser(bean);
+            return ProxyPool.getUserProxy().changeUser(bean);
         }
 
         return false;
