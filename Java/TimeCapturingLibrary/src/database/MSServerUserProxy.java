@@ -27,7 +27,7 @@ public class MSServerUserProxy extends MSServer implements UserProxy
             UserBean returnBean = null;
             StringBuilder query = new StringBuilder();
 
-            query.append("SELECT *  FROM Mitarbeiter WHERE ");
+            query.append("SELECT MId, Vornamen, Namen, LoginNamen, LoginPasswort FROM Mitarbeiter WHERE ");
             query.append("LoginNamen='");
             query.append(username);
             query.append("'");
