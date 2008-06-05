@@ -5,7 +5,7 @@
  */
 package timecapturing;
 
-import com.sun.rave.faces.data.DefaultTableDataModel;
+import com.sun.data.provider.RowKey;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import com.sun.webui.jsf.component.TableColumn;
 import com.sun.webui.jsf.model.DefaultTableDataProvider;
@@ -31,6 +31,19 @@ public class Bookings extends AbstractPageBean
     private void _init() throws Exception
     {
     }    // </editor-fold>
+    
+    private String debug = null;
+
+    public String getDebug()
+    {
+        return debug;
+    }
+
+    public void setDebug(String debug)
+    {
+        this.debug = debug;
+    }
+    
     private DefaultTableDataProvider defaultTableDataProvider = new DefaultTableDataProvider();
 
     public DefaultTableDataProvider getDefaultTableDataProvider()
@@ -100,6 +113,11 @@ public class Bookings extends AbstractPageBean
     // *after* managed components are initialized
     // TODO - add your own initialization code here
         
+        if (defaultTableDataProvider.canAppendRow())
+        {
+            RowKey temp = defaultTableDataProvider.appendRow();
+            debug = temp.toString();
+        }
 
     }
 
