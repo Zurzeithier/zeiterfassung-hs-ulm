@@ -1,7 +1,7 @@
 package database;
 
 import beans.UserBean;
-import errors.DBError;
+import exceptions.DBException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,7 +18,7 @@ public class MSServerUserProxy extends MSServer implements UserProxy
         super(adress, username, password);
     }
 
-    public UserBean getUser(String username) throws DBError
+    public UserBean getUser(String username) throws DBException
     {
         try
         {
@@ -55,11 +55,11 @@ public class MSServerUserProxy extends MSServer implements UserProxy
         }
         catch (SQLException ex)
         {
-            throw new DBError(ex);
+            throw new DBException(ex);
         }
     }
 
-    public UserBean getUser(int mid)
+    public UserBean getUser(int mid) throws DBException
     {
         try
         {
@@ -95,11 +95,11 @@ public class MSServerUserProxy extends MSServer implements UserProxy
         }
         catch (SQLException ex)
         {
-            throw new DBError(ex);
+            throw new DBException(ex);
         }
     }
 
-    public boolean changeUser(UserBean user)
+    public boolean changeUser(UserBean user) throws DBException
     {
         try
         {
@@ -138,12 +138,12 @@ public class MSServerUserProxy extends MSServer implements UserProxy
         }
         catch (SQLException ex)
         {
-            throw new DBError(ex);
+            throw new DBException(ex);
         }
     }
 
     // nicht getestet ob der MSServer die MID automatisch erhöht
-    public boolean insertUser(UserBean user)
+    public boolean insertUser(UserBean user) throws DBException
     {
         try
         {
@@ -172,7 +172,7 @@ public class MSServerUserProxy extends MSServer implements UserProxy
         }
         catch (SQLException ex)
         {
-            throw new DBError(ex);
+            throw new DBException(ex);
         }
     }
 

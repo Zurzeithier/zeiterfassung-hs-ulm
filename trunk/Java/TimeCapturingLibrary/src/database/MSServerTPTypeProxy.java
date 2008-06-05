@@ -5,7 +5,7 @@
 package database;
 
 import beans.TPTypeBean;
-import errors.DBError;
+import exceptions.DBException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,7 +22,7 @@ public class MSServerTPTypeProxy extends MSServer implements TPTypeProxy
         super(adress, username, password);
     }
 
-    public TPTypeBean getType(int typId)
+    public TPTypeBean getType(int typId) throws DBException
     {
         try
         {
@@ -56,7 +56,7 @@ public class MSServerTPTypeProxy extends MSServer implements TPTypeProxy
         }
         catch (SQLException ex)
         {
-            throw new DBError(ex);
+            throw new DBException(ex);
         }
     }
 

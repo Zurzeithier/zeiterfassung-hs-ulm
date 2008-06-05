@@ -6,6 +6,7 @@
 package database;
 
 import beans.TPTypeBean;
+import exceptions.DBException;
 
 /**
  *
@@ -13,6 +14,6 @@ import beans.TPTypeBean;
  */
 public interface TPTypeProxy {
 
-    TPTypeBean getType(int typId);
+    TPTypeBean getType(int typId) throws DBException;
 
 }

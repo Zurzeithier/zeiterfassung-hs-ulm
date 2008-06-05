@@ -6,6 +6,7 @@
 package database;
 
 import beans.TimeAccountBean;
+import exceptions.DBException;
 
 /**
  *
@@ -13,6 +14,6 @@ import beans.TimeAccountBean;
  */
 public interface TimeAccountProxy {
 
-    TimeAccountBean getTimeAccount();
+    TimeAccountBean getTimeAccount() throws DBException;
 
 }

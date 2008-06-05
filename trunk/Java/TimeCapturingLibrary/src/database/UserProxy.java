@@ -6,7 +6,7 @@
 package database;
 
 import beans.UserBean;
-import errors.DBError;
+import exceptions.DBException;
 
 /**
  *
@@ -14,12 +14,12 @@ import errors.DBError;
  */
 public interface UserProxy {
 
-    boolean changeUser(UserBean user);
+    boolean changeUser(UserBean user) throws DBException;
 
-    boolean insertUser(UserBean user);
+    boolean insertUser(UserBean user) throws DBException;
     
-    UserBean getUser(String username) throws DBError;
+    UserBean getUser(String username) throws DBException;
 
-    UserBean getUser(int mid);
+    UserBean getUser(int mid) throws DBException;
 
 }

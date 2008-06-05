@@ -5,6 +5,7 @@
 
 package database;
 
+import exceptions.DBException;
 import java.util.List;
 
 /**
@@ -13,6 +14,6 @@ import java.util.List;
  */
 public interface TimePostingProxy {
 
-    List getTimePosting(int mid);
+    List getTimePosting(int mid) throws DBException;
 
 }
