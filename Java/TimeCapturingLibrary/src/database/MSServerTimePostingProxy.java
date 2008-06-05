@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,14 +20,14 @@ public class MSServerTimePostingProxy extends MSServer implements TimePostingPro
         super(adress, username, password);
     }
 
-    public ArrayList getTimePosting(int mid)
+    public List getTimePosting(int mid)
     {
         try
         {
             connect();
 
             TimePostingBean returnBean = null;
-            ArrayList returnArrayList = new ArrayList();
+            List returnList = new ArrayList();
             StringBuilder query = new StringBuilder();
 
             query.append("SELECT *  FROM ZeitBuchung WHERE ");
@@ -49,13 +50,13 @@ public class MSServerTimePostingProxy extends MSServer implements TimePostingPro
                 returnBean.setKstId(res.getInt("KstId"));
                 returnBean.setTypId(res.getInt("TypId"));
                 
-                returnArrayList.add(returnBean);
+                returnList.add(returnBean);
             }
 
             res.close();
             disconnect();
 
-            return returnArrayList;
+            return returnList;
         }
         catch (SQLException ex)
         {
