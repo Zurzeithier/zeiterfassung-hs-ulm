@@ -101,7 +101,45 @@ public class MSServerUserProxy extends MSServer implements UserProxy
 
     public boolean changeUser(UserBean user)
     {
-        return false;
+        try
+        {
+            connect();
+
+            StringBuilder query = new StringBuilder();
+
+            query.append("UPDATE Mitarbeiter SET ");
+            
+            if (user.getFirstname() != null)
+            {
+                query.append("Vornamen='").append(user.getFirstname()).append("'");
+            }
+            if (user.getName() != null)
+            {
+                query.append("Namen='").append(user.getName()).append("'");
+            }
+            if (user.getUsername() != null)
+            {
+                query.append("LoginNamen='").append(user.getUsername()).append("'");
+            }
+            if (user.getPassword() != null)
+            {
+                query.append("LoginPasswort='").append(user.getPassword()).append("'");
+            }
+           
+            query.append(" WHERE mid='").append(user.getMid()).append("'");
+
+            // System.out.println(query.toString());
+            Statement sat = m_Connection.createStatement();
+            boolean sucessfull = sat.execute(query.toString());
+
+            disconnect();
+            
+            return sucessfull;
+        }
+        catch (SQLException ex)
+        {
+            throw new DBError(ex);
+        }
     }
 
     // nicht getestet ob der MSServer die MID automatisch erhöht
