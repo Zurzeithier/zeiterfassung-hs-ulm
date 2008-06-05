@@ -10,7 +10,6 @@ import controllers.UserController;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import com.sun.webui.jsf.model.DefaultOptionsList;
 import javax.faces.FacesException;
-import listeners.ConfigListener;
 
 /**
  * <p>Page bean that corresponds to a similarly named JSP page.  This
@@ -218,7 +217,7 @@ public class Login extends AbstractPageBean
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
 
-        if (UserController.getInstance().LoginUser(userBean))
+        if (UserController.getInstance().LoginUser(userBean.getUsername(), userBean.getPassword()))
         {
             return "loginSucessfull";
         }
@@ -235,7 +234,7 @@ public class Login extends AbstractPageBean
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
 
-        if (UserController.getInstance().ChangeUserPWD(userBean, newPassword))
+        if (UserController.getInstance().ChangeUserPWD(userBean.getUsername(), userBean.getPassword(), newPassword))
         {
             statusChangePWD = "Change was successful!";
         }
@@ -252,7 +251,7 @@ public class Login extends AbstractPageBean
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
 
-        if (UserController.getInstance().LoginUser(userBean))
+        if (UserController.getInstance().LoginUser(userBean.getUsername(), userBean.getPassword()))
         {
             return "loginSucessfull";
         }
@@ -268,7 +267,7 @@ public class Login extends AbstractPageBean
     {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        if (UserController.getInstance().LoginUser(userBean))
+        if (UserController.getInstance().LoginUser(userBean.getUsername(), userBean.getPassword()))
         {
             return "loginSucessfull";
         }

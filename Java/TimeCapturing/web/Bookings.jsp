@@ -34,6 +34,7 @@
                             style="height: 24px; left: 47px; top: 72px; position: absolute; width: 120px" text="Kommen"/>
                         <webuijsf:button actionExpression="#{Bookings.gehenButton_action}" id="gehenButton"
                             style="height: 24px; left: 215px; top: 72px; position: absolute; width: 120px" text="Gehen"/>
+                        <webuijsf:label id="label1" style="position: absolute; left: 48px; top: 336px; width: 288px; height: 24px" text="#{Bookings.debug}"/>
                     </webuijsf:form>
                 </webuijsf:body>
             </webuijsf:html>
