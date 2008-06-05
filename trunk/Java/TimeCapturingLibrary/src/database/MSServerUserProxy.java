@@ -68,7 +68,7 @@ public class MSServerUserProxy extends MSServer implements UserProxy
             UserBean returnBean = null;
             StringBuilder query = new StringBuilder();
 
-            query.append("SELECT *  FROM Mitarbeiter WHERE ");
+            query.append("SELECT MId, Vornamen, Namen, LoginNamen, LoginPasswort FROM Mitarbeiter WHERE ");
             query.append("MId='");
             query.append(mid);
             query.append("'");
@@ -81,7 +81,7 @@ public class MSServerUserProxy extends MSServer implements UserProxy
             {
                 returnBean = new UserBean();
 
-                returnBean.setMid(res.getInt("Mid"));
+                returnBean.setMid(res.getInt("MId"));
                 returnBean.setFirstname(res.getString("Vornamen"));
                 returnBean.setName(res.getString("Namen"));
                 returnBean.setUsername(res.getString("LoginNamen"));
