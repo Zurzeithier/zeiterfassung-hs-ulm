@@ -1,7 +1,7 @@
 package database;
 
 import beans.TimePostingBean;
-import errors.DBError;
+import exceptions.DBException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,7 +20,7 @@ public class MSServerTimePostingProxy extends MSServer implements TimePostingPro
         super(adress, username, password);
     }
 
-    public List getTimePosting(int mid)
+    public List getTimePosting(int mid) throws DBException
     {
         try
         {
@@ -60,7 +60,7 @@ public class MSServerTimePostingProxy extends MSServer implements TimePostingPro
         }
         catch (SQLException ex)
         {
-            throw new DBError(ex);
+            throw new DBException(ex);
         }
     }
 }
