@@ -30,7 +30,7 @@ public class MSServerTimePostingProxy extends MSServer implements TimePostingPro
             List returnList = new ArrayList();
             StringBuilder query = new StringBuilder();
 
-            query.append("SELECT *  FROM ZeitBuchung WHERE ");
+            query.append("SELECT MId, BId, Datum, KoaId, KstId, TypId FROM ZeitBuchung WHERE ");
             query.append("MId='");
             query.append(mid);
             query.append("'");
@@ -43,8 +43,8 @@ public class MSServerTimePostingProxy extends MSServer implements TimePostingPro
             {
                 returnBean = new TimePostingBean();
 
-                returnBean.setMid(res.getInt("Mid"));
-                returnBean.setBid(res.getInt("Bid"));
+                returnBean.setMid(res.getInt("MId"));
+                returnBean.setBid(res.getInt("BId"));
                 returnBean.setDate(res.getDate("Datum"));
                 returnBean.setKoaId(res.getInt("KoaId"));
                 returnBean.setKstId(res.getInt("KstId"));

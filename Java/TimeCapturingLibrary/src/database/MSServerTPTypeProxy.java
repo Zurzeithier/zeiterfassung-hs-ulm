@@ -31,7 +31,7 @@ public class MSServerTPTypeProxy extends MSServer implements TPTypeProxy
             TPTypeBean returnBean = null;
             StringBuilder query = new StringBuilder();
 
-            query.append("SELECT *  FROM ZBTyp WHERE ");
+            query.append("SELECT TypId, Bezeichung, Symbol  FROM ZBTyp WHERE ");
             query.append("TypId='");
             query.append(typId);
             query.append("'");
