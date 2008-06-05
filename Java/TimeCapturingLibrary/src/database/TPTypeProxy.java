@@ -9,10 +9,10 @@ import beans.TPTypeBean;
 
 /**
  *
- * @author manuel
+ * @author manuel, steffen
  */
 public interface TPTypeProxy {
 
-    TPTypeBean getType();
+    TPTypeBean getType(int typId);
 
 }
