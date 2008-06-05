@@ -9,6 +9,7 @@ import beans.UserBean;
 import controllers.UserController;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import com.sun.webui.jsf.model.DefaultOptionsList;
+import exceptions.DBException;
 import javax.faces.FacesException;
 
 /**
@@ -212,12 +213,12 @@ public class Login extends AbstractPageBean
         return (ApplicationBean1) getBean("ApplicationBean1");
     }
 
-    public String loginButton_action()
+    public String loginButton_action() throws DBException
     {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
 
-        if (UserController.getInstance().LoginUser(userBean.getUsername(), userBean.getPassword()))
+        if (UserController.LoginUser(userBean.getUsername(), userBean.getPassword()))
         {
             return "loginSucessfull";
         }
@@ -229,12 +230,12 @@ public class Login extends AbstractPageBean
         return null;
     }
 
-    public String changePwdButton_action()
+    public String changePwdButton_action() throws DBException
     {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
 
-        if (UserController.getInstance().ChangeUserPWD(userBean.getUsername(), userBean.getPassword(), newPassword))
+        if (UserController.ChangeUserPWD(userBean.getUsername(), userBean.getPassword(), newPassword))
         {
             statusChangePWD = "Change was successful!";
         }
@@ -246,12 +247,12 @@ public class Login extends AbstractPageBean
         return null;
     }
 
-    public String buchungKommenButton_action()
+    public String buchungKommenButton_action() throws DBException
     {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
 
-        if (UserController.getInstance().LoginUser(userBean.getUsername(), userBean.getPassword()))
+        if (UserController.LoginUser(userBean.getUsername(), userBean.getPassword()))
         {
             return "loginSucessfull";
         }
@@ -263,11 +264,11 @@ public class Login extends AbstractPageBean
         return null;
     }
 
-    public String buchungGehenButton_action()
+    public String buchungGehenButton_action() throws DBException
     {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        if (UserController.getInstance().LoginUser(userBean.getUsername(), userBean.getPassword()))
+        if (UserController.LoginUser(userBean.getUsername(), userBean.getPassword()))
         {
             return "loginSucessfull";
         }
