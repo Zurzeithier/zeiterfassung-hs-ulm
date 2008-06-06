@@ -6,7 +6,7 @@
 package timecapturing;
 
 import beans.UserBean;
-import controllers.UserController;
+import handlers.UserHandler;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import com.sun.webui.jsf.model.DefaultOptionsList;
 import exceptions.DBException;
@@ -138,11 +138,11 @@ public class Login extends AbstractPageBean
             throw e instanceof FacesException ? (FacesException) e : new FacesException(e);
         }
 
-        // </editor-fold>
-        // Perform application initialization that must complete
-        // *after* managed components are initialized
-        // TODO - add your own initialization code here 
-        
+    // </editor-fold>
+    // Perform application initialization that must complete
+    // *after* managed components are initialized
+    // TODO - add your own initialization code here 
+
     }
 
     /**
@@ -218,8 +218,9 @@ public class Login extends AbstractPageBean
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
 
-        if (UserController.LoginUser(userBean.getUsername(), userBean.getPassword()))
+        if (UserHandler.LoginUser(userBean.getUsername(), userBean.getPassword()))
         {
+            getSessionBean1().setLogTest("Hallo du");
             return "loginSucessfull";
         }
         else
@@ -235,7 +236,7 @@ public class Login extends AbstractPageBean
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
 
-        if (UserController.ChangeUserPWD(userBean.getUsername(), userBean.getPassword(), newPassword))
+        if (UserHandler.ChangeUserPWD(userBean.getUsername(), userBean.getPassword(), newPassword))
         {
             statusChangePWD = "Change was successful!";
         }
@@ -252,7 +253,7 @@ public class Login extends AbstractPageBean
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
 
-        if (UserController.LoginUser(userBean.getUsername(), userBean.getPassword()))
+        if (UserHandler.LoginUser(userBean.getUsername(), userBean.getPassword()))
         {
             return "loginSucessfull";
         }
@@ -268,7 +269,7 @@ public class Login extends AbstractPageBean
     {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        if (UserController.LoginUser(userBean.getUsername(), userBean.getPassword()))
+        if (UserHandler.LoginUser(userBean.getUsername(), userBean.getPassword()))
         {
             return "loginSucessfull";
         }

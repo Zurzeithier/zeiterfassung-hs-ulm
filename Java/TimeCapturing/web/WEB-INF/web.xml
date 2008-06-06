@@ -42,9 +42,18 @@
             <param-value>4096</param-value>
         </init-param>
     </filter>
+    <filter>
+        <filter-name>SecureCheckFilter</filter-name>
+        <filter-class>filters.SecureCheckFilter</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>UploadFilter</filter-name>
         <servlet-name>Time Capturing</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UploadFilter</filter-name>
+        <servlet-name>Time Capturing</servlet-name>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     <listener>
         <description>set Config Data</description>
@@ -110,7 +119,7 @@
         <location>/error/ExceptionHandler</location>
     </error-page>
     <error-page>
-        <exception-type>errors.DBError</exception-type>
+        <exception-type>exceptions.DBException</exception-type>
         <location>/error_pages/ServerErrorPage.jsp</location>
     </error-page>
     <jsp-config>

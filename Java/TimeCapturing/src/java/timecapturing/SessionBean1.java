@@ -48,6 +48,20 @@ public class SessionBean1 extends AbstractSessionBean {
     }
     // </editor-fold>
 
+    private String logTest = null;
+
+    public String getLogTest()
+    {
+        return logTest;
+    }
+
+    public void setLogTest(String logTest)
+    {
+        this.logTest = logTest;
+    }
+    
+    
+    
     /**
      * <p>Construct a new session data bean instance.</p>
      */
