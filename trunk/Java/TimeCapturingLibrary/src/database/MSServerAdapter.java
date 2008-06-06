@@ -1,21 +1,115 @@
 package database;
 
+import beans.TPTypeBean;
+import beans.TimeAccountBean;
+import beans.TimePostingBean;
 import beans.UserBean;
 import exceptions.DBException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
- * @author manuel, steffen
+ * @author manuel
  */
-public class MSServerUserProxy extends MSServer implements UserProxy
+public class MSServerAdapter extends Database implements DBAdapter
 {
 
-    public MSServerUserProxy(String adress, String username, String password)
+    public MSServerAdapter(String adress, String username, String password)
     {
         super(adress, username, password);
+        m_ClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+        m_AdressPrefix = "jdbc:sqlserver://";
+    }
+
+    public TPTypeBean getType(int typId) throws DBException
+    {
+        try
+        {
+            connect();
+
+            TPTypeBean returnBean = null;
+            StringBuilder query = new StringBuilder();
+
+            query.append("SELECT TypId, Bezeichung, Symbol  FROM ZBTyp WHERE ");
+            query.append("TypId='");
+            query.append(typId);
+            query.append("'");
+
+            Statement sat = m_Connection.createStatement();
+            ResultSet res = sat.executeQuery(query.toString());
+
+
+            if (res.next())
+            {
+                returnBean = new TPTypeBean();
+
+                returnBean.setTypId(res.getInt("TypId"));
+                returnBean.setName(res.getString("Bezeichnung"));
+                returnBean.setSymbol(res.getString("Symbol"));
+            }
+
+            res.close();
+            disconnect();
+
+            return returnBean;
+        }
+        catch (SQLException ex)
+        {
+            throw new DBException(ex);
+        }
+    }
+
+    public TimeAccountBean getTimeAccount()
+    {
+        return null;
+    }
+
+    public List getTimePosting(int mid) throws DBException
+    {
+        try
+        {
+            connect();
+
+            TimePostingBean returnBean = null;
+            List returnList = new ArrayList();
+            StringBuilder query = new StringBuilder();
+
+            query.append("SELECT MId, BId, Datum, KoaId, KstId, TypId FROM ZeitBuchung WHERE ");
+            query.append("MId='");
+            query.append(mid);
+            query.append("'");
+
+            Statement sat = m_Connection.createStatement();
+            ResultSet res = sat.executeQuery(query.toString());
+
+
+            while (res.next())
+            {
+                returnBean = new TimePostingBean();
+
+                returnBean.setMid(res.getInt("MId"));
+                returnBean.setBid(res.getInt("BId"));
+                returnBean.setDate(res.getDate("Datum"));
+                returnBean.setKoaId(res.getInt("KoaId"));
+                returnBean.setKstId(res.getInt("KstId"));
+                returnBean.setTypId(res.getInt("TypId"));
+
+                returnList.add(returnBean);
+            }
+
+            res.close();
+            disconnect();
+
+            return returnList;
+        }
+        catch (SQLException ex)
+        {
+            throw new DBException(ex);
+        }
     }
 
     public UserBean getUser(String username) throws DBException
@@ -108,7 +202,7 @@ public class MSServerUserProxy extends MSServer implements UserProxy
             StringBuilder query = new StringBuilder();
 
             query.append("UPDATE Mitarbeiter SET ");
-            
+
             if (user.getFirstname() != null)
             {
                 query.append("Vornamen='").append(user.getFirstname()).append("'");
@@ -125,7 +219,7 @@ public class MSServerUserProxy extends MSServer implements UserProxy
             {
                 query.append("LoginPasswort='").append(user.getPassword()).append("'");
             }
-           
+
             query.append(" WHERE mid='").append(user.getMid()).append("'");
 
             // System.out.println(query.toString());
@@ -133,7 +227,7 @@ public class MSServerUserProxy extends MSServer implements UserProxy
             boolean sucessfull = sat.execute(query.toString());
 
             disconnect();
-            
+
             return sucessfull;
         }
         catch (SQLException ex)
@@ -148,7 +242,7 @@ public class MSServerUserProxy extends MSServer implements UserProxy
         try
         {
             connect();
-            
+
             StringBuilder query = new StringBuilder();
 
             query.append("INSERT INTO Mitarbeiter ");

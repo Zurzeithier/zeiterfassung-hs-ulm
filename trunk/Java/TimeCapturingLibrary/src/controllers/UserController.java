@@ -1,7 +1,7 @@
 package controllers;
 
 import beans.UserBean;
-import database.ProxyPool;
+import database.AdapterPool;
 import exceptions.DBException;
 import utils.SecurityUtils;
 
@@ -20,7 +20,7 @@ public class UserController
      */
     public static boolean LoginUser(String username, String password) throws DBException
     {
-        UserBean dbBean = ProxyPool.getUserProxy().getUser(username);
+        UserBean dbBean = AdapterPool.getDBAdapter().getUser(username);
 
         return (dbBean != null && dbBean.getPassword().equals(SecurityUtils.makeMD5Checksum(password)));
     }
@@ -38,7 +38,7 @@ public class UserController
     public static boolean ChangeUserPWD(String username, String password, String newPassword) throws DBException
     {
 
-        UserBean dbBean = ProxyPool.getUserProxy().getUser(username);
+        UserBean dbBean = AdapterPool.getDBAdapter().getUser(username);
 
         if (dbBean != null && dbBean.getPassword().equals(SecurityUtils.makeMD5Checksum(password)))
         {
@@ -46,7 +46,7 @@ public class UserController
             bean.setMid(dbBean.getMid());
             bean.setPassword(SecurityUtils.makeMD5Checksum(newPassword));
 
-            return ProxyPool.getUserProxy().changeUser(bean);
+            return AdapterPool.getDBAdapter().changeUser(bean);
         }
 
         return false;
