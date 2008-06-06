@@ -27,15 +27,15 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>Bookings</managed-bean-name>
-        <managed-bean-class>timecapturing.Bookings</managed-bean-class>
+        <managed-bean-name>secure$Bookings</managed-bean-name>
+        <managed-bean-class>timecapturing.secure.Bookings</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <navigation-rule>
         <from-view-id>/Login.jsp</from-view-id>
         <navigation-case>
             <from-outcome>loginSucessfull</from-outcome>
-            <to-view-id>/Bookings.jsp</to-view-id>
+            <to-view-id>/secure/Bookings.jsp</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>forgotPassword</from-outcome>
@@ -48,7 +48,7 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <navigation-rule>
-        <from-view-id>/Bookings.jsp</from-view-id>
+        <from-view-id>/secure/Bookings.jsp</from-view-id>
         <navigation-case>
             <from-outcome>logout</from-outcome>
             <to-view-id>/Login.jsp</to-view-id>

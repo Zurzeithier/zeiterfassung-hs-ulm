@@ -3,9 +3,9 @@
  *
  * Created on 31.05.2008, 00:32:31
  */
-package timecapturing;
+package timecapturing.secure;
 
-import com.sun.data.provider.RowKey;
+import timecapturing.*;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import com.sun.webui.jsf.component.TableColumn;
 import com.sun.webui.jsf.model.DefaultTableDataProvider;
@@ -31,7 +31,7 @@ public class Bookings extends AbstractPageBean
     private void _init() throws Exception
     {
     }    // </editor-fold>
-    
+
     private String debug = null;
 
     public String getDebug()
@@ -43,7 +43,7 @@ public class Bookings extends AbstractPageBean
     {
         this.debug = debug;
     }
-    
+
     private DefaultTableDataProvider defaultTableDataProvider = new DefaultTableDataProvider();
 
     public DefaultTableDataProvider getDefaultTableDataProvider()
@@ -55,6 +55,7 @@ public class Bookings extends AbstractPageBean
     {
         this.defaultTableDataProvider = dtdp;
     }
+
     private TableColumn tableColumn1 = new TableColumn();
 
     public TableColumn getTableColumn1()
@@ -108,16 +109,12 @@ public class Bookings extends AbstractPageBean
             throw e instanceof FacesException ? (FacesException) e : new FacesException(e);
         }
 
-    // </editor-fold>
-    // Perform application initialization that must complete
-    // *after* managed components are initialized
-    // TODO - add your own initialization code here
-        
-        if (defaultTableDataProvider.canAppendRow())
-        {
-            RowKey temp = defaultTableDataProvider.appendRow();
-            debug = temp.toString();
-        }
+        // </editor-fold>
+        // Perform application initialization that must complete
+        // *after* managed components are initialized
+        // TODO - add your own initialization code here
+
+        debug = getSessionBean1().getLogTest();
 
     }
 
@@ -191,8 +188,8 @@ public class Bookings extends AbstractPageBean
 
     public String logoutButton_action()
     {
-        // TODO: Process the action. Return value is a navigation
-        // case name where null will return to the same page.
+        getSessionBean1().setLogTest(null);
+        
         return "logout";
     }
 
@@ -209,5 +206,6 @@ public class Bookings extends AbstractPageBean
         // case name where null will return to the same page.
         return null;
     }
+
 }
 
