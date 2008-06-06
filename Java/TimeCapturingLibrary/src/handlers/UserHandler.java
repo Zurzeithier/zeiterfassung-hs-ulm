@@ -1,4 +1,4 @@
-package controllers;
+package handlers;
 
 import beans.UserBean;
 import database.AdapterPool;
@@ -9,7 +9,7 @@ import utils.SecurityUtils;
  *
  * @author manuel
  */
-public class UserController
+public class UserHandler
 {
     /**
      * 
