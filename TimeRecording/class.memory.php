@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- * The Memory:: class
+ * The Memory:: class implements memory measuring methods.
  *
  * @copyright 	Patrick Kracht <patrick.kracht@googlemail.com>
  *
@@ -14,8 +14,6 @@ class Memory
 		/**
 		 * constructor
 		 *
-		 * @param	array	parameters: 0=>(string)NAME,1=>(boolean)START
-		 *
 		 * @access  public
 		 *
 		 * @author  patrick.kracht
@@ -26,7 +24,7 @@ class Memory
 		}
 		
 		/**
-		 * destructor kills the timer and decreases counter
+		 * destructor
 		 *
 		 * @access  public
 		 *
@@ -34,7 +32,6 @@ class Memory
 		 */
 		public function __destruct()
 		{
-			echo memory_get_usage(true) . " bytes in use;\n";
 		}
 		
 		/**
@@ -63,6 +60,8 @@ class Memory
 		
 		/**
 		 * to string
+		 *
+		 * @return  string	memory in use (in bytes)
 		 *
 		 * @access  public
 		 *

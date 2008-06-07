@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- * The Timer:: class
+ * The Timer:: class implements time measuring methods.
  *
  * @copyright 	Patrick Kracht <patrick.kracht@googlemail.com>
  *
@@ -16,11 +16,10 @@ class Timer
 		private $unitfac = 1.0;			// unit multiplication factor
 		private $unitstr = "s";			// unti string name (default seconds)
 		private $namestr;				// name of the current counter
-		private $umemory;				// usage of memory
 		private $started;				// timestamp when timer was created
 		
 		/**
-		 * constructor
+		 * constructor initializes the counter and starts it (if wanted)
 		 *
 		 * @param	array	parameters: 0=>(string)NAME,1=>(boolean)START
 		 *
@@ -34,7 +33,8 @@ class Timer
 			$this->namestr = (isset($parameters[0])) ? $parameters[0] : "Timer#" . self::$number;
 			if (isset($parameters[1]))
 				{
-					self::start();
+					// autostart timer
+					$this->start();
 				}
 			self::$number++;
 		}
@@ -52,7 +52,7 @@ class Timer
 		}
 		
 		/**
-		 * start
+		 * start current timer
 		 *
 		 * @access  public
 		 *
@@ -64,7 +64,7 @@ class Timer
 		}
 		
 		/**
-		 * stop
+		 * stop timer and increase total runtime and ticks counter
 		 *
 		 * @access  public
 		 *
@@ -78,7 +78,7 @@ class Timer
 		}
 		
 		/**
-		 * resets counter to zero
+		 * resets current counter to zero
 		 *
 		 * @access  public
 		 *
@@ -98,18 +98,26 @@ class Timer
 		 *
 		 * @param	int		(optional) precision [default:3]
 		 *
+		 * @return	double	amount of time since first start
+		 *
 		 * @access  public
 		 *
 		 * @author  patrick.kracht
 		 */
 		public function get($prec = 3)
 		{
-			if ($this->microtm != 0) self::stop();
+			if ($this->microtm != 0)
+				{
+					// stop timer, if running
+					$this->stop();
+				}
 			return (double)number_format($this->runtime * $this->unitfac, $prec);
 		}
 		
 		/**
-		 * counter
+		 * get number of timeslices from timer
+		 *
+		 * @return 	int		number of timeslices
 		 *
 		 * @access  public
 		 *
@@ -121,7 +129,9 @@ class Timer
 		}
 		
 		/**
-		 * number
+		 * get number of counters registered
+		 *
+		 * @return	int		 number of counters
 		 *
 		 * @access  public
 		 *
@@ -135,12 +145,15 @@ class Timer
 		/**
 		 * set units system
 		 *
+		 * @param	string		unit to use for output [us|ms|s]
+		 *
 		 * @access  public
 		 *
 		 * @author  patrick.kracht
 		 */
 		public function set_units($name)
 		{
+			$name = strtolower($name);
 			switch ($name)
 				{
 				case "us":
@@ -162,14 +175,20 @@ class Timer
 		/**
 		 * to string
 		 *
+		 * @return 	string		[created@TIMESTAMP]COUNTER trigger(s) from 'NAME' lasted DURATION UNIT;
+		 *
 		 * @access  public
 		 *
 		 * @author  patrick.kracht
 		 */
 		public function __toString()
 		{
-			if ($this->microtm != 0) self::stop();
-			return "[created@".$this->started."]".$this->counter." trigger(s) from '".$this->namestr . "' lasted " . self::get() . $this->unitstr . ";<br/>\n";
+			if ($this->microtm != 0)
+				{
+					// stop timer, if running
+					$this->stop();
+				}
+			return "[created@".$this->started."] ".$this->counter." trigger(s) from '".$this->namestr . "' lasted " . $this->get() . $this->unitstr . ";<br/>\n";
 		}
 		
 	}

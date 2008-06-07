@@ -21,7 +21,7 @@ class MySql extends Controller implements iSql
 		private $username;
 		
 		/**
-		 * constructor read config-file and initializes the vars
+		 * constructor initializes the vars
 		 *
 		 * @param   string  config-file-location
 		 *

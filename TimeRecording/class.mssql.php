@@ -22,7 +22,7 @@ class MsSql extends Controller implements iSql
 		private $querytimer;
 		
 		/**
-		 * constructor read config-file and initializes the vars
+		 * constructor initializes the vars
 		 *
 		 * @param   string  config-file-location
 		 *

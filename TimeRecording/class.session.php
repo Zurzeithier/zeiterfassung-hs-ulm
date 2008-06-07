@@ -12,7 +12,7 @@
 class Session extends Controller
 	{
 		/**
-		 * constructor initializes session, sets ini-values
+		 * constructor
 		 *
 		 * @access  public
 		 *
