@@ -88,7 +88,7 @@ if ($_SESSION["CLIENT"]->is_admin())
 				break;
 			case "home":
 			default:
-				$book = $Controller->show_last_bookings();
+				$book = $Controller->show_last_bookings(15);
 				$_SESSION["HTML"]->load("index.html");
 				$_SESSION["HTML"]->assign("index.html", "<!--MID-->", $_SESSION["_UserData"]["mid"]);
 				$_SESSION["HTML"]->assign("index.html", "<!--FIRST_NAME-->", $_SESSION["_UserData"]["firstname"]);
@@ -124,7 +124,7 @@ else if ($_SESSION["CLIENT"]->is_user())
 				break;
 			case "home":
 			default:
-				$book = $Controller->show_last_bookings();
+				$book = $Controller->show_last_bookings(15);
 				$_SESSION["HTML"]->load("index.html");
 				$_SESSION["HTML"]->assign("index.html", "<!--MID-->", $_SESSION["_UserData"]["mid"]);
 				$_SESSION["HTML"]->assign("index.html", "<!--FIRST_NAME-->", $_SESSION["_UserData"]["firstname"]);

@@ -105,6 +105,9 @@
 <div class="win_corner_rb"></div>
 </div>
 <!-- ************* USER ACTIONS WINDOW ****** -->
+<form enctype="multipart/form-data" action="" method="post"
+	target="_self" id="bookingform"><input type="hidden" name="page"
+	value="{{PAGE}}" /> <input type="hidden" name="action" value="book" />
 <div class="win"
 	style="width: 480px; height: 220px; left: 500px; top: 350px;">
 <div class="win_corner_lt"></div>
@@ -113,13 +116,22 @@
 <br clear="all" />
 <div class="win_bg_left" style="height: 120px;"></div>
 <div class="win_bg_center" style="width: 440px; height: 120px;">
-TODO<!--USER_ACTIONS--></div>
+<label for="bookingsymbol">Symbol </label>
+<select id="bookingsymbol" name="symid" tabindex="1" >
+ <option value="1">Kommen</option>
+ <option value="2">Gehen</option>
+ <option value="3">Testen</option>
+ <option value="4">Pause</option>
+</select>
+<input name="Submit" type="submit" id="bookingsubmit" tabindex="2" value="OK" />
+</div>
 <div class="win_bg_right" style="height: 120px;"></div>
 <br clear="all" />
 <div class="win_corner_lb"></div>
 <div class="win_bg_bottom" style="width: 440px;"></div>
 <div class="win_corner_rb"></div>
 </div>
+</form>
 <!-- ************* FOOTER ******************* -->
 <div id="footer"><a
 	href="http://validator.w3.org/check?uri=referer&amp;doctype=Inline&amp;ss=1&amp;outline=1&amp;group=0&amp;No200=1&amp;verbose=1&amp;st=1"
