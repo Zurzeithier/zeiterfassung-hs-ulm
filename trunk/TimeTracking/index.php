@@ -20,7 +20,6 @@ setlocale(LC_ALL, 'de_DE');
 ini_set("session.name", "TR_SESSION");
 ini_set("url_rewriter.tags", "");
 ini_set("session.use_only_cookies", "1");
-ini_set("session.cookie_secure", "1");
 ini_set("session.cookie_path", "/");
 ini_set("session.cookie_domain", "");
 
