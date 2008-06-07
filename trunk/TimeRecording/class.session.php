@@ -80,15 +80,33 @@ class Session extends Controller
 		}
 		
 		/**
-		 * booking method
+		 * booking method with symbol for userid
+		 * 
+		 * @param	int		symbol id to set
+		 * @param	int		userid to set (optional)
 		 *
+		 * @return	int		affected rows
+		 * 
 		 * @access  public
 		 *
 		 * @author  patrick.kracht
 		 */
 		public function book()
 		{
-			//TODO
+			$symid = ( isset( $_POST["symid"] ) ) ? $_POST["symid"] : -1;
+			$mid   = ( isset( $_POST["mid"] ) ) ? $_POST["mid"] : $_SESSION["_UserData"]["mid"];
+			
+			if ( $symid < 0 )
+			{
+				throw new Exception("no valid booking symbol selected!",305); 
+			}
+			else
+			{
+				$query  = "INSERT INTO tr_bookings ( mid, symid ) ";
+				$query .= "VALUES ( $mid, $symid );";
+				$_SESSION[$_SESSION["_SqlType"]]->query($query);
+				return $_SESSION[$_SESSION["_SqlType"]]->affected_rows();
+			}
 		}
 		
 		/**
@@ -214,7 +232,10 @@ class Session extends Controller
 				{
 					$username = trim($_POST["LoginUsername"]);
 					$password = md5(trim($_POST["LoginPassword"]));
-					if (empty($username)) throw new Exception("access denied! no username given!",301);
+					if (empty($username)) 
+					{
+						throw new Exception("access denied! no username given!",301);
+					}
 				}
 			else
 				{
