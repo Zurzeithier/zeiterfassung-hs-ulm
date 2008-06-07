@@ -180,9 +180,10 @@ class Template extends Controller
 		 */
 		public function load($name, $force_reload = false)
 		{
-			$this->assign($name, "{{SID}}",       session_id());
-			$this->assign($name, "{{PAGE}}",      $_SESSION["_PageID.current"]);
-			$this->assign($name, "{{ACTION}}",    $_SESSION["_Action"]);
+			// default assignments for system use in forms and links
+			$this->assign($name, "{{SID}}",    session_id());
+			$this->assign($name, "{{PAGE}}",   $_SESSION["_PageID.current"]);
+			$this->assign($name, "{{ACTION}}", $_SESSION["_Action"]);
 			
 			// if template loaded, don't waste time and return
 			if (isset($this->template[$name]) && ! $force_reload) return true;

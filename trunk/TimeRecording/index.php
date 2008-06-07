@@ -83,12 +83,12 @@ if ($_SESSION["CLIENT"]->is_admin())
 			default:
 				$book = $Controller->show_last_bookings();
 				$_SESSION["HTML"]->load("index.html");
-				$_SESSION["HTML"]->assign("index.html", "<!--MId-->", $_SESSION["_UserData"]["mid"]);
-				$_SESSION["HTML"]->assign("index.html", "<!--Vornamen-->", $_SESSION["_UserData"]["firstname"]);
-				$_SESSION["HTML"]->assign("index.html", "<!--Namen-->", $_SESSION["_UserData"]["lastname"]);
-				$_SESSION["HTML"]->assign("index.html", "<!--LoginNamen-->", $_SESSION["_UserData"]["email"]);
-				$_SESSION["HTML"]->assign("index.html", "<!--ClientIP-->", $_SESSION["_UserData"]["ip"]);
-				$_SESSION["HTML"]->assign("index.html", "<!--GroupNAME-->", $_SESSION["_UserData"]["groupname"]);
+				$_SESSION["HTML"]->assign("index.html", "<!--MID-->", $_SESSION["_UserData"]["mid"]);
+				$_SESSION["HTML"]->assign("index.html", "<!--FIRST_NAME-->", $_SESSION["_UserData"]["firstname"]);
+				$_SESSION["HTML"]->assign("index.html", "<!--LAST_NAME-->", $_SESSION["_UserData"]["lastname"]);
+				$_SESSION["HTML"]->assign("index.html", "<!--LOGIN_NAME-->", $_SESSION["_UserData"]["email"]);
+				$_SESSION["HTML"]->assign("index.html", "<!--IP-->", $_SESSION["_UserData"]["ip"]);
+				$_SESSION["HTML"]->assign("index.html", "<!--GROUP_NAME-->", $_SESSION["_UserData"]["groupname"]);
 				$_SESSION["HTML"]->assign("index.html", "<!--HISTORY_DATA-->",$book);
 				$_SESSION["HTML"]->assign("index.html", "<!--MENU-->", $menu);
 				$_SESSION["HTML"]->assign("index.html", "<!--OUTPUT-->",$output);
@@ -119,12 +119,12 @@ else if ($_SESSION["CLIENT"]->is_user())
 			default:
 				$book = $Controller->show_last_bookings();
 				$_SESSION["HTML"]->load("index.html");
-				$_SESSION["HTML"]->assign("index.html", "<!--MId-->", $_SESSION["_UserData"]["mid"]);
-				$_SESSION["HTML"]->assign("index.html", "<!--Vornamen-->", $_SESSION["_UserData"]["firstname"]);
-				$_SESSION["HTML"]->assign("index.html", "<!--Namen-->", $_SESSION["_UserData"]["lastname"]);
-				$_SESSION["HTML"]->assign("index.html", "<!--LoginNamen-->", $_SESSION["_UserData"]["email"]);
-				$_SESSION["HTML"]->assign("index.html", "<!--ClientIP-->", $_SESSION["_UserData"]["ip"]);
-				$_SESSION["HTML"]->assign("index.html", "<!--GroupNAME-->", $_SESSION["_UserData"]["groupname"]);
+				$_SESSION["HTML"]->assign("index.html", "<!--MID-->", $_SESSION["_UserData"]["mid"]);
+				$_SESSION["HTML"]->assign("index.html", "<!--FIRST_NAME-->", $_SESSION["_UserData"]["firstname"]);
+				$_SESSION["HTML"]->assign("index.html", "<!--LAST_NAME-->", $_SESSION["_UserData"]["lastname"]);
+				$_SESSION["HTML"]->assign("index.html", "<!--LOGIN_NAME-->", $_SESSION["_UserData"]["email"]);
+				$_SESSION["HTML"]->assign("index.html", "<!--IP-->", $_SESSION["_UserData"]["ip"]);
+				$_SESSION["HTML"]->assign("index.html", "<!--GROUP_NAME-->", $_SESSION["_UserData"]["groupname"]);
 				$_SESSION["HTML"]->assign("index.html", "<!--HISTORY_DATA-->",$book);
 				$_SESSION["HTML"]->assign("index.html", "<!--MENU-->", $menu);
 				$_SESSION["HTML"]->assign("index.html", "<!--OUTPUT-->",$output);
