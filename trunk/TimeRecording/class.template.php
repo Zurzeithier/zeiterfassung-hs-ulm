@@ -55,13 +55,26 @@ class Template extends Controller
 		 */
 		public function clean_ob()
 		{
-			if (!ob_get_length() || !ob_get_level()) ob_start();
-			session_cache_limiter('must-revalidate');
+			if (!ob_get_length() || !ob_get_level())
+				{
+					session_cache_limiter('must-revalidate');
+					ob_start();
+					ob_clean();
+				}
 		}
 		
+		/**
+		 * preload all templates by default (or selected by array/string)
+		 *
+		 * @param	mixed		[default=false], array or string (separator ',')
+		 *
+		 * @access  public
+		 *
+		 * @author  patrick.kracht
+		 */
 		public function preload($list = false)
 		{
-			//Templates aus der Liste vorladen
+			// build specific sql query statements
 			if (is_array($list))
 				{
 					$list = implode("','", $list);
@@ -73,9 +86,13 @@ class Template extends Controller
 					$list = " WHERE file IN ( '$list' )";
 				}
 				
-			$table = $_SESSION["_TplSqlTable"];
+			// get templates table in database
+			$table  = $_SESSION["_TplSqlTable"];
+			
 			$query  = "SELECT file, content FROM $table $list;";
 			$result = $_SESSION[$_SESSION["_SqlType"]]->query($query);
+			
+			// prebuffer every found template
 			while ($row = $_SESSION[$_SESSION["_SqlType"]]->fetch_array())
 				{
 					$this->template[ $row['file'] ] = $row['content'];
@@ -83,6 +100,18 @@ class Template extends Controller
 				}
 		}
 		
+		
+		/**
+		 * import all templates by default (or selected by array/string)
+		 *
+		 * @param	mixed		[default=false], array or string (separator ',')
+		 *
+		 * @return 	mixed		affected_rows by insert query (false if error)
+		 *
+		 * @access  public
+		 *
+		 * @author  patrick.kracht
+		 */
 		public function import($list = false)
 		{
 			//Templates aus der Liste in die Datenbank importieren
@@ -114,6 +143,7 @@ class Template extends Controller
 					return false;
 				}
 				
+			// prepare query statement for all found files
 			foreach($files as $file)
 			{
 				$file     = trim($file);
@@ -123,6 +153,7 @@ class Template extends Controller
 				$values  .= (($values == "") ? "" : ", ") . "( '$file', '$content' )";
 			}
 			
+			// try to renew complete table of templates
 			try
 				{
 					$table = $_SESSION["_TplSqlTable"];
@@ -132,7 +163,7 @@ class Template extends Controller
 				}
 			catch (Exception $e)
 				{
-					echo $e->getMessage();
+					die($e->getMessage());
 				}
 		}
 		
@@ -216,8 +247,8 @@ class Template extends Controller
 		/**
 		 * returns get_parsed content of template in buffer
 		 *
-		 * @param   string  template file name
-		 * @param   boolean force reloading buffer content
+		 * @param   string  	template file name
+		 * @param   boolean 	force reloading buffer content
 		 *
 		 * @access  public
 		 *
@@ -237,7 +268,7 @@ class Template extends Controller
 		/**
 		 * compress template (remove not needed chars)
 		 *
-		 * @param   string  template file name
+		 * @param   &string  	reference to source html for compression
 		 *
 		 * @access  public
 		 *
@@ -269,14 +300,16 @@ class Template extends Controller
 		 */
 		public function output($name, $type = "html")
 		{
-			if (! isset($this->template[$name]))
-				{
-					throw new Exception("Bitte geben Sie ein Template zur Ausgabe an!");
-				}
-				
+			// if template not buffered, try to load it
 			if (! isset($this->template[$name]))
 				{
 					$this->load($name);
+				}
+				
+			// if template not buffered again, trow exception
+			if (! isset($this->template[$name]))
+				{
+					throw new Exception("template '$name' not found!");
 				}
 				
 			$timers = "<br/>";
@@ -285,13 +318,16 @@ class Template extends Controller
 			if (isset($_SESSION["TIMER.MSSQL"])) $timers .= $_SESSION["TIMER.MSSQL"];
 			if (isset($_SESSION["TIMER.PHP"]))   $timers .= $_SESSION["TIMER.PHP"];
 			
-			$this->assign($name, "<!--ERRORS-->", $_SESSION["_Errors"]);
 			$this->assign($name, "<!--TIMERS-->", $timers);
+			$this->assign($name, "<!--ERRORS-->", $_SESSION["_Errors"]);
 			
+			// parse and replace assignments
 			$buffer = $this->get_parsed($name);
 			
+			// fix special html-characters
 			$this->special_chars($buffer);
 			
+			// compress html source, if set
 			if ($this->do_compress)
 				{
 					$this->compress($buffer);
@@ -302,7 +338,7 @@ class Template extends Controller
 			$obget = str_replace("\xef\xbb\xbf", "", $obget);   //BOM
 			$obget = strip_tags(utf8_encode($obget));
 			
-			// if errormessages were printed, append hidden
+			// if errormessages printed, append hidden or visible
 			if (! empty($obget))
 				{
 					if ($this->debug_off)
@@ -311,16 +347,17 @@ class Template extends Controller
 						}
 					else
 						{
-							$buffer .= "<hr/>".$obget;
+							$buffer .= $obget;
 						}
 				}
 				
-			// GZIP ON | OFF
+			// if gzip accepted, compress level 9
 			if ($this->accepts_gzip())
 				{
 					$buffer = gzencode($buffer, 9);
 				}
 				
+			// send headers to browser and print page
 			$this->headers($type);
 			header("Content-Length: ".strlen($buffer));
 			echo $buffer;
@@ -444,7 +481,10 @@ class Template extends Controller
 		 */
 		public function accepts_gzip()
 		{
-			if (! isset($_SERVER['HTTP_ACCEPT_ENCODING'])) return false;
+			if (! isset($_SERVER['HTTP_ACCEPT_ENCODING']))
+				{
+					return false;
+				}
 			$accept = str_replace(" ", "", strtolower($_SERVER['HTTP_ACCEPT_ENCODING']));
 			$accept = explode(",", $accept);
 			return (in_array("gzip", $accept) === true);
@@ -562,6 +602,20 @@ class Template extends Controller
 			$return  = '<li><a '.(is_string($access_key) ? 'accesskey="'.$access_key.'" ' : '');
 			$return .= ($selected ? 'class="selected" ' : '').'href="'.$href.'" target="'.$target.'">'.$name.'</a></li>';
 			return $return;
+		}
+		
+		/**
+		* return true, if needed settings for database access are present
+		*
+		* @return  boolean
+		*
+		* @access  public
+		*
+		* @author  patrick.kracht
+		*/
+		public function use_database()
+		{
+			return ($_SESSION["_TplSqlTable"] && $_SESSION["_SqlType"]);
 		}
 		
 		

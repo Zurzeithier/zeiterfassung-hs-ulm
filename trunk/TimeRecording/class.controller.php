@@ -1,7 +1,8 @@
 <?php
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- * The Controller:: class
+ * The Controller:: class implements the main-controller for
+ * the sytem and takes care of all registered session-objects
  *
  * @copyright 	Patrick Kracht <patrick.kracht@googlemail.com>
  *
@@ -10,7 +11,9 @@
 class Controller
 	{
 		/**
-		 * constructor
+		 * constructor loads global config file and initializes
+		 * default session variables, register session-objects if
+		 * not set, reset needed timers
 		 *
 		 * @access  public
 		 *
@@ -18,6 +21,7 @@ class Controller
 		 */
 		public function __construct()
 		{
+			// load global config file or die
 			if (file_exists("./config.controller.php"))
 				{
 					include("./config.controller.php");
@@ -30,6 +34,7 @@ class Controller
 					die("config file 'config.controller.php' not found!");
 				}
 				
+			// try to register needed objects for current session or die
 			try
 				{
 					self::register("Timer",array("controller runtime",true),"TIMER.PHP");
@@ -63,7 +68,11 @@ class Controller
 		}
 		
 		/**
-		 * register
+		 * register new session-object, if not allready present
+		 *
+		 * @param 	string		name of object to create
+		 * @param 	array		specific parameters for constructor
+		 * @param 	string		(optional) alias of object
 		 *
 		 * @access  public
 		 *
@@ -84,6 +93,9 @@ class Controller
 		/**
 		 * unregister
 		 *
+		 * @param 	string		name of object to delete
+		 * @param 	string		(optional) alias of object
+		 *
 		 * @access  public
 		 *
 		 * @author  patrick.kracht
@@ -101,7 +113,9 @@ class Controller
 		}
 		
 		/**
-		 * to string
+		 * to string returns var_dump of itself
+		 *
+		 * @return	string		var_dump( $this )
 		 *
 		 * @access  public
 		 *
@@ -115,7 +129,7 @@ class Controller
 		/**
 		 * returns array of all tables in database
 		 *
-		 * @param 	string	(optional) type of sql to query from [MySql|MsSql]
+		 * @param 	int		(optional) number of lines to query
 		 *
 		 * @return	array	array of all tables in database
 		 *
@@ -123,7 +137,7 @@ class Controller
 		 *
 		 * @author  patrick.kracht
 		 */
-		public function show_last_bookings($limit=15)
+		public function show_last_bookings($limit=10)
 		{
 			$return = "";
 			$query  = "SELECT s.symbolname, s.symid, DATE_FORMAT( b.stamp, '%d.%m.%Y %H:%i:%s') AS Datum ";
@@ -139,7 +153,7 @@ class Controller
 		}
 		
 		/**
-		 * execute action dependend methods
+		 * manage page actions and execute state-dependend methods
 		 *
 		 * @access  public
 		 *
@@ -147,6 +161,7 @@ class Controller
 		 */
 		public function switch_actions()
 		{
+			// clean previous errors
 			$_SESSION["_Errors"] = "";
 			
 			// save post or get value from "page"
@@ -180,11 +195,12 @@ class Controller
 					$_SESSION["_Action"] = "";
 				}
 				
+			// extend session of user, if valid
 			$_SESSION["CLIENT"]->extend();
 			
+			// try to execute session actions
 			try
 				{
-					// do session actions
 					switch ($_SESSION["_Action"])
 						{
 						case "login":
@@ -215,7 +231,7 @@ class Controller
 				}
 			catch (Exception $e)
 				{
-					$_SESSION["_Errors"] = $e->getMessage();
+					$_SESSION["_Errors"] .= $e->getMessage();
 				}
 		}
 		
