@@ -24,6 +24,13 @@ ob_start();
 ob_clean();
 
 
+// die, if cookies are disabled at login
+if (count($_SESSION) == 0 && isset($_POST["action"]))
+	{
+		die("necessary cookies for login are disabled!");
+	}
+
+
 // magic autoload function for dynamically loading class files
 function __autoload($class_name)
 {

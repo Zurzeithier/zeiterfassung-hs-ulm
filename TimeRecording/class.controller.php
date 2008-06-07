@@ -37,7 +37,7 @@ class Controller
 			// try to register needed objects for current session or die
 			try
 				{
-					self::register("Timer",array("controller runtime",true),"TIMER.PHP");
+					self::register("Timer",array("system runtime",true),"TIMER.PHP");
 					$_SESSION["TIMER.PHP"]->reset();
 					$_SESSION["TIMER.PHP"]->start();
 					

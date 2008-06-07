@@ -43,9 +43,23 @@ class Session extends Controller
 		 */
 		public function logout()
 		{
+			// kill session and array
 			session_destroy();
 			unset($_SESSION);
-			$this->reload();
+			
+			// set ini parameters for session (force use of cookies)
+			ini_set("url_rewriter.tags", "");
+			ini_set("session.name", "TR_SESSION");
+			ini_set("session.use_only_cookies", "1");
+			ini_set("session.cookie_path", "/");
+			ini_set("session.cookie_domain", "");
+			
+			// configure and start session
+			session_cache_limiter("private");
+			session_cache_expire(300);
+			session_start();
+			
+			$this->return_to("./");
 		}
 		
 		/**
@@ -173,15 +187,15 @@ class Session extends Controller
 		}
 		
 		/**
-		 * reload page without parameters (do not send headers before)
+		 * redirect to any $url using header-location
 		 *
 		 * @access  public
 		 *
 		 * @author  patrick.kracht
 		 */
-		public function reload()
+		public function return_to($url)
 		{
-			header("Location: ./");
+			header("Location: ".$url);
 			exit();
 		}
 		
@@ -282,19 +296,6 @@ class Session extends Controller
 		public function started()
 		{
 			return (isset($_SESSION["_SessionTimer"]) && isset($_SESSION["_UserData"]["ip"]));
-		}
-		
-		/**
-		 * redirect to any $url using header-location
-		 *
-		 * @access  public
-		 *
-		 * @author  patrick.kracht
-		 */
-		public function return_to($url)
-		{
-			header("Location: ".$url);
-			exit();
 		}
 		
 		/**
