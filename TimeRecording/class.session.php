@@ -88,7 +88,7 @@ class Session extends Controller
 		{
 			$symid = (isset($_GET["id"])) ? intval($_GET["id"]) : -1;
 			
-			if ( ! $this->is_user() )
+			if (! $this->is_user())
 				{
 					throw new Exception("you are no user or not logged in!",306);
 				}
@@ -100,11 +100,11 @@ class Session extends Controller
 					$query .= "WHERE mid = '$mid' ORDER BY stamp DESC;";
 					$last   = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
 					
-					if ( intval($last["symid"]) == $symid )
-					{
-						throw new Exception("asynchronous booking is disabled!",308);
-					}
-					
+					if (intval($last["symid"]) == $symid)
+						{
+							throw new Exception("asynchronous booking is disabled!",308);
+						}
+						
 					$query  = "INSERT INTO tr_bookings ( mid, symid ) ";
 					$query .= "VALUES ( '$mid', '$symid' );";
 					$_SESSION[$_SESSION["_SqlType"]]->query($query);
