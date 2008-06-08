@@ -1,51 +1,7 @@
 <?php
 
-// do some init stuff here
-error_reporting(E_ALL);
-setlocale(LC_ALL, 'de_DE');
-
-
-// set ini parameters for session (force use of cookies)
-ini_set("url_rewriter.tags", "");
-ini_set("session.name", "TR_SESSION");
-ini_set("session.use_only_cookies", "1");
-ini_set("session.cookie_path", "/");
-ini_set("session.cookie_domain", "");
-
-
-// configure and start session
-session_cache_limiter("private");
-session_cache_expire(300);
-session_start();
-
-
-// create clean output buffer
-ob_start();
-ob_clean();
-
-
-// die, if cookies are disabled at login
-if (count($_SESSION) == 0 && isset($_POST["action"]))
-	{
-		die("necessary cookies for login are disabled!");
-	}
-
-
-// magic autoload function for dynamically loading class files
-function __autoload($class_name)
-{
-	$class_name = strtolower($class_name);
-	$class_file = "./class.${class_name}.php";
-	if (file_exists($class_file))
-		{
-			require_once $class_file;
-		}
-	else
-		{
-			die("unable to load class '${class_name}'! include file '${class_file}' not found! ");
-		}
-}
-
+// fetch global functions and start session init
+require_once "./functions.php";
 
 // create controller and check for actions to do
 $Controller =& new Controller();

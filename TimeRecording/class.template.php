@@ -180,8 +180,17 @@ class Template extends Controller
 		 */
 		public function load($name, $force_reload = false)
 		{
+			// use post and get session id, if no cookies
+			if (ini_get("session.use_cookies") == "0")
+				{
+					$this->assign($name, "{{SID}}", session_id());
+				}
+			else
+				{
+					$this->assign($name, "{{SID}}", "");
+				}
+				
 			// default assignments for system use in forms and links
-			$this->assign($name, "{{SID}}",    session_id());
 			$this->assign($name, "{{PAGE}}",   $_SESSION["_PageID.current"]);
 			$this->assign($name, "{{ACTION}}", $_SESSION["_Action"]);
 			
@@ -600,6 +609,11 @@ class Template extends Controller
 		*/
 		public function menu_get_entry($name, $href, $access_key = false, $selected = false, $target = "_self")
 		{
+			if (ini_get("session.use_cookies") == "0")
+				{
+					$sid = ini_get("session.name")."=".session_id();
+					$href .= (strpos($href,"?")===false)?("?".$sid):("&amp;".$sid);
+				}
 			$return  = '<li><a '.(is_string($access_key) ? 'accesskey="'.$access_key.'" ' : '');
 			$return .= ($selected ? 'class="selected" ' : '').'href="'.$href.'" target="'.$target.'">'.$name.'</a></li>';
 			return $return;

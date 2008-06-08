@@ -72,8 +72,14 @@ class MySql extends Controller implements iSql
 		 */
 		public function init()
 		{
-			if (! $this->connect()) throw new Exception("unable to connect to ".$this->hostname."! ".$this->mysql_error,211);
-			if (! $this->select_db()) throw new Exception("unable to access database ".$this->database."! ".$this->mysql_error,212);
+			if (! $this->connect())
+				{
+					throw new Exception("unable to connect to mysql server '".$this->hostname."'! ".$this->mysql_error,211);
+				}
+			if (! $this->select_db())
+				{
+					throw new Exception("unable to access mysql database '".$this->database."'! ".$this->mysql_error,212);
+				}
 		}
 		
 		/**
