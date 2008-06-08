@@ -31,7 +31,8 @@ function __session_start($name="sid")
 				{
 					session_start();
 					$_COOKIE[$name] = session_id();
-					header("Location: ./?page=home");
+					session_write_close();
+					header("Location: ./?page=restart");
 					exit();
 				}
 			ini_set("session.use_cookies", "");
