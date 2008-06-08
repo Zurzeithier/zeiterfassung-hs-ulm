@@ -17,24 +17,33 @@ function __session_start($name="sid")
 	
 	// set ini parameters for session (force use of cookies)
 	ini_set("session.use_cookies", "1");
-	ini_set("session.use_trans_sid", "false");
+	ini_set("session.use_only_cookies", "1");
+	ini_set("session.use_trans_sid", "");
 	ini_set("url_rewriter.tags", "");
 	ini_set("session.name", $name);
-	ini_set("session.use_only_cookies", "1");
 	ini_set("session.cookie_path", "/");
 	ini_set("session.cookie_domain", "");
 	
 	// if no session cookie exists, try to switch to cookieless mode
 	if (!isset($_COOKIE[$name]))
 		{
-			ini_set("session.use_cookies", "0");
-			ini_set("session.use_only_cookies", "0");
+			if (empty($_SERVER["QUERY_STRING"]))
+			{
+				session_start();
+				$_COOKIE[$name] = session_id();
+				header("Location: ./?page=home");
+				exit();
+			}
+			ini_set("session.use_cookies", "");
+			ini_set("session.use_only_cookies", "");
+			ini_set("session.use_trans_sid", "1");
 			$sid = isset($_POST[$name])?$_POST[$name]:(isset($_GET[$name])?$_GET[$name]:"");
 			if (preg_match('/^[a-z0-9]{32}$/', $sid)) session_id($sid);
 		}
-		
+	
 	// start session now
 	session_start();
+	$_COOKIE[$name] = session_id();
 }
 
 // magic autoload function for dynamically loading class files

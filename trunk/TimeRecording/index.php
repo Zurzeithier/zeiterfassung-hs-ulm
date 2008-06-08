@@ -3,6 +3,7 @@
 // fetch global functions and start session init
 require_once "./functions.php";
 
+
 // create controller and check for actions to do
 $Controller =& new Controller();
 $Controller->switch_actions();

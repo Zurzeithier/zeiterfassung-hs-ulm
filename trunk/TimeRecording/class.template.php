@@ -181,7 +181,7 @@ class Template extends Controller
 		public function load($name, $force_reload = false)
 		{
 			// use post and get session id, if no cookies
-			if (ini_get("session.use_cookies") == "0")
+			if (ini_get("session.use_cookies") != "1")
 				{
 					$this->assign($name, "{{SID}}", session_id());
 				}
@@ -609,7 +609,7 @@ class Template extends Controller
 		*/
 		public function menu_get_entry($name, $href, $access_key = false, $selected = false, $target = "_self")
 		{
-			if (ini_get("session.use_cookies") == "0")
+			if (ini_get("session.use_cookies") != "1")
 				{
 					$sid = ini_get("session.name")."=".session_id();
 					$href .= (strpos($href,"?")===false)?("?".$sid):("&amp;".$sid);
