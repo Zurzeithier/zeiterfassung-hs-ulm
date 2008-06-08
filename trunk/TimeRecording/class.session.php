@@ -11,6 +11,7 @@
  */
 class Session extends Controller
 	{
+	
 		/**
 		 * constructor
 		 *
@@ -45,20 +46,9 @@ class Session extends Controller
 		{
 			// kill session and array
 			session_destroy();
+			// savely remove complete array
 			unset($_SESSION);
-			
-			// set ini parameters for session (force use of cookies)
-			ini_set("url_rewriter.tags", "");
-			ini_set("session.name", "TR_SESSION");
-			ini_set("session.use_only_cookies", "1");
-			ini_set("session.cookie_path", "/");
-			ini_set("session.cookie_domain", "");
-			
-			// configure and start session
-			session_cache_limiter("private");
-			session_cache_expire(300);
-			session_start();
-			
+			// reload page
 			$this->return_to("./");
 		}
 		
@@ -81,32 +71,32 @@ class Session extends Controller
 		
 		/**
 		 * booking method with symbol for userid
-		 * 
+		 *
 		 * @param	int		symbol id to set
 		 * @param	int		userid to set (optional)
 		 *
 		 * @return	int		affected rows
-		 * 
+		 *
 		 * @access  public
 		 *
 		 * @author  patrick.kracht
 		 */
 		public function book()
 		{
-			$symid = ( isset( $_POST["symid"] ) ) ? $_POST["symid"] : -1;
-			$mid   = ( isset( $_POST["mid"] ) ) ? $_POST["mid"] : $_SESSION["_UserData"]["mid"];
+			$symid = (isset($_POST["symid"])) ? $_POST["symid"] : -1;
+			$mid   = (isset($_POST["mid"])) ? $_POST["mid"] : $_SESSION["_UserData"]["mid"];
 			
-			if ( $symid < 0 )
-			{
-				throw new Exception("no valid booking symbol selected!",305); 
-			}
+			if ($symid < 0)
+				{
+					throw new Exception("no valid booking symbol selected!",305);
+				}
 			else
-			{
-				$query  = "INSERT INTO tr_bookings ( mid, symid ) ";
-				$query .= "VALUES ( $mid, $symid );";
-				$_SESSION[$_SESSION["_SqlType"]]->query($query);
-				return $_SESSION[$_SESSION["_SqlType"]]->affected_rows();
-			}
+				{
+					$query  = "INSERT INTO tr_bookings ( mid, symid ) ";
+					$query .= "VALUES ( $mid, $symid );";
+					$_SESSION[$_SESSION["_SqlType"]]->query($query);
+					return $_SESSION[$_SESSION["_SqlType"]]->affected_rows();
+				}
 		}
 		
 		/**
@@ -232,10 +222,10 @@ class Session extends Controller
 				{
 					$username = trim($_POST["LoginUsername"]);
 					$password = md5(trim($_POST["LoginPassword"]));
-					if (empty($username)) 
-					{
-						throw new Exception("access denied! no username given!",301);
-					}
+					if (empty($username))
+						{
+							throw new Exception("access denied! no username given!",301);
+						}
 				}
 			else
 				{
@@ -256,6 +246,8 @@ class Session extends Controller
 				}
 				
 			$_SESSION["_UserData"] = $found;
+			$_SESSION["_UserData"]["timestamp"] = time();
+			$_SESSION["_UserData"]["ip"]        = $_SERVER["REMOTE_ADDR"];
 			
 			$this->extend();
 			
@@ -276,7 +268,7 @@ class Session extends Controller
 					if ($this->valid())
 						{
 							// extend session
-							$_SESSION["_SessionTimer"] = time();
+							$_SESSION["_UserData"]["timestamp"] = time();
 						}
 					else
 						{
@@ -301,7 +293,11 @@ class Session extends Controller
 		 */
 		public function valid()
 		{
-			$away = (time() - $_SESSION["_SessionTimer"]);
+			if (!isset($_SESSION["_UserData"]["timestamp"]))
+				{
+					return false;
+				}
+			$away = (time() - $_SESSION["_UserData"]["timestamp"]);
 			return (($_SERVER["REMOTE_ADDR"] == $_SESSION["_UserData"]["ip"]) && ($away < $_SESSION["_TimeOut"]));
 		}
 		
@@ -316,7 +312,7 @@ class Session extends Controller
 		 */
 		public function started()
 		{
-			return (isset($_SESSION["_SessionTimer"]) && isset($_SESSION["_UserData"]["ip"]));
+			return (isset($_SESSION["_UserData"]["timestamp"]) && isset($_SESSION["_UserData"]["ip"]));
 		}
 		
 		/**

@@ -32,8 +32,10 @@
 <div id="errors"><!--ERRORS--></div>
 <!-- ************* LOGIN FORM *************** -->
 <form enctype="multipart/form-data" action="" method="post"
-	target="_self" id="loginform"><input type="hidden" name="page"
-	value="{{PAGE}}" /> <input type="hidden" name="action" value="login" />
+	target="_self" id="loginform">
+	<input type="hidden" name="page"   value="{{PAGE}}" />
+	<input type="hidden" name="sid"    value="{{SID}}" />
+	<input type="hidden" name="action" value="login" />
 <div id="login_window">
 <div id="login_window_top">Anmelden</div>
 <div id="login_window_center"><label for="LoginUsername"><input

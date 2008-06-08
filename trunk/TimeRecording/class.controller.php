@@ -22,16 +22,22 @@ class Controller
 		public function __construct()
 		{
 			// load global config file or die
-			if (file_exists("./config.controller.php"))
+			if (!file_exists("./config.controller.php"))
 				{
-					include("./config.controller.php");
-					$_SESSION["_TplSqlTable"] = (isset($_SETTINGS["Template"][3])) ? $_SETTINGS["Template"][3] : false;
-					$_SESSION["_SqlType"]     = (isset($_SETTINGS["Main"][0])) ? $_SETTINGS["Main"][0] : false;
-					$_SESSION["_TimeOut"]     = (isset($_SETTINGS["Main"][1])) ? $_SETTINGS["Main"][1] : 300;
+					die("config file 'config.controller.php' not found!");
 				}
 			else
 				{
-					die("config file 'config.controller.php' not found!");
+					__session_start();
+					include("./config.controller.php");
+					$_SESSION["_Action"]         = "";
+					$_SESSION["_Errors"]         = "";
+					$_SESSION["_PageID.current"] = "";
+					$_SESSION["_PageID.last"]    = "";
+					$_SESSION["_SqlType"]        = (isset($_SETTINGS["Main"][0])) ? $_SETTINGS["Main"][0] : false;
+					$_SESSION["_TimeOut"]        = (isset($_SETTINGS["Main"][1])) ? $_SETTINGS["Main"][1] : 300;
+					$_SESSION["_Cookies"]        = (isset($_SETTINGS["Main"][2])) ? $_SETTINGS["Main"][2] : false;
+					$_SESSION["_TplSqlTable"]    = (isset($_SETTINGS["Template"][3])) ? $_SETTINGS["Template"][3] : false;
 				}
 				
 			// try to register needed objects for current session or die
@@ -43,9 +49,6 @@ class Controller
 					
 					self::register("MySql", $_SETTINGS["MySql"], "MYSQL");
 					$_SESSION["TIMER.MYSQL"]->reset();
-					
-					self::register("MsSql", $_SETTINGS["MsSql"], "MSSQL");
-					$_SESSION["TIMER.MSSQL"]->reset();
 					
 					self::register("Template", $_SETTINGS["Template"], "HTML");
 					self::register("Session",  array(), "CLIENT");
@@ -84,7 +87,7 @@ class Controller
 				{
 					$_SESSION[$alias] =& new $classname($parameters);
 				}
-			else if (! isset($_SESSION[$classname]))
+			else if (! isset($_SESSION[$classname]) && $alias == "")
 				{
 					$_SESSION[$classname] =& new $classname($parameters);
 				}
@@ -123,7 +126,7 @@ class Controller
 		 */
 		public function __toString()
 		{
-			return var_dump($this).";\n";
+			return print_r($_SESSION).";\n";
 		}
 		
 		/**

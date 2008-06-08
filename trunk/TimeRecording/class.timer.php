@@ -16,7 +16,6 @@ class Timer
 		private $unitfac = 1.0;			// unit multiplication factor
 		private $unitstr = "s";			// unti string name (default seconds)
 		private $namestr;				// name of the current counter
-		private $started;				// timestamp when timer was created
 		
 		/**
 		 * constructor initializes the counter and starts it (if wanted)
@@ -29,7 +28,6 @@ class Timer
 		 */
 		public function __construct($parameters = array())
 		{
-			$this->started = time();
 			$this->namestr = (isset($parameters[0])) ? $parameters[0] : "Timer#" . self::$number;
 			if (isset($parameters[1]))
 				{
@@ -175,7 +173,7 @@ class Timer
 		/**
 		 * to string
 		 *
-		 * @return 	string		[created@TIMESTAMP]COUNTER trigger(s) from 'NAME' lasted DURATION UNIT;
+		 * @return 	string		[COUNTER] trigger(s) from '[NAME]' lasted [DURATION] [UNIT];
 		 *
 		 * @access  public
 		 *
@@ -188,7 +186,7 @@ class Timer
 					// stop timer, if running
 					$this->stop();
 				}
-			return "[created@".$this->started."] ".$this->counter." trigger(s) from '".$this->namestr . "' lasted " . $this->get() . $this->unitstr . ";<br/>\n";
+			return $this->counter." trigger(s) from '".$this->namestr . "' lasted " . $this->get() . $this->unitstr . ";<br/>\n";
 		}
 		
 	}

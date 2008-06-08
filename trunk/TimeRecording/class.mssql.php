@@ -72,8 +72,14 @@ class MsSql extends Controller implements iSql
 		 */
 		public function init()
 		{
-			if (! $this->connect()) throw new Exception("unable to connect to ".$this->hostname."! ".$this->mssql_error,202);
-			if (! $this->select_db()) throw new Exception("unable to access database ".$this->database."! ".$this->mssql_error,203);
+			if (! $this->connect())
+				{
+					throw new Exception("unable to connect to mssql server '".$this->hostname."'! ".$this->mssql_error,202);
+				}
+			if (! $this->select_db())
+				{
+					throw new Exception("unable to access mssql database '".$this->database."'! ".$this->mssql_error,203);
+				}
 		}
 		
 		/**
