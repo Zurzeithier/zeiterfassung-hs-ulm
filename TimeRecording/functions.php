@@ -28,19 +28,19 @@ function __session_start($name="sid")
 	if (!isset($_COOKIE[$name]))
 		{
 			if (empty($_SERVER["QUERY_STRING"]))
-			{
-				session_start();
-				$_COOKIE[$name] = session_id();
-				header("Location: ./?page=home");
-				exit();
-			}
+				{
+					session_start();
+					$_COOKIE[$name] = session_id();
+					header("Location: ./?page=home");
+					exit();
+				}
 			ini_set("session.use_cookies", "");
 			ini_set("session.use_only_cookies", "");
 			ini_set("session.use_trans_sid", "1");
 			$sid = isset($_POST[$name])?$_POST[$name]:(isset($_GET[$name])?$_GET[$name]:"");
 			if (preg_match('/^[a-z0-9]{32}$/', $sid)) session_id($sid);
 		}
-	
+		
 	// start session now
 	session_start();
 	$_COOKIE[$name] = session_id();

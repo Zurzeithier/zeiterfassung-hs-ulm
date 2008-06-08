@@ -402,7 +402,7 @@ class Template extends Controller
 		 *
 		 * @author  patrick.kracht
 		 */
-		public function headers($type = "html")
+		public function headers($type = "html",$maxage=10)
 		{
 			// send all headers to the browser
 			header('Content-Language: de');
@@ -411,9 +411,9 @@ class Template extends Controller
 			header('Content-Transfer-Encoding: UTF-8');
 			header('Date: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 			header('Accept-Ranges: bytes');
-			header('Expires: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-			header('Cache-Control: max-age=0');
-			header('Pragma: no-cache');
+			header('Expires: ' . gmdate('D, d M Y H:i:s', (time()+$maxage)) . ' GMT');
+			header('Cache-Control: max-age='.$maxage);
+			header('Pragma: private');
 			if ($this->accepts_gzip())
 				{
 					header('X-Compression: gzip');
