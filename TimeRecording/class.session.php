@@ -46,8 +46,11 @@ class Session extends Controller
 		{
 			// kill session and array
 			session_destroy();
+			session_regenerate_id();
+			
 			// savely remove complete array
 			unset($_SESSION);
+			
 			// reload page
 			$this->return_to("./");
 		}
@@ -83,19 +86,28 @@ class Session extends Controller
 		 */
 		public function book()
 		{
-			$symid = (isset($_POST["symid"])) ? $_POST["symid"] : -1;
-			$mid   = (isset($_POST["mid"])) ? $_POST["mid"] : $_SESSION["_UserData"]["mid"];
+			$symid = (isset($_GET["id"])) ? intval($_GET["id"]) : -1;
 			
-			if ($symid < 0)
+			if ( ! $this->is_user() )
 				{
-					throw new Exception("no valid booking symbol selected!",305);
+					throw new Exception("you are no user or not logged in!",306);
 				}
 			else
 				{
+					$mid    = $_SESSION["_UserData"]["mid"];
+					
+					$query  = "SELECT symid, UNIX_TIMESTAMP( stamp ) AS timestamp FROM tr_bookings ";
+					$query .= "WHERE mid = '$mid' ORDER BY stamp DESC;";
+					$last   = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
+					
+					if ( intval($last["symid"]) == $symid )
+					{
+						throw new Exception("asynchronous booking is disabled!",308);
+					}
+					
 					$query  = "INSERT INTO tr_bookings ( mid, symid ) ";
-					$query .= "VALUES ( $mid, $symid );";
+					$query .= "VALUES ( '$mid', '$symid' );";
 					$_SESSION[$_SESSION["_SqlType"]]->query($query);
-					return $_SESSION[$_SESSION["_SqlType"]]->affected_rows();
 				}
 		}
 		
@@ -191,7 +203,7 @@ class Session extends Controller
 		public function is_user()
 		{
 			if (! isset($_SESSION["_UserData"]["gid"])) return false;
-			return ($_SESSION["_UserData"]["gid"] != 0 && $_SESSION["_UserData"]["gid"] != 1);
+			return ($_SESSION["_UserData"]["gid"] != 1);
 		}
 		
 		/**
@@ -203,6 +215,7 @@ class Session extends Controller
 		 */
 		public function return_to($url)
 		{
+			session_write_close();
 			header("Location: ".$url);
 			exit();
 		}
@@ -246,6 +259,8 @@ class Session extends Controller
 				}
 				
 			$_SESSION["_UserData"] = $found;
+			
+			// save current timestamp and ip to verify session
 			$_SESSION["_UserData"]["timestamp"] = time();
 			$_SESSION["_UserData"]["ip"]        = $_SERVER["REMOTE_ADDR"];
 			
@@ -293,10 +308,13 @@ class Session extends Controller
 		 */
 		public function valid()
 		{
+			// no timestamp means never logged in
 			if (!isset($_SESSION["_UserData"]["timestamp"]))
 				{
 					return false;
 				}
+			// if session timed out in case of inactivity, return false too
+			// or if ip-address has changed (may be intruder)
 			$away = (time() - $_SESSION["_UserData"]["timestamp"]);
 			return (($_SERVER["REMOTE_ADDR"] == $_SESSION["_UserData"]["ip"]) && ($away < $_SESSION["_TimeOut"]));
 		}
@@ -312,6 +330,7 @@ class Session extends Controller
 		 */
 		public function started()
 		{
+			// only if having timestamp and ip return true
 			return (isset($_SESSION["_UserData"]["timestamp"]) && isset($_SESSION["_UserData"]["ip"]));
 		}
 		

@@ -16,3 +16,15 @@ BODY {
 	bottom: 0px;
 	z-index: 2000;
 }
+
+.errors {
+	font-size:16px;
+	color: red;
+	font-weight: bold;
+}
+
+.timers {
+	font-size:11px;
+	color: #333333;
+	font-weight: bold;
+}

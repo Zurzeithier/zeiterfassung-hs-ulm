@@ -11,7 +11,7 @@
 <meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
 <meta http-equiv="content-language" content="de" />
 <meta http-equiv="expires" content="0" />
-<meta http-equiv="pragma" content="private" />
+<meta http-equiv="pragma" content="no-cache" />
 <meta name="revisit" content="after 1 days" />
 <meta name="revisit-after" content="1 days" />
 <meta name="audience" content="all" />
@@ -63,7 +63,7 @@
 <div class="win_bg_right2" style="height: 150px;"></div>
 <br clear="all" />
 <div class="win_corner_lb"></div>
-<div class="win_bg_bottom" style="width: 440px;"><!--STATUS_MESSAGE--></div>
+<div class="win_bg_bottom" style="width: 440px;"></div>
 <div class="win_corner_rb"></div>
 </div>
 <!-- ************* USER DATA WINDOW ********* -->
@@ -103,36 +103,21 @@
 <div class="win_bg_right" style="height: 200px;"></div>
 <br clear="all" />
 <div class="win_corner_lb"></div>
-<div class="win_bg_bottom" style="width: 440px;"><!--STATUS_MESSAGE--></div>
+<div class="win_bg_bottom" style="width: 440px;"></div>
 <div class="win_corner_rb"></div>
 </div>
-<!-- ************* USER ACTIONS WINDOW ****** -->
-<form enctype="multipart/form-data" action="" method="post"
-	target="_self" id="bookingform">
-	<input type="hidden" name="page"   value="{{PAGE}}" />
-	<input type="hidden" name="sid"    value="{{SID}}" />
-	<input type="hidden" name="action" value="book" />
+<!-- ************* USER MESSAGES WINDOW ***** -->
 <div class="win"
 	style="width: 480px; height: 220px; left: 500px; top: 350px;">
 <div class="win_corner_lt"></div>
-<div class="win_bg_top" style="width: 440px;">Aktionen</div>
+<div class="win_bg_top" style="width: 440px;">Mitteilungen</div>
 <div class="win_corner_rt"></div>
 <br clear="all" />
 <div class="win_bg_left" style="height: 120px;"></div>
 <div class="win_bg_center" style="width: 440px; height: 120px;">
-<label for="bookingsymbol">Symbol </label>
-<select id="bookingsymbol" name="symid" tabindex="1" >
- <option value="1">Kommen</option>
- <option value="2">Gehen</option>
- <option value="3">Testen</option>
- <option value="4">Pause</option>
-</select>
-<input name="Submit" type="submit" id="bookingsubmit" tabindex="2" value="OK" />
-
-<br/>
-<!--TIMERS-->
-
-
+<span class="timers"><!--TIMERS--></span>
+<hr/>
+<span class="errors"><!--ERRORS--></span>
 </div>
 <div class="win_bg_right" style="height: 120px;"></div>
 <br clear="all" />
@@ -140,7 +125,6 @@
 <div class="win_bg_bottom" style="width: 440px;"></div>
 <div class="win_corner_rb"></div>
 </div>
-</form>
 <!-- ************* FOOTER ******************* -->
 <div id="footer"><a
 	href="http://validator.w3.org/check?uri=referer&amp;doctype=Inline&amp;ss=1&amp;outline=1&amp;group=0&amp;No200=1&amp;verbose=1&amp;st=1"

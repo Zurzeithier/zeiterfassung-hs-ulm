@@ -402,7 +402,7 @@ class Template extends Controller
 		 *
 		 * @author  patrick.kracht
 		 */
-		public function headers($type = "html",$maxage=10)
+		public function headers($type = "html",$maxage=0)
 		{
 			// send all headers to the browser
 			header('Content-Language: de');
@@ -413,7 +413,7 @@ class Template extends Controller
 			header('Accept-Ranges: bytes');
 			header('Expires: ' . gmdate('D, d M Y H:i:s', (time()+$maxage)) . ' GMT');
 			header('Cache-Control: max-age='.$maxage);
-			header('Pragma: private');
+			header('Pragma: no-cache');
 			if ($this->accepts_gzip())
 				{
 					header('X-Compression: gzip');
@@ -617,6 +617,26 @@ class Template extends Controller
 			$return  = '<li><a '.(is_string($access_key) ? 'accesskey="'.$access_key.'" ' : '');
 			$return .= ($selected ? 'class="selected" ' : '').'href="'.$href.'" target="'.$target.'">'.$name.'</a></li>';
 			return $return;
+		}
+		
+		/**
+		* return menu entry
+		*
+		* @param   string    name of the menu entry
+		* @param   string    href of link
+		* @param   char      access key
+		* @param   boolean   changes class of entry, if true
+		* @param   string    target of link (default:_self)
+		*
+		* @return  string    menu entry
+		*
+		* @access  public
+		*
+		* @author  patrick.kracht
+		*/
+		public function menu_get_spacer()
+		{
+			return  '<ul class="spacer"><li>-</li></ul>';
 		}
 		
 		/**

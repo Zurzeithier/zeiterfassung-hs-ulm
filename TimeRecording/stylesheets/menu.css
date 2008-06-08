@@ -28,7 +28,8 @@
 	z-index: 1000;
 }
 
-#main_menu li a,#main_menu li a:visited {
+#main_menu li a,
+#main_menu li a:visited {
 	display: block;
 	width: 120px;
 	height: 36px;
@@ -46,8 +47,18 @@
 	background: url(../pro/cssplay/menu_bg_green.png);
 }
 
-#main_menu li a.selected,#main_menu li a.selected:visited,#main_menu li a:active,#main_menu li a:focus
-	{
+#main_menu li a.selected,
+#main_menu li a.selected:visited,
+#main_menu li a:active,
+#main_menu li a:focus{
 	color: #fff;
 	background: url(../images/menu_bg_red.png);
+}
+
+.spacer {
+	float: left;
+	display: inline;
+	width: 0px;
+	z-index: 1000;
+	overflow: hidden;
 }
