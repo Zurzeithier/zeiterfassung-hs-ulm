@@ -16,7 +16,7 @@ class Template extends Controller
 		private $sql_table    = false;
 		private $sql_type     = false;
 		private $debugout     = "";
-		private $menu         = "";
+		private $menu_content = "";
 		private $menu_spacer  = false;
 		private $tpl_folder   = "./templates/";
 		
@@ -324,12 +324,15 @@ class Template extends Controller
 					throw new Exception("template '$name' not found!");
 				}
 				
-			$timers = "<br/>";
+			$timers = "";
+			$menu   = $this->menu_get();
 			
 			if (isset($_SESSION["TIMER.MYSQL"])) $timers .= $_SESSION["TIMER.MYSQL"];
 			if (isset($_SESSION["TIMER.MSSQL"])) $timers .= $_SESSION["TIMER.MSSQL"];
 			if (isset($_SESSION["TIMER.PHP"]))   $timers .= $_SESSION["TIMER.PHP"];
 			
+			
+			$this->assign($name, "<!--MENU-->",   $menu);
 			$this->assign($name, "<!--TIMERS-->", $timers);
 			$this->assign($name, "<!--ERRORS-->", $_SESSION["_Errors"]);
 			
@@ -607,7 +610,7 @@ class Template extends Controller
 		}
 		
 		/**
-		* return menu entry
+		* set new menu entry
 		*
 		* @param   string    name of the menu entry
 		* @param   string    href of link
@@ -615,13 +618,11 @@ class Template extends Controller
 		* @param   boolean   changes class of entry, if true
 		* @param   string    target of link (default:_self)
 		*
-		* @return  string    menu entry
-		*
 		* @access  public
 		*
 		* @author  patrick.kracht
 		*/
-		public function menu_get_entry($name, $href, $access_key = false, $selected = false, $target = "_self")
+		public function menu_insert_entry($name, $href, $access_key = false, $selected = false, $target = "_self")
 		{
 			// append session id, if no cookies in use
 			if (ini_get("session.use_cookies") != "1")
@@ -634,7 +635,23 @@ class Template extends Controller
 			$return .= '<a '.(is_string($access_key) ? 'accesskey="'.$access_key.'" ' : '');
 			$return .= ($selected ? 'class="selected" ' : '').'href="'.$href.'" target="'.$target.'">'.$name.'</a></li>';
 			// reset spacer
-			$this->menu_spacer = false;
+			$this->menu_spacer   = false;
+			$this->menu_content .= $return;
+		}
+		
+		/**
+		* return menu string
+		*
+		* @return  string    menu entry
+		*
+		* @access  public
+		*
+		* @author  patrick.kracht
+		*/
+		public function menu_get()
+		{
+			$return = '<ul id="main_menu">'.$this->menu_content.'</ul>';
+			$this->menu_content = "";
 			return $return;
 		}
 		
