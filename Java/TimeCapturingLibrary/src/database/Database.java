@@ -14,13 +14,15 @@ public class Database
     private final String m_Username;
     private final String m_Password;
     
-    protected String m_ClassName = null;
-    protected String m_AdressPrefix = null;
+    private final String m_ClassName;
+    private final String m_AdressPrefix;
     
-    protected Connection m_Connection;
+    private Connection m_Connection;
 
-    public Database(String adress, String username, String password)
+    public Database(String className, String prefix, String adress, String username, String password)
     {
+        m_ClassName = className;
+        m_AdressPrefix = prefix;
         m_Adress = adress;
         m_Username = username;
         m_Password = password;
@@ -44,4 +46,9 @@ public class Database
     {
         m_Connection.close();
     }
+    
+    public Connection getConnection()
+    {
+        return m_Connection;
+    }    
 }

@@ -20,9 +20,10 @@ public class MSServerAdapter extends Database implements DBAdapter
 
     public MSServerAdapter(String adress, String username, String password)
     {
-        super(adress, username, password);
-        m_ClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-        m_AdressPrefix = "jdbc:sqlserver://";
+        super("com.microsoft.sqlserver.jdbc.SQLServerDriver", 
+              "jdbc:sqlserver://", 
+              adress, username, password);
+
     }
 
     public TPTypeBean getType(int typId) throws DBException
@@ -35,11 +36,9 @@ public class MSServerAdapter extends Database implements DBAdapter
             StringBuilder query = new StringBuilder();
 
             query.append("SELECT TypId, Bezeichung, Symbol  FROM ZBTyp WHERE ");
-            query.append("TypId='");
-            query.append(typId);
-            query.append("'");
+            query.append("TypId='").append(typId).append("'");
 
-            Statement sat = m_Connection.createStatement();
+            Statement sat = getConnection().createStatement();
             ResultSet res = sat.executeQuery(query.toString());
 
 
@@ -79,11 +78,9 @@ public class MSServerAdapter extends Database implements DBAdapter
             StringBuilder query = new StringBuilder();
 
             query.append("SELECT MId, BId, Datum, KoaId, KstId, TypId FROM ZeitBuchung WHERE ");
-            query.append("MId='");
-            query.append(mid);
-            query.append("'");
+            query.append("MId='").append(mid).append("'");
 
-            Statement sat = m_Connection.createStatement();
+            Statement sat = getConnection().createStatement();
             ResultSet res = sat.executeQuery(query.toString());
 
 
@@ -122,12 +119,10 @@ public class MSServerAdapter extends Database implements DBAdapter
             StringBuilder query = new StringBuilder();
 
             query.append("SELECT MId, Vornamen, Namen, LoginNamen, LoginPasswort FROM Mitarbeiter WHERE ");
-            query.append("LoginNamen='");
-            query.append(username);
-            query.append("'");
+            query.append("LoginNamen='").append(username).append("'");
 
             // System.out.println(query.toString());
-            Statement sat = m_Connection.createStatement();
+            Statement sat = getConnection().createStatement();
             ResultSet res = sat.executeQuery(query.toString());
 
 
@@ -163,11 +158,9 @@ public class MSServerAdapter extends Database implements DBAdapter
             StringBuilder query = new StringBuilder();
 
             query.append("SELECT MId, Vornamen, Namen, LoginNamen, LoginPasswort FROM Mitarbeiter WHERE ");
-            query.append("MId='");
-            query.append(mid);
-            query.append("'");
+            query.append("MId='").append(mid).append("'");
 
-            Statement sat = m_Connection.createStatement();
+            Statement sat = getConnection().createStatement();
             ResultSet res = sat.executeQuery(query.toString());
 
 
@@ -223,7 +216,7 @@ public class MSServerAdapter extends Database implements DBAdapter
             query.append(" WHERE mid='").append(user.getMid()).append("'");
 
             // System.out.println(query.toString());
-            Statement sat = m_Connection.createStatement();
+            Statement sat = getConnection().createStatement();
             boolean sucessfull = sat.execute(query.toString());
 
             disconnect();
@@ -247,16 +240,12 @@ public class MSServerAdapter extends Database implements DBAdapter
 
             query.append("INSERT INTO Mitarbeiter ");
             query.append("(Namen, Vornamen, LoginNamen, LoginPasswort) VALUES (");
-            query.append(user.getName());
-            query.append(", ");
-            query.append(user.getFirstname());
-            query.append(", ");
-            query.append(user.getUsername());
-            query.append(", ");
-            query.append(user.getPassword());
-            query.append(")");
+            query.append(user.getName()).append(", ");
+            query.append(user.getFirstname()).append(", ");
+            query.append(user.getUsername()).append(", ");
+            query.append(user.getPassword()).append(")");
 
-            Statement sat = m_Connection.createStatement();
+            Statement sat = getConnection().createStatement();
             ResultSet res = sat.executeQuery(query.toString());
 
             res.close();
