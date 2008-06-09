@@ -50,9 +50,7 @@ class Session extends Controller
 			
 			// savely remove complete array
 			unset($_SESSION);
-			
-			// reload page
-			$this->return_to("./");
+			parent::reinit();
 		}
 		
 		/**
@@ -72,7 +70,7 @@ class Session extends Controller
 					$password = md5(trim($_POST["LoginPassword"]));
 					if (empty($username))
 						{
-							throw new Exception("access denied! no username given!",301);
+							throw new Exception("Zugriff verweigert! Kein Benutzername eingegeben!",301);
 						}
 				}
 			else
@@ -90,7 +88,7 @@ class Session extends Controller
 			
 			if (! isset($found["mid"]))
 				{
-					throw new Exception("access denied for '$username'!",303);
+					throw new Exception("Die Email oder das Kennwort ist falsch!",302);
 				}
 				
 			$_SESSION["_UserData"] = $found;
@@ -123,12 +121,12 @@ class Session extends Controller
 					$username = trim($_POST["LoginUsername"]);
 					if (empty($username))
 						{
-							throw new Exception("no email address given!",304);
+							throw new Exception("Sie haben keine Emailadresse angegeben!",303);
 						}
 				}
 			else
 				{
-					throw new Exception("no email address given!",304);
+					throw new Exception("Sie haben keine Emailadresse angegeben!",303);
 				}
 				
 			// check, if user with md5-pass exists in database
@@ -138,7 +136,7 @@ class Session extends Controller
 			// only if one hit
 			if ( ! isset( $result["mid"] ) )
 			{
-				throw new Exception("no user with email '$username'!",305);
+				throw new Exception("Die Emailadresse '$username' ist mir unbekannt!",304);
 			}
 			else
 			{
@@ -154,23 +152,23 @@ class Session extends Controller
 					$tpl = "passwd.email.html";
 					
 					$email = new Email(array($tpl,"Sie haben Ihr Passwort vergessen?"));
-					$email->set_sender("root@omega2k.de","Webmaster");
+					$email->set_sender("omega2k@omega2k.de","Webmaster");
 					$email->set_to($username, $result["firstname"]." ".$result["lastname"]);
 					$email->assign($tpl,"{{URL}}","http://www.omega2k.de/~omega2k/TimeRecording/");
 					$email->assign($tpl,"{{USER}}",$username);
 					$email->assign($tpl,"{{PASS}}",$passwd);
 					if ( $email->send() )
 					{
-						throw new Exception("new password for '$username' was sent by mail!",307);
+						throw new Exception("Es wurde ein neues Passwort an '$username' geschickt!",305);
 					}
 					else
 					{
-						throw new Exception("problems sending email, contact admin!",308);
+						throw new Exception("Die Email konnte nicht gesendet werden! Wir arbeiten daran...",306);
 					}
 				}
 				else
 				{
-					throw new Exception("problems updating database, contact admin!",306);
+					throw new Exception("Es gab Probleme mit der Datenbank! Wir arbeiten daran...",307);
 				}
 			}
 		}
@@ -193,7 +191,7 @@ class Session extends Controller
 			
 			if (! $this->is_user())
 				{
-					throw new Exception("you are no user or not logged in!",306);
+					throw new Exception("Sie sind kein bekannter Benutzer!",308);
 				}
 			else
 				{
@@ -205,7 +203,7 @@ class Session extends Controller
 					
 					if (intval($last["symid"]) == $symid)
 						{
-							throw new Exception("asynchronous booking is disabled!",308);
+							throw new Exception("Asynchrone Buchungen sind nicht zugelassen!",309);
 						}
 						
 					$query  = "INSERT INTO tr_bookings ( mid, symid ) ";
@@ -343,6 +341,7 @@ class Session extends Controller
 						{
 							// kill session and logout
 							$this->logout();
+							throw new Exception("Ihre Session ist abgelaufen! Bitte neu anmelden...",310);
 						}
 				}
 			else

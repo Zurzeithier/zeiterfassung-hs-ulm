@@ -31,11 +31,13 @@ if ($_SESSION["CLIENT"]->is_user())
 			{
 			case "setup":
 				$_SESSION["HTML"]->load("setup.html");
+				$users = $Controller->show_user_table();
+				$_SESSION["HTML"]->assign("setup.html", "<!--USER_TABLE-->",$users);
 				$_SESSION["HTML"]->output("setup.html");
 				break;
 			case "home":
 			default:
-				$book = $Controller->show_last_bookings(15);
+				$book = $Controller->show_last_bookings();
 				$_SESSION["HTML"]->load("index.html");
 				$_SESSION["HTML"]->assign("index.html", "<!--MID-->", $_SESSION["_UserData"]["mid"]);
 				$_SESSION["HTML"]->assign("index.html", "<!--FIRST_NAME-->", $_SESSION["_UserData"]["firstname"]);

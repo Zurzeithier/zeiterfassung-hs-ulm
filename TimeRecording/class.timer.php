@@ -186,7 +186,10 @@ class Timer
 					// stop timer, if running
 					$this->stop();
 				}
-			return $this->counter." trigger(s) from '".$this->namestr . "' lasted " . $this->get() . $this->unitstr . ";<br/>\n";
+			$return  = $this->counter." Zugriff".(($this->counter!=1)?"e":"");
+			$return .= " auf ".$this->namestr . " dauerte".(($this->counter!=1)?"n ":" ");
+			$return .= $this->get().$this->unitstr . "<br/>";
+			return $return;
 		}
 		
 	}

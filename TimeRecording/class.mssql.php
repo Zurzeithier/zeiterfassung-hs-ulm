@@ -43,10 +43,10 @@ class MsSql extends Controller implements iSql
 			
 			if (! $this->hostname || ! $this->hostport || ! $this->database || ! $this->username || ! $this->password)
 				{
-					throw new Exception("missing parameters for creating mssql connection!",201);
+					throw new Exception("Es fehlt mindestens ein Parameter um die MsSQL-Verbindung herzustellen!",101);
 				}
 				
-			parent::register("Timer",array("mssql runtime",true),"TIMER.MSSQL");
+			parent::register("Timer",array("MsSQL",true),"TIMER.MSSQL");
 			
 			$this->init();
 		}
@@ -74,11 +74,11 @@ class MsSql extends Controller implements iSql
 		{
 			if (! $this->connect())
 				{
-					throw new Exception("unable to connect to mssql server '".$this->hostname."'! ".$this->mssql_error,202);
+					throw new Exception("Konnte keine Verbindung zum MsSQL-Server '".$this->hostname."' herstellen! (".$this->mssql_error.")",102);
 				}
 			if (! $this->select_db())
 				{
-					throw new Exception("unable to access mssql database '".$this->database."'! ".$this->mssql_error,203);
+					throw new Exception("Konnte auf die MsSQL-Datenbank '".$this->database."' nicht zugreifen! (".$this->mssql_error.")",103);
 				}
 		}
 		
@@ -390,11 +390,11 @@ class MsSql extends Controller implements iSql
 		 *
 		 * @author  patrick.kracht
 		 */
-		public function html_table($tablename)
+		public function html_table($tablename,$where="")
 		{
 			$dump   = "";
 			$first  = true;
-			$query  = "SELECT * FROM $tablename";
+			$query  = "SELECT * FROM $tablename $where";
 			$result = $this->query($query);
 			
 			// append title and start table

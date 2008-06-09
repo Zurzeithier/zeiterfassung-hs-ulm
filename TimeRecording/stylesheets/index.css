@@ -3,7 +3,7 @@
 /* CSS for main program */
 BODY {
 	font-family: verdana, arial;
-	font-size: 11px;
+	font-size: 10pt;
 	margin: 0px;
 	padding: 45px 10px 20px 10px;
 	background-color: white;
@@ -18,13 +18,48 @@ BODY {
 }
 
 .errors {
-	font-size:16px;
+	font-size:12pt;
 	color: red;
 	font-weight: bold;
 }
 
 .timers {
-	font-size:11px;
+	font-size:9pt;
 	color: #333333;
 	font-weight: bold;
+}
+
+#last_bookings {
+	border: none;
+	width: 100%;
+}
+
+#last_bookings td {
+	border: 1px solid #a4daa5;
+	padding: 2px;
+	width: 20%;
+	text-align: center;
+	vertical-align: center;
+}
+
+#last_bookings b {
+	font-size: 10pt;
+}	
+
+	
+#user_table {
+	border: none;
+	width: 100%;
+}
+
+#user_table td {
+	border: 1px solid #a4daa5;
+	padding: 2px;
+	width: 20%;
+	text-align: center;
+	vertical-align: center;
+}
+
+#user_table b {
+	font-size: 10pt;
 }
