@@ -17,6 +17,7 @@ class Template extends Controller
 		private $sql_type     = false;
 		private $debugout     = "";
 		private $menu         = "";
+		private $menu_spacer  = false;
 		private $tpl_folder   = "./templates/";
 		
 		/**
@@ -33,6 +34,7 @@ class Template extends Controller
 			$this->tpl_folder  = (isset($parameters[0])) ? $parameters[0] : "./templates/";
 			$this->debug_off   = (isset($parameters[1])) ? $parameters[1] : true;
 			$this->do_compress = (isset($parameters[2])) ? $parameters[2] : true;
+			$this->menu_spacer = false;
 		}
 		
 		/**
@@ -593,30 +595,15 @@ class Template extends Controller
 		}
 		
 		/**
-		* return menu entry
-		*
-		* @param   string    name of the menu entry
-		* @param   string    href of link
-		* @param   char      access key
-		* @param   boolean   changes class of entry, if true
-		* @param   string    target of link (default:_self)
-		*
-		* @return  string    menu entry
-		*
-		* @access  public
-		*
-		* @author  patrick.kracht
-		*/
-		public function menu_get_entry($name, $href, $access_key = false, $selected = false, $target = "_self")
+		 * set spacer to next menu entry
+		 *
+		 * @access  public
+		 *
+		 * @author  patrick.kracht
+		 */
+		public function menu_insert_spacer()
 		{
-			if (ini_get("session.use_cookies") != "1")
-				{
-					$sid = ini_get("session.name")."=".session_id();
-					$href .= (strpos($href,"?")===false)?("?".$sid):("&amp;".$sid);
-				}
-			$return  = '<li><a '.(is_string($access_key) ? 'accesskey="'.$access_key.'" ' : '');
-			$return .= ($selected ? 'class="selected" ' : '').'href="'.$href.'" target="'.$target.'">'.$name.'</a></li>';
-			return $return;
+			$this->menu_spacer = true;
 		}
 		
 		/**
@@ -634,9 +621,21 @@ class Template extends Controller
 		*
 		* @author  patrick.kracht
 		*/
-		public function menu_get_spacer()
+		public function menu_get_entry($name, $href, $access_key = false, $selected = false, $target = "_self")
 		{
-			return  '<ul class="spacer"><li>-</li></ul>';
+			// append session id, if no cookies in use
+			if (ini_get("session.use_cookies") != "1")
+				{
+					$sid = ini_get("session.name")."=".session_id();
+					$href .= (strpos($href,"?")===false)?("?".$sid):("&amp;".$sid);
+				}
+			// check for preset spacer for next entry
+			$return  = ($this->menu_spacer) ? '<li class="spacer">' : '<li>';
+			$return .= '<a '.(is_string($access_key) ? 'accesskey="'.$access_key.'" ' : '');
+			$return .= ($selected ? 'class="selected" ' : '').'href="'.$href.'" target="'.$target.'">'.$name.'</a></li>';
+			// reset spacer
+			$this->menu_spacer = false;
+			return $return;
 		}
 		
 		/**
