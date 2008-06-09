@@ -56,6 +56,55 @@ class Session extends Controller
 		}
 		
 		/**
+		 * perform login with POST values $_POST["LoginUsername"] and $_POST["LoginPassword"]
+		 *
+		 * @return  boolean   success of login action
+		 *
+		 * @access  public
+		 *
+		 * @author  patrick.kracht
+		 */
+		public function login()
+		{
+			if (isset($_POST["LoginUsername"]) && isset($_POST["LoginPassword"]))
+				{
+					$username = trim($_POST["LoginUsername"]);
+					$password = md5(trim($_POST["LoginPassword"]));
+					if (empty($username))
+						{
+							throw new Exception("access denied! no username given!",301);
+						}
+				}
+			else
+				{
+					// if no post values for user and pass, init save state (guest)
+					$this->logout();
+				}
+				
+			// check, if user with md5-pass exists in database
+			$query  = "SELECT u.mid, u.gid, u.email, u.firstname, u.lastname, g.groupname ";
+			$query .= "FROM tr_users u LEFT JOIN ";
+			$query .= "tr_groups g USING ( gid ) ";
+			$query .= "WHERE u.email = '$username' AND u.password = '$password';";
+			$found = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
+			
+			if (! isset($found["mid"]))
+				{
+					throw new Exception("access denied for '$username'!",303);
+				}
+				
+			$_SESSION["_UserData"] = $found;
+			
+			// save current timestamp and ip to verify session
+			$_SESSION["_UserData"]["timestamp"] = time();
+			$_SESSION["_UserData"]["ip"]        = $_SERVER["REMOTE_ADDR"];
+			
+			$this->extend();
+			
+			return true;
+		}
+		
+		/**
 		 * reset a password for a given username (email)
 		 * and returns new generated password
 		 *
@@ -69,7 +118,61 @@ class Session extends Controller
 		 */
 		public function passwd()
 		{
-			//TODO
+			if (isset($_POST["LoginUsername"]))
+				{
+					$username = trim($_POST["LoginUsername"]);
+					if (empty($username))
+						{
+							throw new Exception("no email address given!",304);
+						}
+				}
+			else
+				{
+					throw new Exception("no email address given!",304);
+				}
+				
+			// check, if user with md5-pass exists in database
+			$query  = "SELECT mid, firstname, lastname FROM tr_users WHERE email = '$username';";
+			$result = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
+			
+			// only if one hit
+			if ( ! isset( $result["mid"] ) )
+			{
+				throw new Exception("no user with email '$username'!",305);
+			}
+			else
+			{
+				$passwd  = $this->generate_password();
+				$passmd5 = md5( $passwd );
+				$query   = "UPDATE tr_users SET password = '$passmd5' WHERE email = '$username';";
+				$_SESSION[$_SESSION["_SqlType"]]->query($query);
+				$count   = $_SESSION[$_SESSION["_SqlType"]]->affected_rows();
+				
+				// successful updated database 
+				if ( $count == 1 )
+				{
+					$tpl = "passwd.email.html";
+					
+					$email = new Email(array($tpl,"Sie haben Ihr Passwort vergessen?"));
+					$email->set_sender("root@omega2k.de","Webmaster");
+					$email->set_to($username, $result["firstname"]." ".$result["lastname"]);
+					$email->assign($tpl,"{{URL}}","http://www.omega2k.de/~omega2k/TimeRecording/");
+					$email->assign($tpl,"{{USER}}",$username);
+					$email->assign($tpl,"{{PASS}}",$passwd);
+					if ( $email->send() )
+					{
+						throw new Exception("new password for '$username' was sent by mail!",307);
+					}
+					else
+					{
+						throw new Exception("problems sending email, contact admin!",308);
+					}
+				}
+				else
+				{
+					throw new Exception("problems updating database, contact admin!",306);
+				}
+			}
 		}
 		
 		/**
@@ -218,55 +321,6 @@ class Session extends Controller
 			session_write_close();
 			header("Location: ".$url);
 			exit();
-		}
-		
-		/**
-		 * perform login with POST values $_POST["LoginUsername"] and $_POST["LoginPassword"]
-		 *
-		 * @return  boolean   success of login action
-		 *
-		 * @access  public
-		 *
-		 * @author  patrick.kracht
-		 */
-		public function login()
-		{
-			if (isset($_POST["LoginUsername"]) && isset($_POST["LoginPassword"]))
-				{
-					$username = trim($_POST["LoginUsername"]);
-					$password = md5(trim($_POST["LoginPassword"]));
-					if (empty($username))
-						{
-							throw new Exception("access denied! no username given!",301);
-						}
-				}
-			else
-				{
-					// if no post values for user and pass, init save state (guest)
-					$this->logout();
-				}
-				
-			// check, if user with md5-pass exists in database
-			$query  = "SELECT u.mid, u.gid, u.email, u.firstname, u.lastname, g.groupname ";
-			$query .= "FROM tr_users u LEFT JOIN ";
-			$query .= "tr_groups g USING ( gid ) ";
-			$query .= "WHERE u.email = '$username' AND u.password = '$password';";
-			$found = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
-			
-			if (! isset($found["mid"]))
-				{
-					throw new Exception("access denied for '$username'!",303);
-				}
-				
-			$_SESSION["_UserData"] = $found;
-			
-			// save current timestamp and ip to verify session
-			$_SESSION["_UserData"]["timestamp"] = time();
-			$_SESSION["_UserData"]["ip"]        = $_SERVER["REMOTE_ADDR"];
-			
-			$this->extend();
-			
-			return true;
 		}
 		
 		/**

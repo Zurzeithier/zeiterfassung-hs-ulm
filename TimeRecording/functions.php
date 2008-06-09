@@ -42,7 +42,7 @@ function __session_start($name="sid")
 			if (preg_match('/^[a-z0-9]{32}$/', $sid)) session_id($sid);
 		}
 		
-	// start session now
+	// start session now and set cookie
 	session_start();
 	$_COOKIE[$name] = session_id();
 }
@@ -60,6 +60,17 @@ function __autoload($class_name)
 		{
 			die("unable to load class '${class_name}'! include file '${class_file}' not found!");
 		}
+}
+
+// magic check syntax function, to validate php files
+function __check_syntax($filename)
+{
+	$source = file_get_contents($filename);
+	ob_start();
+	$eval = @eval('?>'.$source);
+	$cont = ob_get_contents();
+	ob_end_clean();
+	return $eval === NULL ? true : false;
 }
 
 ?>

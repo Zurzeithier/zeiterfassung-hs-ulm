@@ -205,7 +205,7 @@ class Template extends Controller
 					try
 						{
 							$table = $_SESSION["_TplSqlTable"];
-							$query = "SELECT content FROM ${table} WHERE file = '${template}';";
+							$query = "SELECT content FROM ${table} WHERE file = '${name}';";
 							$array = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
 							$this->template[$name] = $array["content"];
 							return true;

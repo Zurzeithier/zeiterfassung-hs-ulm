@@ -26,6 +26,10 @@ class Controller
 				{
 					die("config file 'config.controller.php' not found!");
 				}
+			else if (!__check_syntax("./config.controller.php"))
+				{
+					die("config file 'config.controller.php' is invalid!");
+				}
 			else
 				{
 					__session_start();
