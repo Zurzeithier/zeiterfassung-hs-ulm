@@ -42,15 +42,17 @@ class Session extends Controller
 		 *
 		 * @author  patrick.kracht
 		 */
-		public function logout()
+		public function logout($error_message="")
 		{
 			// kill session and array
 			session_destroy();
 			session_regenerate_id();
 			
-			// savely remove complete array
+			// savely remove complete array and recreate session
 			unset($_SESSION);
 			parent::reinit();
+			
+			$_SESSION["_Errors"] = $error_message;
 		}
 		
 		/**
@@ -340,8 +342,7 @@ class Session extends Controller
 					else
 						{
 							// kill session and logout
-							$this->logout();
-							throw new Exception("Ihre Session ist abgelaufen! Bitte neu anmelden...",310);
+							$this->logout("Ihre Session ist abgelaufen! Bitte neu anmelden...");
 						}
 				}
 			else
