@@ -21,6 +21,20 @@ class Controller
 		 */
 		public function __construct()
 		{
+			self::reinit();
+		}
+		
+		/**
+		 * reinit loads global config file and initializes
+		 * default session variables, register session-objects
+		 * if not set, reset needed timers
+		 *
+		 * @access  public
+		 *
+		 * @author  patrick.kracht
+		 */
+		public function reinit()
+		{
 			// load global config file or die
 			if (!file_exists("./config.controller.php"))
 				{
@@ -47,7 +61,7 @@ class Controller
 			// try to register needed objects for current session or die
 			try
 				{
-					self::register("Timer",array("system runtime",true),"TIMER.PHP");
+					self::register("Timer",array("Controller",true),"TIMER.PHP");
 					$_SESSION["TIMER.PHP"]->reset();
 					$_SESSION["TIMER.PHP"]->start();
 					
@@ -144,19 +158,70 @@ class Controller
 		 *
 		 * @author  patrick.kracht
 		 */
-		public function show_last_bookings($limit=10)
+		public function show_last_bookings($limit=9)
 		{
-			$return = "";
-			$query  = "SELECT s.symbolname, s.symid, DATE_FORMAT( b.stamp, '%d.%m.%Y %H:%i:%s') AS Datum ";
+			$query  = "SELECT s.symbolname AS Aktion,DATE_FORMAT( b.stamp, '%d.%m.%Y %H:%i:%s') AS Datum ";
 			$query .= "FROM tr_bookings b LEFT JOIN tr_symbols s ";
 			$query .= "USING ( symid ) WHERE b.mid = '".$_SESSION["_UserData"]["mid"]."' ";
 			$query .= "ORDER BY b.stamp DESC LIMIT 0,$limit";
+			
+			return $this->query2table($query,"last_bookings");
+		}
+		
+		/**
+		 * generate html user table
+		 *
+		 * @access  public
+		 *
+		 * @author  patrick.kracht
+		 */
+		public function show_user_table($limit=8)
+		{
+			$query  = "SELECT u.mid AS MitarbeiterID, u.email AS Email, ";
+			$query .= "u.firstname AS Vorname, u.lastname AS Nachname, g.groupname AS Gruppe ";
+			$query .= "FROM tr_users u LEFT JOIN ";
+			$query .= "tr_groups g USING ( gid ) ";
+			$query .= "ORDER BY MitarbeiterID ASC LIMIT 0,$limit";
+			
+			return $this->query2table($query,"user_table");
+		}
+		
+		
+		/**
+		 * private query to html table converter
+		 * 
+		 * @param   string		sql query to get rows from
+		 * @param 	string		id-tag (css stylesheet)
+		 *
+		 * @access  private
+		 *
+		 * @author  patrick.kracht
+		 */
+		private function query2table($query,$id)
+		{
 			$result = $_SESSION[$_SESSION["_SqlType"]]->query($query);
+			$first  = true;
+			$dump   = "<table id=\"$id\">";
 			while ($row = $_SESSION[$_SESSION["_SqlType"]]->fetch_array($result))
 				{
-					$return .= '<div class="win_attr">'.$row["symbolname"].'</div><div class="win_value">'.$row["Datum"].'</div><br clear="all"/>';
+					// append only keys on first line
+					if ($first)
+						{
+							$dump .= "<tr><td><b>";
+							$dump .= implode("</b></td><td><b>", array_keys($row));
+							$dump .= "</b></td></tr>";
+							$first = false;
+						}
+					// append data rows
+					$dump .= "<tr><td>";
+					$dump .= implode("</td><td>", $row);
+					$dump .= "</td></tr>";	
 				}
-			return $return;
+			$_SESSION[$_SESSION["_SqlType"]]->free_result($result);
+			if ($first) $dump .= "<tr><td>keine Einstr&auml;ge gefunden...</td></tr>";
+			// close table
+			$dump  .= "</table>";
+			return $dump;
 		}
 		
 		/**

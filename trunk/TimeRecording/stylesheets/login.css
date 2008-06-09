@@ -4,7 +4,7 @@ BODY {
 	background-color: navy;
 	background: navy;
 	font-family: verdana, arial;
-	font-size: 12px;
+	font-size: 10pt;
 	margin: 0;
 	padding: 0;
 }
@@ -39,7 +39,7 @@ BODY {
 	position: relative;
 	width: 326px;
 	height: 89px;
-	font-size: 14px;
+	font-size: 12pt;
 	font-weight: bold;
 	color: white;
 	top: 6px;
@@ -53,7 +53,7 @@ BODY {
 }
 
 #login_window_bottom {
-	font-size: 0;
+	font-size: 0pt;
 	width: 326px;
 	height: 4px;
 	background: url(../images/login_bg_bottom.png) no-repeat bottom left;
@@ -70,7 +70,7 @@ BODY {
 }
 
 #loginform input.logintext {
-	font-size: 11px;
+	font-size: 9pt;
 	margin-right: 20px;
 	border: none;
 	float: right;
@@ -85,7 +85,7 @@ BODY {
 
 #loginsubmit {
 	position: absolute;
-	font-size: 12px;
+	font-size: 9pt;
 	width: 75px;
 	height: 22px;
 	background: url(../images/login_bg_button.png);
@@ -102,7 +102,7 @@ BODY {
 	margin: 20px;
 	margin-left: 20%;
 	margin-right: 20%;
-	font-size: 16px;
+	font-size: 12pt;
 	font-weight: bold;
 	text-align: center;
 }
