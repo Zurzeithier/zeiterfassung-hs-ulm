@@ -31,7 +31,6 @@ if ($_SESSION["CLIENT"]->is_user())
 			{
 			case "setup":
 				$_SESSION["HTML"]->load("setup.html");
-				$_SESSION["HTML"]->assign("setup.html", "<!--MENU-->", $menu);
 				$_SESSION["HTML"]->output("setup.html");
 				break;
 			case "home":
@@ -45,7 +44,6 @@ if ($_SESSION["CLIENT"]->is_user())
 				$_SESSION["HTML"]->assign("index.html", "<!--IP-->", $_SESSION["_UserData"]["ip"]);
 				$_SESSION["HTML"]->assign("index.html", "<!--GROUP_NAME-->", $_SESSION["_UserData"]["groupname"]);
 				$_SESSION["HTML"]->assign("index.html", "<!--HISTORY_DATA-->",$book);
-				$_SESSION["HTML"]->assign("index.html", "<!--MENU-->", $menu);
 				$_SESSION["HTML"]->output("index.html");
 				break;
 			}
