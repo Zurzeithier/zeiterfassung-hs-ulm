@@ -23,12 +23,12 @@ if ($_SESSION["CLIENT"]->is_user())
 		// create top menu
 		$menu  = '<ul id="main_menu">';
 		$menu .= $_SESSION["HTML"]->menu_get_entry("Abmelden", "./?action=logout", "Q");
-		$menu .= $_SESSION["HTML"]->menu_get_spacer();
+		$_SESSION["HTML"]->menu_insert_spacer();
 		$menu .= $_SESSION["HTML"]->menu_get_entry("&Uuml;bersicht", "./?page=home", "H", ($_SESSION["_PageID.current"]=="home"));
 		$menu .= $_SESSION["HTML"]->menu_get_entry("Einstellungen", "./?page=setup", "E", ($_SESSION["_PageID.current"]=="setup"));
-		$menu .= $_SESSION["HTML"]->menu_get_spacer();
-		$menu .= $_SESSION["HTML"]->menu_get_entry("KOMMEN", "./?action=book&id=1", "K");
-		$menu .= $_SESSION["HTML"]->menu_get_entry("GEHEN", "./?action=book&id=2", "G");
+		$_SESSION["HTML"]->menu_insert_spacer();
+		$menu .= $_SESSION["HTML"]->menu_get_entry("KOMMEN", "./?action=book&amp;id=1", "K");
+		$menu .= $_SESSION["HTML"]->menu_get_entry("GEHEN", "./?action=book&amp;id=2", "G");
 		$menu .= '</ul>';
 		
 		// call page specific methods
