@@ -5,7 +5,7 @@ $_SETTINGS = array(
                  /* MYQL SERVER CONFIGURATION (DATABASE_TYPE,SESSION_TIMEOUT) */
                  "Main"     => array(
                                  "MYSQL", 						//(0) type of database to use default
-                                 300,							//(1) session timeout
+                                 600,							//(1) session timeout in seconds
                                  false							//(2) force usage of cookies?
                              )
                              ,

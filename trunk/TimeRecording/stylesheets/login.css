@@ -17,6 +17,14 @@ BODY {
 	font-weight: bold;
 }
 
+.loginpasswd {
+	position: absolute;
+	left: 10px;
+	bottom: 10px;
+	color: #666666;
+	text-decoration: none;
+}
+
 #login_window {
 	position: absolute;
 	left: 35%;
@@ -76,16 +84,17 @@ BODY {
 }
 
 #loginsubmit {
+	position: absolute;
 	font-size: 12px;
 	width: 75px;
 	height: 22px;
 	background: url(../images/login_bg_button.png);
 	margin-right: 20px;
 	border: none;
-	float: right;
-	clear: right;
 	color: black;
 	cursor: pointer;
+	right: 10px;
+	bottom: 28px;
 }
 
 #errors {

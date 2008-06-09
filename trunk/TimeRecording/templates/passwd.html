@@ -4,7 +4,7 @@
  * Created on 28.05.2008
 -->
 <head>
-<title>TimeRecording - Anmelden</title>
+<title>TimeRecording - Passwort vergessen</title>
 <meta http-equiv="content-style-type" content="text/css; charset=UTF-8" />
 <meta http-equiv="content-script-type"
 	content="text/javascript; charset=UTF-8" />
@@ -30,21 +30,19 @@
 </head>
 <body>
 <div id="errors"><!--ERRORS--></div>
-<!-- ************* LOGIN FORM *************** -->
+<!-- ************* RESET FORM *************** -->
 <form enctype="multipart/form-data" action="" method="post"
 	target="_self" id="loginform">
-	<input type="hidden" name="page"   value="home" />
+	<input type="hidden" name="page"   value="passwd" />
 	<input type="hidden" name="sid"    value="{{SID}}" />
-	<input type="hidden" name="action" value="login" />
+	<input type="hidden" name="action" value="passwd" />
 <div id="login_window">
-<div id="login_window_top">Anmelden</div>
+<div id="login_window_top">Passwort vergessen?</div>
 <div id="login_window_center"><label for="LoginUsername"><input
 	class="logintext" type="text" name="LoginUsername" tabindex="1"
-	id="LoginUsername" />Benutzer:</label> <label for="LoginPassword"><input
-	class="logintext" type="password" name="LoginPassword" tabindex="2"
-	id="LoginPassword" />Kennwort:</label> <input
+	id="LoginUsername" />Emailadresse:</label> <input
 	name="Submit" type="submit" id="loginsubmit" tabindex="4" value="OK" />
-	<a href="./?page=passwd" target="_self" class="loginpasswd">Passwort vergessen?</a>
+	<a href="./" target="_self" class="loginpasswd">zur&uuml;ck</a>
 </div>
 <div id="login_window_bottom"></div>
 </div>

@@ -48,11 +48,19 @@ if ($_SESSION["CLIENT"]->is_user())
 				break;
 			}
 	}
-// ************************* page for guests (force login) *******************
+// ***************** page for guests (force login) *****************
 else
 	{
-		$_SESSION["HTML"]->load("login.html");
-		$_SESSION["HTML"]->output("login.html");
+		if ( $_SESSION["_PageID.current"] == "passwd" )
+		{
+			$_SESSION["HTML"]->load("passwd.html");
+			$_SESSION["HTML"]->output("passwd.html");
+		}
+		else
+		{
+			$_SESSION["HTML"]->load("login.html");
+			$_SESSION["HTML"]->output("login.html");
+		}
 	}
 
 

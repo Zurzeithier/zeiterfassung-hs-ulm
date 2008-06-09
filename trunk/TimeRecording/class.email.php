@@ -18,6 +18,7 @@ class Email extends Template
 		private $attach     = array();
 		private $recipients = "";
 		private $subject    = "";
+		private $useinlay   = false;
 		private $template;
 		
 		/**
@@ -30,13 +31,11 @@ class Email extends Template
 		 *
 		 * @author  patrick.kracht
 		 */
-		public function __construct($template, $subject = "")
+		public function __construct( $parameters = array() )
 		{
-			_randomize();
 			$this->set_newlines();
-			
-			$this->template = $template;
-			$this->subject  = utf8_decode($subject);
+			$this->template = isset( $parameters[0] ) ? $parameters[0] : false;
+			$this->subject  = isset( $parameters[1] ) ? utf8_decode($parameters[1]) : "";
 			$this->headers  = array(
 			                      "Return-Path"  => "webmaster@localhost",
 			                      "Message-ID"   => time().rand(1,1000)."@".$_SERVER["SERVER_NAME"],
@@ -63,6 +62,18 @@ class Email extends Template
 		{
 			return strtoupper(md5(uniqid(microtime() * mt_rand(1000,100000))));
 		}
+		
+		/**
+		 * set usage of inlay images or use links
+		 *
+		 * @access  public
+		 *
+		 * @author  patrick.kracht
+		 */
+		public function set_inlay( $bool = false )
+		{
+			$this->useinlay = $bool;
+		} 
 		
 		/**
 		 * add a recipient to the mail
@@ -333,15 +344,30 @@ class Email extends Template
 			$output    .= $this->eol;
 			
 			// replace all images with tokens and inline-attachments (png-only)
-			if (preg_match_all("@=\"(\.\/.*\.png)\"\s@", $html, $found))
+			if (preg_match_all("@(\.\/.*\.png)@i", $html, $found))
 				{
-					foreach($found[1] as $index => $value)
+					// attach the images to the mail
+					if ( $this->useinlay )
 					{
-						$cid = md5($value);
-						$this->attach["cid:".$cid] = $value;
-						$inline .= $this->create_inline($value, $cid, $boundmix);
+						foreach($found[0] as $index => $value)
+						{
+							$cid = md5($value);
+							$this->attach["cid:".$cid] = $value;
+							$inline .= $this->create_inline($value, $cid, $boundmix);
+						}
+						$html = str_replace(array_values($this->attach), array_keys($this->attach), $html);
 					}
-					$html = str_replace(array_values($this->attach), array_keys($this->attach), $html);
+					// turn all image-links into direct online links
+					else
+					{
+						$url = "http://".$_SERVER["HTTP_HOST"].dirname($_SERVER["SCRIPT_NAME"])."/";
+						foreach($found[0] as $index => $value)
+						{
+							$link = $url.str_replace("./","",$value);
+							$this->attach[$link] = $value;
+						}
+						$html = str_replace(array_values($this->attach), array_keys($this->attach), $html);
+					}
 				}
 				
 			$output  .= $html;
