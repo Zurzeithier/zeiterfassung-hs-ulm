@@ -230,7 +230,7 @@ class Session extends Controller
 						$question .= "<input type=\"submit\" name=\"submit\" value=\"Abbrechen\" />";
 						$question .= "</form>";
 						
-						throw new Exception("Asynchrone Buchungen sind nicht zugelassen!$question",310);
+						throw new Exception("Azyklische Buchungen sind nicht zugelassen!$question",310);
 					}
 					else if ( $symid == 1 )
 					{

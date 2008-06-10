@@ -38,6 +38,8 @@ if ($_SESSION["CLIENT"]->is_user())
 				$users = $Controller->show_user_table();
 				$_SESSION["HTML"]->assign("users.html", "<!--USER_TABLE-->",$users);
 				
+				//TODO MORE
+				
 				// send page to browser
 				$_SESSION["HTML"]->output("users.html");
 				break;
@@ -45,7 +47,7 @@ if ($_SESSION["CLIENT"]->is_user())
 				// load template 
 				$_SESSION["HTML"]->load("setup.html");
 				
-				//TODO
+				//TODO ALL
 				
 				// send page to browser
 				$_SESSION["HTML"]->output("setup.html");
