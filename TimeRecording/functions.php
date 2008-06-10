@@ -1,6 +1,14 @@
 <?php
 
-// magic session setup function
+/**
+ * start a valid session with name
+ *
+ * @param   string	session name
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
 function __session_start($name="sid")
 {
 	// do some init stuff here
@@ -50,7 +58,15 @@ function __session_start($name="sid")
 	$_COOKIE[$name] = session_id();
 }
 
-// magic autoload function for dynamically loading class files
+/**
+ * autoload class files
+ *
+ * @param   string	class name
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
 function __autoload($class_name)
 {
 	$class_name = strtolower($class_name);
@@ -65,7 +81,17 @@ function __autoload($class_name)
 		}
 }
 
-// magic check syntax function, to validate php files
+/**
+ * check syntax of php file (config file)
+ *
+ * @param   string	filename to check
+ * 
+ * @return  boolean	true: valid syntax, false: errors
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
 function __check_syntax($filename)
 {
 	$source = file_get_contents($filename);
@@ -75,5 +101,30 @@ function __check_syntax($filename)
 	ob_end_clean();
 	return $eval === NULL ? true : false;
 }
+
+/**
+ * convert php.ini values bytes to KB, MB, GB... 
+ *
+ * @param   int     value in bytes
+ * @param   int     precision
+ * @param   int     shifting amount
+ * 
+ * @return  string  formatted bytes
+ *
+ * @access  public
+ *
+ * @author  patrick.kracht
+ */
+ function __from_bytes( $val, $prec = 0, $cnt = 0 )
+ {
+  $ext = array("B","KB","MB","GB","TB","PB","EB","ZB","YB");
+  $val = trim($val);
+  if(!is_numeric($val)) return $val;
+  else while($val>=1024){
+   $val/=1024.0;
+   $cnt++;
+  }
+  return number_format( $val, $prec, ",", "." )." ".$ext[$cnt];
+ }
 
 ?>

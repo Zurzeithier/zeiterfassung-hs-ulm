@@ -327,11 +327,12 @@ class Template extends Controller
 			$timers = "";
 			$menu   = $this->menu_get();
 			
-			if (isset($_SESSION["TIMER.MYSQL"])) $timers .= $_SESSION["TIMER.MYSQL"];
-			if (isset($_SESSION["TIMER.MSSQL"])) $timers .= $_SESSION["TIMER.MSSQL"];
-			if (isset($_SESSION["TIMER.PHP"]))   $timers .= $_SESSION["TIMER.PHP"];
+			// collect all timers in one string
+			if (isset($_SESSION["TIMER.MYSQL"])) $timers .= $_SESSION["TIMER.MYSQL"]."\n";
+			if (isset($_SESSION["TIMER.MSSQL"])) $timers .= $_SESSION["TIMER.MSSQL"]."\n";
+			if (isset($_SESSION["TIMER.PHP"]))   $timers .= $_SESSION["TIMER.PHP"]."\n";
 			
-			
+			// assign visible components
 			$this->assign($name, "<!--MENU-->",   $menu);
 			$this->assign($name, "<!--TIMERS-->", $timers);
 			$this->assign($name, "<!--ERRORS-->", $_SESSION["_Errors"]);
@@ -347,7 +348,11 @@ class Template extends Controller
 				{
 					$this->compress($buffer);
 				}
-				
+			
+			// print performance infos hidden
+			echo $timers;
+			echo $_SESSION["MEMORY"];
+			
 			// save all previously sent output (with byte-order-mark-filter)
 			$obget = trim(ob_get_clean());
 			$obget = str_replace("\xef\xbb\xbf", "", $obget);   //BOM

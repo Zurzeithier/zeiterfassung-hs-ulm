@@ -43,7 +43,7 @@ class Memory
 		 */
 		public function delta()
 		{
-			echo "delta: " .(memory_get_usage(true) - $this->umemory) . ";\n";
+			echo "Speicher-Differenz: " .(memory_get_usage(false) - $this->umemory) . " Bytes\n";
 		}
 		
 		/**
@@ -55,7 +55,7 @@ class Memory
 		 */
 		public function start()
 		{
-			$this->umemory = memory_get_usage(true);
+			$this->umemory = memory_get_usage(false);
 		}
 		
 		/**
@@ -69,7 +69,7 @@ class Memory
 		 */
 		public function __toString()
 		{
-			return memory_get_usage(true) . " bytes in use;\n";
+			return __from_bytes( memory_get_usage(false) ) . " Speicher sind derzeit belegt\n";
 		}
 		
 	}

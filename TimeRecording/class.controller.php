@@ -64,6 +64,8 @@ class Controller
 			// try to register needed objects for current session or die
 			try
 				{
+					self::register("Memory",array(),"MEMORY");
+					
 					self::register("Timer",array("Controller",true),"TIMER.PHP");
 					$_SESSION["TIMER.PHP"]->reset();
 					$_SESSION["TIMER.PHP"]->start();
