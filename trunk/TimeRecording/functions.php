@@ -48,9 +48,9 @@ function __session_start($name="sid")
 			ini_set("session.use_trans_sid", "1");
 			$sid = isset($_POST[$name])?$_POST[$name]:(isset($_GET[$name])?$_GET[$name]:"");
 			if (preg_match('/^[a-z0-9]{32}$/', $sid))
-			{
-				session_id($sid);
-			}
+				{
+					session_id($sid);
+				}
 		}
 		
 	// start session now and set cookie
@@ -85,7 +85,7 @@ function __autoload($class_name)
  * check syntax of php file (config file)
  *
  * @param   string	filename to check
- * 
+ *
  * @return  boolean	true: valid syntax, false: errors
  *
  * @access  public
@@ -103,28 +103,29 @@ function __check_syntax($filename)
 }
 
 /**
- * convert php.ini values bytes to KB, MB, GB... 
+ * convert php.ini values bytes to KB, MB, GB...
  *
  * @param   int     value in bytes
  * @param   int     precision
  * @param   int     shifting amount
- * 
+ *
  * @return  string  formatted bytes
  *
  * @access  public
  *
  * @author  patrick.kracht
  */
- function __from_bytes( $val, $prec = 0, $cnt = 0 )
- {
-  $ext = array("B","KB","MB","GB","TB","PB","EB","ZB","YB");
-  $val = trim($val);
-  if(!is_numeric($val)) return $val;
-  else while($val>=1024){
-   $val/=1024.0;
-   $cnt++;
-  }
-  return number_format( $val, $prec, ",", "." )." ".$ext[$cnt];
- }
+function __from_bytes($val, $prec = 0, $cnt = 0)
+{
+	$ext = array("B","KB","MB","GB","TB","PB","EB","ZB","YB");
+	$val = trim($val);
+	if (!is_numeric($val)) return $val;
+	else while ($val>=1024)
+			{
+				$val/=1024.0;
+				$cnt++;
+			}
+	return number_format($val, $prec, ",", ".")." ".$ext[$cnt];
+}
 
 ?>

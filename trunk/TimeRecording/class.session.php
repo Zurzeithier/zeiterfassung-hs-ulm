@@ -47,7 +47,7 @@ class Session extends Controller
 			// kill session and array
 			session_unset();
 			session_destroy();
-			session_regenerate_id( true );
+			session_regenerate_id(true);
 			
 			// savely remove complete array and recreate session
 			$_SESSION = array();
@@ -140,43 +140,43 @@ class Session extends Controller
 			$result = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
 			
 			// only if one hit
-			if ( ! isset( $result["mid"] ) )
-			{
-				throw new Exception("Die Emailadresse '$username' ist mir unbekannt!",304);
-			}
+			if (! isset($result["mid"]))
+				{
+					throw new Exception("Die Emailadresse '$username' ist mir unbekannt!",304);
+				}
 			else
-			{
-				$passwd  = $this->generate_password();
-				$passmd5 = md5( $passwd );
-				$query   = "UPDATE tr_users SET password = '$passmd5' WHERE email = '$username';";
-				$_SESSION[$_SESSION["_SqlType"]]->query($query);
-				$count   = $_SESSION[$_SESSION["_SqlType"]]->affected_rows();
-				
-				// successful updated database 
-				if ( $count == 1 )
 				{
-					$tpl = "passwd.email.html";
+					$passwd  = $this->generate_password();
+					$passmd5 = md5($passwd);
+					$query   = "UPDATE tr_users SET password = '$passmd5' WHERE email = '$username';";
+					$_SESSION[$_SESSION["_SqlType"]]->query($query);
+					$count   = $_SESSION[$_SESSION["_SqlType"]]->affected_rows();
 					
-					$email = new Email(array($tpl,"Sie haben Ihr Passwort vergessen?"));
-					$email->set_sender("omega2k@omega2k.de","Webmaster");
-					$email->set_to($username, $result["firstname"]." ".$result["lastname"]);
-					$email->assign($tpl,"{{URL}}","http://www.omega2k.de/~omega2k/TimeRecording/");
-					$email->assign($tpl,"{{USER}}",$username);
-					$email->assign($tpl,"{{PASS}}",$passwd);
-					if ( $email->send() )
-					{
-						throw new Exception("Es wurde ein neues Passwort an '$username' geschickt!",305);
-					}
+					// successful updated database
+					if ($count == 1)
+						{
+							$tpl = "passwd.email.html";
+							
+							$email = new Email(array($tpl,"Sie haben Ihr Passwort vergessen?"));
+							$email->set_sender("omega2k@omega2k.de","Webmaster");
+							$email->set_to($username, $result["firstname"]." ".$result["lastname"]);
+							$email->assign($tpl,"{{URL}}","http://www.omega2k.de/~omega2k/TimeRecording/");
+							$email->assign($tpl,"{{USER}}",$username);
+							$email->assign($tpl,"{{PASS}}",$passwd);
+							if ($email->send())
+								{
+									throw new Exception("Es wurde ein neues Passwort an '$username' geschickt!",305);
+								}
+							else
+								{
+									throw new Exception("Die Email konnte nicht gesendet werden! Wir arbeiten daran...",306);
+								}
+						}
 					else
-					{
-						throw new Exception("Die Email konnte nicht gesendet werden! Wir arbeiten daran...",306);
-					}
+						{
+							throw new Exception("Es gab Probleme mit der Datenbank! Wir arbeiten daran...",307);
+						}
 				}
-				else
-				{
-					throw new Exception("Es gab Probleme mit der Datenbank! Wir arbeiten daran...",307);
-				}
-			}
 		}
 		
 		/**
@@ -194,14 +194,14 @@ class Session extends Controller
 		public function book()
 		{
 			$symid  = (isset($_GET["id"])) ? intval($_GET["id"]) : -1;
-			$symid  = (isset($_POST["id"]) && $symid == -1 ) ? intval($_POST["id"]) : $symid;
+			$symid  = (isset($_POST["id"]) && $symid == -1) ? intval($_POST["id"]) : $symid;
 			$ignore = (isset($_POST["ig"])) ? $_POST["ig"] : -1;
 			
 			if (! $this->is_user())
 				{
 					throw new Exception("Sie sind kein bekannter Benutzer!",308);
 				}
-			else if ( $symid < 0 || $symid > 1 )
+			else if ($symid < 0 || $symid > 1)
 				{
 					throw new Exception("Keine zugelassene Buchungs-Aktion!",309);
 				}
@@ -216,36 +216,36 @@ class Session extends Controller
 					
 					// case_1: new check in but last check out is missing
 					// case_2: new check out but allready checked out
-					$case_1 = ( $symid == 1 && isset( $last["stamp_1"] ) && $last["stamp_2"] == NULL );
-					$case_2 = ( $symid == 2 && isset( $last["stamp_1"] ) && $last["stamp_2"] != NULL );
+					$case_1 = ($symid == 1 && isset($last["stamp_1"]) && $last["stamp_2"] == NULL);
+					$case_2 = ($symid == 2 && isset($last["stamp_1"]) && $last["stamp_2"] != NULL);
 					
-					if ( $ignore == -1 && ( $case_1 || $case_2 ) )
-					{
-						$question  = "<form action=\"./\" method=\"post\">";
-						$question .= "<input type=\"hidden\" name=\"ig\"     value=\"\"/>";
-						$question .= "<input type=\"hidden\" name=\"page\"   value=\"home\" />";
-						$question .= "<input type=\"hidden\" name=\"sid\"    value=\"{{SID}}\" />";
-						$question .= "<input type=\"hidden\" name=\"action\" value=\"book\" />";
-						$question .= "<input type=\"submit\" name=\"submit\" value=\"Ignorieren\" />";
-						$question .= "<input type=\"submit\" name=\"submit\" value=\"Abbrechen\" />";
-						$question .= "</form>";
-						
-						throw new Exception("Azyklische Buchungen sind nicht zugelassen!$question",310);
-					}
-					else if ( $symid == 1 )
-					{
-						// book in (coming)
-						$query  = "INSERT INTO tr_bookings ( mid ) ";
-						$query .= "VALUES ( '$mid' );";
-						$_SESSION[$_SESSION["_SqlType"]]->query($query);
-					}
+					if ($ignore == -1 && ($case_1 || $case_2))
+						{
+							$question  = "<form action=\"./\" method=\"post\">";
+							$question .= "<input type=\"hidden\" name=\"ig\"     value=\"\"/>";
+							$question .= "<input type=\"hidden\" name=\"page\"   value=\"home\" />";
+							$question .= "<input type=\"hidden\" name=\"sid\"    value=\"{{SID}}\" />";
+							$question .= "<input type=\"hidden\" name=\"action\" value=\"book\" />";
+							$question .= "<input type=\"submit\" name=\"submit\" value=\"Ignorieren\" />";
+							$question .= "<input type=\"submit\" name=\"submit\" value=\"Abbrechen\" />";
+							$question .= "</form>";
+							
+							throw new Exception("Azyklische Buchungen sind nicht zugelassen!$question",310);
+						}
+					else if ($symid == 1)
+						{
+							// book in (coming)
+							$query  = "INSERT INTO tr_bookings ( mid ) ";
+							$query .= "VALUES ( '$mid' );";
+							$_SESSION[$_SESSION["_SqlType"]]->query($query);
+						}
 					else
-					{
-						// book out (going)
-						$query  = "UPDATE tr_bookings SET stamp_2 = CURRENT_TIMESTAMP ";
-						$query .= "WHERE bookid = '".$last["bookid"]."';";
-						$_SESSION[$_SESSION["_SqlType"]]->query($query);
-					}
+						{
+							// book out (going)
+							$query  = "UPDATE tr_bookings SET stamp_2 = CURRENT_TIMESTAMP ";
+							$query .= "WHERE bookid = '".$last["bookid"]."';";
+							$_SESSION[$_SESSION["_SqlType"]]->query($query);
+						}
 				}
 		}
 		

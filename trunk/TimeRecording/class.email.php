@@ -31,12 +31,12 @@ class Email extends Template
 		 *
 		 * @author  patrick.kracht
 		 */
-		public function __construct( $parameters = array() )
+		public function __construct($parameters = array())
 		{
 			$this->set_newlines();
-			$this->set_domain( $_SESSION["_Domain"] );
-			$this->template = isset( $parameters[0] ) ? $parameters[0] : false;
-			$this->subject  = isset( $parameters[1] ) ? utf8_decode($parameters[1]) : "";
+			$this->set_domain($_SESSION["_Domain"]);
+			$this->template = isset($parameters[0]) ? $parameters[0] : false;
+			$this->subject  = isset($parameters[1]) ? utf8_decode($parameters[1]) : "";
 			$this->headers  = array(
 			                      "Return-Path"  => $_SESSION["_Webmaster"],
 			                      "Message-ID"   => time().rand(1,1000)."@".$_SERVER["SERVER_NAME"],
@@ -71,10 +71,10 @@ class Email extends Template
 		 *
 		 * @author  patrick.kracht
 		 */
-		public function set_inlay( $bool = false )
+		public function set_inlay($bool = false)
 		{
 			$this->useinlay = $bool;
-		} 
+		}
 		
 		/**
 		 * add a recipient to the mail
@@ -348,27 +348,27 @@ class Email extends Template
 			if (preg_match_all("@(\.\/.*\.png)@i", $html, $found))
 				{
 					// attach the images to the mail
-					if ( $this->useinlay )
-					{
-						foreach($found[0] as $index => $value)
+					if ($this->useinlay)
 						{
-							$cid = md5($value);
-							$this->attach["cid:".$cid] = $value;
-							$inline .= $this->create_inline($value, $cid, $boundmix);
+							foreach($found[0] as $index => $value)
+							{
+								$cid = md5($value);
+								$this->attach["cid:".$cid] = $value;
+								$inline .= $this->create_inline($value, $cid, $boundmix);
+							}
+							$html = str_replace(array_values($this->attach), array_keys($this->attach), $html);
 						}
-						$html = str_replace(array_values($this->attach), array_keys($this->attach), $html);
-					}
 					// turn all image-links into direct online links
 					else
-					{
-						$url = "http://".$_SERVER["HTTP_HOST"].dirname($_SERVER["SCRIPT_NAME"])."/";
-						foreach($found[0] as $index => $value)
 						{
-							$link = $url.str_replace("./","",$value);
-							$this->attach[$link] = $value;
+							$url = "http://".$_SERVER["HTTP_HOST"].dirname($_SERVER["SCRIPT_NAME"])."/";
+							foreach($found[0] as $index => $value)
+							{
+								$link = $url.str_replace("./","",$value);
+								$this->attach[$link] = $value;
+							}
+							$html = str_replace(array_values($this->attach), array_keys($this->attach), $html);
 						}
-						$html = str_replace(array_values($this->attach), array_keys($this->attach), $html);
-					}
 				}
 				
 			$output  .= $html;

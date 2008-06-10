@@ -69,7 +69,7 @@ class Memory
 		 */
 		public function __toString()
 		{
-			return __from_bytes( memory_get_usage(false) ) . " Speicher sind derzeit belegt\n";
+			return __from_bytes(memory_get_usage(false)) . " Speicher sind derzeit belegt\n";
 		}
 		
 	}

@@ -31,7 +31,7 @@ if ($_SESSION["CLIENT"]->is_user())
 		switch ($_SESSION["_PageID.current"])
 			{
 			case "users":
-				// load template 
+				// load template
 				$_SESSION["HTML"]->load("users.html");
 				
 				// list users
@@ -44,7 +44,7 @@ if ($_SESSION["CLIENT"]->is_user())
 				$_SESSION["HTML"]->output("users.html");
 				break;
 			case "setup":
-				// load template 
+				// load template
 				$_SESSION["HTML"]->load("setup.html");
 				
 				//TODO ALL
@@ -54,7 +54,7 @@ if ($_SESSION["CLIENT"]->is_user())
 				break;
 			case "home":
 			default:
-				// load template 
+				// load template
 				$_SESSION["HTML"]->load("index.html");
 				
 				$_SESSION["HTML"]->assign("index.html", "<!--MID-->", $_SESSION["_UserData"]["mid"]);
@@ -69,13 +69,13 @@ if ($_SESSION["CLIENT"]->is_user())
 				$_SESSION["HTML"]->assign("index.html", "<!--HISTORY_DATA-->",$book);
 				
 				// summary calculation and assignment
-				$array = $Controller->get_booking_sums( "WEEK" );
+				$array = $Controller->get_booking_sums("WEEK");
 				$_SESSION["HTML"]->assign("index.html", "<!--SUM_WEEK_NOW-->",$array["Stunden"]);
-				$array = $Controller->get_booking_sums( "MONTH" );
+				$array = $Controller->get_booking_sums("MONTH");
 				$_SESSION["HTML"]->assign("index.html", "<!--SUM_MONTH_NOW-->",$array["Stunden"]);
-				$array = $Controller->get_booking_sums( "WEEK", 1 );
+				$array = $Controller->get_booking_sums("WEEK", 1);
 				$_SESSION["HTML"]->assign("index.html", "<!--SUM_WEEK_LAST-->",$array["Stunden"]);
-				$array = $Controller->get_booking_sums( "MONTH", 1 );
+				$array = $Controller->get_booking_sums("MONTH", 1);
 				$_SESSION["HTML"]->assign("index.html", "<!--SUM_MONTH_LAST-->",$array["Stunden"]);
 				
 				// send page to browser
@@ -86,20 +86,20 @@ if ($_SESSION["CLIENT"]->is_user())
 // ***************** page for guests (force login) *****************
 else
 	{
-		if ( $_SESSION["_PageID.current"] == "passwd" )
-		{
-			// load template 
-			$_SESSION["HTML"]->load("passwd.html");
-			// send page to browser
-			$_SESSION["HTML"]->output("passwd.html");
-		}
+		if ($_SESSION["_PageID.current"] == "passwd")
+			{
+				// load template
+				$_SESSION["HTML"]->load("passwd.html");
+				// send page to browser
+				$_SESSION["HTML"]->output("passwd.html");
+			}
 		else
-		{
-			// load template 
-			$_SESSION["HTML"]->load("login.html");
-			// send page to browser
-			$_SESSION["HTML"]->output("login.html");
-		}
+			{
+				// load template
+				$_SESSION["HTML"]->load("login.html");
+				// send page to browser
+				$_SESSION["HTML"]->output("login.html");
+			}
 	}
 
 
