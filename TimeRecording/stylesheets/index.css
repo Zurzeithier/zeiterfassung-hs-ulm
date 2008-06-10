@@ -32,14 +32,18 @@ BODY {
 }
 
 .timers {
-	font-size:9pt;
-	color: #333333;
+	font-size: 9pt;
+	color: #999999;
 	font-weight: bold;
+	font-style: italic;
+	padding: 8px;
+	overflow: hidden;
 }
 
 #last_bookings {
 	border: none;
 	width: 100%;
+	font-size: 9pt;
 }
 
 #last_bookings td {
@@ -51,13 +55,14 @@ BODY {
 }
 
 #last_bookings b {
-	font-size: 10pt;
+	font-size: 9pt;
 }	
 
 #last_summary {
 	border: none;
 	width: 100%;
 	margin-top: 8px;
+	font-size: 9pt;
 }
 
 #last_summary td {
@@ -74,10 +79,11 @@ BODY {
 }
 
 #last_summary b {
-	font-size: 10pt;
+	font-size: 9pt;
 }	
 
 #user_table {
+	font-size: 9pt;
 	border: none;
 	width: 100%;
 }
@@ -91,5 +97,5 @@ BODY {
 }
 
 #user_table b {
-	font-size: 10pt;
+	font-size: 9pt;
 }
