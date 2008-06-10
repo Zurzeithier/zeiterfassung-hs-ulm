@@ -17,10 +17,18 @@ BODY {
 	z-index: 2000;
 }
 
-.errors {
+#errors {
+	margin: 5px;
 	font-size:12pt;
 	color: red;
 	font-weight: bold;
+}
+
+#errors A {
+	font-size:12pt;
+	color: red;
+	font-weight: bold;
+	text-decoration: none;
 }
 
 .timers {
@@ -46,7 +54,29 @@ BODY {
 	font-size: 10pt;
 }	
 
-	
+#last_summary {
+	border: none;
+	width: 100%;
+	margin-top: 8px;
+}
+
+#last_summary td {
+	border: none;
+	padding-right: 10px;
+	width: 50%;
+	vertical-align: center;
+	text-align: right;
+}
+
+#last_summary td.left {
+	text-align: left;
+	padding-left: 10px;
+}
+
+#last_summary b {
+	font-size: 10pt;
+}	
+
 #user_table {
 	border: none;
 	width: 100%;
