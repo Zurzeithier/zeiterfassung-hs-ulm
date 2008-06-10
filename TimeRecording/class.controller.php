@@ -158,21 +158,21 @@ class Controller
 		 * @param	string	type of range to sum from
 		 * @param 	int		offset of first entry
 		 * @param 	int		number of entries returned
-		 * 
+		 *
 		 * @return	array	array of all sums
 		 *
 		 * @access  public
 		 *
 		 * @author  patrick.kracht
 		 */
-		public function get_booking_sums( $range = "DAY", $offset = 0, $limit = 1 )
+		public function get_booking_sums($range = "DAY", $offset = 0, $limit = 1)
 		{
 			$group = "";
 			$start = "";
 			$stop  = "";
 			$redat = "";
-			switch( strtoupper( $range ) )
-			{
+			switch (strtoupper($range))
+				{
 				case "YEAR":
 					$redat = "DATE_SUB( NOW(), INTERVAL $offset YEAR )";
 					$start = "DATE_FORMAT( $redat, '01.01.%Y' )";
@@ -202,8 +202,8 @@ class Controller
 					$group = "%j";
 					$range = "SameDay";
 					break;
-			}
-			
+				}
+				
 			$query  = "SELECT DATE_FORMAT( $redat, '$group' ) AS $range, ";
 			$query .= "DATE_FORMAT( $start , '%d.%m.%Y 00:00:00' ) AS Von, ";
 			$query .= "DATE_FORMAT( $stop , '%d.%m.%Y 23:59:59' ) AS Bis, ";
@@ -215,11 +215,11 @@ class Controller
 			$array = $_SESSION[$_SESSION["_SqlType"]]->query_all($query);
 			
 			// future use, if multiple row read implemented
-			if ( $limit > 1 )
-			{
-				return $array;
-			}
-			
+			if ($limit > 1)
+				{
+					return $array;
+				}
+				
 			return $array[0];
 		}
 		
@@ -270,7 +270,7 @@ class Controller
 		
 		/**
 		 * private query to html table converter
-		 * 
+		 *
 		 * @param   string		sql query to get rows from
 		 * @param 	string		id-tag (css stylesheet)
 		 *
@@ -296,7 +296,7 @@ class Controller
 					// append data rows
 					$dump .= "<tr><td>";
 					$dump .= implode("</td><td>", $row);
-					$dump .= "</td></tr>";	
+					$dump .= "</td></tr>";
 				}
 			$_SESSION[$_SESSION["_SqlType"]]->free_result($result);
 			if ($first) $dump .= "<tr><td>keine Einstr&auml;ge gefunden...</td></tr>";

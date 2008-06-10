@@ -323,26 +323,26 @@ class Template extends Controller
 				{
 					throw new Exception("template '$name' not found!");
 				}
-			
+				
 			$menu   = $this->menu_get();
 			
 			// output each timer, if present
 			if (isset($_SESSION["TIMER.MYSQL"]))
-			{
-				$this->assign($name, "<!--TIMERS_MYSQL-->", $_SESSION["TIMER.MYSQL"]."\n");
-				echo $_SESSION["TIMER.MYSQL"]."\n";
-			}
-			if (isset($_SESSION["TIMER.MSSQL"])) 
-			{
-				$this->assign($name, "<!--TIMERS_MSSQL-->", $_SESSION["TIMER.MSSQL"]."\n");
-				echo $_SESSION["TIMER.MSSQL"]."\n";
-			}
+				{
+					$this->assign($name, "<!--TIMERS_MYSQL-->", $_SESSION["TIMER.MYSQL"]."\n");
+					echo $_SESSION["TIMER.MYSQL"]."\n";
+				}
+			if (isset($_SESSION["TIMER.MSSQL"]))
+				{
+					$this->assign($name, "<!--TIMERS_MSSQL-->", $_SESSION["TIMER.MSSQL"]."\n");
+					echo $_SESSION["TIMER.MSSQL"]."\n";
+				}
 			if (isset($_SESSION["TIMER.PHP"]))
-			{
-				$this->assign($name, "<!--TIMERS_PHP-->", $_SESSION["TIMER.PHP"]."\n");
-				echo $_SESSION["TIMER.PHP"]."\n";
-			}
-			
+				{
+					$this->assign($name, "<!--TIMERS_PHP-->", $_SESSION["TIMER.PHP"]."\n");
+					echo $_SESSION["TIMER.PHP"]."\n";
+				}
+				
 			// assign visible components
 			$this->assign($name, "<!--MENU-->",   $menu);
 			$this->assign($name, "<!--ERRORS-->", $_SESSION["_Errors"]);
@@ -358,7 +358,7 @@ class Template extends Controller
 				{
 					$this->compress($buffer);
 				}
-			
+				
 			// print performance infos hidden
 			echo $_SESSION["MEMORY"];
 			
