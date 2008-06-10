@@ -50,11 +50,14 @@ class Controller
 					include("./config.controller.php");
 					$_SESSION["_Action"]         = "";
 					$_SESSION["_Errors"]         = "";
+					$_SESSION["_ErrNo"]          = "";
 					$_SESSION["_PageID.current"] = "";
 					$_SESSION["_PageID.last"]    = "";
 					$_SESSION["_SqlType"]        = (isset($_SETTINGS["Main"][0])) ? $_SETTINGS["Main"][0] : false;
 					$_SESSION["_TimeOut"]        = (isset($_SETTINGS["Main"][1])) ? $_SETTINGS["Main"][1] : 300;
 					$_SESSION["_Cookies"]        = (isset($_SETTINGS["Main"][2])) ? $_SETTINGS["Main"][2] : false;
+					$_SESSION["_Webmaster"]      = (isset($_SETTINGS["Main"][3])) ? $_SETTINGS["Main"][3] : "webmaster@localhost";
+					$_SESSION["_Domain"]         = (isset($_SETTINGS["Main"][4])) ? $_SETTINGS["Main"][4] : "localhost";
 					$_SESSION["_TplSqlTable"]    = (isset($_SETTINGS["Template"][3])) ? $_SETTINGS["Template"][3] : false;
 				}
 				
@@ -148,6 +151,77 @@ class Controller
 		}
 		
 		/**
+		 * returns sum array of bookings (week, month - current and last)
+		 *
+		 * @param	string	type of range to sum from
+		 * @param 	int		offset of first entry
+		 * @param 	int		number of entries returned
+		 * 
+		 * @return	array	array of all sums
+		 *
+		 * @access  public
+		 *
+		 * @author  patrick.kracht
+		 */
+		public function get_booking_sums( $range = "DAY", $offset = 0, $limit = 1 )
+		{
+			$group = "";
+			$start = "";
+			$stop  = "";
+			$redat = "";
+			switch( strtoupper( $range ) )
+			{
+				case "YEAR":
+					$redat = "DATE_SUB( NOW(), INTERVAL $offset YEAR )";
+					$start = "DATE_FORMAT( $redat, '01.01.%Y' )";
+					$stop  = "DATE_FORMAT( $redat, '31.12.%Y' )";
+					$group = "%Y";
+					$range = "SameYear";
+					break;
+				case "MONTH":
+					$redat = "DATE_SUB( NOW(), INTERVAL $offset MONTH )";
+					$start = "DATE_FORMAT( $redat, '%Y-%m-01' )";
+					$stop  = "LAST_DAY( $redat )";
+					$group = "%m";
+					$range = "SameMonth";
+					break;
+				case "WEEK":
+					$redat = "DATE_SUB( NOW(), INTERVAL $offset WEEK )";
+					$start = "DATE_SUB( $redat, INTERVAL DAYOFWEEK( $redat ) - 2 DAY )";
+					$stop  = "DATE_SUB( $redat, INTERVAL DAYOFWEEK( $redat ) - 8 DAY )";
+					$group = "%u";
+					$range = "SameWeek";
+					break;
+				case "DAY":
+				default:
+					$redat = "DATE_SUB( NOW(), INTERVAL $offset DAY )";
+					$start = "DATE_SUB( NOW(), INTERVAL $offset DAY )";
+					$stop  = "DATE_SUB( NOW(), INTERVAL $offset DAY )";
+					$group = "%j";
+					$range = "SameDay";
+					break;
+			}
+			
+			$query  = "SELECT DATE_FORMAT( $redat, '$group' ) AS $range, ";
+			$query .= "DATE_FORMAT( $start , '%d.%m.%Y 00:00:00' ) AS Von, ";
+			$query .= "DATE_FORMAT( $stop , '%d.%m.%Y 23:59:59' ) AS Bis, ";
+			$query .= "SEC_TO_TIME( IFNULL( SUM( UNIX_TIMESTAMP( stamp_2 ) - UNIX_TIMESTAMP( stamp_1 ) ), 0 ) ) as Stunden, ";
+			$query .= "IF( bookid = NULL, 0, COUNT( bookid ) ) AS Besuche FROM tr_bookings ";
+			$query .= "WHERE mid = '".$_SESSION["_UserData"]["mid"]."' AND ";
+			$query .= "DATE( stamp_1 ) >= DATE( $start ) AND DATE( stamp_1 ) <= DATE( $stop ) ";
+			
+			$array = $_SESSION[$_SESSION["_SqlType"]]->query_all($query);
+			
+			// future use, if multiple row read implemented
+			if ( $limit > 1 )
+			{
+				return $array;
+			}
+			
+			return $array[0];
+		}
+		
+		/**
 		 * returns array of all tables in database
 		 *
 		 * @param 	int		(optional) number of lines to query
@@ -160,10 +234,13 @@ class Controller
 		 */
 		public function show_last_bookings($limit=9)
 		{
-			$query  = "SELECT s.symbolname AS Aktion,DATE_FORMAT( b.stamp, '%d.%m.%Y %H:%i:%s') AS Datum ";
-			$query .= "FROM tr_bookings b LEFT JOIN tr_symbols s ";
-			$query .= "USING ( symid ) WHERE b.mid = '".$_SESSION["_UserData"]["mid"]."' ";
-			$query .= "ORDER BY b.stamp DESC LIMIT 0,$limit";
+			$query  = "SELECT DATE_FORMAT( stamp_1, '%d.%m.%Y' ) AS Datum, ";
+			$query .= "DATE_FORMAT( stamp_1, '%T Uhr' ) AS Gekommen, ";
+			$query .= "DATE_FORMAT( stamp_2, '%T Uhr' ) AS Gegangen, ";
+			$query .= "SEC_TO_TIME( UNIX_TIMESTAMP( stamp_2 ) - UNIX_TIMESTAMP( stamp_1 ) ) AS Anwesend ";
+			$query .= "FROM tr_bookings ";
+			$query .= "WHERE mid = '".$_SESSION["_UserData"]["mid"]."' ";
+			$query .= "ORDER BY stamp_1 DESC LIMIT 0,$limit";
 			
 			return $this->query2table($query,"last_bookings");
 		}
@@ -179,9 +256,11 @@ class Controller
 		{
 			$query  = "SELECT u.mid AS MitarbeiterID, u.email AS Email, ";
 			$query .= "u.firstname AS Vorname, u.lastname AS Nachname, g.groupname AS Gruppe ";
-			$query .= "FROM tr_users u LEFT JOIN ";
-			$query .= "tr_groups g USING ( gid ) ";
-			$query .= "ORDER BY MitarbeiterID ASC LIMIT 0,$limit";
+			//$query .= "IF( b.stamp_2 = NULL, 'Nein', 'Ja' ) AS Anwesend ";
+			$query .= "FROM tr_users u ";
+			//$query .= "LEFT JOIN tr_bookings b USING ( mid ) ";
+			$query .= "LEFT JOIN tr_groups g USING ( gid ) ";
+			$query .= "ORDER BY mid ASC LIMIT 0,$limit";
 			
 			return $this->query2table($query,"user_table");
 		}
@@ -304,6 +383,7 @@ class Controller
 			catch (Exception $e)
 				{
 					$_SESSION["_Errors"] .= $e->getMessage();
+					$_SESSION["_ErrNo"]   = $e->getCode();
 				}
 		}
 		

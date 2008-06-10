@@ -39,7 +39,10 @@ function __session_start($name="sid")
 			ini_set("session.use_only_cookies", "");
 			ini_set("session.use_trans_sid", "1");
 			$sid = isset($_POST[$name])?$_POST[$name]:(isset($_GET[$name])?$_GET[$name]:"");
-			if (preg_match('/^[a-z0-9]{32}$/', $sid)) session_id($sid);
+			if (preg_match('/^[a-z0-9]{32}$/', $sid))
+			{
+				session_id($sid);
+			}
 		}
 		
 	// start session now and set cookie

@@ -45,13 +45,17 @@ class Session extends Controller
 		public function logout($error_message="")
 		{
 			// kill session and array
+			session_unset();
 			session_destroy();
-			session_regenerate_id();
+			session_regenerate_id( true );
 			
 			// savely remove complete array and recreate session
-			unset($_SESSION);
-			parent::reinit();
+			$_SESSION = array();
 			
+			// reinit session
+			$this->reinit();
+			
+			// restore error message
 			$_SESSION["_Errors"] = $error_message;
 		}
 		
@@ -189,28 +193,59 @@ class Session extends Controller
 		 */
 		public function book()
 		{
-			$symid = (isset($_GET["id"])) ? intval($_GET["id"]) : -1;
+			$symid  = (isset($_GET["id"])) ? intval($_GET["id"]) : -1;
+			$symid  = (isset($_POST["id"]) && $symid == -1 ) ? intval($_POST["id"]) : $symid;
+			$ignore = (isset($_POST["ig"])) ? $_POST["ig"] : -1;
 			
 			if (! $this->is_user())
 				{
 					throw new Exception("Sie sind kein bekannter Benutzer!",308);
 				}
+			else if ( $symid < 0 || $symid > 1 )
+				{
+					throw new Exception("Keine zugelassene Buchungs-Aktion!",309);
+				}
 			else
 				{
 					$mid    = $_SESSION["_UserData"]["mid"];
 					
-					$query  = "SELECT symid, UNIX_TIMESTAMP( stamp ) AS timestamp FROM tr_bookings ";
-					$query .= "WHERE mid = '$mid' ORDER BY stamp DESC;";
+					// check if booking is out of cycle
+					$query  = "SELECT bookid, stamp_1, stamp_2 FROM tr_bookings ";
+					$query .= "WHERE mid = '$mid' ORDER BY bookid DESC;";
 					$last   = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
 					
-					if (intval($last["symid"]) == $symid)
-						{
-							throw new Exception("Asynchrone Buchungen sind nicht zugelassen!",309);
-						}
+					// case_1: new check in but last check out is missing
+					// case_2: new check out but allready checked out
+					$case_1 = ( $symid == 1 && isset( $last["stamp_1"] ) && $last["stamp_2"] == NULL );
+					$case_2 = ( $symid == 2 && isset( $last["stamp_1"] ) && $last["stamp_2"] != NULL );
+					
+					if ( $ignore == -1 && ( $case_1 || $case_2 ) )
+					{
+						$question  = "<form action=\"./\" method=\"post\">";
+						$question .= "<input type=\"hidden\" name=\"ig\"     value=\"\"/>";
+						$question .= "<input type=\"hidden\" name=\"page\"   value=\"home\" />";
+						$question .= "<input type=\"hidden\" name=\"sid\"    value=\"{{SID}}\" />";
+						$question .= "<input type=\"hidden\" name=\"action\" value=\"book\" />";
+						$question .= "<input type=\"submit\" name=\"submit\" value=\"Ignorieren\" />";
+						$question .= "<input type=\"submit\" name=\"submit\" value=\"Abbrechen\" />";
+						$question .= "</form>";
 						
-					$query  = "INSERT INTO tr_bookings ( mid, symid ) ";
-					$query .= "VALUES ( '$mid', '$symid' );";
-					$_SESSION[$_SESSION["_SqlType"]]->query($query);
+						throw new Exception("Asynchrone Buchungen sind nicht zugelassen!$question",310);
+					}
+					else if ( $symid == 1 )
+					{
+						// book in (coming)
+						$query  = "INSERT INTO tr_bookings ( mid ) ";
+						$query .= "VALUES ( '$mid' );";
+						$_SESSION[$_SESSION["_SqlType"]]->query($query);
+					}
+					else
+					{
+						// book out (going)
+						$query  = "UPDATE tr_bookings SET stamp_2 = CURRENT_TIMESTAMP ";
+						$query .= "WHERE bookid = '".$last["bookid"]."';";
+						$_SESSION[$_SESSION["_SqlType"]]->query($query);
+					}
 				}
 		}
 		

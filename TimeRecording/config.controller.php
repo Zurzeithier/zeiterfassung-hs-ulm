@@ -6,7 +6,9 @@ $_SETTINGS = array(
                  "Main"     => array(
                                  "MYSQL", 						//(0) type of database to use default
                                  600,							//(1) session timeout in seconds
-                                 false							//(2) force usage of cookies?
+                                 false,							//(2) force usage of cookies?
+                                 "omega2k@omega2k.de",			//(3) webmaster email
+                                 "omega2k.de"					//(4) mailserver domain
                              )
                              ,
                  /* MYQL SERVER CONFIGURATION (HOST,PORT,DATABASE,USERNAME,PASSWORD) */

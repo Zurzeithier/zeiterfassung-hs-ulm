@@ -11,8 +11,8 @@ class Email extends Template
 	{
 		private $eol; 		//End-Of-Line
 		private $sol; 		//Separator-Of-Line
-		private $mailto     = "webmaster@localhost";
-		private $domain     = "localhost";
+		private $mailto;
+		private $domain;
 		private $borders    = array();
 		private $headers    = array();
 		private $attach     = array();
@@ -34,17 +34,18 @@ class Email extends Template
 		public function __construct( $parameters = array() )
 		{
 			$this->set_newlines();
+			$this->set_domain( $_SESSION["_Domain"] );
 			$this->template = isset( $parameters[0] ) ? $parameters[0] : false;
 			$this->subject  = isset( $parameters[1] ) ? utf8_decode($parameters[1]) : "";
 			$this->headers  = array(
-			                      "Return-Path"  => "webmaster@localhost",
+			                      "Return-Path"  => $_SESSION["_Webmaster"],
 			                      "Message-ID"   => time().rand(1,1000)."@".$_SERVER["SERVER_NAME"],
 			                      "Date"         => date("D, j M Y G:i:s O"),
-			                      "From"         => "webmaster <webmaster@localhost>",
+			                      "From"         => $_SERVER["SERVER_NAME"]." <".$_SESSION["_Webmaster"].">",
 			                      "User-Agent"   => "PHP MAILER",
 			                      "MIME-Version" => "1.0",
 			                      "Sender-IP"    => $_SERVER["REMOTE_ADDR"],
-			                      "Reply-To"     => "webmaster <service@localhost>"
+			                      "Reply-To"     => $_SERVER["SERVER_NAME"]." <".$_SESSION["_Webmaster"].">"
 			                  );
 			                  
 		}

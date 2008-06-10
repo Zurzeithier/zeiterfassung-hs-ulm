@@ -2,6 +2,7 @@
 
 /* CSS for top menu */
 #menu {
+	font-family: verdana, arial;
 	position: fixed;
 	top: 0px;
 	left: 0;
@@ -13,6 +14,7 @@
 }
 
 #main_menu {
+	font-family: verdana, arial;
 	padding: 0;
 	margin: 0 20px;
 	list-style-type: none;
