@@ -1,5 +1,11 @@
 <?php
 
+// warn, if php version older than 5
+if ( 0 > version_compare(PHP_VERSION, '5') )
+{
+	die('Diese Programm verwendet mindestens PHP5!');
+}
+
 // fetch global functions and start session init
 require_once "./functions.php";
 
