@@ -210,7 +210,7 @@ class Controller
 			$query .= "SEC_TO_TIME( IFNULL( SUM( UNIX_TIMESTAMP( stamp_2 ) - UNIX_TIMESTAMP( stamp_1 ) ), 0 ) ) as Stunden, ";
 			$query .= "IF( bookid = NULL, 0, COUNT( bookid ) ) AS Besuche FROM tr_bookings ";
 			$query .= "WHERE mid = '".$_SESSION["_UserData"]["mid"]."' AND ";
-			$query .= "DATE( stamp_1 ) >= DATE( $start ) AND DATE( stamp_1 ) <= DATE( $stop ) ";
+			$query .= "DATE( stamp_1 ) >= DATE( $start ) AND DATE( stamp_1 ) <= DATE( $stop );";
 			
 			$array = $_SESSION[$_SESSION["_SqlType"]]->query_all($query);
 			
