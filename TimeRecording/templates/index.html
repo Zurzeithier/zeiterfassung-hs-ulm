@@ -38,32 +38,34 @@
 <div class="win_bg_top" style="width: 440px;">R&uuml;ckblick</div>
 <div class="win_corner_rt"></div>
 <br clear="all" />
-<div class="win_bg_left" style="height: 270px;"></div>
-<div class="win_bg_center" style="width: 440px; height: 270px;"><!--HISTORY_DATA-->
+<div class="win_bg_left" style="height: 283px;"></div>
+<div class="win_bg_center" style="width: 440px; height: 283px;"><!--HISTORY_DATA-->
 </div>
-<div class="win_bg_right" style="height: 270px;"></div>
+<div class="win_bg_right" style="height: 283px;"></div>
 <br clear="all" />
-<div class="win_bg_left2" style="height: 150px;"></div>
-<div class="win_bg_center2" style="width: 440px; height: 150px;">
+<div class="win_bg_left2" style="height: 137px;"></div>
+<div class="win_bg_center2" style="width: 440px; height: 137px;">
 <table id="last_summary">
  <tr>
-  <td class="left">Laufende Woche</td><td><!--SUM_WEEK_NOW--> h</td>
+  <td class="left" title="Zeitraum : {{SUM_WEEK_NOW_TL}}">Laufende Woche</td><td title="Zeitraum : {{SUM_WEEK_NOW_TL}}"><!--SUM_WEEK_NOW--> h</td>
  </tr>
  <tr>
-  <td class="left">Laufender Monat</td><td><!--SUM_MONTH_NOW--> h</td>
+  <td class="left" title="Zeitraum : {{SUM_MONTH_NOW_TL}}">Laufender Monat</td><td title="Zeitraum : {{SUM_WEEK_NOW_TL}}"><!--SUM_MONTH_NOW--> h</td>
  </tr>
  <tr>
-  <td class="left">Letzte Woche</td><td><!--SUM_WEEK_LAST--> h</td>
+  <td class="left" title="Zeitraum : {{SUM_WEEK_LAST_TL}}">Letzte Woche</td><td title="Zeitraum : {{SUM_WEEK_NOW_TL}}"><!--SUM_WEEK_LAST--> h</td>
  </tr>
  <tr>
-  <td class="left">Letzter Monat</td><td><!--SUM_MONTH_LAST--> h</td>
+  <td class="left" title="Zeitraum : {{SUM_MONTH_LAST_TL}}">Letzter Monat</td><td title="Zeitraum : {{SUM_WEEK_NOW_TL}}"><!--SUM_MONTH_LAST--> h</td>
  </tr>
 </table>
 </div>
-<div class="win_bg_right2" style="height: 150px;"></div>
+<div class="win_bg_right2" style="height: 137px;"></div>
 <br clear="all" />
 <div class="win_corner_lb"></div>
-<div class="win_bg_bottom" style="width: 440px;"><div class="timers"><!--TIMERS_MYSQL--><!--TIMERS_MSSQL--></div></div>
+<div class="win_bg_bottom" style="width: 440px;">
+ <div class="timers"><!--TIMERS_MYSQL--><!--TIMERS_MSSQL--></div>
+</div>
 <div class="win_corner_rb"></div>
 </div>
 <!-- ************* USER DATA WINDOW ********* -->
@@ -120,7 +122,9 @@
 <div class="win_bg_right" style="height: 120px;"></div>
 <br clear="all" />
 <div class="win_corner_lb"></div>
-<div class="win_bg_bottom" style="width: 440px;"><div class="timers"><!--TIMERS_PHP--></div></div>
+<div class="win_bg_bottom" style="width: 440px;">
+ <div class="timers"><!--TIMERS_PHP--></div>
+</div>
 <div class="win_corner_rb"></div>
 </div>
 <!-- ************* FOOTER ******************* -->

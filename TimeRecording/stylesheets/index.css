@@ -61,7 +61,7 @@ BODY {
 #last_summary {
 	border: none;
 	width: 100%;
-	margin-top: 8px;
+	margin-top: 6px;
 	font-size: 9pt;
 }
 
@@ -98,4 +98,21 @@ BODY {
 
 #user_table b {
 	font-size: 9pt;
+}
+
+#question {
+	text-align: right;
+	margin: 0px;
+	padding: 0px;
+}
+
+#question INPUT {
+	margin: 9px;
+	font-size: 9pt;
+	width: 75px;
+	height: 22px;
+	background: url(../images/login_bg_button.png);
+	border: none;
+	color: black;
+	cursor: pointer;
 }
