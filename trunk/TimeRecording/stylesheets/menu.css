@@ -11,6 +11,8 @@
 	text-align: center;
 	background: url(../images/menu_bg.png);
 	z-index: 1000;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 #main_menu {

@@ -205,8 +205,8 @@ class Controller
 				}
 				
 			$query  = "SELECT DATE_FORMAT( $redat, '$group' ) AS $range, ";
-			$query .= "DATE_FORMAT( $start , '%d.%m.%Y 00:00:00' ) AS Von, ";
-			$query .= "DATE_FORMAT( $stop , '%d.%m.%Y 23:59:59' ) AS Bis, ";
+			$query .= "DATE_FORMAT( $start , '%d.%m.%Y' ) AS Von, ";
+			$query .= "DATE_FORMAT( $stop , '%d.%m.%Y' ) AS Bis, ";
 			$query .= "SEC_TO_TIME( IFNULL( SUM( UNIX_TIMESTAMP( stamp_2 ) - UNIX_TIMESTAMP( stamp_1 ) ), 0 ) ) as Stunden, ";
 			$query .= "IF( bookid = NULL, 0, COUNT( bookid ) ) AS Besuche FROM tr_bookings ";
 			$query .= "WHERE mid = '".$_SESSION["_UserData"]["mid"]."' AND ";
@@ -234,7 +234,7 @@ class Controller
 		 *
 		 * @author  patrick.kracht
 		 */
-		public function show_last_bookings($limit=9)
+		public function show_last_bookings($limit=10)
 		{
 			$query  = "SELECT DATE_FORMAT( stamp_1, '%d.%m.%Y' ) AS Datum, ";
 			$query .= "DATE_FORMAT( stamp_1, '%T Uhr' ) AS Gekommen, ";
@@ -254,7 +254,7 @@ class Controller
 		 *
 		 * @author  patrick.kracht
 		 */
-		public function show_user_table($limit=8)
+		public function show_user_table($limit=10)
 		{
 			$query  = "SELECT u.mid AS MitarbeiterID, u.email AS Email, ";
 			$query .= "u.firstname AS Vorname, u.lastname AS Nachname, g.groupname AS Gruppe ";

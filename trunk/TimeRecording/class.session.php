@@ -221,10 +221,10 @@ class Session extends Controller
 					
 					if ($ignore == -1 && ($case_1 || $case_2))
 						{
-							$question  = "<form action=\"./\" method=\"post\">";
+							$question  = "<form action=\"./\" method=\"post\" id=\"question\">";
 							$question .= "<input type=\"hidden\" name=\"ig\"     value=\"\"/>";
 							$question .= "<input type=\"hidden\" name=\"page\"   value=\"home\" />";
-							$question .= "<input type=\"hidden\" name=\"sid\"    value=\"{{SID}}\" />";
+							$question .= "<input type=\"hidden\" name=\"sid\"    value=\"".session_id()."\" />";
 							$question .= "<input type=\"hidden\" name=\"action\" value=\"book\" />";
 							$question .= "<input type=\"submit\" name=\"submit\" value=\"Ignorieren\" />";
 							$question .= "<input type=\"submit\" name=\"submit\" value=\"Abbrechen\" />";

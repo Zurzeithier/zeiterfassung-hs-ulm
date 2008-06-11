@@ -68,15 +68,21 @@ if ($_SESSION["CLIENT"]->is_user())
 				$book = $Controller->show_last_bookings();
 				$_SESSION["HTML"]->assign("index.html", "<!--HISTORY_DATA-->",$book);
 				
-				// summary calculation and assignment
+				// summary calculation and assignment for current week and month
 				$array = $Controller->get_booking_sums("WEEK");
 				$_SESSION["HTML"]->assign("index.html", "<!--SUM_WEEK_NOW-->",$array["Stunden"]);
+				$_SESSION["HTML"]->assign("index.html", "{{SUM_WEEK_NOW_TL}}",$array["Von"]." - ".$array["Bis"]);
 				$array = $Controller->get_booking_sums("MONTH");
 				$_SESSION["HTML"]->assign("index.html", "<!--SUM_MONTH_NOW-->",$array["Stunden"]);
+				$_SESSION["HTML"]->assign("index.html", "{{SUM_MONTH_NOW_TL}}",$array["Von"]." - ".$array["Bis"]);
+				
+				// summary calculation and assignment for last week and month
 				$array = $Controller->get_booking_sums("WEEK", 1);
 				$_SESSION["HTML"]->assign("index.html", "<!--SUM_WEEK_LAST-->",$array["Stunden"]);
+				$_SESSION["HTML"]->assign("index.html", "{{SUM_WEEK_LAST_TL}}",$array["Von"]." - ".$array["Bis"]);
 				$array = $Controller->get_booking_sums("MONTH", 1);
 				$_SESSION["HTML"]->assign("index.html", "<!--SUM_MONTH_LAST-->",$array["Stunden"]);
+				$_SESSION["HTML"]->assign("index.html", "{{SUM_MONTH_LAST_TL}}",$array["Von"]." - ".$array["Bis"]);
 				
 				// send page to browser
 				$_SESSION["HTML"]->output("index.html");
