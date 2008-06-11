@@ -299,7 +299,7 @@ class Controller
 					$dump .= "</td></tr>";
 				}
 			$_SESSION[$_SESSION["_SqlType"]]->free_result($result);
-			if ($first) $dump .= "<tr><td>keine Einstr&auml;ge gefunden...</td></tr>";
+			if ($first) $dump .= "<tr><td>keine Eintr&auml;ge gefunden...</td></tr>";
 			// close table
 			$dump  .= "</table>";
 			return $dump;
