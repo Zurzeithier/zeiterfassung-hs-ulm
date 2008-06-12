@@ -3,9 +3,11 @@
 /**
  * The iSql:: interface declares the SQL-Server-Connection.
  *
- * Copyright 2008 Patrick Kracht <patrick.kracht@googlemail.com>
+ * @copyright 	Patrick Kracht <patrick.kracht@googlemail.com>
+ * @copyright	Thorsten Moll <thorsten.moll@googlemail.com>
  *
- * @author  Patrick Kracht <patrick.kracht@googlemail.com>
+ * @author		Patrick Kracht <patrick.kracht@googlemail.com>
+ * @author		Thorsten Moll <thorsten.moll@googlemail.com>
  */
 interface iSql
 	{
@@ -16,7 +18,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __construct($config_file = "");
 		/**
@@ -24,7 +26,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __destruct();
 		/**
@@ -32,7 +34,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function init();
 		/**
@@ -42,7 +44,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function connect();
 		/**
@@ -52,7 +54,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function select_db();
 		/**
@@ -67,7 +69,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function query($qstring);
 		/**
@@ -83,7 +85,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function query_all($qstring);
 		/**
@@ -99,7 +101,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function unbuffered_query($qstring);
 		/**
@@ -114,7 +116,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function fetch_array($query_id=-1);
 		/**
@@ -127,7 +129,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function fetch_row($query_id = -1);
 		/**
@@ -143,7 +145,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function query_first($qstring);
 		/**
@@ -155,7 +157,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function num_rows($query_id = -1);
 		/**
@@ -167,7 +169,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function affected_rows($link_id = -1);
 		/**
@@ -179,7 +181,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function insert_id($link_id = -1);
 		/**
@@ -189,7 +191,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function free_result(&$result);
 		/**
@@ -199,7 +201,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function close($link_id = -1);
 		/**
@@ -207,7 +209,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function show_tables();
 		/**
@@ -215,7 +217,7 @@ interface iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function html_table($tablename);
 	}

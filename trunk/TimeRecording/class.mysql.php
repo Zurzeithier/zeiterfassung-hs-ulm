@@ -3,9 +3,11 @@
 /**
  * The MySql:: class implements the MySQL-Server-Connection.
  *
- * Copyright 2008 Patrick Kracht <patrick.kracht@googlemail.com>
+ * @copyright 	Patrick Kracht <patrick.kracht@googlemail.com>
+ * @copyright	Thorsten Moll <thorsten.moll@googlemail.com>
  *
- * @author  Patrick Kracht <patrick.kracht@googlemail.com>
+ * @author		Patrick Kracht <patrick.kracht@googlemail.com>
+ * @author		Thorsten Moll <thorsten.moll@googlemail.com>
  */
 class MySql extends Controller implements iSql
 	{
@@ -27,7 +29,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __construct($parameters = array())
 		{
@@ -56,7 +58,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __destruct()
 		{
@@ -68,7 +70,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function init()
 		{
@@ -89,7 +91,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function connect()
 		{
@@ -112,7 +114,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function select_db()
 		{
@@ -139,7 +141,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function query($qstring, $limit=0, $offset=0)
 		{
@@ -164,7 +166,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function query_all($qstring, $limit=0, $offset=0, $type=MYSQL_ASSOC)
 		{
@@ -189,7 +191,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function unbuffered_query($qstring, $LOW=0, $limit=0, $offset=0)
 		{
@@ -221,7 +223,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function fetch_array($query_id=-1, $type=MYSQL_ASSOC)
 		{
@@ -242,7 +244,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function fetch_row($query_id=-1)
 		{
@@ -266,7 +268,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function query_first($qstring, $limit=0, $offset=0, $type=MYSQL_ASSOC)
 		{
@@ -285,7 +287,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function num_rows($query_id=-1)
 		{
@@ -305,7 +307,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function affected_rows($link_id=-1)
 		{
@@ -325,7 +327,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function insert_id($link_id=-1)
 		{
@@ -343,7 +345,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function free_result(&$result)
 		{
@@ -358,7 +360,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function close($link_id=-1)
 		{
@@ -371,7 +373,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function show_tables()
 		{
@@ -389,7 +391,7 @@ class MySql extends Controller implements iSql
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function html_table($tablename,$where="")
 		{

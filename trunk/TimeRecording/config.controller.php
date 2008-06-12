@@ -1,4 +1,14 @@
 <?php
+/* vim: set expandtab sw=4 ts=4 sts=4: */
+/**
+ * CONFIG FILE - TIMERECORDING
+ *
+ * @copyright 	Patrick Kracht <patrick.kracht@googlemail.com>
+ * @copyright	Thorsten Moll <thorsten.moll@googlemail.com>
+ *
+ * @author		Patrick Kracht <patrick.kracht@googlemail.com>
+ * @author		Thorsten Moll <thorsten.moll@googlemail.com>
+ */
 
 $_SETTINGS = array(
 

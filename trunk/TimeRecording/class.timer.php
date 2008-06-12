@@ -4,8 +4,10 @@
  * The Timer:: class implements time measuring methods.
  *
  * @copyright 	Patrick Kracht <patrick.kracht@googlemail.com>
+ * @copyright	Thorsten Moll <thorsten.moll@googlemail.com>
  *
  * @author		Patrick Kracht <patrick.kracht@googlemail.com>
+ * @author		Thorsten Moll <thorsten.moll@googlemail.com>
  */
 class Timer
 	{
@@ -24,7 +26,7 @@ class Timer
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __construct($parameters = array())
 		{
@@ -42,7 +44,7 @@ class Timer
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __destruct()
 		{
@@ -54,7 +56,7 @@ class Timer
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function start()
 		{
@@ -66,7 +68,7 @@ class Timer
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function stop()
 		{
@@ -80,7 +82,7 @@ class Timer
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function reset()
 		{
@@ -100,7 +102,7 @@ class Timer
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function get($prec = 3)
 		{
@@ -119,7 +121,7 @@ class Timer
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function counter()
 		{
@@ -133,7 +135,7 @@ class Timer
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function number()
 		{
@@ -147,7 +149,7 @@ class Timer
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function set_units($name)
 		{
@@ -177,7 +179,7 @@ class Timer
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __toString()
 		{

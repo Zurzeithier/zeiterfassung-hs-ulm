@@ -3,9 +3,11 @@
 /**
  * The Email:: class gives easy methods to send html mails
  *
- * Copyright 2008 Patrick Kracht <patrick.kracht@googlemail.com>
+ * @copyright 	Patrick Kracht <patrick.kracht@googlemail.com>
+ * @copyright	Thorsten Moll <thorsten.moll@googlemail.com>
  *
- * @author  Patrick Kracht <patrick.kracht@googlemail.com>
+ * @author		Patrick Kracht <patrick.kracht@googlemail.com>
+ * @author		Thorsten Moll <thorsten.moll@googlemail.com>
  */
 class Email extends Template
 	{
@@ -29,7 +31,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __construct($parameters = array())
 		{
@@ -57,7 +59,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function get_token()
 		{
@@ -69,7 +71,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function set_inlay($bool = false)
 		{
@@ -85,7 +87,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function add_recipient($prefix, $email, $name = "")
 		{
@@ -101,7 +103,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function set_sender($email, $name = "")
 		{
@@ -118,7 +120,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function set_reply($email, $name = "")
 		{
@@ -134,7 +136,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function set_to($email, $name = "")
 		{
@@ -149,7 +151,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function set_subject($subject)
 		{
@@ -163,7 +165,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function set_domain($domain)
 		{
@@ -175,7 +177,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		private function set_newlines()
 		{
@@ -203,7 +205,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		private function get_boundary()
 		{
@@ -217,7 +219,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		private function create_head($boundary)
 		{
@@ -235,7 +237,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		private function create_html()
 		{
@@ -251,7 +253,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		private function create_text($html)
 		{
@@ -282,7 +284,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		private function create_inline($filename, $id, $boundary)
 		{
@@ -311,7 +313,7 @@ class Email extends Template
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function send()
 		{
