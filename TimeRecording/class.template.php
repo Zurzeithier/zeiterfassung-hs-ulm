@@ -3,9 +3,11 @@
 /**
  * The Template:: class implements the HTML-templates and output-engine.
  *
- * Copyright 2008 Patrick Kracht <patrick.kracht@googlemail.com>
+ * @copyright 	Patrick Kracht <patrick.kracht@googlemail.com>
+ * @copyright	Thorsten Moll <thorsten.moll@googlemail.com>
  *
- * @author  Patrick Kracht <patrick.kracht@googlemail.com>
+ * @author		Patrick Kracht <patrick.kracht@googlemail.com>
+ * @author		Thorsten Moll <thorsten.moll@googlemail.com>
  */
 class Template extends Controller
 	{
@@ -27,7 +29,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __construct($parameters = array())
 		{
@@ -42,7 +44,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __destruct()
 		{
@@ -53,7 +55,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function clean_ob()
 		{
@@ -72,7 +74,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function preload($list = false)
 		{
@@ -112,7 +114,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function import($list = false)
 		{
@@ -178,7 +180,7 @@ class Template extends Controller
 		 *  *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function load($name, $force_reload = false)
 		{
@@ -242,7 +244,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function assign($name, $search, $replace = "EMPTY")
 		{
@@ -264,7 +266,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function get($name, $force_reload = false)
 		{
@@ -284,7 +286,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function compress(&$buffer)
 		{
@@ -308,7 +310,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function output($name, $type = "html")
 		{
@@ -401,7 +403,7 @@ class Template extends Controller
 		 * @return  array	templates
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function get_parsed($name)
 		{
@@ -419,7 +421,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function headers($type = "html",$maxage=0)
 		{
@@ -453,7 +455,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function wraplongwords(&$text, $maxlen = 64)
 		{
@@ -478,7 +480,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function save_newlines(&$text)
 		{
@@ -492,7 +494,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function restore_newlines(&$text)
 		{
@@ -506,7 +508,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function accepts_gzip()
 		{
@@ -526,7 +528,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function special_chars(&$content)
 		{
@@ -555,7 +557,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function create_select($array, $selected = "")
 		{
@@ -582,7 +584,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function replace_data_from_array(&$data, &$array)
 		{
@@ -602,7 +604,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function align_right($text, $maxlen = 16)
 		{
@@ -616,7 +618,7 @@ class Template extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function menu_insert_spacer()
 		{
@@ -634,7 +636,7 @@ class Template extends Controller
 		*
 		* @access  public
 		*
-		* @author  patrick.kracht
+		* @author  patrick.kracht, thorsten.moll
 		*/
 		public function menu_insert_entry($name, $href, $access_key = false, $selected = false, $target = "_self")
 		{
@@ -660,7 +662,7 @@ class Template extends Controller
 		*
 		* @access  public
 		*
-		* @author  patrick.kracht
+		* @author  patrick.kracht, thorsten.moll
 		*/
 		public function menu_get()
 		{
@@ -676,7 +678,7 @@ class Template extends Controller
 		*
 		* @access  public
 		*
-		* @author  patrick.kracht
+		* @author  patrick.kracht, thorsten.moll
 		*/
 		public function use_database()
 		{

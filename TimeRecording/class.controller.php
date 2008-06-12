@@ -5,8 +5,10 @@
  * the sytem and takes care of all registered session-objects
  *
  * @copyright 	Patrick Kracht <patrick.kracht@googlemail.com>
+ * @copyright	Thorsten Moll <thorsten.moll@googlemail.com>
  *
  * @author		Patrick Kracht <patrick.kracht@googlemail.com>
+ * @author		Thorsten Moll <thorsten.moll@googlemail.com>
  */
 class Controller
 	{
@@ -17,7 +19,7 @@ class Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __construct()
 		{
@@ -31,7 +33,7 @@ class Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function reinit()
 		{
@@ -87,7 +89,7 @@ class Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __destruct()
 		{
@@ -102,7 +104,7 @@ class Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function register($classname, $parameters = array(), $alias = "")
 		{
@@ -124,7 +126,7 @@ class Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function unregister($classname, $alias = "")
 		{
@@ -145,7 +147,7 @@ class Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __toString()
 		{
@@ -163,7 +165,7 @@ class Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function get_booking_sums($range = "DAY", $offset = 0, $limit = 1)
 		{
@@ -232,7 +234,7 @@ class Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function show_last_bookings($limit=10)
 		{
@@ -252,7 +254,7 @@ class Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function show_user_table($limit=10)
 		{
@@ -276,7 +278,7 @@ class Controller
 		 *
 		 * @access  private
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		private function query2table($query,$id)
 		{
@@ -310,7 +312,7 @@ class Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function switch_actions()
 		{

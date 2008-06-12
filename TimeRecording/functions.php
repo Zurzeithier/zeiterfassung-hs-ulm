@@ -1,4 +1,14 @@
 <?php
+/* vim: set expandtab sw=4 ts=4 sts=4: */
+/**
+ * GLOBAL FUNCTIONS - TIMERECORDING
+ *
+ * @copyright 	Patrick Kracht <patrick.kracht@googlemail.com>
+ * @copyright	Thorsten Moll <thorsten.moll@googlemail.com>
+ *
+ * @author		Patrick Kracht <patrick.kracht@googlemail.com>
+ * @author		Thorsten Moll <thorsten.moll@googlemail.com>
+ */
 
 /**
  * start a valid session with name
@@ -7,7 +17,7 @@
  *
  * @access  public
  *
- * @author  patrick.kracht
+ * @author  patrick.kracht, thorsten.moll
  */
 function __session_start($name="sid")
 {
@@ -65,7 +75,7 @@ function __session_start($name="sid")
  *
  * @access  public
  *
- * @author  patrick.kracht
+ * @author  patrick.kracht, thorsten.moll
  */
 function __autoload($class_name)
 {
@@ -90,7 +100,7 @@ function __autoload($class_name)
  *
  * @access  public
  *
- * @author  patrick.kracht
+ * @author  patrick.kracht, thorsten.moll
  */
 function __check_syntax($filename)
 {
@@ -113,7 +123,7 @@ function __check_syntax($filename)
  *
  * @access  public
  *
- * @author  patrick.kracht
+ * @author  patrick.kracht, thorsten.moll
  */
 function __from_bytes($val, $prec = 0, $cnt = 0)
 {

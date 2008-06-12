@@ -3,11 +3,11 @@
 /**
  * The Session:: class manages login functions and security using sessions
  *
- * Copyright 2008 Patrick Kracht <patrick.kracht@googlemail.com>
+ * @copyright 	Patrick Kracht <patrick.kracht@googlemail.com>
+ * @copyright	Thorsten Moll <thorsten.moll@googlemail.com>
  *
- * @author  Patrick Kracht <patrick.kracht@googlemail.com>
- *
- *
+ * @author		Patrick Kracht <patrick.kracht@googlemail.com>
+ * @author		Thorsten Moll <thorsten.moll@googlemail.com>
  */
 class Session extends Controller
 	{
@@ -17,7 +17,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __construct()
 		{
@@ -28,7 +28,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function __destruct()
 		{
@@ -40,7 +40,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function logout($error_message="")
 		{
@@ -66,7 +66,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function login()
 		{
@@ -118,7 +118,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function passwd()
 		{
@@ -189,7 +189,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function book()
 		{
@@ -254,7 +254,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function update()
 		{
@@ -266,7 +266,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function delete()
 		{
@@ -278,7 +278,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function create()
 		{
@@ -294,7 +294,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function generate_password($length = 8)
 		{
@@ -321,7 +321,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function is_admin()
 		{
@@ -336,7 +336,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function is_user()
 		{
@@ -349,7 +349,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function return_to($url)
 		{
@@ -363,7 +363,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function extend()
 		{
@@ -393,7 +393,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function valid()
 		{
@@ -415,7 +415,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function started()
 		{
@@ -428,7 +428,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function randomize()
 		{
@@ -446,7 +446,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function valid_email($email, $check_db = false)
 		{
@@ -537,7 +537,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		private function get_mx_records($host, $type = "MX")
 		{
@@ -567,7 +567,7 @@ class Session extends Controller
 		 *
 		 * @access  public
 		 *
-		 * @author  patrick.kracht
+		 * @author  patrick.kracht, thorsten.moll
 		 */
 		public function is_secure_password($password, $min_len = 8)
 		{
