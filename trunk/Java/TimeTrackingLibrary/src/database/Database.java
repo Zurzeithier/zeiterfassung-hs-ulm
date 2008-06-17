@@ -21,7 +21,7 @@ public class Database
     
     private Connection m_Connection = null;
 
-    public Database(String className, String prefix, String adress, String username, String password) throws SQLException
+    Database(String className, String prefix, String adress, String username, String password) throws SQLException
     {
         m_ClassName = className;
         m_AdressPrefix = prefix;

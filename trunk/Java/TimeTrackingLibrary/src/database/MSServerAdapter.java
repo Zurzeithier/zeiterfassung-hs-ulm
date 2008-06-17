@@ -18,7 +18,7 @@ import java.util.List;
 public class MSServerAdapter extends Database implements DBAdapter
 {
 
-    public MSServerAdapter(String adress, String username, String password) throws SQLException
+    MSServerAdapter(String adress, String username, String password) throws SQLException
     {
         super("com.microsoft.sqlserver.jdbc.SQLServerDriver", 
               "jdbc:sqlserver://", 
