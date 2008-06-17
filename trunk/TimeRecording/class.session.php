@@ -51,7 +51,7 @@ class Session extends Controller
 			
 			// savely remove complete array and reload page
 			$_SESSION = array();
-			$this->return_to( "./" );
+			$this->return_to("./");
 		}
 		
 		/**
@@ -192,15 +192,15 @@ class Session extends Controller
 			$symid  = (isset($_GET["id"])) ? intval($_GET["id"]) : -1;
 			$symid  = (isset($_POST["id"]) && $symid == -1) ? intval($_POST["id"]) : $symid;
 			
-			print_r( $_POST );
+			print_r($_POST);
 			
 			// for async booking, check if token is valid
-			if ( isset( $_SESSION["_AsyncToken"] ) && isset( $_POST["ig"] ) )
-			{
-				$ignore = ( $_SESSION["_AsyncToken"] == $_POST["ig"] );
-				unset( $_SESSION["_AsyncToken"] );
-			}
-			
+			if (isset($_SESSION["_AsyncToken"]) && isset($_POST["ig"]))
+				{
+					$ignore = ($_SESSION["_AsyncToken"] == $_POST["ig"]);
+					unset($_SESSION["_AsyncToken"]);
+				}
+				
 			if (! $this->is_user())
 				{
 					throw new Exception("Sie sind kein bekannter Benutzer!",308);
@@ -219,58 +219,58 @@ class Session extends Controller
 					$last   = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
 					
 					$case_1 = ($symid == 1 && isset($last["stamp_1"]) && $last["stamp_2"] == NULL);
-					$case_2 = ( $last["away"] > ( $_SESSION["_MaxWorkingH"] * 3600 ) );
+					$case_2 = ($last["away"] > ($_SESSION["_MaxWorkingH"] * 3600));
 					
 					// case_1: new check in but last check out is missing (async booking!)
-					if ( $case_1 && $ignore )
-					{
-						$query  = "INSERT INTO tr_bookings ( mid ) ";
-						$query .= "VALUES ( '$mid' );";
-						$_SESSION[$_SESSION["_SqlType"]]->query($query);
-					}
+					if ($case_1 && $ignore)
+						{
+							$query  = "INSERT INTO tr_bookings ( mid ) ";
+							$query .= "VALUES ( '$mid' );";
+							$_SESSION[$_SESSION["_SqlType"]]->query($query);
+						}
 					// case_1: new check in but last check out is missing
-					else if ( $case_1 )
-					{
-						$_SESSION["_AsyncToken"] = md5( $this->generate_password( 10 ) );
-						
-						$question  = "<form action=\"./\" method=\"post\" id=\"question\">";
-						$question .= "<input type=\"hidden\" name=\"ig\"     value=\"".$_SESSION["_AsyncToken"]."\"/>";
-						$question .= "<input type=\"hidden\" name=\"id\"     value=\"$symid\"/>";
-						$question .= "<input type=\"hidden\" name=\"page\"   value=\"home\" />";
-						$question .= "<input type=\"hidden\" name=\"sid\"    value=\"".session_id()."\" />";
-						$question .= "<input type=\"hidden\" name=\"action\" value=\"book\" />";
-						$question .= "<input type=\"submit\" name=\"submit\" value=\"Ignorieren\" />";
-						$question .= "<input type=\"button\" onclick=\"location.href='./?page=home';\" value=\"Abbrechen\" />";
-						$question .= "</form>";
-						
-						throw new Exception("Azyklische Buchungen sind nicht zugelassen!$question",311);
-					}
+					else if ($case_1)
+						{
+							$_SESSION["_AsyncToken"] = md5($this->generate_password(10));
+							
+							$question  = "<form action=\"./\" method=\"post\" id=\"question\">";
+							$question .= "<input type=\"hidden\" name=\"ig\"     value=\"".$_SESSION["_AsyncToken"]."\"/>";
+							$question .= "<input type=\"hidden\" name=\"id\"     value=\"$symid\"/>";
+							$question .= "<input type=\"hidden\" name=\"page\"   value=\"home\" />";
+							$question .= "<input type=\"hidden\" name=\"sid\"    value=\"".session_id()."\" />";
+							$question .= "<input type=\"hidden\" name=\"action\" value=\"book\" />";
+							$question .= "<input type=\"submit\" name=\"submit\" value=\"Ignorieren\" />";
+							$question .= "<input type=\"button\" onclick=\"location.href='./?page=home';\" value=\"Abbrechen\" />";
+							$question .= "</form>";
+							
+							throw new Exception("Azyklische Buchungen sind nicht zugelassen!$question",311);
+						}
 					// case_2: more than maximum hours
-					else if ( $case_2 )
-					{
-						$message  = "Sie haben die Arbeitszeit von maximal ".$_SESSION["_MaxWorkingH"];
-						$message .= " Stunden &uuml;berschritten!<br/><br/>";
-						$message .= "Bitte azyklisch buchen!";
-						throw new Exception($message,312);
-					}
+					else if ($case_2)
+						{
+							$message  = "Sie haben die Arbeitszeit von maximal ".$_SESSION["_MaxWorkingH"];
+							$message .= " Stunden &uuml;berschritten!<br/><br/>";
+							$message .= "Bitte azyklisch buchen!";
+							throw new Exception($message,312);
+						}
 					// update going stamp only
-					else if ( $symid == 0 )
-					{
-						$query  = "UPDATE tr_bookings SET stamp_2 = CURRENT_TIMESTAMP ";
-						$query .= "WHERE bookid = '".$last["bookid"]."';";
-						$_SESSION[$_SESSION["_SqlType"]]->query($query);
-					}
+					else if ($symid == 0)
+						{
+							$query  = "UPDATE tr_bookings SET stamp_2 = CURRENT_TIMESTAMP ";
+							$query .= "WHERE bookid = '".$last["bookid"]."';";
+							$_SESSION[$_SESSION["_SqlType"]]->query($query);
+						}
 					// insert new stamp
-					else if ( $symid == 1 )
-					{
-						$query  = "INSERT INTO tr_bookings ( mid ) ";
-						$query .= "VALUES ( '$mid' );";
-						$_SESSION[$_SESSION["_SqlType"]]->query($query);
-					}
+					else if ($symid == 1)
+						{
+							$query  = "INSERT INTO tr_bookings ( mid ) ";
+							$query .= "VALUES ( '$mid' );";
+							$_SESSION[$_SESSION["_SqlType"]]->query($query);
+						}
 					else
-					{
-						throw new Exception("Unbekannter Fehler!",399);
-					}
+						{
+							throw new Exception("Unbekannter Fehler!",399);
+						}
 				}
 		}
 		
