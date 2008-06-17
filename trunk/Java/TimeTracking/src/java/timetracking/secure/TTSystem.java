@@ -1,19 +1,17 @@
 /*
  * TTSystem.java
  *
- * Created on 16.06.2008, 14:31:57
+ * Created on 17.06.2008, 17:56:01
  */
  
 package timetracking.secure;
 
+import beans.UserBean;
+import com.sun.data.provider.impl.ObjectListDataProvider;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
-import com.sun.webui.jsf.model.DefaultTableDataProvider;
-import data_provider.ReadOnlyTableDataProvider;
 import javax.faces.FacesException;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
-import timetracking.SessionBean1;
 import timetracking.ApplicationBean1;
+import timetracking.SessionBean1;
 
 /**
  * <p>Page bean that corresponds to a similarly named JSP page.  This
@@ -24,7 +22,7 @@ import timetracking.ApplicationBean1;
  *
  * @author manuel
  */
-public class TTSystem extends AbstractPageBean implements HttpSessionListener  {
+public class TTSystem extends AbstractPageBean {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**
@@ -34,29 +32,23 @@ public class TTSystem extends AbstractPageBean implements HttpSessionListener  {
      */
     private void _init() throws Exception {
     }
-    private DefaultTableDataProvider defaultTableDataProvider = new DefaultTableDataProvider();
-
-    public DefaultTableDataProvider getDefaultTableDataProvider()
-    {
-        return defaultTableDataProvider;
-    }
-
-    public void setDefaultTableDataProvider(DefaultTableDataProvider dtdp)
-    {
-        this.defaultTableDataProvider = dtdp;
-    }
 
     // </editor-fold>
 
-    ReadOnlyTableDataProvider table = new ReadOnlyTableDataProvider();
+    private ObjectListDataProvider bookings = new ObjectListDataProvider(UserBean.class);
 
-
-    public ReadOnlyTableDataProvider getTable()
+    public ObjectListDataProvider getBookings()
     {
-        return table;
+        return bookings;
     }
 
+    public void setBookings(ObjectListDataProvider bookings)
+    {
+        this.bookings = bookings;
+    }
     
+        
+     
     /**
      * <p>Construct a new Page bean instance.</p>
      */
@@ -97,11 +89,6 @@ public class TTSystem extends AbstractPageBean implements HttpSessionListener  {
         // Perform application initialization that must complete
         // *after* managed components are initialized
         // TODO - add your own initialization code here
-        
-        if (getSessionBean1().getUser() == null)
-        {
-           
-        }
     }
 
     /**
@@ -144,9 +131,9 @@ public class TTSystem extends AbstractPageBean implements HttpSessionListener  {
      *
      * @return reference to the scoped data bean
      */
-    protected SessionBean1 getSessionBean1()
+    protected ApplicationBean1 getApplicationBean1()
     {
-        return (SessionBean1) getBean("SessionBean1");
+        return (ApplicationBean1) getBean("ApplicationBean1");
     }
 
     /**
@@ -154,19 +141,9 @@ public class TTSystem extends AbstractPageBean implements HttpSessionListener  {
      *
      * @return reference to the scoped data bean
      */
-    protected ApplicationBean1 getApplicationBean1()
+    protected SessionBean1 getSessionBean1()
     {
-        return (ApplicationBean1) getBean("ApplicationBean1");
-    }
-
-    public void sessionCreated(HttpSessionEvent arg0)
-    {
-        arg0.getSession().getServletContext().getRequestDispatcher("");
-    }
-
-    public void sessionDestroyed(HttpSessionEvent arg0)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return (SessionBean1) getBean("SessionBean1");
     }
     
 }

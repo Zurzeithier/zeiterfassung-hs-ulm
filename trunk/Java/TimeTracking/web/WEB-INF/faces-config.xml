@@ -21,11 +21,6 @@
         <managed-bean-class>timetracking.ApplicationBean1</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
-    <managed-bean>
-        <managed-bean-name>secure$TTSystem</managed-bean-name>
-        <managed-bean-class>timetracking.secure.TTSystem</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
     <navigation-rule>
         <from-view-id>/Login.jsp</from-view-id>
         <navigation-case>
@@ -44,6 +39,11 @@
     <managed-bean>
         <managed-bean-name>error$DBError</managed-bean-name>
         <managed-bean-class>timetracking.error.DBError</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>secure$TTSystem</managed-bean-name>
+        <managed-bean-class>timetracking.secure.TTSystem</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 </faces-config>
