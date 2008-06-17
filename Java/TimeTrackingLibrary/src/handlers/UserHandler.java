@@ -2,6 +2,7 @@ package handlers;
 
 import beans.UserBean;
 import database.AdapterPool;
+import database.DBAdapter;
 import exceptions.DBException;
 import utils.SecurityUtils;
 
@@ -20,14 +21,18 @@ public class UserHandler
      */
     public static UserBean LoginUser(String username, String password) throws DBException
     {
-        UserBean dbBean = AdapterPool.getDBAdapter().getUser(username);
-
+        DBAdapter adapter = AdapterPool.getDBAdapter();
+        UserBean returnValue = null;
+        
+        UserBean dbBean = adapter.getUser(username);
+        
         if (dbBean != null && dbBean.getPassword().equals(SecurityUtils.makeMD5Checksum(password)))
         {
-            return dbBean;
+            returnValue =  dbBean;
         }
         
-        return null;
+        AdapterPool.releaseDBAdapter(adapter);
+        return returnValue;
     }
 
     /**
@@ -42,8 +47,10 @@ public class UserHandler
      */
     public static boolean ChangeUserPWD(String username, String password, String newPassword) throws DBException
     {
-
-        UserBean dbBean = AdapterPool.getDBAdapter().getUser(username);
+        DBAdapter adapter = AdapterPool.getDBAdapter();
+        boolean returnValue = false;
+        
+        UserBean dbBean = adapter.getUser(username);
 
         if (dbBean != null && dbBean.getPassword().equals(SecurityUtils.makeMD5Checksum(password)))
         {
@@ -51,9 +58,10 @@ public class UserHandler
             bean.setMid(dbBean.getMid());
             bean.setPassword(SecurityUtils.makeMD5Checksum(newPassword));
 
-            return AdapterPool.getDBAdapter().changeUser(bean);
+            returnValue = adapter.changeUser(bean);
         }
 
-        return false;
+        AdapterPool.releaseDBAdapter(adapter);
+        return returnValue;
     }
 }
