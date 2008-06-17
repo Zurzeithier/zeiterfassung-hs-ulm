@@ -41,6 +41,14 @@
 	color: white;
 }
 
+.win_bg_top A {
+	color: white;
+	text-decoration: none;
+}
+.win_bg_top A:hover {
+	text-decoration: underline;
+}
+
 .win_corner_rt {
 	position: relative;
 	width: 10px;

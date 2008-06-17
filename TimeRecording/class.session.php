@@ -49,10 +49,8 @@ class Session extends Controller
 			session_destroy();
 			session_regenerate_id(true);
 			
-			// savely remove complete array and recreate session
+			// savely remove complete array and reload page
 			$_SESSION = array();
-			
-			// reinit session
 			$this->return_to( "./" );
 		}
 		

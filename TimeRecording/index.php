@@ -51,10 +51,7 @@ if ($_SESSION["CLIENT"]->is_user())
 				$_SESSION["HTML"]->load("users.html");
 				
 				// list users
-				$users = $Controller->show_user_table();
-				$_SESSION["HTML"]->assign("users.html", "<!--USER_TABLE-->",$users);
-				
-				//TODO MORE
+				$Controller->show_user_table();
 				
 				// send page to browser
 				$_SESSION["HTML"]->output("users.html");
@@ -81,8 +78,7 @@ if ($_SESSION["CLIENT"]->is_user())
 				$_SESSION["HTML"]->assign("index.html", "<!--GROUP_NAME-->", $_SESSION["_UserData"]["groupname"]);
 				
 				// list last bookings
-				$book = $Controller->show_last_bookings();
-				$_SESSION["HTML"]->assign("index.html", "<!--HISTORY_DATA-->",$book);
+				$Controller->show_last_bookings();
 				
 				// summary calculation and assignment for current week and month
 				$array = $Controller->get_booking_sums("WEEK");
@@ -123,6 +119,4 @@ else
 				$_SESSION["HTML"]->output("login.html");
 			}
 	}
-
-
 ?>

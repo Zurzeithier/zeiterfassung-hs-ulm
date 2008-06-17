@@ -239,15 +239,37 @@ class Controller
 		 */
 		public function show_last_bookings($limit=10)
 		{
+			$query  = "SELECT COUNT( stamp_1 ) AS total FROM tr_bookings ";
+			$query .= "WHERE mid = '".$_SESSION["_UserData"]["mid"]."' GROUP BY mid;";
+			$entry  = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
+			
+			$plink = new PageLink( $entry["total"] );
+			
 			$query  = "SELECT DATE_FORMAT( stamp_1, '%d.%m.%Y' ) AS Datum, ";
 			$query .= "DATE_FORMAT( stamp_1, '%T Uhr' ) AS Gekommen, ";
 			$query .= "DATE_FORMAT( stamp_2, '%T Uhr' ) AS Gegangen, ";
 			$query .= "SEC_TO_TIME( UNIX_TIMESTAMP( stamp_2 ) - UNIX_TIMESTAMP( stamp_1 ) ) AS Anwesend ";
 			$query .= "FROM tr_bookings ";
 			$query .= "WHERE mid = '".$_SESSION["_UserData"]["mid"]."' ";
-			$query .= "ORDER BY stamp_1 DESC LIMIT 0,$limit";
+			$query .= "ORDER BY stamp_1 DESC ".$plink->get_query_limit();
 			
-			return $this->query2table($query,"last_bookings");
+			$book = $this->query2table($query,"last_bookings");
+			$_SESSION["HTML"]->assign("index.html", "<!--HISTORY_DATA-->",$book);
+			$_SESSION["HTML"]->assign("index.html", "<!--HISTORY_PAGE_LINK-->",$plink);
+		}
+		
+		/**
+		 * returns pagelink
+		 *
+		 * @return	string	html code
+		 *
+		 * @access  public
+		 *
+		 * @author  patrick.kracht, thorsten.moll
+		 */
+		public function get_page_link()
+		{
+			return "TODO";
 		}
 		
 		/**
@@ -259,15 +281,22 @@ class Controller
 		 */
 		public function show_user_table($limit=10)
 		{
+			$query  = "SELECT COUNT( email ) AS total FROM tr_users;";
+			$entry  = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
+			
+			$plink = new PageLink( $entry["total"] );
+			
 			$query  = "SELECT u.mid AS MitarbeiterID, u.email AS Email, ";
 			$query .= "u.firstname AS Vorname, u.lastname AS Nachname, g.groupname AS Gruppe ";
 			//$query .= "IF( b.stamp_2 = NULL, 'Nein', 'Ja' ) AS Anwesend ";
 			$query .= "FROM tr_users u ";
 			//$query .= "LEFT JOIN tr_bookings b USING ( mid ) ";
 			$query .= "LEFT JOIN tr_groups g USING ( gid ) ";
-			$query .= "ORDER BY mid ASC LIMIT 0,$limit";
+			$query .= "ORDER BY mid ASC ".$plink->get_query_limit();
 			
-			return $this->query2table($query,"user_table");
+			$users = $this->query2table($query,"user_table");
+			$_SESSION["HTML"]->assign("users.html", "<!--USER_TABLE-->",$users);
+			$_SESSION["HTML"]->assign("users.html", "<!--USER_PAGE_LINK-->",$plink);
 		}
 		
 		

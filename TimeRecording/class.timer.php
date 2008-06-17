@@ -111,7 +111,8 @@ class Timer
 					// stop timer, if running
 					$this->stop();
 				}
-			return (double)number_format($this->runtime * $this->unitfac, $prec);
+			$double = (double)number_format($this->runtime * $this->unitfac, $prec);
+			return ($double<0)?0.001:$double;
 		}
 		
 		/**
