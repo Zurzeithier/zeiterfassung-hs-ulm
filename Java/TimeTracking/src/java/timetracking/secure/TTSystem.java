@@ -8,7 +8,7 @@ package timetracking.secure;
 
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import com.sun.webui.jsf.model.DefaultTableDataProvider;
-import data_provider.BookingsTableDataProvider;
+import data_provider.ReadOnlyTableDataProvider;
 import javax.faces.FacesException;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
@@ -48,10 +48,10 @@ public class TTSystem extends AbstractPageBean implements HttpSessionListener  {
 
     // </editor-fold>
 
-    BookingsTableDataProvider table = new BookingsTableDataProvider();
+    ReadOnlyTableDataProvider table = new ReadOnlyTableDataProvider();
 
 
-    public BookingsTableDataProvider getTable()
+    public ReadOnlyTableDataProvider getTable()
     {
         return table;
     }

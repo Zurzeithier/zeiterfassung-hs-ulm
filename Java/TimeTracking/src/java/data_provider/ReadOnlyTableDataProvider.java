@@ -15,10 +15,10 @@ import com.sun.data.provider.impl.AbstractTableDataProvider;
  *
  * @author manuel
  */
-public class BookingsTableDataProvider extends AbstractTableDataProvider
+public class ReadOnlyTableDataProvider extends AbstractTableDataProvider
 {
 
-    public BookingsTableDataProvider()
+    public ReadOnlyTableDataProvider()
     {
         //addFieldKeys();
     }
