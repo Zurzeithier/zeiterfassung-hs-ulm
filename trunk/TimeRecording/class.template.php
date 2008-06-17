@@ -323,7 +323,7 @@ class Template extends Controller
 			// if template not buffered again, trow exception
 			if (! isset($this->template[$name]))
 				{
-					throw new Exception("template '$name' not found!");
+					die("template '$name' not found!");
 				}
 				
 			$menu   = $this->menu_get();
