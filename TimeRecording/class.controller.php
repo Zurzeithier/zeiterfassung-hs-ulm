@@ -243,7 +243,7 @@ class Controller
 			$query .= "WHERE mid = '".$_SESSION["_UserData"]["mid"]."' GROUP BY mid;";
 			$entry  = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
 			
-			$plink = new PageLink( $entry["total"] );
+			$plink = new PageLink($entry["total"]);
 			
 			$query  = "SELECT DATE_FORMAT( stamp_1, '%d.%m.%Y' ) AS Datum, ";
 			$query .= "DATE_FORMAT( stamp_1, '%T Uhr' ) AS Gekommen, ";
@@ -284,7 +284,7 @@ class Controller
 			$query  = "SELECT COUNT( email ) AS total FROM tr_users;";
 			$entry  = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
 			
-			$plink = new PageLink( $entry["total"] );
+			$plink = new PageLink($entry["total"]);
 			
 			$query  = "SELECT u.mid AS MitarbeiterID, u.email AS Email, ";
 			$query .= "u.firstname AS Vorname, u.lastname AS Nachname, g.groupname AS Gruppe ";

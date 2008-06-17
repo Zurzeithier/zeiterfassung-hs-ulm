@@ -32,7 +32,7 @@ class PageLink
 		 * @access  public
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		public function __construct( $entrycount, $perpage = 10, $maxlinks = 10 )
+		public function __construct($entrycount, $perpage = 10, $maxlinks = 10)
 		{
 			// init values
 			$this->html = "";
@@ -51,39 +51,39 @@ class PageLink
 		 */
 		private function prepare()
 		{
-			if ( isset( $_GET["pageid"] ) )
-			{ 
-				$this->pageid = intval( $_GET["pageid"] );
-			}
+			if (isset($_GET["pageid"]))
+				{
+					$this->pageid = intval($_GET["pageid"]);
+				}
 			else
-			{
-				$this->pageid = 0;
-			}
-			
-			$this->total_pages = ceil( $this->cnt / $this->pp );
-			$this->query_limit = "LIMIT ".( $this->pp * $this->pageid ).",".$this->pp;
-			$this->query_first = ( $this->pp * $this->pageid + 1 );
-			$this->query_last  = ( $this->pp * ( $this->pageid + 1 ) );
+				{
+					$this->pageid = 0;
+				}
+				
+			$this->total_pages = ceil($this->cnt / $this->pp);
+			$this->query_limit = "LIMIT ".($this->pp * $this->pageid).",".$this->pp;
+			$this->query_first = ($this->pp * $this->pageid + 1);
+			$this->query_last  = ($this->pp * ($this->pageid + 1));
 			
 			// force valid values
-			if ( $this->pageid + 1 > $this->total_pages )
-			{
-				$this->pageid = $this->total_pages - 1;
-			}
-			else if ( $this->pageid < 0 )
-			{
-				$this->pageid = 0;
-			}
-			
-			// save other query values in url 
-			if ( isset( $_SERVER["QUERY_STRING"] ) && ! empty( $_SERVER["QUERY_STRING"] ) )
-			{
-				$this->url = "./?".preg_replace( "@pageid=(\d+)|&pageid=(\d+)@i", "", $_SERVER["QUERY_STRING"] );
-			}
+			if ($this->pageid + 1 > $this->total_pages)
+				{
+					$this->pageid = $this->total_pages - 1;
+				}
+			else if ($this->pageid < 0)
+				{
+					$this->pageid = 0;
+				}
+				
+			// save other query values in url
+			if (isset($_SERVER["QUERY_STRING"]) && ! empty($_SERVER["QUERY_STRING"]))
+				{
+					$this->url = "./?".preg_replace("@pageid=(\d+)|&pageid=(\d+)@i", "", $_SERVER["QUERY_STRING"]);
+				}
 			else
-			{
-				$this->url = "./?page=home";
-			}
+				{
+					$this->url = "./?page=home";
+				}
 		}
 		
 		/**
@@ -95,29 +95,29 @@ class PageLink
 		{
 			$this->html = "Seite";
 			// less than 10 links -> one row, no splitting
-			if ( $this->total_pages < 10 )
+			if ($this->total_pages < 10)
+				{
+					$this->get_links_from(1, $this->total_pages);
+				}
+			elseif($this->pageid > 5 && $this->pageid <= ($this->total_pages - 5))
 			{
-				$this->get_links_from( 1, $this->total_pages );
+				$this->get_links_from(1, 2);
+				$this->html .= "&nbsp;...";
+				$this->get_links_from($this->pageid, $this->pageid + 2);
+				$this->html .= "&nbsp;...";
+				$this->get_links_from($this->total_pages - 1, $this->total_pages);
 			}
-			elseif ( $this->pageid > 5 && $this->pageid <= ( $this->total_pages - 5 ) )
+			elseif($this->pageid <= 5)
 			{
-				$this->get_links_from( 1, 2 );
+				$this->get_links_from(1, 7);
 				$this->html .= "&nbsp;...";
-				$this->get_links_from( $this->pageid, $this->pageid + 2);
-				$this->html .= "&nbsp;...";
-				$this->get_links_from( $this->total_pages - 1, $this->total_pages );
+				$this->get_links_from($this->total_pages - 1, $this->total_pages);
 			}
-			elseif ( $this->pageid <= 5 )
+			elseif($this->pageid >= ($this->total_pages - 5))
 			{
-				$this->get_links_from( 1, 7 );
+				$this->get_links_from(1, 2);
 				$this->html .= "&nbsp;...";
-				$this->get_links_from( $this->total_pages - 1, $this->total_pages );
-			}
-			elseif ( $this->pageid >= ( $this->total_pages - 5 ) )
-			{
-				$this->get_links_from( 1, 2 );
-				$this->html .= "&nbsp;...";
-				$this->get_links_from( $this->total_pages - 6, $this->total_pages );
+				$this->get_links_from($this->total_pages - 6, $this->total_pages);
 			}
 		}
 		
@@ -128,19 +128,19 @@ class PageLink
 		 * @access  private
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		private function get_links_from( $start, $end )
+		private function get_links_from($start, $end)
 		{
-			for( $i = $start; $i <= $end; $i++ )
-			{
-				if ( ( $this->pageid + 1 ) == $i )
+			for ($i = $start; $i <= $end; $i++)
 				{
-					$this->html .= "&nbsp;(&nbsp;$i&nbsp;)";
+					if (($this->pageid + 1) == $i)
+						{
+							$this->html .= "&nbsp;(&nbsp;$i&nbsp;)";
+						}
+					else
+						{
+							$this->html .= "&nbsp;".$this->get_page_link($i);
+						}
 				}
-				else
-				{
-					$this->html .= "&nbsp;".$this->get_page_link( $i );	
-				}
-			}
 		}
 		
 		/**
@@ -159,7 +159,7 @@ class PageLink
 		 * @access  public
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		public function get_page_link( $page )
+		public function get_page_link($page)
 		{
 			return "<a title=\"Seite $page\" href=\"$this->url&amp;pageid=".($page-1)."\">$page</a>";
 		}
