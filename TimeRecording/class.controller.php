@@ -60,6 +60,7 @@ class Controller
 					$_SESSION["_Cookies"]        = (isset($_SETTINGS["Main"][2])) ? $_SETTINGS["Main"][2] : false;
 					$_SESSION["_Webmaster"]      = (isset($_SETTINGS["Main"][3])) ? $_SETTINGS["Main"][3] : "webmaster@localhost";
 					$_SESSION["_Domain"]         = (isset($_SETTINGS["Main"][4])) ? $_SETTINGS["Main"][4] : "localhost";
+					$_SESSION["_MaxWorkingH"]    = (isset($_SETTINGS["Main"][5])) ? $_SETTINGS["Main"][5] : 8;
 					$_SESSION["_TplSqlTable"]    = (isset($_SETTINGS["Template"][3])) ? $_SETTINGS["Template"][3] : false;
 				}
 				

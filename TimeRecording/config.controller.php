@@ -18,7 +18,8 @@ $_SETTINGS = array(
                                  600,							//(1) session timeout in seconds
                                  false,							//(2) force usage of cookies?
                                  "omega2k@omega2k.de",			//(3) webmaster email
-                                 "omega2k.de"					//(4) mailserver domain
+                                 "omega2k.de",					//(4) mailserver domain
+                                 9								//(5) max working time in hours
                              )
                              ,
                  /* MYQL SERVER CONFIGURATION (HOST,PORT,DATABASE,USERNAME,PASSWORD) */

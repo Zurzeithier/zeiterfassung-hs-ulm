@@ -76,11 +76,11 @@ class MySql extends Controller implements iSql
 		{
 			if (! $this->connect())
 				{
-					throw new Exception("Konnte keine Verbindung zum MsSQL-Server '".$this->hostname."' herstellen! (".$this->mssql_error.")",102);
+					throw new Exception("Konnte keine Verbindung zum MsSQL-Server '".$this->hostname."' herstellen! (".$this->mysql_error.")",102);
 				}
 			if (! $this->select_db())
 				{
-					throw new Exception("Konnte auf die MsSQL-Datenbank '".$this->database."' nicht zugreifen! (".$this->mssql_error.")",103);
+					throw new Exception("Konnte auf die MsSQL-Datenbank '".$this->database."' nicht zugreifen! (".$this->msysql_error.")",103);
 				}
 		}
 		
