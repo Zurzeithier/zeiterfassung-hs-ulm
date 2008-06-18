@@ -39,7 +39,23 @@
 <div class="win_corner_rt"></div>
 <br clear="all" />
 <div class="win_bg_left" style="height: 240px;"></div>
-<div class="win_bg_center" style="width: 930px; height: 240px;"><!--SETUP_TABLE-->
+<div class="win_bg_center" style="width: 930px; height: 240px;">
+ <form enctype="multipart/form-data" action="" method="post"
+	target="_self" id="setupform">
+	<input type="hidden" name="page"   value="setup" />
+	<input type="hidden" name="sid"    value="{{SID}}" />
+	Benutzer <select name="mid" >
+	 <option value="-1">- bitte w&auml;hlen -</option>
+	 <!--USERLIST_SELECT-->
+	</select>
+	Aktion <select name="action" >
+	 <option value="nop">- bitte w&auml;hlen -</option>
+	 <option value="delete">L &Ouml; S C H E N</option>
+	 <option value="edit">B E A R B E I T E N</option>
+	 <option value="create">E R S T E L L E N</option>
+	</select>
+</form>
+
 </div>
 <div class="win_bg_right" style="height: 240px;"></div>
 <br clear="all" />
