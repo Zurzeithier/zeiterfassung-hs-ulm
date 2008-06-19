@@ -187,7 +187,7 @@ public class Login extends AbstractPageBean
         UserBean user = UserHandler.LoginUser(username, password);
         if (user != null)
         {
-            getSessionBean1().setUser(user);
+            getSessionBean1().setUser(user);      
             return "loginSucessfull";
         }
         else

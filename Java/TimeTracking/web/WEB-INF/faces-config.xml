@@ -46,4 +46,11 @@
         <managed-bean-class>timetracking.secure.TTSystem</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <navigation-rule>
+        <from-view-id>/secure/TTSystem.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/Login.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
