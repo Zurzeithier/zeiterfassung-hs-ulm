@@ -219,7 +219,7 @@ class Session extends Controller
 					$last   = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
 					
 					$case_1 = ($symid == 1 && isset($last["stamp_1"]) && $last["stamp_2"] == NULL);
-					$case_2 = ($last["away"] > ($_SESSION["_MaxWorkingH"] * 3600) && $last["stamp_2"] == NULL);
+					$case_2 = ($last["away"] > ($_SESSION["_MaxWorkingH"] * 3600) && $symid == 0);
 					
 					// case_1: new check in but last check out is missing (async booking!)
 					if ($case_1 && $ignore)
@@ -249,8 +249,7 @@ class Session extends Controller
 					else if ($case_2)
 						{
 							$message  = "Sie haben die Arbeitszeit von maximal ".$_SESSION["_MaxWorkingH"];
-							$message .= " Stunden &uuml;berschritten!<br/><br/>";
-							$message .= "Bitte azyklisch buchen!";
+							$message .= " Stunden &uuml;berschritten!";
 							throw new Exception($message,312);
 						}
 					// update going stamp only
