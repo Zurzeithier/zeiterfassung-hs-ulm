@@ -20,9 +20,9 @@ public class MSServerAdapter extends Database implements DBAdapter
 
     MSServerAdapter(String adress, String username, String password) throws SQLException
     {
-        super("com.microsoft.sqlserver.jdbc.SQLServerDriver", 
-              "jdbc:sqlserver://", 
-              adress, username, password);
+        super("com.microsoft.sqlserver.jdbc.SQLServerDriver",
+                "jdbc:sqlserver://",
+                adress, username, password);
 
     }
 
@@ -65,7 +65,7 @@ public class MSServerAdapter extends Database implements DBAdapter
         return null;
     }
 
-    public List getTimePosting(int mid) throws DBException
+    public List<TimePostingBean> getTimePosting(int mid) throws DBException
     {
         try
         {
@@ -131,7 +131,7 @@ public class MSServerAdapter extends Database implements DBAdapter
             }
 
             res.close();
-            
+
             return returnBean;
         }
         catch (SQLException ex)
@@ -180,29 +180,37 @@ public class MSServerAdapter extends Database implements DBAdapter
         try
         {
             StringBuilder query = new StringBuilder();
-
-            query.append("UPDATE Mitarbeiter SET ");
-
+            
+            query.append("UPDATE Mitarbeiter");
+            String between = " SET ";
+            
             if (user.getFirstname() != null)
             {
+                query.append(between);
                 query.append("Vornamen='").append(user.getFirstname()).append("'");
+                between = ", ";
             }
             if (user.getName() != null)
             {
+                query.append(between);
                 query.append("Namen='").append(user.getName()).append("'");
+                between = ", ";
             }
             if (user.getUsername() != null)
             {
+                query.append(between);
                 query.append("LoginNamen='").append(user.getUsername()).append("'");
+                between = ", ";
             }
             if (user.getPassword() != null)
             {
+                query.append(between);
                 query.append("LoginPasswort='").append(user.getPassword()).append("'");
+                between = ", ";
             }
 
             query.append(" WHERE mid='").append(user.getMid()).append("'");
-
-            // System.out.println(query.toString());
+            
             Statement sat = getConnection().createStatement();
             boolean sucessfull = sat.execute(query.toString());
 
