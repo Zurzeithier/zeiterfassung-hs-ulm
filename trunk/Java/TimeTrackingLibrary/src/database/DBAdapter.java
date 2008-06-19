@@ -7,6 +7,7 @@ package database;
 
 import beans.TPTypeBean;
 import beans.TimeAccountBean;
+import beans.TimePostingBean;
 import beans.UserBean;
 import exceptions.DBException;
 import java.util.List;
@@ -21,7 +22,7 @@ public interface DBAdapter {
 
     TimeAccountBean getTimeAccount();
 
-    List getTimePosting(int mid) throws DBException;
+    List<TimePostingBean> getTimePosting(int mid) throws DBException;
 
     TPTypeBean getType(int typId) throws DBException;
 

@@ -1,11 +1,7 @@
 package database;
 
 import application.ConfigDataProvider;
-import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import pool.ObjectPoolException;
 
 /**
  *
@@ -13,30 +9,16 @@ import java.util.logging.Logger;
  */
 public class AdapterPool
 {
+    private static DBAdapterObjectPool pool = new DBAdapterObjectPool(ConfigDataProvider.getDBPoolSize());
 
-    private static Queue<DBAdapter> m_Adapters = new LinkedList<DBAdapter>();
-
-    public synchronized static DBAdapter getDBAdapter()
+    public synchronized static DBAdapter getDBAdapter() throws ObjectPoolException
     {
-        if (m_Adapters.size() < ConfigDataProvider.getDBPoolSize())
-        {
-            try
-            {
-                DBAdapter newAdapter = new MSServerAdapter(ConfigDataProvider.getDBData().adress, ConfigDataProvider.getDBData().user, ConfigDataProvider.getDBData().password);
-                m_Adapters.add(newAdapter);
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(AdapterPool.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        return m_Adapters.remove();
+        return pool.borrowObject();
     }
-    
+
     public synchronized static void releaseDBAdapter(DBAdapter adapter)
     {
-        m_Adapters.add(adapter);
+        pool.returnObject(adapter);
     }
 
 }
