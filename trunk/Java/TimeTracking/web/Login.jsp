@@ -23,7 +23,7 @@
                                     <webuijsf:passwordField id="passwordTextField" password="#{Login.password}" style="height: 24px; left: 120px; top: 83px; position: absolute; width: 120px"/>
                                     <webuijsf:button actionExpression="#{Login.loginButton_action}" id="loginButton"
                                         style="height: 24px; left: 119px; top: 131px; position: absolute; width: 96px" text="Login"/>
-                                    <webuijsf:label id="statusLabel" style="height: 24px; left: 24px; top: 11px; position: absolute; width: 96px"
+                                    <webuijsf:label id="statusLabel" style="height: 24px; left: 24px; top: 11px; position: absolute; width: 262px"
                                         styleClass="errorMessage" text="#{Login.status}"/>
                                 </webuijsf:panelLayout>
                             </webuijsf:tab>

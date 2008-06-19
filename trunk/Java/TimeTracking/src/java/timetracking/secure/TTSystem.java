@@ -9,6 +9,8 @@ package timetracking.secure;
 import beans.UserBean;
 import com.sun.data.provider.impl.ObjectListDataProvider;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
+import exceptions.DBException;
+import handlers.UserHandler;
 import javax.faces.FacesException;
 import timetracking.ApplicationBean1;
 import timetracking.SessionBean1;
@@ -35,7 +37,40 @@ public class TTSystem extends AbstractPageBean {
 
     // </editor-fold>
 
+    private String oldPassword = null;
+    private String newPassword = null;
+    private String status = null;
     private ObjectListDataProvider bookings = new ObjectListDataProvider(UserBean.class);
+
+    public String getNewPassword()
+    {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword)
+    {
+        this.newPassword = newPassword;
+    }
+
+    public String getOldPassword()
+    {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword)
+    {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus(String status)
+    {
+        this.status = status;
+    }
 
     public ObjectListDataProvider getBookings()
     {
@@ -47,7 +82,7 @@ public class TTSystem extends AbstractPageBean {
         this.bookings = bookings;
     }
     
-        
+    
      
     /**
      * <p>Construct a new Page bean instance.</p>
@@ -74,6 +109,8 @@ public class TTSystem extends AbstractPageBean {
         // Perform application initialization that must complete
         // *before* managed components are initialized
         // TODO - add your own initialiation code here
+        
+        bookings.addObject(getSessionBean1().getUser());
         
         // <editor-fold defaultstate="collapsed" desc="Managed Component Initialization">
         // Initialize automatically managed components
@@ -145,6 +182,34 @@ public class TTSystem extends AbstractPageBean {
     {
         return (SessionBean1) getBean("SessionBean1");
     }
-    
-}
 
+    public String logoutButton_action()
+    {
+        return "logout";
+    }
+
+    public String tab1_action()
+    {
+        return null;
+    }
+
+    public String tab2_action()
+    {
+        return null;
+    }
+
+    public String changePasswordButton_action() throws DBException
+    {
+        if (UserHandler.ChangeUserPWD(getSessionBean1().getUser().getMid(), oldPassword, newPassword))
+        {
+            status = "Passwort erfolgreich geändert!";
+            status = getSessionBean1().getUser().getUsername();
+        }
+        else
+        {
+            status = "Änderung fehlgeschlagen!";
+        }
+        
+        return null;
+    }
+}
