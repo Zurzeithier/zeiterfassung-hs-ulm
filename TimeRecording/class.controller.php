@@ -23,7 +23,7 @@ class Controller
 		 */
 		public function __construct()
 		{
-			self::reinit();
+			$this->reinit();
 		}
 		
 		/**
@@ -142,9 +142,9 @@ class Controller
 		}
 		
 		/**
-		 * to string returns var_dump of itself
+		 * to string returns null
 		 *
-		 * @return	string		var_dump( $this )
+		 * @return	null
 		 *
 		 * @access  public
 		 *
@@ -152,7 +152,120 @@ class Controller
 		 */
 		public function __toString()
 		{
-			return print_r($_SESSION).";\n";
+			return;
+		}
+		
+		/**
+		 * creates user menu or not
+		 *
+		 * @access  public
+		 *
+		 * @author  patrick.kracht, thorsten.moll
+		 */
+		public function create_menu()
+		{
+			if (! $_SESSION["CLIENT"]->is_user())
+				{
+					return;
+				}
+			$_SESSION["HTML"]->menu_insert_entry("Abmelden", "./?action=logout", "Q");
+			$_SESSION["HTML"]->menu_insert_spacer();
+			$_SESSION["HTML"]->menu_insert_entry("&Uuml;bersicht", "./?page=home", "H", ($_SESSION["_PageID.current"]=="home"));
+			$_SESSION["HTML"]->menu_insert_entry("Mitarbeiter", "./?page=users", "E", ($_SESSION["_PageID.current"]=="users"));
+			$_SESSION["HTML"]->menu_insert_entry("Einstellungen", "./?page=setup", "E", ($_SESSION["_PageID.current"]=="setup"));
+			$_SESSION["HTML"]->menu_insert_spacer();
+			$_SESSION["HTML"]->menu_insert_entry("[<u>KOMMEN</u>]", "./?action=book&amp;id=1", "K");
+			$_SESSION["HTML"]->menu_insert_entry("[<u>GEHEN</u>]", "./?action=book&amp;id=0", "G");
+		}
+		
+		/**
+		 * creates user specific page
+		 *
+		 * @access  public
+		 *
+		 * @author  patrick.kracht, thorsten.moll
+		 */
+		public function create_page()
+		{
+			if (! $_SESSION["CLIENT"]->is_user())
+				{
+					if ($_SESSION["_PageID.current"] == "passwd")
+						{
+							// load template
+							$_SESSION["HTML"]->load("passwd.html");
+							// send page to browser
+							$_SESSION["HTML"]->output("passwd.html");
+						}
+					else
+						{
+							// load template
+							$_SESSION["HTML"]->load("login.html");
+							// send page to browser
+							$_SESSION["HTML"]->output("login.html");
+						}
+				}
+			else
+				{
+					switch ($_SESSION["_PageID.current"])
+						{
+						case "users":
+							$this->show_user_table();
+							$_SESSION["HTML"]->output("users.html");
+							break;
+						case "setup":
+							//TODO ALL
+							$_SESSION["HTML"]->output("setup.html");
+							break;
+						case "home":
+						default:
+							$_SESSION["HTML"]->assign("index.html", "<!--MID-->", $_SESSION["_UserData"]["mid"]);
+							$_SESSION["HTML"]->assign("index.html", "<!--FIRST_NAME-->", $_SESSION["_UserData"]["firstname"]);
+							$_SESSION["HTML"]->assign("index.html", "<!--LAST_NAME-->", $_SESSION["_UserData"]["lastname"]);
+							$_SESSION["HTML"]->assign("index.html", "<!--LOGIN_NAME-->", $_SESSION["_UserData"]["email"]);
+							$_SESSION["HTML"]->assign("index.html", "<!--IP-->", $_SESSION["_UserData"]["ip"]);
+							$_SESSION["HTML"]->assign("index.html", "<!--GROUP_NAME-->", $_SESSION["_UserData"]["groupname"]);
+							
+							// list last bookings
+							$this->show_last_bookings();
+							
+							// summary calculation and assignment for current week and month
+							$array = $this->get_booking_sums("WEEK");
+							$_SESSION["HTML"]->assign("index.html", "<!--SUM_WEEK_NOW-->",$array["Stunden"]);
+							$_SESSION["HTML"]->assign("index.html", "{{SUM_WEEK_NOW_TL}}",$array["Von"]." - ".$array["Bis"]);
+							$array = $this->get_booking_sums("MONTH");
+							$_SESSION["HTML"]->assign("index.html", "<!--SUM_MONTH_NOW-->",$array["Stunden"]);
+							$_SESSION["HTML"]->assign("index.html", "{{SUM_MONTH_NOW_TL}}",$array["Von"]." - ".$array["Bis"]);
+							
+							// summary calculation and assignment for last week and month
+							$array = $this->get_booking_sums("WEEK", 1);
+							$_SESSION["HTML"]->assign("index.html", "<!--SUM_WEEK_LAST-->",$array["Stunden"]);
+							$_SESSION["HTML"]->assign("index.html", "{{SUM_WEEK_LAST_TL}}",$array["Von"]." - ".$array["Bis"]);
+							$array = $this->get_booking_sums("MONTH", 1);
+							$_SESSION["HTML"]->assign("index.html", "<!--SUM_MONTH_LAST-->",$array["Stunden"]);
+							$_SESSION["HTML"]->assign("index.html", "{{SUM_MONTH_LAST_TL}}",$array["Von"]." - ".$array["Bis"]);
+							
+							// send page to browser
+							$_SESSION["HTML"]->output("index.html");
+							break;
+						}
+				}
+		}
+		
+		/**
+		 * prepare templates for session
+		 *
+		 * @access  public
+		 *
+		 * @author  patrick.kracht, thorsten.moll
+		 */
+		public function prepare_templates()
+		{
+			if (! isset($_SESSION["_cached"]) || ! $_SESSION["_cached"])
+				{
+					$_SESSION["HTML"]->import();
+					$_SESSION["HTML"]->preload();
+					$_SESSION["_cached"] = true;
+				}
 		}
 		
 		/**
