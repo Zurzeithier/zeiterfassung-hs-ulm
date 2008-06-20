@@ -31,11 +31,11 @@ class Controller
 		 * default session variables, register session-objects
 		 * if not set, reset needed timers
 		 *
-		 * @access  public
+		 * @access  private
 		 *
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		public function reinit()
+		private function reinit()
 		{
 			// load global config file or die
 			if (!file_exists("./config.controller.php"))
@@ -67,17 +67,17 @@ class Controller
 			// try to register needed objects for current session or die
 			try
 				{
-					self::register("Memory",array(),"MEMORY");
+					$this->register("Memory",array(),"MEMORY");
 					
-					self::register("Timer",array("Controller",true),"TIMER.PHP");
+					$this->register("Timer",array("Controller",true),"TIMER.PHP");
 					$_SESSION["TIMER.PHP"]->reset();
 					$_SESSION["TIMER.PHP"]->start();
 					
-					self::register("MySql", $_SETTINGS["MySql"], "MYSQL");
+					$this->register("MySql", $_SETTINGS["MySql"], "MYSQL");
 					$_SESSION["TIMER.MYSQL"]->reset();
 					
-					self::register("Template", $_SETTINGS["Template"], "HTML");
-					self::register("Session",  array(), "CLIENT");
+					$this->register("Template", $_SETTINGS["Template"], "HTML");
+					$this->register("Session",  array(), "CLIENT");
 				}
 			catch (Exception $e)
 				{
@@ -103,11 +103,11 @@ class Controller
 		 * @param 	array		specific parameters for constructor
 		 * @param 	string		(optional) alias of object
 		 *
-		 * @access  public
+		 * @access  protected
 		 *
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		public function register($classname, $parameters = array(), $alias = "")
+		protected function register($classname, $parameters = array(), $alias = "")
 		{
 			if ($alias != "" && ! isset($_SESSION[$alias]))
 				{
@@ -125,11 +125,11 @@ class Controller
 		 * @param 	string		name of object to delete
 		 * @param 	string		(optional) alias of object
 		 *
-		 * @access  public
+		 * @access  protected
 		 *
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		public function unregister($classname, $alias = "")
+		protected function unregister($classname, $alias = "")
 		{
 			if (isset($_SESSION[$classname]))
 				{
@@ -277,11 +277,11 @@ class Controller
 		 *
 		 * @return	array	array of all sums
 		 *
-		 * @access  public
+		 * @access  protected
 		 *
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		public function get_booking_sums($range = "DAY", $offset = 0, $limit = 1)
+		protected function get_booking_sums($range = "DAY", $offset = 0, $limit = 1)
 		{
 			$group = "";
 			$start = "";
@@ -346,11 +346,11 @@ class Controller
 		 *
 		 * @return	array	array of all tables in database
 		 *
-		 * @access  public
+		 * @access  protected
 		 *
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		public function show_last_bookings($limit=10)
+		protected function show_last_bookings($limit=10)
 		{
 			$query  = "SELECT COUNT( stamp_1 ) AS total FROM tr_bookings ";
 			$query .= "WHERE mid = '".$_SESSION["_UserData"]["mid"]."' GROUP BY mid;";
@@ -372,27 +372,13 @@ class Controller
 		}
 		
 		/**
-		 * returns pagelink
-		 *
-		 * @return	string	html code
-		 *
-		 * @access  public
-		 *
-		 * @author  patrick.kracht, thorsten.moll
-		 */
-		public function get_page_link()
-		{
-			return "TODO";
-		}
-		
-		/**
 		 * generate html user table
 		 *
-		 * @access  public
+		 * @access  protected
 		 *
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		public function show_user_table($limit=10)
+		protected function show_user_table($limit=10)
 		{
 			$query  = "SELECT COUNT( email ) AS total FROM tr_users;";
 			$entry  = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
@@ -419,11 +405,11 @@ class Controller
 		 * @param   string		sql query to get rows from
 		 * @param 	string		id-tag (css stylesheet)
 		 *
-		 * @access  private
+		 * @access  protected
 		 *
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		private function query2table($query,$id)
+		protected function query2table($query,$id)
 		{
 			$result = $_SESSION[$_SESSION["_SqlType"]]->query($query);
 			$first  = true;
@@ -457,7 +443,7 @@ class Controller
 		 *
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		public function switch_actions()
+		public function prepare_actions()
 		{
 			// clean previous errors
 			$_SESSION["_Errors"] = "";
