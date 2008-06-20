@@ -16,13 +16,11 @@ if (0 > version_compare(PHP_VERSION, '5'))
 		die('Diese Programm verwendet mindestens PHP5!');
 	}
 
-// fetch global functions
 require_once "./functions.php";
 
 
-// create controller and check for actions to do
 $Controller =& new Controller;
-$Controller->switch_actions();
+$Controller->prepare_actions();
 $Controller->prepare_templates();
 $Controller->create_menu();
 $Controller->create_page();

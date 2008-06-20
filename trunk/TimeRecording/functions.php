@@ -41,6 +41,8 @@ function __session_start($name="sid")
 	ini_set("session.name", $name);
 	ini_set("session.cookie_path", "/");
 	ini_set("session.cookie_domain", "");
+	ini_set("session.cache_expire", "180");
+	ini_set("session.gc_maxlifetime", "3600");
 	
 	// if no session cookie exists, try to switch to cookieless mode
 	if (!isset($_COOKIE[$name]))
