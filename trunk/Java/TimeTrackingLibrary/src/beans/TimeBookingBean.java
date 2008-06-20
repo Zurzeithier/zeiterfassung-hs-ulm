@@ -6,7 +6,7 @@ import java.util.Date;
  *
  * @author manuel
  */
-public class TimePostingBean
+public class TimeBookingBean
 {
 
     private int bid;
@@ -16,8 +16,8 @@ public class TimePostingBean
     private int kstId;
     private int koaId;
 
-    /** Creates a new instance of TimePostingBean */
-    public TimePostingBean()
+    /** Creates a new instance of TimeBookingBean */
+    public TimeBookingBean()
     {
     }
 

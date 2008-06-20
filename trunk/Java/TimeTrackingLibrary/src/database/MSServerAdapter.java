@@ -2,14 +2,18 @@ package database;
 
 import beans.TPTypeBean;
 import beans.TimeAccountBean;
-import beans.TimePostingBean;
+import beans.TimeBookingBean;
+import beans.TimeBookingTableEntryBean;
 import beans.UserBean;
 import exceptions.DBException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
+import utils.LocalizeUtils;
 
 /**
  *
@@ -37,8 +41,8 @@ public class MSServerAdapter extends Database implements DBAdapter
             query.append("SELECT TypId, Bezeichung, Symbol  FROM ZBTyp WHERE ");
             query.append("TypId='").append(typId).append("'");
 
-            Statement sat = getConnection().createStatement();
-            ResultSet res = sat.executeQuery(query.toString());
+            Statement stat = getConnection().createStatement();
+            ResultSet res = stat.executeQuery(query.toString());
 
 
             if (res.next())
@@ -65,45 +69,6 @@ public class MSServerAdapter extends Database implements DBAdapter
         return null;
     }
 
-    public List<TimePostingBean> getTimePosting(int mid) throws DBException
-    {
-        try
-        {
-            TimePostingBean returnBean = null;
-            List returnList = new ArrayList();
-            StringBuilder query = new StringBuilder();
-
-            query.append("SELECT MId, BId, Datum, KoaId, KstId, TypId FROM ZeitBuchung WHERE ");
-            query.append("MId='").append(mid).append("'");
-
-            Statement sat = getConnection().createStatement();
-            ResultSet res = sat.executeQuery(query.toString());
-
-
-            while (res.next())
-            {
-                returnBean = new TimePostingBean();
-
-                returnBean.setMid(res.getInt("MId"));
-                returnBean.setBid(res.getInt("BId"));
-                returnBean.setDate(res.getDate("Datum"));
-                returnBean.setKoaId(res.getInt("KoaId"));
-                returnBean.setKstId(res.getInt("KstId"));
-                returnBean.setTypId(res.getInt("TypId"));
-
-                returnList.add(returnBean);
-            }
-
-            res.close();
-
-            return returnList;
-        }
-        catch (SQLException ex)
-        {
-            throw new DBException(ex);
-        }
-    }
-
     public UserBean getUser(String username) throws DBException
     {
         try
@@ -115,8 +80,8 @@ public class MSServerAdapter extends Database implements DBAdapter
             query.append("LoginNamen='").append(username).append("'");
 
             // System.out.println(query.toString());
-            Statement sat = getConnection().createStatement();
-            ResultSet res = sat.executeQuery(query.toString());
+            Statement stat = getConnection().createStatement();
+            ResultSet res = stat.executeQuery(query.toString());
 
 
             if (res.next())
@@ -150,8 +115,8 @@ public class MSServerAdapter extends Database implements DBAdapter
             query.append("SELECT MId, Vornamen, Namen, LoginNamen, LoginPasswort FROM Mitarbeiter WHERE ");
             query.append("MId='").append(mid).append("'");
 
-            Statement sat = getConnection().createStatement();
-            ResultSet res = sat.executeQuery(query.toString());
+            Statement stat = getConnection().createStatement();
+            ResultSet res = stat.executeQuery(query.toString());
 
 
             if (res.next())
@@ -180,10 +145,10 @@ public class MSServerAdapter extends Database implements DBAdapter
         try
         {
             StringBuilder query = new StringBuilder();
-            
+
             query.append("UPDATE Mitarbeiter");
             String between = " SET ";
-            
+
             if (user.getFirstname() != null)
             {
                 query.append(between);
@@ -210,11 +175,11 @@ public class MSServerAdapter extends Database implements DBAdapter
             }
 
             query.append(" WHERE mid='").append(user.getMid()).append("'");
-            
-            Statement sat = getConnection().createStatement();
-            boolean sucessfull = sat.execute(query.toString());
 
-            return sucessfull;
+            Statement stat = getConnection().createStatement();
+            int updateCount = stat.executeUpdate(query.toString());
+
+            return (updateCount == 1);
         }
         catch (SQLException ex)
         {
@@ -236,12 +201,87 @@ public class MSServerAdapter extends Database implements DBAdapter
             query.append(user.getUsername()).append(", ");
             query.append(user.getPassword()).append(")");
 
-            Statement sat = getConnection().createStatement();
-            ResultSet res = sat.executeQuery(query.toString());
+            Statement stat = getConnection().createStatement();
+            ResultSet res = stat.executeQuery(query.toString());
 
             res.close();
 
             return true;
+        }
+        catch (SQLException ex)
+        {
+            throw new DBException(ex);
+        }
+    }
+
+    public List<TimeBookingTableEntryBean> getTimeBookings(int mid) throws DBException
+    {
+        try
+        {
+            TimeBookingTableEntryBean returnBean = null;
+            List<TimeBookingTableEntryBean> returnList = new ArrayList();
+            StringBuilder query = new StringBuilder();
+
+            query.append("SELECT Namen, Vornamen, Start_Datum, End_Datum");
+            query.append(" FROM View_GetNextBuchung gb");
+            query.append(" INNER JOIN Mitarbeiter mi");
+            query.append(" ON gb.mid = mi.mid");
+            query.append(" WHERE mi.mid='").append(mid).append("'");
+            query.append(" ORDER BY Start_Datum DESC");
+
+            Statement stat = getConnection().createStatement();
+            ResultSet res = stat.executeQuery(query.toString());
+
+
+            while (res.next())
+            {
+                returnBean = new TimeBookingTableEntryBean();
+
+                returnBean.setFirstname(res.getString("Vornamen"));
+                returnBean.setLastname(res.getString("Namen"));
+
+                // read utc time from db and localize this time              
+                returnBean.setComeBooking(LocalizeUtils.localizeDate(res.getTimestamp("Start_Datum")));
+                returnBean.setGoBooking(LocalizeUtils.localizeDate(res.getTimestamp("End_Datum")));
+
+                returnList.add(returnBean);
+            }
+
+            res.close();
+
+            return returnList;
+        }
+        catch (SQLException ex)
+        {
+            throw new DBException(ex);
+        }
+    }
+
+    public boolean addTimeBooking(TimeBookingBean bean) throws DBException
+    {
+        try
+        {
+            StringBuilder query = new StringBuilder();
+
+            query.append("INSERT INTO ZeitBuchung");
+            query.append(" (TypId, Datum, Mid, KstId, KoaId)");
+            query.append(" VALUES (");
+            query.append(bean.getTypId()).append(", ");
+
+            // format localized time to the right string format and to utc time
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd HH:mm:ss.SSS");
+            dateFormatter.setTimeZone(TimeZone.getTimeZone("GMT"));
+            query.append("'").append(dateFormatter.format(bean.getDate())).append("', ");
+
+            query.append(bean.getMid()).append(", ");
+            query.append(bean.getKstId()).append(", ");
+            query.append(bean.getKoaId());
+            query.append(")");
+
+            Statement stat = getConnection().createStatement();
+            int insertCount = stat.executeUpdate(query.toString());
+
+            return (insertCount == 1);
         }
         catch (SQLException ex)
         {
