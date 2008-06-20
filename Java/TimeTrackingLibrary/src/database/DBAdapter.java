@@ -7,7 +7,8 @@ package database;
 
 import beans.TPTypeBean;
 import beans.TimeAccountBean;
-import beans.TimePostingBean;
+import beans.TimeBookingBean;
+import beans.TimeBookingTableEntryBean;
 import beans.UserBean;
 import exceptions.DBException;
 import java.util.List;
@@ -22,7 +23,9 @@ public interface DBAdapter {
 
     TimeAccountBean getTimeAccount();
 
-    List<TimePostingBean> getTimePosting(int mid) throws DBException;
+    List<TimeBookingTableEntryBean> getTimeBookings(int mid) throws DBException;
+    
+    boolean addTimeBooking(TimeBookingBean bean) throws DBException;
 
     TPTypeBean getType(int typId) throws DBException;
 
