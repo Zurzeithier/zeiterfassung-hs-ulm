@@ -112,7 +112,7 @@ class Timer
 					$this->stop();
 				}
 			$double = (double)number_format($this->runtime * $this->unitfac, $prec);
-			return ($double<0)?0.001:$double;
+			return ($double<=0)?0.001:$double;
 		}
 		
 		/**
