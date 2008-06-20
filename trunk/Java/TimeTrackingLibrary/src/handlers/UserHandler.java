@@ -13,6 +13,7 @@ import utils.SecurityUtils;
  */
 public class UserHandler
 {
+
     /**
      * 
      * @param username
@@ -20,16 +21,11 @@ public class UserHandler
      * @return
      * @throws DBException 
      */
-    public static UserBean LoginUser(String username, String password) throws DBException
+    public static UserBean loginUser(String username, String password) throws DBException
     {
         try
         {
             DBAdapter adapter = AdapterPool.getDBAdapter();
-            
-          /*  UserBean temp = adapter.getUser("manv");
-            temp.setPassword(SecurityUtils.makeMD5Checksum("geheim"));
-            adapter.changeUser(temp);
-            */
             UserBean returnValue = null;
 
             UserBean dbBean = adapter.getUser(username);
@@ -40,38 +36,29 @@ public class UserHandler
             }
 
             AdapterPool.releaseDBAdapter(adapter);
+            
+            returnValue.setPassword(null);  // always delete passwort from bean
             return returnValue;
         }
         catch (ObjectPoolException ex)
         {
-           throw new DBException(ex);
+            throw new DBException(ex);
         }
     }
 
-    /**
-     * Ändert das Passwort eines Users falls der übergebene Username
-     * und das Passwort stimmen.
-     * 
-     * @param mid Mid des zu ändernden Users
-     * @param password Altes Passwort das geändert werden soll
-     * @param newPassword Neues Passwort
-     * @return
-     * @throws DBException 
-     */
-    public static boolean ChangeUserPWD(int mid, String password, String newPassword) throws DBException
+    public static boolean changeUser(int mid, UserBean bean) throws DBException
     {
         try
         {
             DBAdapter adapter = AdapterPool.getDBAdapter();
             boolean returnValue = false;
 
-            UserBean dbBean = adapter.getUser(mid);
-
-            if (dbBean != null && dbBean.getPassword().equals(SecurityUtils.makeMD5Checksum(password)))
+            if (bean != null)
             {
-                UserBean bean = new UserBean();
-                bean.setMid(dbBean.getMid());
-                bean.setPassword(SecurityUtils.makeMD5Checksum(newPassword));
+                if (bean.getPassword() != null)
+                {
+                    bean.setPassword(SecurityUtils.makeMD5Checksum(bean.getPassword()));
+                }
 
                 returnValue = adapter.changeUser(bean);
             }
@@ -84,4 +71,5 @@ public class UserHandler
             throw new DBException(ex);
         }
     }
+
 }
