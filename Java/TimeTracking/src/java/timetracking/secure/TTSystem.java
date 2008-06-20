@@ -37,7 +37,7 @@ public class TTSystem extends AbstractPageBean
     private void _init() throws Exception
     {
         dateTimeConverter.setTimeZone(null);
-        dateTimeConverter.setPattern("HH:mm dd.MM.yyyy");
+        dateTimeConverter.setPattern("dd.MM.yyyy 'um' HH:mm 'Uhr'");
     }
 
     // </editor-fold>
