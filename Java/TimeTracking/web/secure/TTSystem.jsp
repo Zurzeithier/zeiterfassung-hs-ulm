@@ -14,7 +14,7 @@ Author     : manuel
                 </webuijsf:head>
                 <webuijsf:body id="body1" style="-rave-layout: grid">
                     <webuijsf:form id="form1">
-                        <webuijsf:tabSet binding="#{secure$TTSystem.tabSet1}" id="tabSet1" selected="tab2" style="height: 334px; left: 48px; top: 72px; position: absolute; width: 454px">
+                        <webuijsf:tabSet binding="#{secure$TTSystem.tabSet1}" id="tabSet1" selected="tab1" style="height: 334px; left: 48px; top: 72px; position: absolute; width: 454px">
                             <webuijsf:tab actionExpression="#{secure$TTSystem.tab1_action}" id="tab1" tabIndex="5" text="Buchungen">
                                 <webuijsf:panelLayout id="layoutPanel1" style="height: 299px; position: relative; width: 100%; -rave-layout: grid">
                                     <webuijsf:table augmentTitle="false" id="table1" style="height: 173px; left: 24px; top: 72px; position: absolute"
@@ -27,10 +27,10 @@ Author     : manuel
                                                 <webuijsf:staticText id="staticText4" text="#{currentRow.value['lastname']}"/>
                                             </webuijsf:tableColumn>
                                             <webuijsf:tableColumn headerText="Kommen Buchung" id="tableColumn4" valign="top">
-                                                <webuijsf:staticText id="staticText5" text="#{currentRow.value['comeBooking']}"/>
+                                                <webuijsf:staticText converter="#{secure$TTSystem.dateTimeConverter}" id="staticText5" text="#{currentRow.value['comeBooking']}"/>
                                             </webuijsf:tableColumn>
                                             <webuijsf:tableColumn headerText="Gehen Buchung" id="tableColumn1" valign="top">
-                                                <webuijsf:staticText id="staticText1" text="#{currentRow.value['goBooking']}"/>
+                                                <webuijsf:staticText converter="#{secure$TTSystem.dateTimeConverter}" id="staticText1" text="#{currentRow.value['goBooking']}"/>
                                             </webuijsf:tableColumn>
                                         </webuijsf:tableRowGroup>
                                     </webuijsf:table>

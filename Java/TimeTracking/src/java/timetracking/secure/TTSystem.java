@@ -36,9 +36,8 @@ public class TTSystem extends AbstractPageBean
      */
     private void _init() throws Exception
     {
-        dateTimeConverter1.setTimeZone(null);
-        tabSet1.setConverter((javax.faces.convert.Converter) getValue("#{secure$TTSystem.dateTimeConverter2}"));
-        dateTimeConverter2.setTimeZone(null);
+        dateTimeConverter.setTimeZone(null);
+        dateTimeConverter.setPattern("HH:mm dd.MM.yyyy");
     }
 
     // </editor-fold>
@@ -65,16 +64,16 @@ public class TTSystem extends AbstractPageBean
     {
         this.bookings = bookings;
     }
-    private DateTimeConverter dateTimeConverter1 = new DateTimeConverter();
+    private DateTimeConverter dateTimeConverter = new DateTimeConverter();
 
-    public DateTimeConverter getDateTimeConverter1()
+    public DateTimeConverter getDateTimeConverter()
     {
-        return dateTimeConverter1;
+        return dateTimeConverter;
     }
 
-    public void setDateTimeConverter1(DateTimeConverter dtc)
+    public void setDateTimeConverter(DateTimeConverter dtc)
     {
-        this.dateTimeConverter1 = dtc;
+        this.dateTimeConverter = dtc;
     }
 
     private TabSet tabSet1 = new TabSet();
@@ -87,17 +86,6 @@ public class TTSystem extends AbstractPageBean
     public void setTabSet1(TabSet ts)
     {
         this.tabSet1 = ts;
-    }
-    private DateTimeConverter dateTimeConverter2 = new DateTimeConverter();
-
-    public DateTimeConverter getDateTimeConverter2()
-    {
-        return dateTimeConverter2;
-    }
-
-    public void setDateTimeConverter2(DateTimeConverter dtc)
-    {
-        this.dateTimeConverter2 = dtc;
     }
 
     /**
