@@ -3,15 +3,17 @@
  *
  * Created on 17.06.2008, 17:56:01
  */
- 
 package timetracking.secure;
 
-import beans.UserBean;
+import beans.TimeBookingTableEntryBean;
 import com.sun.data.provider.impl.ObjectListDataProvider;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
+import com.sun.webui.jsf.component.TabSet;
 import exceptions.DBException;
+import handlers.BookingHandler;
 import handlers.UserHandler;
 import javax.faces.FacesException;
+import javax.faces.convert.DateTimeConverter;
 import timetracking.ApplicationBean1;
 import timetracking.SessionBean1;
 
@@ -24,43 +26,25 @@ import timetracking.SessionBean1;
  *
  * @author manuel
  */
-public class TTSystem extends AbstractPageBean {
+public class TTSystem extends AbstractPageBean
+{
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
-
     /**
      * <p>Automatically managed component initialization.  <strong>WARNING:</strong>
      * This method is automatically generated, so any user-specified code inserted
      * here is subject to being replaced.</p>
      */
-    private void _init() throws Exception {
+    private void _init() throws Exception
+    {
+        dateTimeConverter1.setTimeZone(null);
+        tabSet1.setConverter((javax.faces.convert.Converter) getValue("#{secure$TTSystem.dateTimeConverter2}"));
+        dateTimeConverter2.setTimeZone(null);
     }
 
     // </editor-fold>
-
-    private String oldPassword = null;
-    private String newPassword = null;
+    
     private String status = null;
-    private ObjectListDataProvider bookings = new ObjectListDataProvider(UserBean.class);
-
-    public String getNewPassword()
-    {
-        return newPassword;
-    }
-
-    public void setNewPassword(String newPassword)
-    {
-        this.newPassword = newPassword;
-    }
-
-    public String getOldPassword()
-    {
-        return oldPassword;
-    }
-
-    public void setOldPassword(String oldPassword)
-    {
-        this.oldPassword = oldPassword;
-    }
+    private ObjectListDataProvider bookings = new ObjectListDataProvider(TimeBookingTableEntryBean.class);
 
     public String getStatus()
     {
@@ -81,13 +65,46 @@ public class TTSystem extends AbstractPageBean {
     {
         this.bookings = bookings;
     }
-    
-    
-     
+    private DateTimeConverter dateTimeConverter1 = new DateTimeConverter();
+
+    public DateTimeConverter getDateTimeConverter1()
+    {
+        return dateTimeConverter1;
+    }
+
+    public void setDateTimeConverter1(DateTimeConverter dtc)
+    {
+        this.dateTimeConverter1 = dtc;
+    }
+
+    private TabSet tabSet1 = new TabSet();
+
+    public TabSet getTabSet1()
+    {
+        return tabSet1;
+    }
+
+    public void setTabSet1(TabSet ts)
+    {
+        this.tabSet1 = ts;
+    }
+    private DateTimeConverter dateTimeConverter2 = new DateTimeConverter();
+
+    public DateTimeConverter getDateTimeConverter2()
+    {
+        return dateTimeConverter2;
+    }
+
+    public void setDateTimeConverter2(DateTimeConverter dtc)
+    {
+        this.dateTimeConverter2 = dtc;
+    }
+
     /**
      * <p>Construct a new Page bean instance.</p>
      */
-    public TTSystem() {
+    public TTSystem()
+    {
     }
 
     /**
@@ -103,29 +120,40 @@ public class TTSystem extends AbstractPageBean {
      * property values that were saved for this view when it was rendered.</p>
      */
     @Override
-    public void init() {
+    public void init()
+    {
         // Perform initializations inherited from our superclass
         super.init();
+
         // Perform application initialization that must complete
         // *before* managed components are initialized
         // TODO - add your own initialiation code here
-        
-        bookings.addObject(getSessionBean1().getUser());
-        
+        try
+        {
+            bookings.setList(BookingHandler.getBookings(getSessionBean1().getUser().getMid()));
+        }
+        catch (DBException ex)
+        {
+            log(ex.getMessage());
+        }
+
         // <editor-fold defaultstate="collapsed" desc="Managed Component Initialization">
         // Initialize automatically managed components
         // *Note* - this logic should NOT be modified
-        try {
+        try
+        {
             _init();
-        } catch (Exception e) {
-            log("TTSystem Initialization Failure", e);
-            throw e instanceof FacesException ? (FacesException) e: new FacesException(e);
         }
-        
-        // </editor-fold>
-        // Perform application initialization that must complete
-        // *after* managed components are initialized
-        // TODO - add your own initialization code here
+        catch (Exception e)
+        {
+            log("TTSystem Initialization Failure", e);
+            throw e instanceof FacesException ? (FacesException) e : new FacesException(e);
+        }
+
+    // </editor-fold>
+    // Perform application initialization that must complete
+    // *after* managed components are initialized
+    // TODO - add your own initialization code here
     }
 
     /**
@@ -136,7 +164,8 @@ public class TTSystem extends AbstractPageBean {
      * resources that will be required in your event handlers.</p>
      */
     @Override
-    public void preprocess() {
+    public void preprocess()
+    {
     }
 
     /**
@@ -148,7 +177,8 @@ public class TTSystem extends AbstractPageBean {
      * this page.</p>
      */
     @Override
-    public void prerender() {
+    public void prerender()
+    {
     }
 
     /**
@@ -160,7 +190,8 @@ public class TTSystem extends AbstractPageBean {
      * acquired during execution of an event handler).</p>
      */
     @Override
-    public void destroy() {
+    public void destroy()
+    {
     }
 
     /**
@@ -200,16 +231,30 @@ public class TTSystem extends AbstractPageBean {
 
     public String changePasswordButton_action() throws DBException
     {
-        if (UserHandler.ChangeUserPWD(getSessionBean1().getUser().getMid(), oldPassword, newPassword))
+        if (UserHandler.changeUser(getSessionBean1().getUser().getMid(), getSessionBean1().getUser()))
         {
-            status = "Passwort erfolgreich geändert!";
-            status = getSessionBean1().getUser().getUsername();
+            status = "Änderungen erfolgreich übernommen!";
         }
         else
         {
             status = "Änderung fehlgeschlagen!";
         }
+
+        return null;
+    }
+
+    public String comePushButton_action() throws DBException
+    {
+        BookingHandler.makeComeBooking(getSessionBean1().getUser().getMid());
         
         return null;
     }
+
+    public String goPushButton_action() throws DBException
+    {
+        BookingHandler.makeGoBooking(getSessionBean1().getUser().getMid());
+        
+        return null;
+    }
+
 }

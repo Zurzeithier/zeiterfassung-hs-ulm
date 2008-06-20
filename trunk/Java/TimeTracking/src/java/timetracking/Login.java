@@ -8,6 +8,7 @@ package timetracking;
 import beans.UserBean;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import exceptions.DBException;
+import handlers.BookingHandler;
 import handlers.UserHandler;
 import javax.faces.FacesException;
 
@@ -36,6 +37,7 @@ public class Login extends AbstractPageBean
     private String username = null;
     private String password = null;
     private String status = null;
+    private boolean message = false;
 
     public String getPassword()
     {
@@ -65,6 +67,16 @@ public class Login extends AbstractPageBean
     public void setStatus(String status)
     {
         this.status = status;
+    }
+
+    public boolean isMessage()
+    {
+        return message;
+    }
+
+    public void setMessage(boolean message)
+    {
+        this.message = message;
     }
 
     /**
@@ -184,7 +196,7 @@ public class Login extends AbstractPageBean
 
     public String loginButton_action() throws DBException
     {
-        UserBean user = UserHandler.LoginUser(username, password);
+        UserBean user = UserHandler.loginUser(username, password);
         if (user != null)
         {
             getSessionBean1().setUser(user);      
@@ -200,10 +212,12 @@ public class Login extends AbstractPageBean
 
     public String kommenPushButton_action() throws DBException
     {
-        UserBean user = UserHandler.LoginUser(username, password);
+        UserBean user = UserHandler.loginUser(username, password);
         if (user != null)
         {
             getSessionBean1().setUser(user);
+            BookingHandler.makeComeBooking(user.getMid());
+            
             return "loginCome";
         }
         else
@@ -216,10 +230,12 @@ public class Login extends AbstractPageBean
 
     public String gehenPushButton_action() throws DBException
     {
-        UserBean user = UserHandler.LoginUser(username, password);
+        UserBean user = UserHandler.loginUser(username, password);
         if (user != null)
         {
             getSessionBean1().setUser(user);
+            BookingHandler.makeGoBooking(user.getMid());
+            
             return "loginGo";
         }
         else
@@ -232,6 +248,7 @@ public class Login extends AbstractPageBean
 
     public String bookingTab_action()
     {
+        message = true;
         return null;
     }
 
