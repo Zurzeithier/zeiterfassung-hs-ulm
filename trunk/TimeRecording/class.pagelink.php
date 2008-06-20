@@ -13,7 +13,7 @@ class PageLink
 	{
 		private $url   = "./";
 		private $pp    = 10;
-		private $ml    = 10;
+		private $ml    = 7;
 		private $_data = array();
 		private $cnt;
 		private $html;
@@ -32,7 +32,7 @@ class PageLink
 		 * @access  public
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		public function __construct($entrycount, $perpage = 10, $maxlinks = 10)
+		public function __construct($entrycount, $perpage = 10, $maxlinks = 7)
 		{
 			// init values
 			$this->html = "";
@@ -95,11 +95,11 @@ class PageLink
 		{
 			$this->html = "Seite";
 			// less than 10 links -> one row, no splitting
-			if ($this->total_pages < 10)
+			if ($this->total_pages <= $this->ml)
 				{
 					$this->get_links_from(1, $this->total_pages);
 				}
-			elseif($this->pageid > 5 && $this->pageid <= ($this->total_pages - 5))
+			elseif($this->pageid > 3 && $this->pageid <= ($this->total_pages - 5))
 			{
 				$this->get_links_from(1, 2);
 				$this->html .= "&nbsp;...";
@@ -107,17 +107,22 @@ class PageLink
 				$this->html .= "&nbsp;...";
 				$this->get_links_from($this->total_pages - 1, $this->total_pages);
 			}
-			elseif($this->pageid <= 5)
+			elseif($this->pageid <= 3)
 			{
-				$this->get_links_from(1, 7);
+				$last = $this->pageid + 2;
+				if ( $last < 5 )
+				{
+					$last = 5;
+				}
+				$this->get_links_from(1, $last );
 				$this->html .= "&nbsp;...";
 				$this->get_links_from($this->total_pages - 1, $this->total_pages);
 			}
-			elseif($this->pageid >= ($this->total_pages - 5))
+			elseif($this->pageid >= ($this->total_pages - 4))
 			{
 				$this->get_links_from(1, 2);
 				$this->html .= "&nbsp;...";
-				$this->get_links_from($this->total_pages - 6, $this->total_pages);
+				$this->get_links_from($this->total_pages - 4, $this->total_pages);
 			}
 		}
 		
