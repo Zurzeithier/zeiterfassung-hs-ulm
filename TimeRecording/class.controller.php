@@ -300,7 +300,7 @@ class Controller
 				{
 					$_SESSION["HTML"]->import();
 					$_SESSION["HTML"]->preload();
-					//$_SESSION["_cached"] = true;
+					$_SESSION["_cached"] = true;
 				}
 		}
 		
