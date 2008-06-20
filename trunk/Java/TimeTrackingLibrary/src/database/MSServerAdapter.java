@@ -79,7 +79,6 @@ public class MSServerAdapter extends Database implements DBAdapter
             query.append("SELECT MId, Vornamen, Namen, LoginNamen, LoginPasswort FROM Mitarbeiter WHERE ");
             query.append("LoginNamen='").append(username).append("'");
 
-            // System.out.println(query.toString());
             Statement stat = getConnection().createStatement();
             ResultSet res = stat.executeQuery(query.toString());
 
