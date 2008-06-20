@@ -10,6 +10,11 @@ BODY {
 	background: white;
 }
 
+FORM {
+	float: left;
+	width: 350px;
+}
+
 #footer {
 	position: fixed;
 	right: 2px;
@@ -108,7 +113,7 @@ BODY {
 	padding: 0px;
 }
 
-#question INPUT {
+#question INPUT, .submit {
 	margin: 9px;
 	font-size: 8pt;
 	width: 75px;
@@ -117,4 +122,30 @@ BODY {
 	border: none;
 	color: black;
 	cursor: pointer;
+}
+
+#createform fieldset,
+#editform fieldset {
+	display: block;
+	width: 200px;
+	border: 1px solid #a4daa5;
+	font-weight: bold;
+}
+
+#createform label,
+#editform label {
+	display: block;
+	width: 300px;
+	font-weight: normal;
+}
+
+#new_firstname,
+#new_lastname,
+#new_password,
+#new_email,
+#edit_mid,
+#new_group {
+	border: 1px solid black;
+	margin: 0px 10px 0px 10px;
+	width: 265px;
 }

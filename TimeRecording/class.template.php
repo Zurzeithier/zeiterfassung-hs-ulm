@@ -569,8 +569,14 @@ class Template extends Controller
 				{
 					foreach($array as $key => $value)
 					{
-						if ($selected == $value) $ret.="<option value=\"$key\" selected=\"selected\">$value</option>";
-						else $ret.="<option value=\"$key\">$value</option>";
+						if ($selected != "" && ( $selected == $value || $selected == $key ) )
+						{
+							$ret.="<option value=\"$key\" selected=\"selected\">$value</option>";
+						}
+						else
+						{ 
+							$ret.="<option value=\"$key\">$value</option>";
+						}
 					}
 				}
 			return $ret;

@@ -18,12 +18,18 @@ if (0 > version_compare(PHP_VERSION, '5'))
 
 require_once "./functions.php";
 
-
-$Controller =& new Controller;
-$Controller->prepare_actions();
-$Controller->prepare_templates();
-$Controller->create_menu();
-$Controller->create_page();
+try
+{
+	$Controller =& new Controller;
+	$Controller->prepare_actions();
+	$Controller->prepare_templates();
+	$Controller->create_menu();
+	$Controller->create_page();
+}
+catch (Exception $e)
+{
+	die( $e->getMessage() );
+}
 
 
 ?>
