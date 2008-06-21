@@ -107,6 +107,19 @@ FORM {
 	font-size: 9pt;
 }
 
+#booking_details {
+	font-size: 9pt;
+	border: none;
+}
+
+#booking_details td {
+	border: 1px solid #a4daa5;
+	padding: 2px;
+	text-align: right;
+	vertical-align: middle;
+	white-space: nowrap;
+}
+	
 #question {
 	text-align: right;
 	margin: 0px;

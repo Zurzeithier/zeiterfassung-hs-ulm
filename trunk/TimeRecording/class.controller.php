@@ -428,7 +428,7 @@ class Controller
 			$query .= "WHERE mid = '".$_SESSION["_UserData"]["mid"]."' ";
 			$query .= "ORDER BY ".$_SESSION["_OrderBy"]["last_bookings"]." ".$plink->get_query_limit();
 
-			$book = $this->query2table($query,"last_bookings");
+			$book = $this->query2table($query,"last_bookings",array(),false,true);
 			$_SESSION["HTML"]->assign("index.html", "<!--HISTORY_DATA-->",$book);
 			$_SESSION["HTML"]->assign("index.html", "<!--HISTORY_PAGE_LINK-->",$plink);
 		}
@@ -457,7 +457,7 @@ class Controller
 			$query .= "LEFT JOIN tr_groups g USING ( gid ) ";
 			$query .= "ORDER BY ".$_SESSION["_OrderBy"]["user_table"]." ".$plink->get_query_limit();
 
-			$users = $this->query2table($query,"user_table", array( 60, 290, 200, 200 ), true );
+			$users = $this->query2table($query,"user_table", array( 60, 290, 200, 200 ), true, true );
 			$_SESSION["HTML"]->assign("users.html", "<!--USER_TABLE-->",$users);
 			$_SESSION["HTML"]->assign("users.html", "<!--USER_PAGE_LINK-->",$plink);
 		}
@@ -476,10 +476,17 @@ class Controller
 				throw new Exception("Sie haben keine Benutzer-ID angegeben!",999);
 			}
 
-			$query    = "SELECT firstname, lastname FROM tr_users WHERE mid = '".intval( $_GET["id"] )."';";
+			$mid = intval( $_GET["id"] );
+
+			$query    = "SELECT firstname, lastname FROM tr_users WHERE mid = '$mid';";
 			$details  = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
 
-			$content  = "TODO";
+			$query  = "SELECT DATE_FORMAT( stamp_1, '%d.%m.%Y' ) AS Datum, ";
+			$query .= "SEC_TO_TIME( IFNULL( SUM( UNIX_TIMESTAMP( stamp_2 ) - UNIX_TIMESTAMP( stamp_1 ) ), 0 ) ) as 'Stunden anwesend', ";
+			$query .= "IF( bookid = NULL, 0, COUNT( bookid ) ) AS 'Anzahl Buchungen' FROM tr_bookings ";
+			$query .= "WHERE mid = '$mid' GROUP BY Datum ORDER BY Datum ASC";
+
+			$content = $this->query2table($query,"booking_details");
 
 			$_SESSION["HTML"]->assign("details.html", "<!--FIRST_NAME-->",$details["firstname"]);
 			$_SESSION["HTML"]->assign("details.html", "<!--LAST_NAME-->", $details["lastname"]);
@@ -535,7 +542,7 @@ class Controller
 		 *
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		protected function query2table($query,$id,$width = array(),$details = false )
+		protected function query2table($query,$id,$width = array(),$details = false, $orderon = false )
 		{
 			$result = $_SESSION[$_SESSION["_SqlType"]]->query($query);
 			$first  = true;
@@ -546,9 +553,8 @@ class Controller
 					if ($first)
 						{
 							$dump .= "<tr>";
-							$order = ($_SESSION["_OrderID"][$id]<0)?($_SESSION["_OrderID"][$id]+10):$_SESSION["_OrderID"][$id];
+							$sid   = "";
 
-							$sid = "";
 							if (ini_get("session.use_cookies") != "1")
 							{
 								$sid = "&amp;".ini_get("session.name")."=".session_id();
@@ -556,18 +562,7 @@ class Controller
 
 							foreach( array_keys($row) as $key => $value )
 							{
-								$arrow_up = "";
-								$arrow_dn = "";
 								$td_width = "";
-
-								// highlight active buttons
-								if ( $order == $key )
-								{
-									if ( $_SESSION["_OrderID"][$id] < 0 )
-										$arrow_up = "_active";
-									else
-										$arrow_dn = "_active";
-								}
 
 								// correct width if set (in pixels)
 								if ( isset( $width[$key] ) )
@@ -576,8 +571,25 @@ class Controller
 								}
 
 								$dump .= "<td{$td_width}><b>";
-								$dump .= "<a href=\"./?page=".$_SESSION["_PageID.current"]."&amp;order=".$key.$sid."\" target=\"_self\"><img src=\"./images/order_arrow_up{$arrow_up}.png\" alt=\"aufsteigend nach $value sortiert\" title=\"aufsteigend nach $value sortiert\" border=\"0\" width=\"12\" height=\"12\" /></a>&nbsp;";
-								$dump .= "<a href=\"./?page=".$_SESSION["_PageID.current"]."&amp;order=".($key+10).$sid."\" target=\"_self\"><img src=\"./images/order_arrow_down{$arrow_dn}.png\" alt=\"absteigend nach $value sortiert\" title=\"absteigend nach $value sortiert\" border=\"0\" width=\"12\" height=\"12\" /></a>&nbsp;";
+
+								if ( $orderon )
+								{
+									$order = ($_SESSION["_OrderID"][$id]<0)?($_SESSION["_OrderID"][$id]+10):$_SESSION["_OrderID"][$id];
+									$arrow_up = "";
+									$arrow_dn = "";
+
+									// highlight active buttons
+									if ( $order == $key )
+									{
+										if ( $_SESSION["_OrderID"][$id] < 0 )
+											$arrow_up = "_active";
+										else
+											$arrow_dn = "_active";
+									}
+
+									$dump .= "<a href=\"./?page=".$_SESSION["_PageID.current"]."&amp;order=".$key.$sid."\" target=\"_self\"><img src=\"./images/order_arrow_up{$arrow_up}.png\" alt=\"aufsteigend nach $value sortiert\" title=\"aufsteigend nach $value sortiert\" border=\"0\" width=\"12\" height=\"12\" /></a>&nbsp;";
+									$dump .= "<a href=\"./?page=".$_SESSION["_PageID.current"]."&amp;order=".($key+10).$sid."\" target=\"_self\"><img src=\"./images/order_arrow_down{$arrow_dn}.png\" alt=\"absteigend nach $value sortiert\" title=\"absteigend nach $value sortiert\" border=\"0\" width=\"12\" height=\"12\" /></a>&nbsp;";
+								}
 								$dump .= $value;
 								$dump .= "</b></td>";
 							}
@@ -592,7 +604,7 @@ class Controller
 						}
 					// append data rows
 					$dump .= "<tr><td>";
-					print_r ($row);
+
 					$dump .= implode("</td><td>", $row);
 
 					if ( $details )
