@@ -23,7 +23,7 @@ class PageLink
 		private $query_limit;
 		private $query_first;
 		private $query_last;
-
+		
 		/**
 		 * @param 	string	id of the pagelink index
 		 * @param 	int		count of all entries (from sql)
@@ -40,11 +40,11 @@ class PageLink
 			$this->ml   = $maxlinks;
 			$this->cnt  = $entrycount;
 			$this->name = $namespace;
-
+			
 			// prepare generation of html
 			$this->prepare();
 		}
-
+		
 		/**
 		 * prepare some values for later usage
 		 * @access  private
@@ -52,16 +52,16 @@ class PageLink
 		 */
 		private function prepare()
 		{
-			if ( ! is_array( $_SESSION["_pageid"] ) )
-			{
-				$_SESSION["_pageid"] = array();
-			}
-
+			if (! is_array($_SESSION["_pageid"]))
+				{
+					$_SESSION["_pageid"] = array();
+				}
+				
 			if (isset($_GET["pageid"]))
 				{
 					$this->pageid = intval($_GET["pageid"]);
 				}
-			else if ( isset( $_SESSION["_pageid"][$this->name] ) )
+			else if (isset($_SESSION["_pageid"][$this->name]))
 				{
 					$this->pageid = $_SESSION["_pageid"][$this->name];
 				}
@@ -69,12 +69,12 @@ class PageLink
 				{
 					$this->pageid = 0;
 				}
-
+				
 			$this->total_pages = ceil($this->cnt / $this->pp);
 			$this->query_limit = "LIMIT ".($this->pp * $this->pageid).",".$this->pp;
 			$this->query_first = ($this->pp * $this->pageid + 1);
 			$this->query_last  = ($this->pp * ($this->pageid + 1));
-
+			
 			// force valid values
 			if ($this->pageid + 1 > $this->total_pages)
 				{
@@ -84,7 +84,7 @@ class PageLink
 				{
 					$this->pageid = 0;
 				}
-
+				
 			// save other query values in url
 			if (isset($_SERVER["QUERY_STRING"]) && ! empty($_SERVER["QUERY_STRING"]))
 				{
@@ -94,10 +94,10 @@ class PageLink
 				{
 					$this->url = "./?page=home";
 				}
-
+				
 			$_SESSION["_pageid"][$this->name] = $this->pageid;
 		}
-
+		
 		/**
 		 * generates whole link bar in html
 		 * @access  private
@@ -137,7 +137,7 @@ class PageLink
 				$this->get_links_from($this->total_pages - 4, $this->total_pages);
 			}
 		}
-
+		
 		/**
 		 * appends pagelink or blank to html
 		 * @param 	int		first page to display
@@ -159,7 +159,7 @@ class PageLink
 						}
 				}
 		}
-
+		
 		/**
 		 * returns the LIMIT x,y string for mysql queries
 		 * @access  public
@@ -169,7 +169,7 @@ class PageLink
 		{
 			return $this->query_limit;
 		}
-
+		
 		/**
 		 * returns html of one link to page number $page
 		 * @param 	int		page number
@@ -180,7 +180,7 @@ class PageLink
 		{
 			return "<a title=\"Seite $page\" href=\"$this->url&amp;pageid=".($page-1)."\">$page</a>";
 		}
-
+		
 		/**
 		 * returns complete link bar
 		 * @access  public
@@ -191,7 +191,7 @@ class PageLink
 			$this->generate();
 			return $this->html;
 		}
-
+		
 	}
 
 ?>

@@ -21,7 +21,7 @@ class Template
 		private $menu_content = "";
 		private $menu_spacer  = false;
 		private $tpl_folder   = "./templates/";
-
+		
 		/**
 		 * constructor read config-file and initializes the vars
 		 *
@@ -38,7 +38,7 @@ class Template
 			$this->do_compress = (isset($parameters[2])) ? $parameters[2] : true;
 			$this->menu_spacer = false;
 		}
-
+		
 		/**
 		 * destructor (nop)
 		 *
@@ -49,7 +49,7 @@ class Template
 		public function __destruct()
 		{
 		}
-
+		
 		/**
 		 * starts new clean output buffer
 		 *
@@ -66,7 +66,7 @@ class Template
 					ob_clean();
 				}
 		}
-
+		
 		/**
 		 * preload all templates by default (or selected by array/string)
 		 *
@@ -89,13 +89,13 @@ class Template
 					$list = str_replace(",", "','", $list);
 					$list = " WHERE file IN ( '$list' )";
 				}
-
+				
 			// get templates table in database
 			$table  = $_SESSION["_TplSqlTable"];
-
+			
 			$query  = "SELECT file, content FROM $table $list;";
 			$result = $_SESSION[$_SESSION["_SqlType"]]->query($query);
-
+			
 			// prebuffer every found template
 			while ($row = $_SESSION[$_SESSION["_SqlType"]]->fetch_array())
 				{
@@ -103,7 +103,7 @@ class Template
 					$this->assigned[ $row['file'] ] = array();
 				}
 		}
-
+		
 		/**
 		 * import all templates by default (or selected by array/string)
 		 *
@@ -120,7 +120,7 @@ class Template
 			//Templates aus der Liste in die Datenbank importieren
 			$values = "";
 			$files  = array();
-
+			
 			if (! $list)
 				{
 					$dir = dir($this->tpl_folder);
@@ -145,7 +145,7 @@ class Template
 				{
 					return false;
 				}
-
+				
 			// prepare query statement for all found files
 			foreach($files as $file)
 			{
@@ -155,7 +155,7 @@ class Template
 				$content  = addslashes($content);
 				$values  .= (($values == "") ? "" : ", ") . "( '$file', '$content' )";
 			}
-
+			
 			// try to renew complete table of templates
 			try
 				{
@@ -169,7 +169,7 @@ class Template
 					die($e->getMessage());
 				}
 		}
-
+		
 		/**
 		 * loads template with $name in internal buffer-array
 		 *
@@ -191,14 +191,14 @@ class Template
 				{
 					$this->assign($name, "{{SID}}", "");
 				}
-
+				
 			// default assignments for system use in forms and links
 			$this->assign($name, "{{PAGE}}",   $_SESSION["_PageID.current"]);
 			$this->assign($name, "{{ACTION}}", $_SESSION["_Action"]);
-
+			
 			// if template loaded, don't waste time and return
 			if (isset($this->template[$name]) && ! $force_reload) return true;
-
+			
 			// try loading from database, is options set
 			if ($_SESSION["_TplSqlTable"] && $_SESSION["_SqlType"])
 				{
@@ -215,23 +215,23 @@ class Template
 							echo $e->getMessage();
 						}
 				}
-
+				
 			// load template or die
 			$filename = $this->tpl_folder.$name;
 			if (! file_exists($filename) || is_dir($filename))
 				{
 					throw new Exception("could not load template '$name' from '$filename'!");
 				}
-
+				
 			$this->template[$name] = file_get_contents($filename);
-
+			
 			// prepare array for assigned substitutions
 			if (! array_key_exists($name, $this->assigned))
 				{
 					array_push($this->assigned, array($name => array()));
 				}
 		}
-
+		
 		/**
 		 * assign a replacement in template $name
 		 *
@@ -255,7 +255,7 @@ class Template
 					$this->assigned[$name][$search] = $replace;
 				}
 		}
-
+		
 		/**
 		 * returns get_parsed content of template in buffer
 		 *
@@ -276,7 +276,7 @@ class Template
 			$this->special_chars($buffer);
 			return $buffer;
 		}
-
+		
 		/**
 		 * compress template (remove not needed chars)
 		 *
@@ -298,7 +298,7 @@ class Template
 			while ($len1 > strlen($buffer));
 			$this->restore_newlines($buffer);
 		}
-
+		
 		/**
 		 * finally sends complete template $name, get_parsed
 		 * and compressed (if setup in config-file)
@@ -317,15 +317,15 @@ class Template
 				{
 					$this->load($name);
 				}
-
+				
 			// if template not buffered again, trow exception
 			if (! isset($this->template[$name]))
 				{
 					die("template '$name' not found!");
 				}
-
+				
 			$menu   = $this->menu_get();
-
+			
 			// output each timer, if present
 			if (isset($_SESSION["TIMER.MYSQL"]))
 				{
@@ -342,31 +342,31 @@ class Template
 					$this->assign($name, "<!--TIMERS_PHP-->", $_SESSION["TIMER.PHP"]."\n");
 					echo $_SESSION["TIMER.PHP"]."\n";
 				}
-
+				
 			// assign visible components
 			$this->assign($name, "<!--MENU-->",   $menu);
 			$this->assign($name, "<!--ERRORS-->", $_SESSION["_Errors"]);
-
+			
 			// parse and replace assignments
 			$buffer = $this->get_parsed($name);
-
+			
 			// fix special html-characters
 			$this->special_chars($buffer);
-
+			
 			// compress html source, if set
 			if ($this->do_compress)
 				{
 					$this->compress($buffer);
 				}
-
+				
 			// print performance infos hidden
 			echo $_SESSION["MEMORY"];
-
+			
 			// save all previously sent output (with byte-order-mark-filter)
 			$obget = trim(ob_get_clean());
 			$obget = str_replace("\xef\xbb\xbf", "", $obget);   //BOM
 			$obget = strip_tags(utf8_encode($obget));
-
+			
 			// if errormessages printed, append hidden or visible
 			if (! empty($obget))
 				{
@@ -379,19 +379,19 @@ class Template
 							$buffer .= $obget;
 						}
 				}
-
+				
 			// if gzip accepted, compress level 9
 			if ($this->accepts_gzip())
 				{
 					$buffer = gzencode($buffer, 9);
 				}
-
+				
 			// send headers to browser and print page
 			$this->headers($type);
 			header("Content-Length: ".strlen($buffer));
 			echo $buffer;
 		}
-
+		
 		/**
 		 * do replacements (if using 'assign') and
 		 * returns array of parsed templates
@@ -411,7 +411,7 @@ class Template
 				}
 			return $this->template[$name];
 		}
-
+		
 		/**
 		 * send headers to browser (no cookies after this point!)
 		 *
@@ -444,7 +444,7 @@ class Template
 					header('X-Compression: None');
 				}
 		}
-
+		
 		/**
 		 * wrap long words from $text at $maxlen (=64 default)
 		 *
@@ -469,7 +469,7 @@ class Template
 			}
 			$text = implode(" ", $newtext);
 		}
-
+		
 		/**
 		 * replace newlines with invisible character (to save newlines in
 		 * textareas for example)
@@ -484,7 +484,7 @@ class Template
 		{
 			$text = str_replace("\n", chr(31), $text);
 		}
-
+		
 		/**
 		 * revert saved newlines to visible
 		 *
@@ -498,7 +498,7 @@ class Template
 		{
 			$text = str_replace(chr(31), "\n", $text);
 		}
-
+		
 		/**
 		 * check, if browser is accepting gzip or not an return boolean
 		 *
@@ -518,7 +518,7 @@ class Template
 			$accept = explode(",", $accept);
 			return (in_array("gzip", $accept) === true);
 		}
-
+		
 		/**
 		 * replace special chars to html-wellformed equivalents
 		 *
@@ -543,7 +543,7 @@ class Template
 			         );
 			$content = strtr($content, $trans);
 		}
-
+		
 		/**
 		 * return a generated select-html-tag with $selected
 		 *
@@ -560,9 +560,9 @@ class Template
 		public function create_select($array, $selected = "")
 		{
 			$ret = "";
-
+			
 			if (! is_array($array)) $array = explode("|", $array);
-
+			
 			if (is_array($array) && count($array) > 1)
 				{
 					foreach($array as $key => $value)
@@ -579,7 +579,7 @@ class Template
 				}
 			return $ret;
 		}
-
+		
 		/**
 		 * the assign method for complete arrays
 		 *
@@ -597,7 +597,7 @@ class Template
 				$data["<!--".strtoupper($key)."-->"] = $value;
 			}
 		}
-
+		
 		/**
 		 * return a right trimmed text with estimated $maxlen width
 		 *
@@ -616,7 +616,7 @@ class Template
 			if ($len > $maxlen) return $text;
 			return str_repeat(" ", $maxlen - $len).$text;
 		}
-
+		
 		/**
 		 * set spacer to next menu entry
 		 *
@@ -628,7 +628,7 @@ class Template
 		{
 			$this->menu_spacer = true;
 		}
-
+		
 		/**
 		* set new menu entry
 		*
@@ -658,7 +658,7 @@ class Template
 			$this->menu_spacer   = false;
 			$this->menu_content .= $return;
 		}
-
+		
 		/**
 		* return menu string
 		*
@@ -674,7 +674,7 @@ class Template
 			$this->menu_content = "";
 			return $return;
 		}
-
+		
 		/**
 		* return true, if needed settings for database access are present
 		*
@@ -688,7 +688,7 @@ class Template
 		{
 			return ($_SESSION["_TplSqlTable"] && $_SESSION["_SqlType"]);
 		}
-
+		
 	}
 
 ?>
