@@ -192,7 +192,6 @@ class Session extends Controller
 			$symid  = (isset($_GET["id"])) ? intval($_GET["id"]) : -1;
 			$symid  = (isset($_POST["id"]) && $symid == -1) ? intval($_POST["id"]) : $symid;
 			
-			print_r($_POST);
 			
 			// for async booking, check if token is valid
 			if (isset($_SESSION["_AsyncToken"]) && isset($_POST["ig"]))

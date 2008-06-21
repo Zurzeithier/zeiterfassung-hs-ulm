@@ -9,7 +9,7 @@
  * @author		Patrick Kracht <patrick.kracht@googlemail.com>
  * @author		Thorsten Moll <thorsten.moll@googlemail.com>
  */
-class Template extends Controller
+class Template
 	{
 		private $template     = array();
 		private $assigned     = array();
@@ -569,14 +569,14 @@ class Template extends Controller
 				{
 					foreach($array as $key => $value)
 					{
-						if ($selected != "" && ( $selected == $value || $selected == $key ) )
-						{
-							$ret.="<option value=\"$key\" selected=\"selected\">$value</option>";
-						}
+						if ($selected != "" && ($selected == $value || $selected == $key))
+							{
+								$ret.="<option value=\"$key\" selected=\"selected\">$value</option>";
+							}
 						else
-						{ 
-							$ret.="<option value=\"$key\">$value</option>";
-						}
+							{
+								$ret.="<option value=\"$key\">$value</option>";
+							}
 					}
 				}
 			return $ret;
