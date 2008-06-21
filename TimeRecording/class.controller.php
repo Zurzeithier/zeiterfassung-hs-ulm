@@ -451,10 +451,9 @@ class Controller
 			
 			$query  = "SELECT u.mid AS MID, u.email AS Email, ";
 			$query .= "u.firstname AS Vorname, u.lastname AS Nachname, g.groupname AS Gruppe ";
-			//$query .= "IF( b.stamp_2 = NULL, 'Nein', 'Ja' ) AS Anwesend ";
 			$query .= "FROM tr_users u ";
-			//$query .= "LEFT JOIN tr_bookings b USING ( mid ) ";
 			$query .= "LEFT JOIN tr_groups g USING ( gid ) ";
+			$query .= "GROUP BY mid ";
 			$query .= "ORDER BY ".$_SESSION["_OrderBy"]["user_table"]." ".$plink->get_query_limit();
 			
 			$users = $this->query2table($query,"user_table", array(60, 290, 200, 200), true, true);
@@ -475,6 +474,10 @@ class Controller
 				{
 					throw new Exception("Sie haben keine Benutzer-ID angegeben!",999);
 				}
+			else if (! $_SESSION["CLIENT"]->is_admin())
+				{
+					throw new Exception("Sie sind kein Administrator!",998);
+				}
 				
 			$mid = intval($_GET["id"]);
 			
@@ -483,7 +486,8 @@ class Controller
 			
 			$query  = "SELECT DATE_FORMAT( stamp_1, '%d.%m.%Y' ) AS Datum, ";
 			$query .= "SEC_TO_TIME( IFNULL( SUM( UNIX_TIMESTAMP( stamp_2 ) - UNIX_TIMESTAMP( stamp_1 ) ), 0 ) ) as 'Stunden anwesend', ";
-			$query .= "IF( bookid = NULL, 0, COUNT( bookid ) ) AS 'Anzahl Buchungen' FROM tr_bookings ";
+			$query .= "IF( bookid = NULL, 0, COUNT( bookid ) ) AS 'Anzahl Buchungen' ";
+			$query .= "FROM tr_bookings ";
 			$query .= "WHERE mid = '$mid' GROUP BY Datum ORDER BY Datum ASC";
 			
 			$content = $this->query2table($query,"booking_details");
@@ -544,9 +548,10 @@ class Controller
 		 */
 		protected function query2table($query,$id,$width = array(),$details = false, $orderon = false)
 		{
-			$result = $_SESSION[$_SESSION["_SqlType"]]->query($query);
-			$first  = true;
-			$dump   = "<table id=\"$id\">";
+			$details = $details && $_SESSION["CLIENT"]->is_admin();
+			$result  = $_SESSION[$_SESSION["_SqlType"]]->query($query);
+			$first   = true;
+			$dump    = "<table id=\"$id\">";
 			while ($row = $_SESSION[$_SESSION["_SqlType"]]->fetch_array($result))
 				{
 					// append only keys on first line
