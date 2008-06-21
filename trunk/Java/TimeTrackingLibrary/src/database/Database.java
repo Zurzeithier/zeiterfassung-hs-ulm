@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Superclass for database connections
  * @author manuel
  */
 public class Database

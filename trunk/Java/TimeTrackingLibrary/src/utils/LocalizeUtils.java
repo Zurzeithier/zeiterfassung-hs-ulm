@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 /**
- *
+ * Provides localization methods
  * @author manuel
  */
 public class LocalizeUtils 

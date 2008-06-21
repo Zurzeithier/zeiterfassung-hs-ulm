@@ -10,7 +10,7 @@ import exceptions.ObjectPoolException;
 import java.sql.SQLException;
 
 /**
- *
+ * Pool which handles database adapter objects
  * @author manuel
  */
 public class DBAdapterObjectPool extends ObjectPool<DBAdapter>

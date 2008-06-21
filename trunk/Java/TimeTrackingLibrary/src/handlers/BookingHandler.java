@@ -11,7 +11,7 @@ import java.util.List;
 import exceptions.ObjectPoolException;
 
 /**
- *
+ * Handler for all booking operations
  * @author manuel
  */
 public class BookingHandler

@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- *
+ * Exception which is occurring while database access
  * @author manuel
  */
 public class DBException extends Exception

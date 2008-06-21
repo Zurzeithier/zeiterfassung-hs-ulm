@@ -4,7 +4,7 @@ import application.ConfigDataProvider;
 import exceptions.ObjectPoolException;
 
 /**
- *
+ * Pool which handles adapter objects
  * @author manuel, steffen
  */
 public class AdapterPool

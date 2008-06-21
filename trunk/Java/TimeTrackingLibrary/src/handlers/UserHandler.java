@@ -8,7 +8,7 @@ import exceptions.ObjectPoolException;
 import utils.SecurityUtils;
 
 /**
- *
+ * Handler for all user operations
  * @author manuel
  */
 public class UserHandler

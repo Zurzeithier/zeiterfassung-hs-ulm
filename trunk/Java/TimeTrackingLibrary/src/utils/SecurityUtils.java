@@ -3,7 +3,7 @@ package utils;
 import java.security.MessageDigest;
 
 /**
- *
+ * Provides security methods
  * @author manuel
  */
 public class SecurityUtils
