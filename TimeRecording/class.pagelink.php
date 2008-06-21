@@ -110,11 +110,11 @@ class PageLink
 			elseif($this->pageid <= 3)
 			{
 				$last = $this->pageid + 2;
-				if ( $last < 5 )
-				{
-					$last = 5;
-				}
-				$this->get_links_from(1, $last );
+				if ($last < 5)
+					{
+						$last = 5;
+					}
+				$this->get_links_from(1, $last);
 				$this->html .= "&nbsp;...";
 				$this->get_links_from($this->total_pages - 1, $this->total_pages);
 			}

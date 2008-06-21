@@ -214,37 +214,37 @@ class Controller
 							$_SESSION["HTML"]->output("users.html");
 							break;
 						case "setup":
-							$select = array( "-1" => "" );
-							$edit   = array( "name1" => "", "name2" => "", "pass" => "" );
+							$select = array("-1" => "");
+							$edit   = array("name1" => "", "name2" => "", "pass" => "");
 							
 							$query  = "SELECT mid, email FROM tr_users ORDER BY email;";
 							$array  = $_SESSION[$_SESSION["_SqlType"]]->query_all($query);
 							
 							// reformat array for creating select menu
-							foreach( $array as $key => $value )
+							foreach($array as $key => $value)
 							{
 								$select[$value["mid"]] = $value["email"];
 							}
 							
 							// check for selected item
 							$selected = "";
-							if ( isset( $_POST["edit_mid"] ) )
-							{
-								$selected = $_POST["edit_mid"];
-								if ( $_POST["submit"] == "LADEN" )
+							if (isset($_POST["edit_mid"]))
 								{
-									$query  = "SELECT * FROM tr_users WHERE mid='$selected';";
-									$array  = $_SESSION[$_SESSION["_SqlType"]]->query_all($query);
-									$edit["name1"] = $array[0]["firstname"];
-									$edit["name2"] = $array[0]["lastname"];
+									$selected = $_POST["edit_mid"];
+									if ($_POST["submit"] == "LADEN")
+										{
+											$query  = "SELECT * FROM tr_users WHERE mid='$selected';";
+											$array  = $_SESSION[$_SESSION["_SqlType"]]->query_all($query);
+											$edit["name1"] = $array[0]["firstname"];
+											$edit["name2"] = $array[0]["lastname"];
+										}
+									else if ($_POST["submit"] == "SPEICHERN")
+										{
+										
+										}
 								}
-								else if ( $_POST["submit"] == "SPEICHERN" )
-								{
-									
-								}
-							}
-							
-							$options = $_SESSION["HTML"]->create_select($select, $selected );
+								
+							$options = $_SESSION["HTML"]->create_select($select, $selected);
 							$_SESSION["HTML"]->assign("setup.html", "{{EDIT_FIRSTNAME}}", $edit["name1"]);
 							$_SESSION["HTML"]->assign("setup.html", "{{EDIT_LASTNAME}}",  $edit["name2"]);
 							$_SESSION["HTML"]->assign("setup.html", "{{EDIT_PASSWORD}}",  $edit["pass"]);
