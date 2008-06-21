@@ -2,13 +2,10 @@ package application.data_beans;
 
 /**
  *
- * Contains the address, username and password
- * for the database 
- * @author manuel
+ * @author Popeye
  */
-public class DBData
+public class MailData
 {
-    
     public final String address;
     public final String user;
     public final String password;
@@ -19,11 +16,10 @@ public class DBData
      * @param user
      * @param password
      */
-    public DBData(String address, String user, String password)
+    public MailData(String adress, String user, String password)
     {
-        this.address = address;
+        this.address = adress;
         this.user = user;
         this.password = password;
     }
-
 }
