@@ -22,7 +22,7 @@ class MsSql extends Controller implements iSql
 		private $password;
 		private $username;
 		private $querytimer;
-		
+
 		/**
 		 * constructor initializes the vars
 		 *
@@ -42,17 +42,17 @@ class MsSql extends Controller implements iSql
 			$this->database   = (isset($parameters[2])) ? $parameters[2] : false;
 			$this->username   = (isset($parameters[3])) ? $parameters[3] : false;
 			$this->password   = (isset($parameters[4])) ? $parameters[4] : false;
-			
+
 			if (! $this->hostname || ! $this->hostport || ! $this->database || ! $this->username || ! $this->password)
 				{
 					throw new Exception("Es fehlt mindestens ein Parameter um die MsSQL-Verbindung herzustellen!",101);
 				}
-				
+
 			parent::register("Timer",array("MsSQL",true),"TIMER.MSSQL");
-			
+
 			$this->init();
 		}
-		
+
 		/**
 		 * destructor is closing connection, if present
 		 *
@@ -64,7 +64,7 @@ class MsSql extends Controller implements iSql
 		{
 			if ($this->link_id) $this->close();
 		}
-		
+
 		/**
 		 * init is connecting to the mysql-server and selecting the database
 		 *
@@ -83,7 +83,7 @@ class MsSql extends Controller implements iSql
 					throw new Exception("Konnte auf die MsSQL-Datenbank '".$this->database."' nicht zugreifen! (".$this->mssql_error.")",103);
 				}
 		}
-		
+
 		/**
 		 * connect creates the MySQL connection and returns status
 		 *
@@ -106,7 +106,7 @@ class MsSql extends Controller implements iSql
 				}
 			return true;
 		}
-		
+
 		/**
 		 * selects the MySQL database
 		 *
@@ -128,7 +128,7 @@ class MsSql extends Controller implements iSql
 				}
 			return true;
 		}
-		
+
 		/**
 		 * query sends querystring to server and returns queryid
 		 *
@@ -152,7 +152,7 @@ class MsSql extends Controller implements iSql
 			$_SESSION["TIMER.MSSQL"]->stop();
 			return $this->query_id;
 		}
-		
+
 		/**
 		 * queryall sends querystring to server and returns whole result as array
 		 *
@@ -177,7 +177,7 @@ class MsSql extends Controller implements iSql
 			array_pop($return);
 			return $return;
 		}
-		
+
 		/**
 		 * unbuffered_query (like query, but unbuffered)
 		 *
@@ -210,7 +210,7 @@ class MsSql extends Controller implements iSql
 			$_SESSION["TIMER.MSSQL"]->stop();
 			return $this->query_id;
 		}
-		
+
 		/**
 		 * fetch a result row as an associative array, a numeric array, or both
 		 *
@@ -233,7 +233,7 @@ class MsSql extends Controller implements iSql
 			$_SESSION["TIMER.MSSQL"]->stop();
 			return $return;
 		}
-		
+
 		/**
 		 * get row as enumerated array
 		 *
@@ -254,7 +254,7 @@ class MsSql extends Controller implements iSql
 			$_SESSION["TIMER.MSSQL"]->stop();
 			return $return;
 		}
-		
+
 		/**
 		 * query_first sends querystring to server and returns array
 		 *
@@ -277,7 +277,7 @@ class MsSql extends Controller implements iSql
 			$this->free_result($this->query_id);
 			return $return;
 		}
-		
+
 		/**
 		 * gets the number of rows in result
 		 *
@@ -297,7 +297,7 @@ class MsSql extends Controller implements iSql
 			$_SESSION["TIMER.MSSQL"]->stop();
 			return $return;
 		}
-		
+
 		/**
 		 * gets the number of rows in result
 		 *
@@ -317,7 +317,7 @@ class MsSql extends Controller implements iSql
 			$_SESSION["TIMER.MSSQL"]->stop();
 			return $return;
 		}
-		
+
 		/**
 		 * gets id of last insert query
 		 *
@@ -334,7 +334,7 @@ class MsSql extends Controller implements iSql
 			if ($link_id!=-1) $this->link_id = $link_id;
 			return $this->query_first("SELECT @@IDENTITY");
 		}
-		
+
 		/**
 		 * frees result of previous query
 		 *
@@ -349,7 +349,7 @@ class MsSql extends Controller implements iSql
 			@mssql_free_result($result);
 			unset($result);
 		}
-		
+
 		/**
 		 * closes mysql-connection
 		 *
@@ -364,7 +364,7 @@ class MsSql extends Controller implements iSql
 			if ($link_id!=-1) $this->link_id = $link_id;
 			@mssql_close($this->link_id);
 		}
-		
+
 		/**
 		 * returns array of all tables in database
 		 *
@@ -384,7 +384,7 @@ class MsSql extends Controller implements iSql
 				}
 			return $return;
 		}
-		
+
 		/**
 		 * generate html string sql table
 		 *
@@ -398,7 +398,7 @@ class MsSql extends Controller implements iSql
 			$first  = true;
 			$query  = "SELECT * FROM $tablename $where";
 			$result = $this->query($query);
-			
+
 			// append title and start table
 			$dump  .= "<table border=\"1\">";
 			while ($row = $this->fetch_array($result))
@@ -423,7 +423,7 @@ class MsSql extends Controller implements iSql
 			$dump  .= "</table>";
 			return $dump;
 		}
-		
+
 	}
 
 ?>
