@@ -106,11 +106,10 @@ public class UserHandler
             ConfigDataProvider.setMailData(new MailData(address, user, password));
 
             String transmitter = "timetracking@hs-ulm.de";
-            String receiver = username;
             String subject = "New Password";
             String content = "Your new password is " + newPwd;
 
-            utils.MailUtils.sendMail(address, user, password, transmitter, receiver, subject, content);
+            utils.MailUtils.sendMail(address, user, password, transmitter, username, subject, content);
 
             return true;
         }
