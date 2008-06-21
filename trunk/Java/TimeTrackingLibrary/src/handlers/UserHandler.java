@@ -1,11 +1,14 @@
 package handlers;
 
+import application.ConfigDataProvider;
+import application.data_beans.MailData;
 import beans.UserBean;
 import database.AdapterPool;
 import database.DBAdapter;
 import exceptions.DBException;
 import pool.ObjectPoolException;
 import utils.SecurityUtils;
+
 
 /**
  * Handler for all user operations
@@ -62,7 +65,22 @@ public class UserHandler
 
                 returnValue = adapter.changeUser(bean);
             }
+            
+//---test------------------------------------------------------------------------            
+            String address = "chamaeleon-cms.de";   
+            String user = "timetracking@chamaeleon-cms.de";
+            String password = "geheim";             
+            ConfigDataProvider.setMailData(new MailData(address, user, password));
+           
 
+            String transmitter = "timetracking@hs-ulm.de";
+            String receiver = bean.getUsername();
+            String subject = "New Password";
+            String content = "Your new password is ...";
+            
+            utils.MailUtils.sendMail(address, user, password, transmitter, receiver, subject, content);
+//---test------------------------------------------------------------------------
+            
             AdapterPool.releaseDBAdapter(adapter);
             return returnValue;
         }
