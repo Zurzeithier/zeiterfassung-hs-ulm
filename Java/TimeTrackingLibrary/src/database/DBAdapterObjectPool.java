@@ -26,7 +26,7 @@ public class DBAdapterObjectPool extends ObjectPool<DBAdapter>
     {
         try
         {
-            return new MSServerAdapter(ConfigDataProvider.getDBData().adress, ConfigDataProvider.getDBData().user, ConfigDataProvider.getDBData().password);
+            return new MSServerAdapter(ConfigDataProvider.getDBData().address, ConfigDataProvider.getDBData().user, ConfigDataProvider.getDBData().password);
         }
         catch (SQLException ex)
         {

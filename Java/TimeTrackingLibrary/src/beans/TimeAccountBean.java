@@ -1,7 +1,7 @@
 package beans;
 
 /**
- *
+ * Represents one row of the TimeAccount table
  * @author manuel
  */
 public class TimeAccountBean
