@@ -15,10 +15,10 @@ public class UserHandler
 {
 
     /**
-     * 
-     * @param username
+     * Performs the user login
+     * @param username Login name
      * @param password
-     * @return
+     * @return Complete user data
      * @throws DBException 
      */
     public static UserBean loginUser(String username, String password) throws DBException

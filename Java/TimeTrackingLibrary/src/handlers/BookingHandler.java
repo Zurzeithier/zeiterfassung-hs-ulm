@@ -16,6 +16,12 @@ import exceptions.ObjectPoolException;
  */
 public class BookingHandler
 {
+    /**
+     * Fetches a List of booking by user ID
+     * @param mid User ID 
+     * @return List of bookings
+     * @throws exceptions.DBException
+     */
     public static List<TimeBookingTableEntryBean> getBookings(int mid) throws DBException
     {
         try
@@ -34,6 +40,12 @@ public class BookingHandler
         }
     }
     
+    /**
+     * Appends a COME booking
+     * @param mid User ID 
+     * @return Whether the operation was successful
+     * @throws exceptions.DBException
+     */
     public static boolean makeComeBooking(int mid) throws DBException
     {
         try
@@ -58,6 +70,12 @@ public class BookingHandler
         }        
     }
     
+    /**
+     * Appends a GO booking
+     * @param mid User ID
+     * @return Whether the operation was successful
+     * @throws exceptions.DBException
+     */
     public static boolean makeGoBooking(int mid) throws DBException
     {
         try
