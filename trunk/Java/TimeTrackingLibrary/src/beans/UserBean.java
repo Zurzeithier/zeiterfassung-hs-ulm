@@ -1,7 +1,7 @@
 package beans;
 
 /**
- *
+ * Represents one row of the User table
  * @author manuel
  */
 public class UserBean

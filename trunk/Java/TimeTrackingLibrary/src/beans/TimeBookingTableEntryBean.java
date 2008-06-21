@@ -3,7 +3,7 @@ package beans;
 import java.util.Date;
 
 /**
- *
+ * Represents one row of the gui output table
  * @author manuel
  */
 public class TimeBookingTableEntryBean 

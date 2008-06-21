@@ -1,7 +1,7 @@
 package beans;
 
 /**
- *
+ * Represents one row of the TPType table
  * @author manuel
  */
 public class TPTypeBean
