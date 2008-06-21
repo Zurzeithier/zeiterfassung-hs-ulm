@@ -18,7 +18,7 @@ class Timer
 		private $unitfac = 1.0;			// unit multiplication factor
 		private $unitstr = "s";			// unti string name (default seconds)
 		private $namestr;				// name of the current counter
-
+		
 		/**
 		 * constructor initializes the counter and starts it (if wanted)
 		 *
@@ -38,7 +38,7 @@ class Timer
 				}
 			self::$number++;
 		}
-
+		
 		/**
 		 * destructor kills the timer and decreases counter
 		 *
@@ -50,7 +50,7 @@ class Timer
 		{
 			self::$number--;
 		}
-
+		
 		/**
 		 * start current timer
 		 *
@@ -62,7 +62,7 @@ class Timer
 		{
 			$this->microtm = microtime(true);
 		}
-
+		
 		/**
 		 * stop timer and increase total runtime and ticks counter
 		 *
@@ -76,7 +76,7 @@ class Timer
 			$this->microtm = 0;
 			$this->counter++;
 		}
-
+		
 		/**
 		 * resets current counter to zero
 		 *
@@ -92,7 +92,7 @@ class Timer
 			$this->unitfac = 1.0;
 			$this->runtime = 0;
 		}
-
+		
 		/**
 		 * get
 		 *
@@ -114,7 +114,7 @@ class Timer
 			$double = (double)number_format($this->runtime * $this->unitfac, $prec);
 			return ($double<=0)?0.001:$double;
 		}
-
+		
 		/**
 		 * get number of timeslices from timer
 		 *
@@ -128,7 +128,7 @@ class Timer
 		{
 			return $this->counter;
 		}
-
+		
 		/**
 		 * get number of counters registered
 		 *
@@ -142,7 +142,7 @@ class Timer
 		{
 			return self::$number;
 		}
-
+		
 		/**
 		 * set units system
 		 *
@@ -172,7 +172,7 @@ class Timer
 					break;
 				}
 		}
-
+		
 		/**
 		 * to string
 		 *
@@ -194,7 +194,7 @@ class Timer
 			$return .= $this->get().$this->unitstr . "<br/>";
 			return $return;
 		}
-
+		
 	}
 
 ?>

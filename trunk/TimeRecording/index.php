@@ -3,6 +3,10 @@
 /**
  * MAIN PROGRAM - TIMERECORDING
  *
+ * @abstract
+ *
+ * @see
+ *
  * @copyright 	Patrick Kracht <patrick.kracht@googlemail.com>
  * @copyright	Thorsten Moll <thorsten.moll@googlemail.com>
  *
