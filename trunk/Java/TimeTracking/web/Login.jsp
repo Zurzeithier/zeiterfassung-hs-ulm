@@ -44,12 +44,6 @@
                                 </webuijsf:panelLayout>
                             </webuijsf:tab>
                         </webuijsf:tabSet>
-                        <webuijsf:bubble autoClose="false" id="bubble1" style="height: 142px; left: 168px; top: 336px; position: absolute"
-                            title="Buchung außer Tackt" visible="#{Login.message}" width="216">
-                            <webuijsf:panelLayout id="layoutPanel3" style="height: 96px; position: relative; width: 180px; -rave-layout: grid">
-                                <webuijsf:button id="button1" style="height: 24px; left: -1px; top: 48px; position: absolute; width: 48px" text="Ja"/>
-                            </webuijsf:panelLayout>
-                        </webuijsf:bubble>
                     </webuijsf:form>
                 </webuijsf:body>
             </webuijsf:html>
