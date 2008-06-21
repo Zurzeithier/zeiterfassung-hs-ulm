@@ -6,7 +6,7 @@
 package exceptions;
 
 /**
- *
+ * Exception which is occurring while ObjectPool access
  * @author manuel
  */
 public class ObjectPoolException extends Exception

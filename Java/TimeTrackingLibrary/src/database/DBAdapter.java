@@ -14,7 +14,7 @@ import exceptions.DBException;
 import java.util.List;
 
 /**
- *
+ * Interface of database adapters
  * @author manuel
  */
 public interface DBAdapter {

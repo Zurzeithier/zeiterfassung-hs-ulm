@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 import java.util.Queue;
 
 /**
- *
+ * Pool which contains adapter objects
  * @param <E> 
  * @author manuel
  */

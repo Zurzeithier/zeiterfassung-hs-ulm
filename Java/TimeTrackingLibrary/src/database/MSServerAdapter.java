@@ -16,7 +16,7 @@ import java.util.TimeZone;
 import utils.LocalizeUtils;
 
 /**
- *
+ * Adapter for Microsoft database connections which contains all querys
  * @author manuel
  */
 public class MSServerAdapter extends Database implements DBAdapter
