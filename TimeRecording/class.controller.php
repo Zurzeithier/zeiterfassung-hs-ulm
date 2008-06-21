@@ -171,7 +171,7 @@ class Controller
 				}
 			$_SESSION["HTML"]->menu_insert_entry("Abmelden", "./?action=logout", "Q");
 			$_SESSION["HTML"]->menu_insert_spacer();
-			$_SESSION["HTML"]->menu_insert_entry("&Uuml;bersicht", "./?page=home", "H", ($_SESSION["_PageID.current"]=="home"));
+			$_SESSION["HTML"]->menu_insert_entry("&Uuml;bersicht", "./?page=home", "H", ($_SESSION["_PageID.current"]!="users")&&($_SESSION["_PageID.current"]!="setup"));
 			$_SESSION["HTML"]->menu_insert_entry("Mitarbeiter", "./?page=users", "E", ($_SESSION["_PageID.current"]=="users"));
 			$_SESSION["HTML"]->menu_insert_entry("Einstellungen", "./?page=setup", "E", ($_SESSION["_PageID.current"]=="setup"));
 			$_SESSION["HTML"]->menu_insert_spacer();
@@ -300,7 +300,7 @@ class Controller
 				{
 					$_SESSION["HTML"]->import();
 					$_SESSION["HTML"]->preload();
-					$_SESSION["_cached"] = true;
+					//$_SESSION["_cached"] = true;
 				}
 		}
 
@@ -433,7 +433,7 @@ class Controller
 			$query .= "LEFT JOIN tr_groups g USING ( gid ) ";
 			$query .= "ORDER BY ".$_SESSION["_OrderBy"]["user_table"]." ".$plink->get_query_limit();
 
-			$users = $this->query2table($query,"user_table", array( 60, 290, 200, 200 ) );
+			$users = $this->query2table($query,"user_table", array( 60, 290, 200, 200 ), true );
 			$_SESSION["HTML"]->assign("users.html", "<!--USER_TABLE-->",$users);
 			$_SESSION["HTML"]->assign("users.html", "<!--USER_PAGE_LINK-->",$plink);
 		}
@@ -480,12 +480,14 @@ class Controller
 		 *
 		 * @param   string		sql query to get rows from
 		 * @param 	string		id-tag (css stylesheet)
+		 * @param 	array		(optional) width in pixel for td
+		 * @param	boolean		(optional) add col with dtails link to userid
 		 *
 		 * @access  protected
 		 *
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		protected function query2table($query,$id,$width = array())
+		protected function query2table($query,$id,$width = array(),$details = false )
 		{
 			$result = $_SESSION[$_SESSION["_SqlType"]]->query($query);
 			$first  = true;
@@ -531,12 +533,25 @@ class Controller
 								$dump .= $value;
 								$dump .= "</b></td>";
 							}
+
+							if ( $details )
+							{
+								$dump .= "<td>&nbsp;</td>";
+							}
+
 							$dump .= "</tr>";
 							$first = false;
 						}
 					// append data rows
 					$dump .= "<tr><td>";
+					print_r ($row);
 					$dump .= implode("</td><td>", $row);
+
+					if ( $details )
+					{
+						$dump .= "<td><a href=\"./details.php?id=".$row["MID"].$sid."\" target=\"_blank\"><img src=\"./images/more_infos.png\" alt=\"Details zu ".$row["Vorname"]." ".$row["Nachname"]."\" title=\"Details zu ".$row["Vorname"]." ".$row["Nachname"]."\" border=\"0\" width=\"12\" height=\"12\" /></a></td>";
+					}
+
 					$dump .= "</td></tr>";
 				}
 			$_SESSION[$_SESSION["_SqlType"]]->free_result($result);
@@ -617,9 +632,6 @@ class Controller
 							break;
 						case "passwd":
 							$_SESSION["CLIENT"]->passwd();
-							break;
-						case "import":
-							echo $_SESSION["HTML"]->import();
 							break;
 						}
 				}
