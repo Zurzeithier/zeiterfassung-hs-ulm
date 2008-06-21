@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.3.1-hudson-417-SNAPSHOT. --><xs:schema xmlns:tns="http://time_tracking/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://time_tracking/">
+
+<xs:element name="DBException" type="tns:DBException"></xs:element>
+
+<xs:element name="changeUser" type="tns:changeUser"></xs:element>
+
+<xs:element name="changeUserResponse" type="tns:changeUserResponse"></xs:element>
+
+<xs:element name="loginUser" type="tns:loginUser"></xs:element>
+
+<xs:element name="loginUserResponse" type="tns:loginUserResponse"></xs:element>
+
+<xs:element name="sendNewPassword" type="tns:sendNewPassword"></xs:element>
+
+<xs:element name="sendNewPasswordResponse" type="tns:sendNewPasswordResponse"></xs:element>
+
+<xs:complexType name="loginUser">
+<xs:sequence>
+<xs:element name="username" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="loginUserResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:userBean" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="userBean">
+<xs:sequence>
+<xs:element name="firstname" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="mid" type="xs:int"></xs:element>
+<xs:element name="name" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="username" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="DBException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendNewPassword">
+<xs:sequence>
+<xs:element name="username" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendNewPasswordResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changeUser">
+<xs:sequence>
+<xs:element name="mid" type="xs:int"></xs:element>
+<xs:element name="userbean" type="tns:userBean" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changeUserResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/TimeTrackingWebService/UserHandlerServiceService?wsdl" uri="xml-resources/web-service-references/UserHandlerServiceService/wsdl/localhost_8080/TimeTrackingWebService/UserHandlerServiceService.wsdl"/>
+    <system systemId="http://localhost:8080/TimeTrackingWebService/UserHandlerServiceService?xsd=1" uri="xml-resources/web-service-references/UserHandlerServiceService/wsdl/localhost_8080/TimeTrackingWebService/UserHandlerServiceService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/TimeTrackingWebService/BookingHandlerServiceService?wsdl" uri="xml-resources/web-service-references/BookingHandlerServiceService/wsdl/localhost_8080/TimeTrackingWebService/BookingHandlerServiceService.wsdl"/>
+    <system systemId="http://localhost:8080/TimeTrackingWebService/BookingHandlerServiceService?xsd=1" uri="xml-resources/web-service-references/BookingHandlerServiceService/wsdl/localhost_8080/TimeTrackingWebService/BookingHandlerServiceService.xsd_1.xsd"/>
+</catalog>

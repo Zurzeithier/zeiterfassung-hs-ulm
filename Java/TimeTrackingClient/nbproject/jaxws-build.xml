@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xalan="http://xml.apache.org/xslt" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+    <!--
+                ===================
+                JAX-WS WSIMPORT SECTION
+                ===================
+            -->
+    <target name="wsimport-init" depends="init">
+        <mkdir dir="${build.generated.dir}/wsimport/client"/>
+        <mkdir dir="${build.generated.dir}/wsimport/binaries"/>
+        <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+            <classpath path="${libs.jaxws21.classpath}"/>
+        </taskdef>
+    </target>
+    <target name="wsimport-client-check-UserHandlerServiceService" depends="wsimport-init">
+        <condition property="wsimport-client-UserHandlerServiceService.notRequired">
+            <available file="${build.generated.dir}/wsimport/client/time_tracking" type="dir"/>
+        </condition>
+    </target>
+    <target name="wsimport-client-UserHandlerServiceService" depends="wsimport-init,wsimport-client-check-UserHandlerServiceService" unless="wsimport-client-UserHandlerServiceService.notRequired">
+        <wsimport fork="true" xendorsed="true" sourcedestdir="${build.generated.dir}/wsimport/client" extension="true" destdir="${build.generated.dir}/wsimport/binaries" wsdl="${basedir}/xml-resources/web-service-references/UserHandlerServiceService/wsdl/localhost_8080/TimeTrackingWebService/UserHandlerServiceService.wsdl" wsdlLocation="http://localhost:8080/TimeTrackingWebService/UserHandlerServiceService?wsdl" catalog="catalog.xml">
+            <jvmarg value="-Djava.endorsed.dirs=${jaxws.endorsed.dir}"/>
+        </wsimport>
+        <copy todir="${build.classes.dir}">
+            <fileset dir="${build.generated.dir}/wsimport/binaries" includes="**/*.xml"/>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-UserHandlerServiceService" depends="-init-project">
+        <delete dir="${build.generated.dir}/wsimport/client/time_tracking"/>
+    </target>
+    <target name="wsimport-client-check-BookingHandlerServiceService" depends="wsimport-init">
+        <condition property="wsimport-client-BookingHandlerServiceService.notRequired">
+            <available file="${build.generated.dir}/wsimport/client/time_tracking" type="dir"/>
+        </condition>
+    </target>
+    <target name="wsimport-client-BookingHandlerServiceService" depends="wsimport-init,wsimport-client-check-BookingHandlerServiceService" unless="wsimport-client-BookingHandlerServiceService.notRequired">
+        <wsimport fork="true" xendorsed="true" sourcedestdir="${build.generated.dir}/wsimport/client" extension="true" destdir="${build.generated.dir}/wsimport/binaries" wsdl="${basedir}/xml-resources/web-service-references/BookingHandlerServiceService/wsdl/localhost_8080/TimeTrackingWebService/BookingHandlerServiceService.wsdl" wsdlLocation="http://localhost:8080/TimeTrackingWebService/BookingHandlerServiceService?wsdl" catalog="catalog.xml">
+            <jvmarg value="-Djava.endorsed.dirs=${jaxws.endorsed.dir}"/>
+        </wsimport>
+        <copy todir="${build.classes.dir}">
+            <fileset dir="${build.generated.dir}/wsimport/binaries" includes="**/*.xml"/>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-BookingHandlerServiceService" depends="-init-project">
+        <delete dir="${build.generated.dir}/wsimport/client/time_tracking"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-UserHandlerServiceService, wsimport-client-BookingHandlerServiceService"/>
+    <target name="wsimport-client-compile" depends="-pre-pre-compile">
+        <j2seproject3:depend srcdir="${build.generated.dir}/wsimport/client" classpath="${libs.jaxws21.classpath}:${javac.classpath}" destdir="${build.classes.dir}"/>
+        <j2seproject3:javac srcdir="${build.generated.dir}/wsimport/client" classpath="${libs.jaxws21.classpath}:${javac.classpath}" destdir="${build.classes.dir}"/>
+    </target>
+</project>
