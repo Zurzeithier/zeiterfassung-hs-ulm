@@ -5,7 +5,6 @@ import beans.TimeBookingTableEntryBean;
 import database.AdapterPool;
 import database.DBAdapter;
 import exceptions.DBException;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import pool.ObjectPoolException;
@@ -19,17 +18,18 @@ public class BookingHandler
     /**
      * Fetches a List of booking by user ID
      * @param mid User ID 
+     * @param number 
      * @return List of bookings
      * @throws exceptions.DBException
      */
-    public static List<TimeBookingTableEntryBean> getBookings(int mid) throws DBException
+    public static List<TimeBookingTableEntryBean> getBookings(int mid, int number) throws DBException
     {
         try
         {
             DBAdapter adapter = AdapterPool.getDBAdapter();
             List<TimeBookingTableEntryBean> returnList = null;
             
-            returnList = adapter.getTimeBookings(mid);
+            returnList = adapter.getTimeBookings(mid, number);
             
             AdapterPool.releaseDBAdapter(adapter);
             return returnList;

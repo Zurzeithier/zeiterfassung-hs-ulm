@@ -213,7 +213,7 @@ public class MSServerAdapter extends Database implements DBAdapter
         }
     }
 
-    public List<TimeBookingTableEntryBean> getTimeBookings(int mid) throws DBException
+    public List<TimeBookingTableEntryBean> getTimeBookings(int mid, int number) throws DBException
     {
         try
         {
@@ -221,7 +221,12 @@ public class MSServerAdapter extends Database implements DBAdapter
             List<TimeBookingTableEntryBean> returnList = new ArrayList();
             StringBuilder query = new StringBuilder();
 
-            query.append("SELECT Namen, Vornamen, Start_Datum, End_Datum");
+            query.append("SELECT");
+            if (number > -1)
+            {
+                query.append(" TOP ").append(number);   // set number of rows that should be returned
+            }
+            query.append(" Namen, Vornamen, Start_Datum, End_Datum");
             query.append(" FROM View_GetNextBuchung gb");
             query.append(" INNER JOIN Mitarbeiter mi");
             query.append(" ON gb.mid = mi.mid");
