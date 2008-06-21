@@ -164,16 +164,36 @@ class Controller
 		 */
 		public function create_menu()
 		{
-			if (! $_SESSION["CLIENT"]->is_user())
+			if (! $_SESSION["CLIENT"]->is_user() )
 				{
 					// no menu for guests!!
 					return;
 				}
+
+			$is_users = false;
+			$is_home  = false;
+			$is_setup = false;
+
+			switch( $_SESSION["_PageID.current"] )
+			{
+				case "setup":
+					$is_setup = true;
+					break;
+				case "users":
+				case "details":
+					$is_users = true;
+					break;
+				case "home":
+				default:
+					$is_home = true;
+					break;
+			}
+
 			$_SESSION["HTML"]->menu_insert_entry("Abmelden", "./?action=logout", "Q");
 			$_SESSION["HTML"]->menu_insert_spacer();
-			$_SESSION["HTML"]->menu_insert_entry("&Uuml;bersicht", "./?page=home", "H", ($_SESSION["_PageID.current"]!="users")&&($_SESSION["_PageID.current"]!="setup"));
-			$_SESSION["HTML"]->menu_insert_entry("Mitarbeiter", "./?page=users", "E", ($_SESSION["_PageID.current"]=="users"));
-			$_SESSION["HTML"]->menu_insert_entry("Einstellungen", "./?page=setup", "E", ($_SESSION["_PageID.current"]=="setup"));
+			$_SESSION["HTML"]->menu_insert_entry("&Uuml;bersicht", "./?page=home", "H", $is_home );
+			$_SESSION["HTML"]->menu_insert_entry("Mitarbeiter", "./?page=users", "E", $is_users );
+			$_SESSION["HTML"]->menu_insert_entry("Einstellungen", "./?page=setup", "S", $is_setup );
 			$_SESSION["HTML"]->menu_insert_spacer();
 			$_SESSION["HTML"]->menu_insert_entry("[<u>KOMMEN</u>]", "./?action=book&amp;id=1", "K");
 			$_SESSION["HTML"]->menu_insert_entry("[<u>GEHEN</u>]", "./?action=book&amp;id=0", "G");
@@ -212,6 +232,10 @@ class Controller
 						case "users":
 							$this->show_user_table();
 							$_SESSION["HTML"]->output("users.html");
+							break;
+						case "details":
+							$this->show_user_details();
+							$_SESSION["HTML"]->output("details.html");
 							break;
 						case "setup":
 							$select = array("-1" => "");
@@ -439,6 +463,30 @@ class Controller
 		}
 
 		/**
+		 * generate html details for specific userid
+		 *
+		 * @access  public
+		 *
+		 * @author  patrick.kracht, thorsten.moll
+		 */
+		public function show_user_details()
+		{
+			if ( ! isset( $_GET["id"] ) )
+			{
+				throw new Exception("Sie haben keine Benutzer-ID angegeben!",999);
+			}
+
+			$query    = "SELECT firstname, lastname FROM tr_users WHERE mid = '".intval( $_GET["id"] )."';";
+			$details  = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
+
+			$content  = "TODO";
+
+			$_SESSION["HTML"]->assign("details.html", "<!--FIRST_NAME-->",$details["firstname"]);
+			$_SESSION["HTML"]->assign("details.html", "<!--LAST_NAME-->", $details["lastname"]);
+			$_SESSION["HTML"]->assign("details.html", "<!--DETAILS-->",   $content );
+		}
+
+		/**
 		 * set sorting query
 		 *
 		 * @param   string		tableid for sorting
@@ -549,7 +597,7 @@ class Controller
 
 					if ( $details )
 					{
-						$dump .= "<td><a href=\"./details.php?id=".$row["MID"].$sid."\" target=\"_blank\"><img src=\"./images/more_infos.png\" alt=\"Details zu ".$row["Vorname"]." ".$row["Nachname"]."\" title=\"Details zu ".$row["Vorname"]." ".$row["Nachname"]."\" border=\"0\" width=\"12\" height=\"12\" /></a></td>";
+						$dump .= "<td><a href=\"./?page=details&amp;id=".$row["MID"].$sid."\" target=\"_self\"><img src=\"./images/more_infos.png\" alt=\"Details zu ".$row["Vorname"]." ".$row["Nachname"]."\" title=\"Details zu ".$row["Vorname"]." ".$row["Nachname"]."\" border=\"0\" width=\"12\" height=\"12\" /></a></td>";
 					}
 
 					$dump .= "</td></tr>";
