@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <definitions 
+ xmlns="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="UserHandlerServiceService" targetNamespace="http://time_tracking/" xmlns:tns="http://time_tracking/" 
+ >
+    <message name="loginUser"/>
+    <message name="loginUserResponse"/>
+    <message name="DBException"/>
+    <message name="changeUser"/>
+    <message name="changeUserResponse"/>
+    <message name="sendNewPassword"/>
+    <message name="sendNewPasswordResponse"/>
+    <portType name="UserHandlerService">
+        <operation name="loginUser">
+            <input message="tns:loginUser"/>
+            <output message="tns:loginUserResponse"/>
+            <fault name="DBException" message="tns:DBException"/>
+        </operation>
+        <operation name="changeUser">
+            <input message="tns:changeUser"/>
+            <output message="tns:changeUserResponse"/>
+            <fault name="DBException" message="tns:DBException"/>
+        </operation>
+        <operation name="sendNewPassword">
+            <input message="tns:sendNewPassword"/>
+            <output message="tns:sendNewPasswordResponse"/>
+            <fault name="DBException" message="tns:DBException"/>
+        </operation>
+    </portType>
+    <binding name="UserHandlerServicePortBinding" type="tns:UserHandlerService">
+        <operation name="loginUser">
+            <input/>
+            <output/>
+            <fault name="DBException"/>
+        </operation>
+        <operation name="changeUser">
+            <input/>
+            <output/>
+            <fault name="DBException"/>
+        </operation>
+        <operation name="sendNewPassword">
+            <input/>
+            <output/>
+            <fault name="DBException"/>
+        </operation>
+    </binding>
+    <service name="UserHandlerServiceService">
+        <port name="UserHandlerServicePort" binding="tns:UserHandlerServicePortBinding"/>
+    </service>
+</definitions>
