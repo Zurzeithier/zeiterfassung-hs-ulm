@@ -7,25 +7,18 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
 /**
  *
  * @author Popeye
  */
-public class MailUtils {
-    
+public class MailUtils
+{
+
     public static boolean sendMail(String address, String user, String password, String transmitter, String receiver, String subject, String content)
     {
-
-        /*String address = "chamaeleon-cms.de";
-        String transmitter = "hallo@blabla.de";
-        String to = "frehse.steffen@googlemail.com";
-        String subject = "test";
-        String content = "noch mehr test";
-        String username = "timetracking@chamaeleon-cms.de";
-        String password = "geheim";*/
-                                
         MailAuthenticator authentication = new MailAuthenticator(user, password);
-         
+
         // New mail session
         Properties mailServer = new Properties();
         mailServer.put("mail.smtp.host", address);
@@ -46,7 +39,7 @@ public class MailUtils {
 
             // Send message
             Transport.send(msg);
-            
+
             return true;
         }
         catch (Exception e)
@@ -54,4 +47,21 @@ public class MailUtils {
             return false;
         }
     }
+
+    public static String genertateRandomPassword(int length)
+    {
+        StringBuilder pwd = new StringBuilder();
+        int randomNumber = 0;
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (int i = 0; i < length; i++)
+        {
+             // get random number
+            randomNumber = (int) Math.round(Math.random() * chars.length());
+            pwd.append(chars.charAt(randomNumber));
+        }
+
+        return pwd.toString();
+    }
+
 }
