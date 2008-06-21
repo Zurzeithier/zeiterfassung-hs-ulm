@@ -199,12 +199,12 @@ public class Login extends AbstractPageBean
         UserBean user = UserHandler.loginUser(username, password);
         if (user != null)
         {
-            getSessionBean1().setUser(user);      
+            getSessionBean1().setUser(user);
             return "loginSucessfull";
         }
         else
         {
-            status = "Username/Password is wrong!";
+            status = "Benutzername/ Passwort ist falsch!";
         }
 
         return null;
@@ -216,7 +216,7 @@ public class Login extends AbstractPageBean
         if (user != null)
         {
             getSessionBean1().setUser(user);
-            
+
             if (BookingHandler.nextBookingIsGo(user.getMid()))
             {
                 BookingHandler.makeComeBooking(user.getMid());
@@ -226,12 +226,12 @@ public class Login extends AbstractPageBean
             {
                 message = true;
             }
-            
+
             return null;
         }
         else
         {
-            status = "Username/Password is wrong!";
+            status = "Benutzername/ Passwort ist falsch!";
         }
 
         return null;
@@ -243,7 +243,7 @@ public class Login extends AbstractPageBean
         if (user != null)
         {
             getSessionBean1().setUser(user);
-         
+
             if (BookingHandler.nextBookingIsGo(user.getMid()))
             {
                 BookingHandler.makeGoBooking(user.getMid());
@@ -253,12 +253,12 @@ public class Login extends AbstractPageBean
             {
                 message = true;
             }
-            
+
             return null;
         }
         else
         {
-            status = "Username/Password is wrong!";
+            status = "Benutzername/ Passwort ist falsch!";
         }
 
         return null;
@@ -278,7 +278,7 @@ public class Login extends AbstractPageBean
     {
         UserBean user = getSessionBean1().getUser();
         if (user != null)
-        {  
+        {
             // außer Takt buchen, deshalb Prüfung umgedreht
             if (BookingHandler.nextBookingIsCome(user.getMid()))
             {
@@ -288,11 +288,15 @@ public class Login extends AbstractPageBean
             {
                 BookingHandler.makeComeBooking(user.getMid());
             }
-           
-            message = false;       
+
+            message = false;
             return "loginSucessfull";
         }
-        
+        else
+        {
+            status = "Benutzername/ Passwort ist falsch!";
+        }
+
         message = false;
         return null;
     }

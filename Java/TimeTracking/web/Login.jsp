@@ -25,22 +25,24 @@ Author     : manuel
                                         style="height: 24px; left: 120px; top: 83px; position: absolute; width: 120px" tabIndex="2"/>
                                     <webuijsf:button actionExpression="#{Login.loginButton_action}" id="loginButton"
                                         style="height: 24px; left: 119px; top: 131px; position: absolute; width: 96px" tabIndex="3" text="Login"/>
-                                    <webuijsf:label id="statusLabel" style="height: 24px; left: 24px; top: 11px; position: absolute; width: 262px"
+                                    <webuijsf:label id="statusLabel" style="height: 24px; left: 24px; top: 10px; position: absolute; width: 262px"
                                         styleClass="errorMessage" text="#{Login.status}"/>
                                 </webuijsf:panelLayout>
                             </webuijsf:tab>
                             <webuijsf:tab actionExpression="#{Login.bookingTab_action}" id="bookingTab" tabIndex="5" text="Buchen">
                                 <webuijsf:panelLayout id="layoutPanel2" style="height: 177px; position: relative; width: 311px; -rave-layout: grid">
                                     <webuijsf:button actionExpression="#{Login.kommenPushButton_action}" id="kommenPushButton"
-                                        style="height: 24px; left: 23px; top: 120px; position: absolute; width: 96px" tabIndex="3" text="Kommen"/>
+                                        style="height: 24px; left: 23px; top: 131px; position: absolute; width: 96px" tabIndex="3" text="Kommen"/>
                                     <webuijsf:button actionExpression="#{Login.gehenPushButton_action}" id="gehenPushButton"
-                                        style="height: 24px; left: 143px; top: 120px; position: absolute; width: 96px" tabIndex="4" text="Gehen"/>
-                                    <webuijsf:label id="label3" style="height: 24px; left: 24px; top: 33px; position: absolute; width: 94px" text="Benutzername"/>
-                                    <webuijsf:label id="label4" style="height: 24px; left: 24px; top: 72px; position: absolute; width: 94px" text="Passwort"/>
+                                        style="height: 24px; left: 143px; top: 131px; position: absolute; width: 96px" tabIndex="4" text="Gehen"/>
+                                    <webuijsf:label id="label3" style="height: 24px; left: 24px; top: 48px; position: absolute; width: 94px" text="Benutzername"/>
+                                    <webuijsf:label id="label4" style="height: 24px; left: 24px; top: 83px; position: absolute; width: 94px" text="Passwort"/>
                                     <webuijsf:textField id="bookingUsernameTextField"
-                                        style="height: 24px; left: 120px; top: 33px; position: absolute; width: 120px" tabIndex="1" text="#{Login.username}"/>
+                                        style="height: 24px; left: 120px; top: 48px; position: absolute; width: 120px" tabIndex="1" text="#{Login.username}"/>
                                     <webuijsf:passwordField id="bookingPasswordTextField" password="#{Login.password}"
-                                        style="position: absolute; left: 120px; top: 72px; width: 48px; height: 24px" tabIndex="2"/>
+                                        style="height: 24px; left: 120px; top: 83px; position: absolute; width: 48px" tabIndex="2"/>
+                                    <webuijsf:label id="statusLabel1" style="height: 24px; left: 24px; top: 10px; position: absolute; width: 262px"
+                                        styleClass="errorMessage" text="#{Login.status}"/>
                                 </webuijsf:panelLayout>
                             </webuijsf:tab>
                         </webuijsf:tabSet>
