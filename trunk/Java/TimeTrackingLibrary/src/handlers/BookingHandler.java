@@ -8,7 +8,7 @@ import exceptions.DBException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-import exceptions.ObjectPoolException;
+import pool.ObjectPoolException;
 
 /**
  * Handler for all booking operations
