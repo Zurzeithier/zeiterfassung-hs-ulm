@@ -388,11 +388,13 @@ class Controller
 		 */
 		protected function show_last_bookings($limit=10)
 		{
+			$this->set_table_order( "last_bookings", array( "stamp_1", "Gekommen", "Gegangen", "Anwesend" ), 10 );
+
 			$query  = "SELECT COUNT( stamp_1 ) AS total FROM tr_bookings ";
 			$query .= "WHERE mid = '".$_SESSION["_UserData"]["mid"]."' GROUP BY mid;";
 			$entry  = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
 
-			$plink = new PageLink($entry["total"]);
+			$plink = new PageLink( "last_bookings", $entry["total"]);
 
 			$query  = "SELECT DATE_FORMAT( stamp_1, '%d.%m.%Y' ) AS Datum, ";
 			$query .= "DATE_FORMAT( stamp_1, '%T Uhr' ) AS Gekommen, ";
@@ -400,7 +402,7 @@ class Controller
 			$query .= "SEC_TO_TIME( UNIX_TIMESTAMP( stamp_2 ) - UNIX_TIMESTAMP( stamp_1 ) ) AS Anwesend ";
 			$query .= "FROM tr_bookings ";
 			$query .= "WHERE mid = '".$_SESSION["_UserData"]["mid"]."' ";
-			$query .= "ORDER BY stamp_1 DESC ".$plink->get_query_limit();
+			$query .= "ORDER BY ".$_SESSION["_OrderBy"]["last_bookings"]." ".$plink->get_query_limit();
 
 			$book = $this->query2table($query,"last_bookings");
 			$_SESSION["HTML"]->assign("index.html", "<!--HISTORY_DATA-->",$book);
@@ -416,22 +418,61 @@ class Controller
 		 */
 		protected function show_user_table($limit=10)
 		{
+			$this->set_table_order( "user_table", array( "mid", "email", "firstname", "lastname", "groupname" ), 0 );
+
 			$query  = "SELECT COUNT( email ) AS total FROM tr_users;";
 			$entry  = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
 
-			$plink = new PageLink($entry["total"]);
+			$plink = new PageLink( "user_table", $entry["total"]);
 
-			$query  = "SELECT u.mid AS MitarbeiterID, u.email AS Email, ";
+			$query  = "SELECT u.mid AS MID, u.email AS Email, ";
 			$query .= "u.firstname AS Vorname, u.lastname AS Nachname, g.groupname AS Gruppe ";
 			//$query .= "IF( b.stamp_2 = NULL, 'Nein', 'Ja' ) AS Anwesend ";
 			$query .= "FROM tr_users u ";
 			//$query .= "LEFT JOIN tr_bookings b USING ( mid ) ";
 			$query .= "LEFT JOIN tr_groups g USING ( gid ) ";
-			$query .= "ORDER BY mid ASC ".$plink->get_query_limit();
+			$query .= "ORDER BY ".$_SESSION["_OrderBy"]["user_table"]." ".$plink->get_query_limit();
 
-			$users = $this->query2table($query,"user_table");
+			$users = $this->query2table($query,"user_table", array( 60, 290, 200, 200 ) );
 			$_SESSION["HTML"]->assign("users.html", "<!--USER_TABLE-->",$users);
 			$_SESSION["HTML"]->assign("users.html", "<!--USER_PAGE_LINK-->",$plink);
+		}
+
+		/**
+		 * set sorting query
+		 *
+		 * @param   string		tableid for sorting
+		 * @param 	array		order by values, 0 = default [left to right]
+		 * @param 	int			(optional) default value
+		 *
+		 * @access  protected
+		 *
+		 * @author  patrick.kracht, thorsten.moll
+		 */
+		protected function set_table_order( $tableid, $ordervalues, $default = 0 )
+		{
+			if ( ! is_array( $_SESSION["_OrderBy"] ) || ! is_array( $_SESSION["_OrderID"] ) )
+			{
+				 $_SESSION["_OrderID"] = array();
+				 $_SESSION["_OrderBy"] = array();
+			}
+
+			if ( ! isset( $_SESSION["_OrderBy"][$tableid] ) || isset( $_GET["order"] ) )
+			{
+				$_SESSION["_OrderID"][$tableid] = (isset($_GET["order"]))?(intval($_GET["order"])-10):($default-10);
+				$direc = ($_SESSION["_OrderID"][$tableid]>=0)?"DESC":"ASC";
+				$order = ($_SESSION["_OrderID"][$tableid]<0)?($_SESSION["_OrderID"][$tableid]+10):$_SESSION["_OrderID"][$tableid];
+
+				if ( isset( $ordervalues[$order] ) )
+				{
+					$order = $ordervalues[$order];
+				}
+				else
+				{
+					$order = $ordervalues[0];
+				}
+				$_SESSION["_OrderBy"][$tableid] = "$order $direc";
+			}
 		}
 
 		/**
@@ -444,7 +485,7 @@ class Controller
 		 *
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		protected function query2table($query,$id)
+		protected function query2table($query,$id,$width = array())
 		{
 			$result = $_SESSION[$_SESSION["_SqlType"]]->query($query);
 			$first  = true;
@@ -454,9 +495,43 @@ class Controller
 					// append only keys on first line
 					if ($first)
 						{
-							$dump .= "<tr><td><b>";
-							$dump .= implode("</b></td><td><b>", array_keys($row));
-							$dump .= "</b></td></tr>";
+							$dump .= "<tr>";
+							$order = ($_SESSION["_OrderID"][$id]<0)?($_SESSION["_OrderID"][$id]+10):$_SESSION["_OrderID"][$id];
+
+							$sid = "";
+							if (ini_get("session.use_cookies") != "1")
+							{
+								$sid = "&amp;".ini_get("session.name")."=".session_id();
+							}
+
+							foreach( array_keys($row) as $key => $value )
+							{
+								$arrow_up = "";
+								$arrow_dn = "";
+								$td_width = "";
+
+								// highlight active buttons
+								if ( $order == $key )
+								{
+									if ( $_SESSION["_OrderID"][$id] < 0 )
+										$arrow_up = "_active";
+									else
+										$arrow_dn = "_active";
+								}
+
+								// correct width if set (in pixels)
+								if ( isset( $width[$key] ) )
+								{
+									$td_width = " style=\"width:".$width[$key]."px;\"";
+								}
+
+								$dump .= "<td{$td_width}><b>";
+								$dump .= "<a href=\"./?page=".$_SESSION["_PageID.current"]."&amp;order=".$key.$sid."\" target=\"_self\"><img src=\"./images/order_arrow_up{$arrow_up}.png\" alt=\"aufsteigend nach $value sortiert\" title=\"aufsteigend nach $value sortiert\" border=\"0\" width=\"12\" height=\"12\" /></a>&nbsp;";
+								$dump .= "<a href=\"./?page=".$_SESSION["_PageID.current"]."&amp;order=".($key+10).$sid."\" target=\"_self\"><img src=\"./images/order_arrow_down{$arrow_dn}.png\" alt=\"absteigend nach $value sortiert\" title=\"absteigend nach $value sortiert\" border=\"0\" width=\"12\" height=\"12\" /></a>&nbsp;";
+								$dump .= $value;
+								$dump .= "</b></td>";
+							}
+							$dump .= "</tr>";
 							$first = false;
 						}
 					// append data rows
