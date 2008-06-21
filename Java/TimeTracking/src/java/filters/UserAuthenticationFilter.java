@@ -24,7 +24,7 @@ import timetracking.SessionBean1;
 public class UserAuthenticationFilter implements Filter
 {
 
-    private final static String FILTER_APPLIED = "_security_filter_applied";
+    private final static String FILTER_APPLIED = "_authentication_filter_applied";
 
     public void init(FilterConfig config) throws ServletException
     {
@@ -36,11 +36,7 @@ public class UserAuthenticationFilter implements Filter
         HttpServletResponse hres = (HttpServletResponse) response;
         HttpSession session = hreq.getSession();
 
-        String checkforloginpage = hreq.getPathTranslated();
-
-        //dont filter login.jsp because otherwise an endless loop.
-        //& only filter .jsp otherwise it will filter all images etc as well.
-        if ((request.getAttribute(FILTER_APPLIED) == null) && (!checkforloginpage.endsWith("Login.jsp")) && (checkforloginpage.endsWith(".jsp")))
+        if (request.getAttribute(FILTER_APPLIED) == null)
         {
             request.setAttribute(FILTER_APPLIED, Boolean.TRUE);
 
@@ -50,9 +46,10 @@ public class UserAuthenticationFilter implements Filter
                 user = ((SessionBean1) session.getAttribute("SessionBean1")).getUser();
             }
             
-            if (user == null)
+            
+            if (user == null)   // checkes if user is loged in
             {
-                hres.sendRedirect("/TimeTracking"); // send user to default page
+                hres.sendRedirect("/TimeTracking");     // send user to default page
                 return;
             }
 
