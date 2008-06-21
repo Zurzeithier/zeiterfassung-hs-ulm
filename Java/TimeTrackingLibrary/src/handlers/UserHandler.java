@@ -36,11 +36,11 @@ public class UserHandler
             if (dbBean != null && dbBean.getPassword().equals(SecurityUtils.makeMD5Checksum(password)))
             {
                 returnValue = dbBean;
+                returnValue.setPassword(null);  // always delete passwort from bean
             }
 
             AdapterPool.releaseDBAdapter(adapter);
             
-            returnValue.setPassword(null);  // always delete passwort from bean
             return returnValue;
         }
         catch (ObjectPoolException ex)

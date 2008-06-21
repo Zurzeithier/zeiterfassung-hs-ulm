@@ -301,7 +301,7 @@ public class MSServerAdapter extends Database implements DBAdapter
             StringBuilder query = new StringBuilder();
 
             query.append("SELECT TOP 1 Bid, TypId, Datum, Mid, KstId, KoaId");
-            query.append("FROM ZeitBuchung"); 
+            query.append(" FROM ZeitBuchung"); 
             query.append(" WHERE Mid='").append(mid).append("'");
             query.append(" ORDER BY Datum DESC");
 
