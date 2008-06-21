@@ -1,14 +1,13 @@
 /*
- * Page1.java
+ * ForgotPassword.java
  *
- * Created on 16.06.2008, 14:24:26
+ * Created on 21.06.2008, 19:21:24
  */
+ 
 package timetracking;
 
-import beans.UserBean;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import exceptions.DBException;
-import handlers.BookingHandler;
 import handlers.UserHandler;
 import javax.faces.FacesException;
 
@@ -21,33 +20,21 @@ import javax.faces.FacesException;
  *
  * @author manuel
  */
-public class Login extends AbstractPageBean
-{
+public class ForgotPassword extends AbstractPageBean {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
+
     /**
      * <p>Automatically managed component initialization.  <strong>WARNING:</strong>
      * This method is automatically generated, so any user-specified code inserted
      * here is subject to being replaced.</p>
      */
-    private void _init() throws Exception
-    {
+    private void _init() throws Exception {
     }
 
     // </editor-fold>
+
     private String username = null;
-    private String password = null;
     private String status = null;
-    private boolean message = false;
-
-    public String getPassword()
-    {
-        return password;
-    }
-
-    public void setPassword(String password)
-    {
-        this.password = password;
-    }
 
     public String getUsername()
     {
@@ -68,22 +55,12 @@ public class Login extends AbstractPageBean
     {
         this.status = status;
     }
-
-    public boolean isMessage()
-    {
-        return message;
-    }
-
-    public void setMessage(boolean message)
-    {
-        this.message = message;
-    }
-
+   
+    
     /**
      * <p>Construct a new Page bean instance.</p>
      */
-    public Login()
-    {
+    public ForgotPassword() {
     }
 
     /**
@@ -99,31 +76,27 @@ public class Login extends AbstractPageBean
      * property values that were saved for this view when it was rendered.</p>
      */
     @Override
-    public void init()
-    {
+    public void init() {
         // Perform initializations inherited from our superclass
         super.init();
         // Perform application initialization that must complete
         // *before* managed components are initialized
         // TODO - add your own initialiation code here
-
+        
         // <editor-fold defaultstate="collapsed" desc="Managed Component Initialization">
         // Initialize automatically managed components
         // *Note* - this logic should NOT be modified
-        try
-        {
+        try {
             _init();
+        } catch (Exception e) {
+            log("ForgotPassword Initialization Failure", e);
+            throw e instanceof FacesException ? (FacesException) e: new FacesException(e);
         }
-        catch (Exception e)
-        {
-            log("Page1 Initialization Failure", e);
-            throw e instanceof FacesException ? (FacesException) e : new FacesException(e);
-        }
-
-    // </editor-fold>
-    // Perform application initialization that must complete
-    // *after* managed components are initialized
-    // TODO - add your own initialization code here
+        
+        // </editor-fold>
+        // Perform application initialization that must complete
+        // *after* managed components are initialized
+        // TODO - add your own initialization code here
     }
 
     /**
@@ -134,8 +107,7 @@ public class Login extends AbstractPageBean
      * resources that will be required in your event handlers.</p>
      */
     @Override
-    public void preprocess()
-    {
+    public void preprocess() {
     }
 
     /**
@@ -147,8 +119,7 @@ public class Login extends AbstractPageBean
      * this page.</p>
      */
     @Override
-    public void prerender()
-    {
+    public void prerender() {
     }
 
     /**
@@ -160,8 +131,7 @@ public class Login extends AbstractPageBean
      * acquired during execution of an event handler).</p>
      */
     @Override
-    public void destroy()
-    {
+    public void destroy() {
     }
 
     /**
@@ -179,140 +149,24 @@ public class Login extends AbstractPageBean
      *
      * @return reference to the scoped data bean
      */
-    protected RequestBean1 getRequestBean1()
-    {
-        return (RequestBean1) getBean("RequestBean1");
-    }
-
-    /**
-     * <p>Return a reference to the scoped data bean.</p>
-     *
-     * @return reference to the scoped data bean
-     */
     protected ApplicationBean1 getApplicationBean1()
     {
         return (ApplicationBean1) getBean("ApplicationBean1");
     }
 
-    public String loginButton_action() throws DBException
+    public String sendNewPassword_action() throws DBException
     {
-        UserBean user = UserHandler.loginUser(username, password);
-        if (user != null)
+        if (UserHandler.sendNewPassword(username))
         {
-            getSessionBean1().setUser(user);
-            return "loginSucessfull";
+            return "passwordSend";
         }
         else
         {
-            status = "Benutzername/ Passwort ist falsch!";
+            status = "Benutzername nicht vorhanden!";
         }
-
+        
         return null;
     }
-
-    public String kommenPushButton_action() throws DBException
-    {
-        UserBean user = UserHandler.loginUser(username, password);
-        if (user != null)
-        {
-            getSessionBean1().setUser(user);
-
-            if (BookingHandler.nextBookingIsGo(user.getMid()))
-            {
-                BookingHandler.makeComeBooking(user.getMid());
-                return "loginSucessfull";
-            }
-            else
-            {
-                message = true;
-            }
-
-            return null;
-        }
-        else
-        {
-            status = "Benutzername/ Passwort ist falsch!";
-        }
-
-        return null;
-    }
-
-    public String gehenPushButton_action() throws DBException
-    {
-        UserBean user = UserHandler.loginUser(username, password);
-        if (user != null)
-        {
-            getSessionBean1().setUser(user);
-
-            if (BookingHandler.nextBookingIsGo(user.getMid()))
-            {
-                BookingHandler.makeGoBooking(user.getMid());
-                return "loginSucessfull";
-            }
-            else
-            {
-                message = true;
-            }
-
-            return null;
-        }
-        else
-        {
-            status = "Benutzername/ Passwort ist falsch!";
-        }
-
-        return null;
-    }
-
-    public String bookingTab_action()
-    {
-        return null;
-    }
-
-    public String loginTab_action()
-    {
-        return null;
-    }
-
-    public String bookPushButton_action() throws DBException
-    {
-        UserBean user = getSessionBean1().getUser();
-        if (user != null)
-        {
-            // außer Takt buchen, deshalb Prüfung umgedreht
-            if (BookingHandler.nextBookingIsCome(user.getMid()))
-            {
-                BookingHandler.makeGoBooking(user.getMid());
-            }
-            else
-            {
-                BookingHandler.makeComeBooking(user.getMid());
-            }
-
-            message = false;
-            return "loginSucessfull";
-        }
-        else
-        {
-            status = "Benutzername/ Passwort ist falsch!";
-        }
-
-        message = false;
-        return null;
-    }
-
-    public String dontBookPushButton_action()
-    {
-        message = false;
-        return null;
-    }
-
-    public String newPasswordHyperlink_action()
-    {
-        // TODO: Process the action. Return value is a navigation
-        // case name where null will return to the same page.
-        return "forgotPassword";
-    }
-
+    
 }
 

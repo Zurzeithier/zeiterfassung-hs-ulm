@@ -2,9 +2,10 @@
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
-        <Node id="secure/TTSystem.jsp" x="50" y="380" zoom="true"/>
+        <Node id="secure/TTSystem.jsp" x="42" y="339" zoom="true"/>
         <Node id="error/DBError.jsp" x="455" y="56" zoom="true"/>
-        <Node id="Login.jsp" x="85" y="54" zoom="true"/>
+        <Node id="ForgotPassword.jsp" x="359" y="260" zoom="true"/>
+        <Node id="Login.jsp" x="99" y="38" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>
