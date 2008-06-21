@@ -98,9 +98,9 @@ FORM {
 #user_table td {
 	border: 1px solid #a4daa5;
 	padding: 2px;
-	width: 20%;
 	text-align: center;
 	vertical-align: middle;
+	white-space: nowrap;
 }
 
 #user_table b {
