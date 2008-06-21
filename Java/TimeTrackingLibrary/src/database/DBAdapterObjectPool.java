@@ -6,7 +6,7 @@ package database;
 
 import pool.ObjectPool;
 import application.ConfigDataProvider;
-import exceptions.ObjectPoolException;
+import pool.ObjectPoolException;
 import java.sql.SQLException;
 
 /**

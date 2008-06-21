@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package exceptions;
+package pool;
 
 /**
  * Exception which is occurring while ObjectPool access

@@ -1,7 +1,7 @@
 package database;
 
 import application.ConfigDataProvider;
-import exceptions.ObjectPoolException;
+import pool.ObjectPoolException;
 
 /**
  * Pool which handles adapter objects

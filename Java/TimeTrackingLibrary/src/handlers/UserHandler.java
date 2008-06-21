@@ -4,7 +4,7 @@ import beans.UserBean;
 import database.AdapterPool;
 import database.DBAdapter;
 import exceptions.DBException;
-import exceptions.ObjectPoolException;
+import pool.ObjectPoolException;
 import utils.SecurityUtils;
 
 /**
