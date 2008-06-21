@@ -36,12 +36,9 @@ public class TTSystem extends AbstractPageBean
      */
     private void _init() throws Exception
     {
-        dateTimeConverter.setTimeZone(null);
-        dateTimeConverter.setPattern("dd.MM.yyyy 'um' HH:mm 'Uhr'");
     }
 
     // </editor-fold>
-    
     private String status = null;
     private ObjectListDataProvider bookings = new ObjectListDataProvider(TimeBookingTableEntryBean.class);
 
@@ -64,6 +61,7 @@ public class TTSystem extends AbstractPageBean
     {
         this.bookings = bookings;
     }
+
     private DateTimeConverter dateTimeConverter = new DateTimeConverter();
 
     public DateTimeConverter getDateTimeConverter()
@@ -116,14 +114,6 @@ public class TTSystem extends AbstractPageBean
         // Perform application initialization that must complete
         // *before* managed components are initialized
         // TODO - add your own initialiation code here
-        try
-        {
-            bookings.setList(BookingHandler.getBookings(getSessionBean1().getUser().getMid()));
-        }
-        catch (DBException ex)
-        {
-            log(ex.getMessage());
-        }
 
         // <editor-fold defaultstate="collapsed" desc="Managed Component Initialization">
         // Initialize automatically managed components
@@ -138,10 +128,13 @@ public class TTSystem extends AbstractPageBean
             throw e instanceof FacesException ? (FacesException) e : new FacesException(e);
         }
 
-    // </editor-fold>
-    // Perform application initialization that must complete
-    // *after* managed components are initialized
-    // TODO - add your own initialization code here
+        // </editor-fold>
+        // Perform application initialization that must complete
+        // *after* managed components are initialized
+        // TODO - add your own initialization code here
+
+        dateTimeConverter.setTimeZone(null);
+        dateTimeConverter.setPattern("dd.MM.yyyy 'um' HH:mm 'Uhr'");
     }
 
     /**
@@ -167,6 +160,14 @@ public class TTSystem extends AbstractPageBean
     @Override
     public void prerender()
     {
+        try
+        {
+            bookings.setList(BookingHandler.getBookings(getSessionBean1().getUser().getMid(), 10));
+        }
+        catch (DBException ex)
+        {
+            log(ex.getMessage());
+        }
     }
 
     /**
@@ -205,7 +206,7 @@ public class TTSystem extends AbstractPageBean
     public String logoutButton_action()
     {
         getSessionBean1().setUser(null);
-        
+
         return "logout";
     }
 
@@ -236,14 +237,14 @@ public class TTSystem extends AbstractPageBean
     public String comePushButton_action() throws DBException
     {
         BookingHandler.makeComeBooking(getSessionBean1().getUser().getMid());
-        
+
         return null;
     }
 
     public String goPushButton_action() throws DBException
     {
         BookingHandler.makeGoBooking(getSessionBean1().getUser().getMid());
-        
+
         return null;
     }
 
