@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-    Document   : Page1
-    Created on : 16.06.2008, 14:24:26
-    Author     : manuel
+Document   : Page1
+Created on : 16.06.2008, 14:24:26
+Author     : manuel
 -->
 <jsp:root version="2.1" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:webuijsf="http://www.sun.com/webui/webuijsf">
     <jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"/>
@@ -39,11 +39,21 @@
                                     <webuijsf:label id="label4" style="height: 24px; left: 24px; top: 72px; position: absolute; width: 94px" text="Passwort"/>
                                     <webuijsf:textField id="bookingUsernameTextField"
                                         style="height: 24px; left: 120px; top: 33px; position: absolute; width: 120px" tabIndex="1" text="#{Login.username}"/>
-                                    <webuijsf:passwordField id="bookingPasswordTextFieldt" password="#{Login.password}"
+                                    <webuijsf:passwordField id="bookingPasswordTextField" password="#{Login.password}"
                                         style="position: absolute; left: 120px; top: 72px; width: 48px; height: 24px" tabIndex="2"/>
                                 </webuijsf:panelLayout>
                             </webuijsf:tab>
                         </webuijsf:tabSet>
+                        <webuijsf:bubble autoClose="false" id="bubble1" style="height: 118px; left: 72px; top: 120px; position: absolute" title="Hinweis!"
+                            visible="#{Login.message}" width="166">
+                            <webuijsf:panelLayout id="layoutPanel3" style="height: 72px; position: relative; width: 180px; -rave-layout: grid">
+                                <webuijsf:button actionExpression="#{Login.bookPushButton_action}" id="button3"
+                                    style="height: 24px; left: -1px; top: 48px; position: absolute; width: 72px" text="Ja"/>
+                                <webuijsf:button actionExpression="#{Login.dontBookPushButton_action}" id="button1"
+                                    style="height: 24px; left: 95px; top: 48px; position: absolute; width: 72px" text="Nein"/>
+                                <webuijsf:staticText id="staticText1" style="left: 0px; top: 0px; position: absolute" text="Buchung auser Takt! Trotzdem buchen?"/>
+                            </webuijsf:panelLayout>
+                        </webuijsf:bubble>
                     </webuijsf:form>
                 </webuijsf:body>
             </webuijsf:html>

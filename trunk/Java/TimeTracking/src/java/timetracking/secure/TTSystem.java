@@ -6,6 +6,7 @@
 package timetracking.secure;
 
 import beans.TimeBookingTableEntryBean;
+import beans.UserBean;
 import com.sun.data.provider.impl.ObjectListDataProvider;
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import com.sun.webui.jsf.component.TabSet;
@@ -40,6 +41,7 @@ public class TTSystem extends AbstractPageBean
 
     // </editor-fold>
     private String status = null;
+    private boolean message = false;
     private ObjectListDataProvider bookings = new ObjectListDataProvider(TimeBookingTableEntryBean.class);
 
     public String getStatus()
@@ -50,6 +52,16 @@ public class TTSystem extends AbstractPageBean
     public void setStatus(String status)
     {
         this.status = status;
+    }
+
+    public boolean isMessage()
+    {
+        return message;
+    }
+
+    public void setMessage(boolean message)
+    {
+        this.message = message;
     }
 
     public ObjectListDataProvider getBookings()
@@ -236,15 +248,57 @@ public class TTSystem extends AbstractPageBean
 
     public String comePushButton_action() throws DBException
     {
-        BookingHandler.makeComeBooking(getSessionBean1().getUser().getMid());
+        UserBean user = getSessionBean1().getUser();
+
+        if (BookingHandler.nextBookingIsCome(user.getMid()))
+        {
+            BookingHandler.makeComeBooking(user.getMid());
+        }
+        else
+        {
+            message = true;
+        }
 
         return null;
     }
 
     public String goPushButton_action() throws DBException
     {
-        BookingHandler.makeGoBooking(getSessionBean1().getUser().getMid());
+        UserBean user = getSessionBean1().getUser();
 
+        if (BookingHandler.nextBookingIsGo(user.getMid()))
+        {
+            BookingHandler.makeGoBooking(user.getMid());
+        }
+        else
+        {
+            message = true;
+        }
+
+        return null;
+    }
+
+    public String bookPushButton_action() throws DBException
+    {
+        UserBean user = getSessionBean1().getUser();
+
+        // außer Takt buchen, deshalb Prüfung umgedreht
+        if (BookingHandler.nextBookingIsCome(user.getMid()))
+        {
+            BookingHandler.makeGoBooking(user.getMid());
+        }
+        else
+        {
+            BookingHandler.makeComeBooking(user.getMid());
+        }
+
+        message = false;
+        return null;
+    }
+
+    public String dontBookPushButton_action()
+    {
+        message = false;
         return null;
     }
 
