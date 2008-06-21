@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.3.1-hudson-417-SNAPSHOT. --><xs:schema xmlns:tns="http://time_tracking/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://time_tracking/">
+
+<xs:element name="DBException" type="tns:DBException"></xs:element>
+
+<xs:element name="getBookings" type="tns:getBookings"></xs:element>
+
+<xs:element name="getBookingsResponse" type="tns:getBookingsResponse"></xs:element>
+
+<xs:element name="makeComeBooking" type="tns:makeComeBooking"></xs:element>
+
+<xs:element name="makeComeBookingResponse" type="tns:makeComeBookingResponse"></xs:element>
+
+<xs:element name="makeGoBooking" type="tns:makeGoBooking"></xs:element>
+
+<xs:element name="makeGoBookingResponse" type="tns:makeGoBookingResponse"></xs:element>
+
+<xs:element name="nextBookingIsCome" type="tns:nextBookingIsCome"></xs:element>
+
+<xs:element name="nextBookingIsComeResponse" type="tns:nextBookingIsComeResponse"></xs:element>
+
+<xs:element name="nextBookingIsGo" type="tns:nextBookingIsGo"></xs:element>
+
+<xs:element name="nextBookingIsGoResponse" type="tns:nextBookingIsGoResponse"></xs:element>
+
+<xs:complexType name="nextBookingIsGo">
+<xs:sequence>
+<xs:element name="mid" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="nextBookingIsGoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="DBException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="makeGoBooking">
+<xs:sequence>
+<xs:element name="mid" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="makeGoBookingResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="nextBookingIsCome">
+<xs:sequence>
+<xs:element name="mid" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="nextBookingIsComeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="makeComeBooking">
+<xs:sequence>
+<xs:element name="mid" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="makeComeBookingResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getBookings">
+<xs:sequence>
+<xs:element name="mid" type="xs:int"></xs:element>
+<xs:element name="number" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getBookingsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:timeBookingTableEntryBean" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="timeBookingTableEntryBean">
+<xs:sequence>
+<xs:element name="comeBooking" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="firstname" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="goBooking" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="lastname" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
