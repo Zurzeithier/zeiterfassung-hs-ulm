@@ -5,8 +5,6 @@
 
 package database;
 
-import beans.TPTypeBean;
-import beans.TimeAccountBean;
 import beans.TimeBookingBean;
 import beans.TimeBookingTableEntryBean;
 import beans.UserBean;
@@ -21,9 +19,6 @@ public interface DBAdapter {
 
     boolean changeUser(UserBean user) throws DBException;
 
-    TimeAccountBean getTimeAccount();
-
-    
     /**
      * 
      * @param mid
@@ -33,9 +28,9 @@ public interface DBAdapter {
      */
     List<TimeBookingTableEntryBean> getTimeBookings(int mid, int number) throws DBException;
     
+    TimeBookingBean getLastBooking(int mid) throws DBException;
+    
     boolean addTimeBooking(TimeBookingBean bean) throws DBException;
-
-    TPTypeBean getType(int typId) throws DBException;
 
     UserBean getUser(String username) throws DBException;
 

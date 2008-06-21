@@ -293,4 +293,44 @@ public class MSServerAdapter extends Database implements DBAdapter
         }
     }
 
+    public TimeBookingBean getLastBooking(int mid) throws DBException
+    {
+        try
+        {
+            TimeBookingBean returnBean = null;
+            StringBuilder query = new StringBuilder();
+
+            query.append("SELECT TOP 1 Bid, TypId, Datum, Mid, KstId, KoaId");
+            query.append("FROM ZeitBuchung"); 
+            query.append(" WHERE Mid='").append(mid).append("'");
+            query.append(" ORDER BY Datum DESC");
+
+            Statement stat = getConnection().createStatement();
+            ResultSet res = stat.executeQuery(query.toString());
+
+
+            if (res.next())
+            {
+                returnBean = new TimeBookingBean();
+
+                returnBean.setBid(res.getInt("Bid"));
+                returnBean.setMid(res.getInt("MId"));
+                returnBean.setDate(LocalizeUtils.localizeDate(res.getTimestamp("Datum")));
+                returnBean.setTypId(res.getInt("TypId"));
+                returnBean.setKoaId(res.getInt("KoaId"));
+                returnBean.setKstId(res.getInt("KstId"));
+            }
+
+            res.close();
+
+            return returnBean;
+
+
+        }
+        catch (SQLException ex)
+        {
+            throw new DBException(ex);
+        }
+    }
+
 }

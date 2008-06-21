@@ -15,6 +15,7 @@ import pool.ObjectPoolException;
  */
 public class BookingHandler
 {
+
     /**
      * Fetches a List of booking by user ID
      * @param mid User ID 
@@ -28,9 +29,9 @@ public class BookingHandler
         {
             DBAdapter adapter = AdapterPool.getDBAdapter();
             List<TimeBookingTableEntryBean> returnList = null;
-            
+
             returnList = adapter.getTimeBookings(mid, number);
-            
+
             AdapterPool.releaseDBAdapter(adapter);
             return returnList;
         }
@@ -39,7 +40,31 @@ public class BookingHandler
             throw new DBException(ex);
         }
     }
-    
+
+    public static boolean nextBookingIsCome(int mid) throws DBException
+    {
+        try
+        {
+            DBAdapter adapter = AdapterPool.getDBAdapter();
+            TimeBookingBean bean = new TimeBookingBean();
+
+            bean = adapter.getLastBooking(mid);
+
+            AdapterPool.releaseDBAdapter(adapter);
+            
+            if (bean == null)
+            {
+                return false;
+            }            
+
+            return (bean.getTypId() == 2);  // if last booking was go (2) then next must be come (1)
+        }
+        catch (ObjectPoolException ex)
+        {
+            throw new DBException(ex);
+        }
+    }
+
     /**
      * Appends a COME booking
      * @param mid User ID 
@@ -53,23 +78,47 @@ public class BookingHandler
             DBAdapter adapter = AdapterPool.getDBAdapter();
             boolean returnValue = false;
             TimeBookingBean bean = new TimeBookingBean();
-            
+
             bean.setMid(mid);
             bean.setDate(new Date());    // set time to aktual system time
             bean.setTypId(1);            // come booking
-            
+
             returnValue = adapter.addTimeBooking(bean);
-                        
+
             AdapterPool.releaseDBAdapter(adapter);
-            
+
             return returnValue;
         }
         catch (ObjectPoolException ex)
         {
             throw new DBException(ex);
-        }        
+        }
     }
-    
+
+    public static boolean nextBookingIsGo(int mid) throws DBException
+    {
+        try
+        {
+            DBAdapter adapter = AdapterPool.getDBAdapter();
+            TimeBookingBean bean = new TimeBookingBean();
+
+            bean = adapter.getLastBooking(mid);
+
+            AdapterPool.releaseDBAdapter(adapter);
+
+            if (bean == null)
+            {
+                return false;
+            }
+
+            return (bean.getTypId() == 1);  // if last booking was come (1) then next must be go (2)
+        }
+        catch (ObjectPoolException ex)
+        {
+            throw new DBException(ex);
+        }
+    }
+
     /**
      * Appends a GO booking
      * @param mid User ID
@@ -83,20 +132,21 @@ public class BookingHandler
             DBAdapter adapter = AdapterPool.getDBAdapter();
             boolean returnValue = false;
             TimeBookingBean bean = new TimeBookingBean();
-            
+
             bean.setMid(mid);
             bean.setDate(new Date());    // set time to aktual system time
             bean.setTypId(2);            // go booking
-            
+
             returnValue = adapter.addTimeBooking(bean);
-                        
+
             AdapterPool.releaseDBAdapter(adapter);
-            
+
             return returnValue;
         }
         catch (ObjectPoolException ex)
         {
             throw new DBException(ex);
-        }        
-    }    
+        }
+    }
+
 }
