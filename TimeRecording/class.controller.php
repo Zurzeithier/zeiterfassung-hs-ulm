@@ -146,11 +146,11 @@ class Controller
 		 *
 		 * @return	null
 		 *
-		 * @access  public
+		 * @access  private
 		 *
 		 * @author  patrick.kracht, thorsten.moll
 		 */
-		public function __toString()
+		private function __toString()
 		{
 			return;
 		}

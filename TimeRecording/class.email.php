@@ -23,7 +23,7 @@ class Email extends Template
 		private $subject    = "";
 		private $useinlay   = false;
 		private $template;
-
+		
 		/**
 		 * constructor creates default mail from template
 		 *
@@ -50,9 +50,9 @@ class Email extends Template
 			                      "Sender-IP"    => $_SERVER["REMOTE_ADDR"],
 			                      "Reply-To"     => $_SERVER["SERVER_NAME"]." <".$_SESSION["_Webmaster"].">"
 			                  );
-
+			                  
 		}
-
+		
 		/**
 		 * returns a 32bit token
 		 *
@@ -66,7 +66,7 @@ class Email extends Template
 		{
 			return strtoupper(md5(uniqid(microtime() * mt_rand(1000,100000))));
 		}
-
+		
 		/**
 		 * set usage of inlay images or use links
 		 *
@@ -78,7 +78,7 @@ class Email extends Template
 		{
 			$this->useinlay = $bool;
 		}
-
+		
 		/**
 		 * add a recipient to the mail
 		 *
@@ -95,7 +95,7 @@ class Email extends Template
 			if ($name != "") $this->recipients .= "$prefix: ".utf8_decode($name)." <$email>".$this->eol;
 			else $this->recipients .= "$prefix: $email".$this->eol;
 		}
-
+		
 		/**
 		 * set sender details (FROM) and return path
 		 *
@@ -112,7 +112,7 @@ class Email extends Template
 			else $this->headers["From"] = $email;
 			$this->headers["Return-Path"] = $email;
 		}
-
+		
 		/**
 		 * set sender reply-to
 		 *
@@ -128,7 +128,7 @@ class Email extends Template
 			if ($name != "") $this->headers["Reply-To"] = utf8_decode($name)." <$email>";
 			else $this->headers["Reply-To"] = $email;
 		}
-
+		
 		/**
 		 * set recipient (primary)
 		 *
@@ -144,7 +144,7 @@ class Email extends Template
 			if ($name != "") $this->mailto = utf8_decode($name)." <$email>";
 			else $this->mailto = $email;
 		}
-
+		
 		/**
 		 * set subject of mail
 		 *
@@ -158,7 +158,7 @@ class Email extends Template
 		{
 			$this->subject = utf8_decode($subject);
 		}
-
+		
 		/**
 		 * set domain
 		 *
@@ -172,7 +172,7 @@ class Email extends Template
 		{
 			$this->domain = $domain;
 		}
-
+		
 		/**
 		 * set special newlines for linux and windows
 		 *
@@ -200,7 +200,7 @@ class Email extends Template
 					$this->sol = $this->eol;
 				}
 		}
-
+		
 		/**
 		 * returns a boundary for embedded objects
 		 *
@@ -212,7 +212,7 @@ class Email extends Template
 		{
 			return "_-".$this->get_token();
 		}
-
+		
 		/**
 		 * creates multipart header with starting boundary
 		 *
@@ -232,7 +232,7 @@ class Email extends Template
 			$head .= " boundary=\"$boundary\"".$this->eol;
 			return $head;
 		}
-
+		
 		/**
 		 * create parsed text from $template and return html source
 		 *
@@ -244,7 +244,7 @@ class Email extends Template
 		{
 			return parent::get($this->template, true);
 		}
-
+		
 		/**
 		 * reproduce plain text from html source, strip tags etc.
 		 *
@@ -264,16 +264,16 @@ class Email extends Template
 			              '@<[\/\!]*?[^<>]*?>@si',
 			              '@<![\s\S]*?--[ \t\n\r]*>@'
 			          );
-
+			          
 			$text      = preg_replace($search, "", $html);
 			$trans_tbl = get_html_translation_table(HTML_ENTITIES);
 			$trans_tbl = array_flip($trans_tbl);
 			$text      = strtr($text, $trans_tbl);
 			$text      = str_replace($this->eol.$this->eol, $this->eol, $text);
-
+			
 			return trim($text);
 		}
-
+		
 		/**
 		 * creates an inline object in html-mail with $id and $boundary
 		 *
@@ -291,7 +291,7 @@ class Email extends Template
 		{
 			preg_match('@.*\/([a-z_A-Z0-9]*\.png)@i', $filename, $found);
 			$name = $found[1];
-
+			
 			$ret  = $this->eol;
 			$ret .= "Content-Type: image/png; ".$this->eol;
 			$ret .= " name=\"$name\"".$this->eol;
@@ -306,7 +306,7 @@ class Email extends Template
 			$ret .= "--".$boundary;
 			return $ret;
 		}
-
+		
 		/**
 		 * create html and plain-text message, bundle with objects
 		 *
@@ -322,18 +322,18 @@ class Email extends Template
 			$boundmix = $this->get_boundary();
 			$boundalt = $this->get_boundary();
 			$_headers = $this->create_head($boundalt);
-
+			
 			// generate HTML and TEXT body
 			$html     = $this->create_html();
 			$text     = $this->create_text($html);
 			$inline   = "";
-
+			
 			$_headers  .= $this->eol;
 			$_headers  .= "Diese Nachricht sollte als HTML dargestellt werden!".$this->eol;
 			$_headers  .= "--".$boundalt.$this->eol;
 			$_headers  .= "Content-Type: text/plain; charset=UTF-8; format=flowed".$this->eol;
 			$_headers  .= "Content-Transfer-Encoding: 7bit".$this->eol;
-
+			
 			$output     = $text;
 			$output    .= $this->eol;
 			$output    .= $this->eol;
@@ -346,7 +346,7 @@ class Email extends Template
 			$output    .= "Content-Type: text/html; charset=UTF-8".$this->eol;
 			$output    .= "Content-Transfer-Encoding: 7bit".$this->eol;
 			$output    .= $this->eol;
-
+			
 			// replace all images with tokens and inline-attachments (png-only)
 			if (preg_match_all("@(\.\/.*\.png)@i", $html, $found))
 				{
@@ -373,7 +373,7 @@ class Email extends Template
 							$html = str_replace(array_values($this->attach), array_keys($this->attach), $html);
 						}
 				}
-
+				
 			$output  .= $html;
 			$output  .= $this->eol;
 			$output  .= $this->eol;
@@ -382,12 +382,12 @@ class Email extends Template
 			$output  .= $this->eol;
 			$output  .= "--".$boundalt."--".$this->eol;
 			$output  .= $this->eol;
-
+			
 			$status = mail($this->mailto, $this->subject, $output, $_headers);
-
+			
 			return $status;
 		}
-
+		
 	}
 
 ?>

@@ -12,7 +12,7 @@
 class Memory
 	{
 		private $umemory;				// usage of memory
-
+		
 		/**
 		 * constructor
 		 *
@@ -24,7 +24,7 @@ class Memory
 		{
 			$this->start();
 		}
-
+		
 		/**
 		 * destructor
 		 *
@@ -35,7 +35,7 @@ class Memory
 		public function __destruct()
 		{
 		}
-
+		
 		/**
 		 * print delta
 		 *
@@ -47,7 +47,7 @@ class Memory
 		{
 			echo "Speicher-Differenz: " .(memory_get_usage(false) - $this->umemory) . " Bytes\n";
 		}
-
+		
 		/**
 		 * start measuring
 		 *
@@ -59,7 +59,7 @@ class Memory
 		{
 			$this->umemory = memory_get_usage(false);
 		}
-
+		
 		/**
 		 * to string
 		 *
@@ -73,7 +73,7 @@ class Memory
 		{
 			return __from_bytes(memory_get_usage(false)) . " Speicher sind derzeit belegt\n";
 		}
-
+		
 	}
 
 ?>
