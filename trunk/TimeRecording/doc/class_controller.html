@@ -48,6 +48,8 @@ Inheritance diagram for Controller:</div>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controller.html#46372637063e716eb67e852d8cd5dcf7">prepare_templates</a> ()</td></tr>
 
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controller.html#9a2da4435d2efb6c6e3ea62688c59dea">show_user_details</a> ()</td></tr>
+
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controller.html#c08bef447d40ff52ceb21385ec1fd77c">prepare_actions</a> ()</td></tr>
 
 <tr><td colspan="2"><br><h2>Protected Member Functions</h2></td></tr>
@@ -61,7 +63,9 @@ Inheritance diagram for Controller:</div>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controller.html#43fdcefa0d21e5165e46c2609931af58">show_user_table</a> ($limit=10)</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controller.html#7d691235c986ba19b81c082dfe57a714">query2table</a> ($query, $id)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controller.html#0e71c7b5aafbda6b070405b7d8cbfdd3">set_table_order</a> ($tableid, $ordervalues, $default=0)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controller.html#e15f64dc91819ad3eb8ff65b8911cccb">query2table</a> ($query, $id, $width=array(), $details=false, $orderon=false)</td></tr>
 
 <tr><td colspan="2"><br><h2>Private Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controller.html#c9c810571cf39d358b63892272a495ff">reinit</a> ()</td></tr>
@@ -316,9 +320,9 @@ creates user specific page<p>
 public<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00189">189</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00209">209</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
 
-<p>References <a class="el" href="class_8controller_8php-source.html#l00320">get_booking_sums()</a>, <a class="el" href="class_8controller_8php-source.html#l00389">show_last_bookings()</a>, and <a class="el" href="class_8controller_8php-source.html#l00417">show_user_table()</a>.</p>
+<p>References <a class="el" href="class_8controller_8php-source.html#l00344">get_booking_sums()</a>, <a class="el" href="class_8controller_8php-source.html#l00413">show_last_bookings()</a>, <a class="el" href="class_8controller_8php-source.html#l00472">show_user_details()</a>, and <a class="el" href="class_8controller_8php-source.html#l00443">show_user_table()</a>.</p>
 
 </div>
 </div><p>
@@ -342,7 +346,7 @@ prepare templates for session<p>
 public<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00297">297</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00321">321</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
 
 </div>
 </div><p>
@@ -390,9 +394,9 @@ returns sum array of bookings (week, month - current and last)<p>
 protected<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00320">320</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00344">344</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
 
-<p>Referenced by <a class="el" href="class_8controller_8php-source.html#l00189">create_page()</a>.</p>
+<p>Referenced by <a class="el" href="class_8controller_8php-source.html#l00209">create_page()</a>.</p>
 
 </div>
 </div><p>
@@ -423,11 +427,11 @@ returns array of all tables in database<p>
 protected<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00389">389</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00413">413</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
 
-<p>References <a class="el" href="class_8controller_8php-source.html#l00447">query2table()</a>.</p>
+<p>References <a class="el" href="class_8controller_8php-source.html#l00545">query2table()</a>, and <a class="el" href="class_8controller_8php-source.html#l00507">set_table_order()</a>.</p>
 
-<p>Referenced by <a class="el" href="class_8controller_8php-source.html#l00189">create_page()</a>.</p>
+<p>Referenced by <a class="el" href="class_8controller_8php-source.html#l00209">create_page()</a>.</p>
 
 </div>
 </div><p>
@@ -452,15 +456,92 @@ generate html user table<p>
 protected<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00417">417</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00443">443</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
 
-<p>References <a class="el" href="class_8controller_8php-source.html#l00447">query2table()</a>.</p>
+<p>References <a class="el" href="class_8controller_8php-source.html#l00545">query2table()</a>, and <a class="el" href="class_8controller_8php-source.html#l00507">set_table_order()</a>.</p>
 
-<p>Referenced by <a class="el" href="class_8controller_8php-source.html#l00189">create_page()</a>.</p>
+<p>Referenced by <a class="el" href="class_8controller_8php-source.html#l00209">create_page()</a>.</p>
 
 </div>
 </div><p>
-<a class="anchor" name="7d691235c986ba19b81c082dfe57a714"></a><!-- doxytag: member="Controller::query2table" ref="7d691235c986ba19b81c082dfe57a714" args="($query, $id)" -->
+<a class="anchor" name="9a2da4435d2efb6c6e3ea62688c59dea"></a><!-- doxytag: member="Controller::show_user_details" ref="9a2da4435d2efb6c6e3ea62688c59dea" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Controller.show_user_details           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+generate html details for specific userid<p>
+public<p>
+<dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
+
+<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00472">472</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
+
+<p>References <a class="el" href="class_8controller_8php-source.html#l00545">query2table()</a>.</p>
+
+<p>Referenced by <a class="el" href="class_8controller_8php-source.html#l00209">create_page()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="0e71c7b5aafbda6b070405b7d8cbfdd3"></a><!-- doxytag: member="Controller::set_table_order" ref="0e71c7b5aafbda6b070405b7d8cbfdd3" args="($tableid, $ordervalues, $default=0)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Controller.set_table_order           </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>tableid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>ordervalues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>default</em> = <code>0</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+set sorting query<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>tableid for sorting </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>array</em>&nbsp;</td><td>order by values, 0 = default [left to right] </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>int</em>&nbsp;</td><td>(optional) default value</td></tr>
+  </table>
+</dl>
+protected<p>
+<dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
+
+<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00507">507</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
+
+<p>Referenced by <a class="el" href="class_8controller_8php-source.html#l00413">show_last_bookings()</a>, and <a class="el" href="class_8controller_8php-source.html#l00443">show_user_table()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="e15f64dc91819ad3eb8ff65b8911cccb"></a><!-- doxytag: member="Controller::query2table" ref="e15f64dc91819ad3eb8ff65b8911cccb" args="($query, $id, $width=array(), $details=false, $orderon=false)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -474,7 +555,25 @@ protected<p>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">$&nbsp;</td>
-          <td class="paramname"> <em>id</em></td><td>&nbsp;</td>
+          <td class="paramname"> <em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>width</em> = <code>array()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>details</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>orderon</em> = <code>false</code></td><td>&nbsp;</td>
         </tr>
         <tr>
           <td></td>
@@ -490,15 +589,17 @@ private query to html table converter<p>
 <dl compact><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>sql query to get rows from </td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>id-tag (css stylesheet)</td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>id-tag (css stylesheet) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>array</em>&nbsp;</td><td>(optional) width in pixel for td </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>boolean</em>&nbsp;</td><td>(optional) add col with dtails link to userid</td></tr>
   </table>
 </dl>
 protected<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00447">447</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00545">545</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
 
-<p>Referenced by <a class="el" href="class_8controller_8php-source.html#l00389">show_last_bookings()</a>, and <a class="el" href="class_8controller_8php-source.html#l00417">show_user_table()</a>.</p>
+<p>Referenced by <a class="el" href="class_8controller_8php-source.html#l00413">show_last_bookings()</a>, <a class="el" href="class_8controller_8php-source.html#l00472">show_user_details()</a>, and <a class="el" href="class_8controller_8php-source.html#l00443">show_user_table()</a>.</p>
 
 </div>
 </div><p>
@@ -522,14 +623,14 @@ manage page actions and execute state-dependend methods<p>
 public<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00481">481</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8controller_8php-source.html#l00631">631</a> of file <a class="el" href="class_8controller_8php-source.html">class.controller.php</a>.</p>
 
 </div>
 </div><p>
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>C:/xampp/htdocs/TimeRecording/<a class="el" href="class_8controller_8php-source.html">class.controller.php</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sat Jun 21 10:53:59 2008 for TimeRecording by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Sat Jun 21 15:17:02 2008 for TimeRecording by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
 </body>
