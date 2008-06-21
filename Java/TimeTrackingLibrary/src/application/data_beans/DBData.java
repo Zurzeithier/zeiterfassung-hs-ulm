@@ -8,11 +8,17 @@ package application.data_beans;
  */
 public class DBData
 {
-
+    
     public final String address;
     public final String user;
     public final String password;
     
+    /**
+     * 
+     * @param adress
+     * @param user
+     * @param password
+     */
     public DBData(String adress, String user, String password)
     {
         this.address = adress;
