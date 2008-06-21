@@ -64,7 +64,7 @@ function __session_start($name="sid")
 					session_id($sid);
 				}
 		}
-		
+	
 	// start session now and set cookie
 	session_start();
 	$_COOKIE[$name] = session_id();

@@ -1,0 +1,3077 @@
+<?xml version = '1.0' encoding = 'UTF-8' ?>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Sat Jun 21 09:02:34 CEST 2008'>
+  <XMI.header>    <XMI.documentation>
+      <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
+      <XMI.exporterVersion>0.24(5) revised on $Date: 2006-11-06 19:55:22 +0100 (Mon, 06 Nov 2006) $ </XMI.exporterVersion>
+    </XMI.documentation>
+    <XMI.metamodel xmi.name="UML" xmi.version="1.4"/></XMI.header>
+  <XMI.content>
+    <UML:Model xmi.id = '384' name = 'Main' isSpecification = 'false' isRoot = 'false'
+      isLeaf = 'false' isAbstract = 'false'>
+      <UML:Namespace.ownedElement>
+        <UML:DataType xmi.id = '1' name = 'unknown' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false'/>
+        <UML:DataType xmi.id = '2' name = 'boolean' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false'/>
+        <UML:DataType xmi.id = '3' name = 'integer' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false'/>
+        <UML:DataType xmi.id = '4' name = 'double' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false'/>
+        <UML:DataType xmi.id = '5' name = 'float' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false'/>
+        <UML:DataType xmi.id = '6' name = 'string' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false'/>
+        <UML:DataType xmi.id = '7' name = 'array' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false'/>
+        <UML:DataType xmi.id = '8' name = 'object' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false'/>
+        <UML:DataType xmi.id = '9' name = 'resource' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false'/>
+        <UML:DataType xmi.id = '10' name = 'mixed' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false'/>
+        <UML:DataType xmi.id = '11' name = 'void' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false'/>
+        <UML:Generalization xmi.id = '145' isSpecification = 'false'>
+          <UML:Generalization.child>
+            <UML:Class xmi.idref = '14'/>
+          </UML:Generalization.child>
+          <UML:Generalization.parent>
+            <UML:Class xmi.idref = '13'/>
+          </UML:Generalization.parent>
+        </UML:Generalization>
+        <UML:Generalization xmi.id = '197' isSpecification = 'false'>
+          <UML:Generalization.child>
+            <UML:Class xmi.idref = '16'/>
+          </UML:Generalization.child>
+          <UML:Generalization.parent>
+            <UML:Class xmi.idref = '12'/>
+          </UML:Generalization.parent>
+        </UML:Generalization>
+        <UML:Generalization xmi.id = '254' isSpecification = 'false'>
+          <UML:Generalization.child>
+            <UML:Class xmi.idref = '17'/>
+          </UML:Generalization.child>
+          <UML:Generalization.parent>
+            <UML:Class xmi.idref = '12'/>
+          </UML:Generalization.parent>
+        </UML:Generalization>
+        <UML:Generalization xmi.id = '334' isSpecification = 'false'>
+          <UML:Generalization.child>
+            <UML:Class xmi.idref = '19'/>
+          </UML:Generalization.child>
+          <UML:Generalization.parent>
+            <UML:Class xmi.idref = '12'/>
+          </UML:Generalization.parent>
+        </UML:Generalization>
+        <UML:Abstraction xmi.id = '209' isSpecification = 'false'>
+          <UML:Dependency.client>
+            <UML:Class xmi.idref = '16'/>
+          </UML:Dependency.client>
+          <UML:Dependency.supplier>
+            <UML:Interface xmi.idref = '21'/>
+          </UML:Dependency.supplier>
+        </UML:Abstraction>
+        <UML:Abstraction xmi.id = '265' isSpecification = 'false'>
+          <UML:Dependency.client>
+            <UML:Class xmi.idref = '17'/>
+          </UML:Dependency.client>
+          <UML:Dependency.supplier>
+            <UML:Interface xmi.idref = '21'/>
+          </UML:Dependency.supplier>
+        </UML:Abstraction>
+        <UML:Interface xmi.id = '21' name = 'iSql' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false'>
+          <UML:Classifier.feature>
+            <UML:Operation xmi.id = '22' name = '__construct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '385' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '23' name = 'config_file' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '24' name = '__destruct' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '386' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '25' name = 'init' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '387' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '26' name = 'connect' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '388' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '27' name = 'select_db' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '389' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '28' name = 'query' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '390' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '10'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '29' name = 'qstring' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '30' name = 'query_all' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '391' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '7'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '31' name = 'qstring' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '32' name = 'unbuffered_query' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '392' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '10'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '33' name = 'qstring' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '34' name = 'fetch_array' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '393' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '10'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '35' name = 'query_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '36' name = 'fetch_row' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '394' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '10'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '37' name = 'query_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '38' name = 'query_first' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '395' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '7'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '39' name = 'qstring' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '40' name = 'num_rows' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '396' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '41' name = 'query_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '42' name = 'affected_rows' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '397' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '43' name = 'link_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '44' name = 'insert_id' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '398' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '45' name = 'link_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '46' name = 'free_result' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '399' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '47' name = 'result' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '48' name = 'close' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '400' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '49' name = 'link_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '50' name = 'show_tables' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '401' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '51' name = 'html_table' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'true'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '402' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '52' name = 'tablename' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+          </UML:Classifier.feature>
+        </UML:Interface>
+        <UML:Class xmi.id = '12' name = 'Controller' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
+          <UML:Classifier.feature>
+            <UML:Operation xmi.id = '53' name = '__construct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '403' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '54' name = 'reinit' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '404' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '55' name = '__destruct' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '405' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '56' name = 'register' visibility = 'protected'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '406' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '57' name = 'classname' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '58' name = 'parameters' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '59' name = 'alias' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '60' name = 'unregister' visibility = 'protected'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '407' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '61' name = 'classname' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '62' name = 'alias' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '63' name = '__toString' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '408' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '64' name = 'create_menu' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '409' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '65' name = 'create_page' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '410' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '66' name = 'prepare_templates' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '411' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '67' name = 'get_booking_sums' visibility = 'protected'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '412' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '7'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '68' name = 'range' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '69' name = 'offset' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '70' name = 'limit' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '71' name = 'show_last_bookings' visibility = 'protected'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '413' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '7'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '72' name = 'limit' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '73' name = 'show_user_table' visibility = 'protected'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '414' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '74' name = 'limit' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '75' name = 'query2table' visibility = 'protected'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '415' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '76' name = 'query' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '77' name = 'id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '78' name = 'prepare_actions' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '416' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+          </UML:Classifier.feature>
+        </UML:Class>
+        <UML:Class xmi.id = '13' name = 'Template' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
+          <UML:Classifier.feature>
+            <UML:Attribute xmi.id = '79' name = 'template' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '80' name = 'assigned' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '81' name = 'debug_off' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '82' name = 'do_compress' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '83' name = 'sql_table' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '84' name = 'sql_type' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '85' name = 'debugout' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '86' name = 'menu_content' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '87' name = 'menu_spacer' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '88' name = 'tpl_folder' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Operation xmi.id = '89' name = '__construct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '417' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '90' name = 'parameters' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '91' name = '__destruct' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '418' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '92' name = 'clean_ob' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '419' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '93' name = 'preload' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '420' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '94' name = 'list' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '95' name = 'import' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '421' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '10'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '96' name = 'list' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '97' name = 'load' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '422' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '98' name = 'name' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '99' name = 'force_reload' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '100' name = 'assign' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '423' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '101' name = 'name' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '102' name = 'search' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '103' name = 'replace' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '104' name = 'get' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '424' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '105' name = 'name' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '106' name = 'force_reload' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '107' name = 'compress' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '425' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '108' name = 'buffer' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '109' name = 'output' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '426' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '110' name = 'name' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '111' name = 'type' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '112' name = 'get_parsed' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '427' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '7'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '113' name = 'name' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '114' name = 'headers' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '428' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '115' name = 'type' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '116' name = 'maxage' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '117' name = 'wraplongwords' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '429' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '118' name = 'text' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '119' name = 'maxlen' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '120' name = 'save_newlines' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '430' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '121' name = 'text' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '122' name = 'restore_newlines' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '431' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '123' name = 'text' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '124' name = 'accepts_gzip' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '432' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '125' name = 'special_chars' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '433' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '126' name = 'content' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '127' name = 'create_select' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '434' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '128' name = 'array' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '10'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '129' name = 'selected' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '130' name = 'replace_data_from_array' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '435' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '131' name = 'data' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '132' name = 'array' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '133' name = 'align_right' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '436' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '134' name = 'text' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '135' name = 'maxlen' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '136' name = 'menu_insert_spacer' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '437' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '137' name = 'menu_insert_entry' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '438' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '138' name = 'name' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '139' name = 'href' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '140' name = 'access_key' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '141' name = 'selected' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '142' name = 'target' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '143' name = 'menu_get' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '439' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '144' name = 'use_database' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '440' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+          </UML:Classifier.feature>
+        </UML:Class>
+        <UML:Class xmi.id = '14' name = 'Email' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
+          <UML:GeneralizableElement.generalization>
+            <UML:Generalization xmi.idref = '145'/>
+          </UML:GeneralizableElement.generalization>
+          <UML:Classifier.feature>
+            <UML:Attribute xmi.id = '146' name = 'eol' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '147' name = 'sol' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '148' name = 'mailto' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '149' name = 'domain' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '150' name = 'borders' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '151' name = 'headers' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '152' name = 'attach' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '153' name = 'recipients' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '154' name = 'subject' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '155' name = 'useinlay' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '156' name = 'template' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Operation xmi.id = '157' name = '__construct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '441' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '158' name = 'parameters' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '159' name = 'get_token' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '442' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '160' name = 'set_inlay' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '443' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '161' name = 'bool' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '162' name = 'add_recipient' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '444' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '163' name = 'prefix' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '164' name = 'email' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '165' name = 'name' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '166' name = 'set_sender' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '445' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '167' name = 'email' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '168' name = 'name' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '169' name = 'set_reply' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '446' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '170' name = 'email' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '171' name = 'name' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '172' name = 'set_to' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '447' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '173' name = 'email' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '174' name = 'name' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '175' name = 'set_subject' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '448' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '176' name = 'subject' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '177' name = 'set_domain' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '449' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '178' name = 'domain' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '179' name = 'set_newlines' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '450' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '180' name = 'get_boundary' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '451' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '181' name = 'create_head' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '452' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '182' name = 'boundary' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '183' name = 'create_html' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '453' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '184' name = 'create_text' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '454' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '185' name = 'html' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '186' name = 'create_inline' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '455' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '187' name = 'filename' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '188' name = 'id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '189' name = 'boundary' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '190' name = 'send' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '456' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+          </UML:Classifier.feature>
+        </UML:Class>
+        <UML:Class xmi.id = '15' name = 'Memory' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
+          <UML:Classifier.feature>
+            <UML:Attribute xmi.id = '191' name = 'umemory' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Operation xmi.id = '192' name = '__construct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '457' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '193' name = '__destruct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '458' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '194' name = 'delta' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '459' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '195' name = 'start' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '460' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '196' name = '__toString' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '461' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+          </UML:Classifier.feature>
+        </UML:Class>
+        <UML:Class xmi.id = '16' name = 'MsSql' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
+          <UML:ModelElement.clientDependency>
+            <UML:Abstraction xmi.idref = '209'/>
+          </UML:ModelElement.clientDependency>
+          <UML:GeneralizableElement.generalization>
+            <UML:Generalization xmi.idref = '197'/>
+          </UML:GeneralizableElement.generalization>
+          <UML:Classifier.feature>
+            <UML:Attribute xmi.id = '198' name = 'link_id' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '199' name = 'query_id' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '200' name = 'query_key' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '201' name = 'mssql_error' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '202' name = 'select_db' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '203' name = 'hostname' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '204' name = 'hostport' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '205' name = 'database' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '206' name = 'password' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '207' name = 'username' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '208' name = 'querytimer' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Operation xmi.id = '210' name = '__construct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '462' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '211' name = 'parameters' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '212' name = '__destruct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '463' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '213' name = 'init' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '464' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '214' name = 'connect' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '465' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '215' name = 'select_db' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '466' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '216' name = 'query' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '467' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '10'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '217' name = 'qstring' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '218' name = 'limit' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '219' name = 'offset' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '220' name = 'query_all' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '468' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '7'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '221' name = 'qstring' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '222' name = 'limit' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '223' name = 'offset' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '224' name = 'type' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '225' name = 'unbuffered_query' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '469' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '10'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '226' name = 'qstring' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '227' name = 'LOW' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '228' name = 'limit' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '229' name = 'offset' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '230' name = 'fetch_array' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '470' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '10'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '231' name = 'query_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '232' name = 'type' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '233' name = 'fetch_row' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '471' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '10'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '234' name = 'query_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '235' name = 'query_first' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '472' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '7'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '236' name = 'qstring' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '237' name = 'limit' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '238' name = 'offset' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '239' name = 'type' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '240' name = 'num_rows' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '473' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '241' name = 'query_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '242' name = 'affected_rows' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '474' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '243' name = 'link_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '244' name = 'insert_id' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '475' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '245' name = 'link_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '246' name = 'free_result' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '476' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '247' name = 'result' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '248' name = 'close' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '477' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '249' name = 'link_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '250' name = 'show_tables' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '478' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '7'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '251' name = 'html_table' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '479' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '252' name = 'tablename' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '253' name = 'where' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Attribute xmi.id = '-64--88-0-3--75beda20:11aa9e3388d:-8000:00000000000009FB'
+              name = 'newAttr' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              changeability = 'changeable' targetScope = 'instance'>
+              <UML:StructuralFeature.multiplicity>
+                <UML:Multiplicity xmi.id = '-64--88-0-3--75beda20:11aa9e3388d:-8000:00000000000009FF'>
+                  <UML:Multiplicity.range>
+                    <UML:MultiplicityRange xmi.id = '-64--88-0-3--75beda20:11aa9e3388d:-8000:00000000000009FE'
+                      lower = '1' upper = '1'/>
+                  </UML:Multiplicity.range>
+                </UML:Multiplicity>
+              </UML:StructuralFeature.multiplicity>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '-64--88-0-3--75beda20:11aa9e3388d:-8000:00000000000009FA'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '-64--88-0-3--75beda20:11aa9e3388d:-8000:0000000000000A00'
+              name = 'newAttr' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              changeability = 'changeable' targetScope = 'instance'>
+              <UML:StructuralFeature.multiplicity>
+                <UML:Multiplicity xmi.id = '-64--88-0-3--75beda20:11aa9e3388d:-8000:0000000000000A04'>
+                  <UML:Multiplicity.range>
+                    <UML:MultiplicityRange xmi.id = '-64--88-0-3--75beda20:11aa9e3388d:-8000:0000000000000A03'
+                      lower = '1' upper = '1'/>
+                  </UML:Multiplicity.range>
+                </UML:Multiplicity>
+              </UML:StructuralFeature.multiplicity>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '-64--88-0-3--75beda20:11aa9e3388d:-8000:00000000000009FA'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+          </UML:Classifier.feature>
+        </UML:Class>
+        <UML:Class xmi.id = '17' name = 'MySql' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
+          <UML:ModelElement.clientDependency>
+            <UML:Abstraction xmi.idref = '265'/>
+          </UML:ModelElement.clientDependency>
+          <UML:GeneralizableElement.generalization>
+            <UML:Generalization xmi.idref = '254'/>
+          </UML:GeneralizableElement.generalization>
+          <UML:Classifier.feature>
+            <UML:Attribute xmi.id = '255' name = 'link_id' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '256' name = 'query_id' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '257' name = 'query_key' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '258' name = 'mysql_error' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '259' name = 'mysql_errno' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '260' name = 'select_db' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '261' name = 'hostname' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '262' name = 'database' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '263' name = 'password' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '264' name = 'username' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Operation xmi.id = '266' name = '__construct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '480' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '267' name = 'parameters' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '268' name = '__destruct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '481' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '269' name = 'init' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '482' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '270' name = 'connect' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '483' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '271' name = 'select_db' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '484' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '272' name = 'query' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '485' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '10'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '273' name = 'qstring' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '274' name = 'limit' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '275' name = 'offset' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '276' name = 'query_all' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '486' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '7'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '277' name = 'qstring' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '278' name = 'limit' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '279' name = 'offset' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '280' name = 'type' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '281' name = 'unbuffered_query' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '487' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '10'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '282' name = 'qstring' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '283' name = 'LOW' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '284' name = 'limit' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '285' name = 'offset' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '286' name = 'fetch_array' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '488' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '10'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '287' name = 'query_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '288' name = 'type' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '289' name = 'fetch_row' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '489' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '10'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '290' name = 'query_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '291' name = 'query_first' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '490' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '7'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '292' name = 'qstring' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '293' name = 'limit' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '294' name = 'offset' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '295' name = 'type' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '296' name = 'num_rows' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '491' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '297' name = 'query_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '298' name = 'affected_rows' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '492' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '299' name = 'link_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '300' name = 'insert_id' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '493' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '301' name = 'link_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '302' name = 'free_result' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '494' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '303' name = 'result' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '304' name = 'close' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '495' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '305' name = 'link_id' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '306' name = 'show_tables' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '496' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '307' name = 'html_table' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '497' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '7'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '308' name = 'tablename' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '309' name = 'where' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+          </UML:Classifier.feature>
+        </UML:Class>
+        <UML:Class xmi.id = '18' name = 'PageLink' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
+          <UML:Classifier.feature>
+            <UML:Attribute xmi.id = '310' name = 'url' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '311' name = 'pp' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '312' name = 'ml' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '313' name = '_data' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '314' name = 'cnt' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '315' name = 'html' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '316' name = 'pageid' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '317' name = 'total_pages' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '318' name = 'query_limit' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '319' name = 'query_first' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '320' name = 'query_last' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Operation xmi.id = '321' name = '__construct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '498' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '322' name = 'entrycount' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '323' name = 'perpage' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '324' name = 'maxlinks' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '325' name = 'prepare' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '499' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '326' name = 'generate' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '500' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '327' name = 'get_links_from' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '501' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '328' name = 'start' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '329' name = 'end' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '330' name = 'get_query_limit' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '502' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '331' name = 'get_page_link' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '503' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '332' name = 'page' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '333' name = '__toString' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '504' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+          </UML:Classifier.feature>
+        </UML:Class>
+        <UML:Class xmi.id = '19' name = 'Session' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
+          <UML:GeneralizableElement.generalization>
+            <UML:Generalization xmi.idref = '334'/>
+          </UML:GeneralizableElement.generalization>
+          <UML:Classifier.feature>
+            <UML:Operation xmi.id = '335' name = '__construct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '505' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '336' name = '__destruct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '506' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '337' name = 'logout' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '507' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '338' name = 'error_message' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '339' name = 'login' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '508' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '340' name = 'passwd' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '509' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '341' name = 'book' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '510' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '342' name = 'update' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '511' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '343' name = 'delete' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '512' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '344' name = 'create' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '513' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '345' name = 'generate_password' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '514' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '346' name = 'length' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '347' name = 'is_admin' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '515' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '348' name = 'is_user' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '516' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '349' name = 'return_to' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '517' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '350' name = 'url' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '351' name = 'extend' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '518' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '352' name = 'valid' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '519' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '353' name = 'started' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '520' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '354' name = 'randomize' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '521' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '355' name = 'valid_email' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '522' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '356' name = 'email' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '357' name = 'check_db' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '358' name = 'get_mx_records' visibility = 'private'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '523' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '7'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '359' name = 'host' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '360' name = 'type' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '361' name = 'is_secure_password' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '524' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '2'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '362' name = 'password' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '363' name = 'min_len' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+          </UML:Classifier.feature>
+        </UML:Class>
+        <UML:Class xmi.id = '20' name = 'Timer' isSpecification = 'false' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
+          <UML:Classifier.feature>
+            <UML:Attribute xmi.id = '364' name = 'number' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'classifier'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '365' name = 'counter' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '366' name = 'runtime' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '367' name = 'microtm' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '368' name = 'unitfac' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '369' name = 'unitstr' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Attribute xmi.id = '370' name = 'namestr' visibility = 'private' isSpecification = 'false'
+              ownerScope = 'instance'>
+              <UML:StructuralFeature.type>
+                <UML:DataType xmi.idref = '1'/>
+              </UML:StructuralFeature.type>
+            </UML:Attribute>
+            <UML:Operation xmi.id = '371' name = '__construct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '525' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '372' name = 'parameters' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '7'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '373' name = '__destruct' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '526' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '374' name = 'start' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '527' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '375' name = 'stop' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '528' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '376' name = 'reset' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '529' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '377' name = 'get' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '530' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '4'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '378' name = 'prec' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '379' name = 'counter' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '531' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '380' name = 'number' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '532' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '381' name = 'set_units' visibility = 'public' isSpecification = 'false'
+              ownerScope = 'instance' isQuery = 'false' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '533' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '11'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '382' name = 'name' isSpecification = 'false'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '1'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '383' name = '__toString' visibility = 'public'
+              isSpecification = 'false' ownerScope = 'instance' isQuery = 'false' isRoot = 'false'
+              isLeaf = 'false' isAbstract = 'false'>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '534' name = 'return' isSpecification = 'false'
+                  kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:DataType xmi.idref = '6'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+          </UML:Classifier.feature>
+        </UML:Class>
+        <UML:DataType xmi.id = '-64--88-0-3--75beda20:11aa9e3388d:-8000:00000000000009FA'
+          name = 'int' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+          isAbstract = 'false'/>
+      </UML:Namespace.ownedElement>
+    </UML:Model>
+  </XMI.content>
+</XMI>
