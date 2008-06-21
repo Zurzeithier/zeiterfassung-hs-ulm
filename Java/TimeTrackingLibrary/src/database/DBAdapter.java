@@ -23,7 +23,15 @@ public interface DBAdapter {
 
     TimeAccountBean getTimeAccount();
 
-    List<TimeBookingTableEntryBean> getTimeBookings(int mid) throws DBException;
+    
+    /**
+     * 
+     * @param mid
+     * @param number Number of rows that should be returned
+     * @return
+     * @throws exceptions.DBException
+     */
+    List<TimeBookingTableEntryBean> getTimeBookings(int mid, int number) throws DBException;
     
     boolean addTimeBooking(TimeBookingBean bean) throws DBException;
 
