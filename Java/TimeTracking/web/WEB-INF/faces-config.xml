@@ -27,14 +27,6 @@
             <from-outcome>loginSucessfull</from-outcome>
             <to-view-id>/secure/TTSystem.jsp</to-view-id>
         </navigation-case>
-        <navigation-case>
-            <from-outcome>loginGo</from-outcome>
-            <to-view-id>/secure/TTSystem.jsp</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>loginCome</from-outcome>
-            <to-view-id>/secure/TTSystem.jsp</to-view-id>
-        </navigation-case>
     </navigation-rule>
     <managed-bean>
         <managed-bean-name>error$DBError</managed-bean-name>

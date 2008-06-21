@@ -216,9 +216,18 @@ public class Login extends AbstractPageBean
         if (user != null)
         {
             getSessionBean1().setUser(user);
-            BookingHandler.makeComeBooking(user.getMid());
             
-            return "loginCome";
+            if (BookingHandler.nextBookingIsGo(user.getMid()))
+            {
+                BookingHandler.makeComeBooking(user.getMid());
+                return "loginSucessfull";
+            }
+            else
+            {
+                message = true;
+            }
+            
+            return null;
         }
         else
         {
@@ -234,9 +243,18 @@ public class Login extends AbstractPageBean
         if (user != null)
         {
             getSessionBean1().setUser(user);
-            BookingHandler.makeGoBooking(user.getMid());
+         
+            if (BookingHandler.nextBookingIsGo(user.getMid()))
+            {
+                BookingHandler.makeGoBooking(user.getMid());
+                return "loginSucessfull";
+            }
+            else
+            {
+                message = true;
+            }
             
-            return "loginGo";
+            return null;
         }
         else
         {
@@ -248,12 +266,40 @@ public class Login extends AbstractPageBean
 
     public String bookingTab_action()
     {
-        message = true;
         return null;
     }
 
     public String loginTab_action()
     {
+        return null;
+    }
+
+    public String bookPushButton_action() throws DBException
+    {
+        UserBean user = getSessionBean1().getUser();
+        if (user != null)
+        {  
+            // außer Takt buchen, deshalb Prüfung umgedreht
+            if (BookingHandler.nextBookingIsCome(user.getMid()))
+            {
+                BookingHandler.makeGoBooking(user.getMid());
+            }
+            else
+            {
+                BookingHandler.makeComeBooking(user.getMid());
+            }
+           
+            message = false;       
+            return "loginSucessfull";
+        }
+        
+        message = false;
+        return null;
+    }
+
+    public String dontBookPushButton_action()
+    {
+        message = false;
         return null;
     }
 

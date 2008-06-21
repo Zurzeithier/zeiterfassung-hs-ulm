@@ -48,3 +48,9 @@
   font-weight: bold;
 }
 
+
+/* Style rules for message severity levels */
+
+.infoDialog {
+  background-color: #f5f512;
+}

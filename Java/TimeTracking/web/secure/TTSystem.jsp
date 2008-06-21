@@ -18,7 +18,7 @@ Author     : manuel
                             <webuijsf:tab actionExpression="#{secure$TTSystem.tab1_action}" id="tab1" tabIndex="5" text="Buchungen">
                                 <webuijsf:panelLayout id="layoutPanel1" style="height: 299px; position: relative; width: 100%; -rave-layout: grid">
                                     <webuijsf:table augmentTitle="false" id="table1" style="height: 173px; left: 24px; top: 72px; position: absolute"
-                                        title="Buchungen" width="408">
+                                                    title="Buchungen" width="408">
                                         <webuijsf:tableRowGroup id="tableRowGroup1" rows="10" sourceData="#{secure$TTSystem.bookings}" sourceVar="currentRow">
                                             <webuijsf:tableColumn headerText="Vorname" id="tableColumn3" valign="top">
                                                 <webuijsf:staticText id="staticText3" text="#{currentRow.value['firstname']}"/>
@@ -35,27 +35,38 @@ Author     : manuel
                                         </webuijsf:tableRowGroup>
                                     </webuijsf:table>
                                     <webuijsf:button actionExpression="#{secure$TTSystem.comePushButton_action}" id="comePushButton"
-                                        style="height: 24px; left: 23px; top: 24px; position: absolute; width: 120px" tabIndex="1" text="Kommen"/>
+                                                     style="height: 24px; left: 23px; top: 24px; position: absolute; width: 120px" tabIndex="1" text="Kommen"/>
                                     <webuijsf:button actionExpression="#{secure$TTSystem.goPushButton_action}" id="goPushButton"
-                                        style="height: 24px; left: 192px; top: 24px; position: absolute; width: 119px" tabIndex="2" text="Gehen"/>
+                                                     style="height: 24px; left: 192px; top: 24px; position: absolute; width: 119px" tabIndex="2" text="Gehen"/>
                                 </webuijsf:panelLayout>
                             </webuijsf:tab>
                             <webuijsf:tab actionExpression="#{secure$TTSystem.tab2_action}" id="tab2" tabIndex="6" text="Einstellungen">
                                 <webuijsf:panelLayout id="layoutPanel2" style="height: 203px; position: relative; width: 100%; -rave-layout: grid">
                                     <webuijsf:label id="newPasswordLabel" style="height: 24px; left: 24px; top: 96px; position: absolute; width: 96px" text=" Passwort"/>
                                     <webuijsf:button actionExpression="#{secure$TTSystem.changePasswordButton_action}" id="changePasswordButton"
-                                        style="height: 24px; left: 143px; top: 136px; position: absolute; width: 168px" tabIndex="3" text="Änderungen übernehmen"/>
+                                                     style="height: 24px; left: 143px; top: 136px; position: absolute; width: 168px" tabIndex="3" text="Änderungen übernehmen"/>
                                     <webuijsf:passwordField columns="25" id="passwordTextField" password="#{SessionBean1.user.password}"
-                                        style="height: 24px; left: 144px; top: 96px; position: absolute; width: 168px" tabIndex="2"/>
+                                                            style="height: 24px; left: 144px; top: 96px; position: absolute; width: 168px" tabIndex="2"/>
                                     <webuijsf:label id="oldPasswordLabel" style="height: 24px; left: 24px; top: 57px; position: absolute; width: 96px" text="Benutzername"/>
                                     <webuijsf:label id="label1" style="height: 24px; left: 24px; top: 11px; position: absolute; width: 264px" text="#{secure$TTSystem.status}"/>
                                     <webuijsf:textField columns="25" id="textField1"
-                                        style="height: 24px; left: 144px; top: 58px; position: absolute; width: 168px" text="#{SessionBean1.user.username}"/>
+                                                        style="height: 24px; left: 144px; top: 58px; position: absolute; width: 168px" text="#{SessionBean1.user.username}"/>
                                 </webuijsf:panelLayout>
                             </webuijsf:tab>
                         </webuijsf:tabSet>
                         <webuijsf:button actionExpression="#{secure$TTSystem.logoutButton_action}" id="logoutButton"
-                            style="position: absolute; left: 48px; top: 24px; width: 120px; height: 24px" tabIndex="4" text="Logout"/>
+                                         style="position: absolute; left: 48px; top: 24px; width: 120px; height: 24px" tabIndex="4" text="Logout"/>
+                        
+                        <webuijsf:bubble autoClose="false" id="bubble1" style="height: 118px; left: 72px; top: 120px; position: absolute" title="Hinweis!"
+                                         visible="#{secure$TTSystem.message}" width="166">
+                            <webuijsf:panelLayout id="layoutPanel3" style="height: 72px; position: relative; width: 180px; -rave-layout: grid">
+                                <webuijsf:button actionExpression="#{secure$TTSystem.bookPushButton_action}" id="button3"
+                                                 style="height: 24px; left: -1px; top: 48px; position: absolute; width: 72px" text="Ja"/>
+                                <webuijsf:button actionExpression="#{secure$TTSystem.dontBookPushButton_action}" id="button1"
+                                                 style="height: 24px; left: 95px; top: 48px; position: absolute; width: 72px" text="Nein"/>
+                                <webuijsf:staticText id="staticText1" style="left: 0px; top: 0px; position: absolute" text="Buchung auser Takt! Trotzdem buchen?"/>
+                            </webuijsf:panelLayout>
+                        </webuijsf:bubble>
                     </webuijsf:form>
                 </webuijsf:body>
             </webuijsf:html>
