@@ -204,6 +204,8 @@ public class TTSystem extends AbstractPageBean
 
     public String logoutButton_action()
     {
+        getSessionBean1().setUser(null);
+        
         return "logout";
     }
 

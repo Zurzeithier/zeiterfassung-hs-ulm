@@ -52,7 +52,7 @@ public class UserAuthenticationFilter implements Filter
             
             if (user == null)
             {
-                hres.sendRedirect("Login.jsp");
+                hres.sendRedirect("/TimeTracking"); // send user to default page
                 return;
             }
 

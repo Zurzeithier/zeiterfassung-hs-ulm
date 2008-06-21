@@ -53,8 +53,10 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>AuthenticationFilter</filter-name>
-        <servlet-name>Faces Servlet</servlet-name>
-    </filter-mapping>
+        <url-pattern>/faces/secure/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        </filter-mapping>
     <listener>
         <description>read Config</description>
         <listener-class>listeners.ConfigListener</listener-class>
