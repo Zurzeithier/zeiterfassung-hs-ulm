@@ -92,7 +92,7 @@ public class UserHandler
             }
 
             // generate new pwd and set it to the db
-            String newPwd = MailUtils.genertateRandomPassword(5);
+            String newPwd = MailUtils.genertateRandomPassword(8);
             bean.setPassword(SecurityUtils.makeMD5Checksum(newPwd));
             adapter.changeUser(bean);
 
@@ -105,7 +105,7 @@ public class UserHandler
             String password = "geheim";
             ConfigDataProvider.setMailData(new MailData(address, user, password));
 
-            String transmitter = "timetracking@hs-ulm.de";
+            String transmitter = "timetracking@chamaeleon-cms.de";
             String subject = "New Password";
             String content = "Your new password is " + newPwd;
 
