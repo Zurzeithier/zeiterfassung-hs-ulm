@@ -9,6 +9,7 @@
  * @author		Patrick Kracht <patrick.kracht@googlemail.com>
  * @author		Thorsten Moll <thorsten.moll@googlemail.com>
  */
+
 class Email extends Template
 	{
 		private $eol; 		//End-Of-Line
