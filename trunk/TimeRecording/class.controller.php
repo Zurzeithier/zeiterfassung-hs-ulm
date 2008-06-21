@@ -25,7 +25,7 @@ class Controller
 		{
 			$this->reinit();
 		}
-		
+
 		/**
 		 * reinit loads global config file and initializes
 		 * default session variables, register session-objects
@@ -63,19 +63,19 @@ class Controller
 					$_SESSION["_MaxWorkingH"]    = (isset($_SETTINGS["Main"][5])) ? $_SETTINGS["Main"][5] : 8;
 					$_SESSION["_TplSqlTable"]    = (isset($_SETTINGS["Template"][3])) ? $_SETTINGS["Template"][3] : false;
 				}
-				
+
 			// try to register needed objects for current session or die
 			try
 				{
 					$this->register("Memory",array(),"MEMORY");
-					
+
 					$this->register("Timer",array("Controller",true),"TIMER.PHP");
 					$_SESSION["TIMER.PHP"]->reset();
 					$_SESSION["TIMER.PHP"]->start();
-					
+
 					$this->register("MySql", $_SETTINGS["MySql"], "MYSQL");
 					$_SESSION["TIMER.MYSQL"]->reset();
-					
+
 					$this->register("Template", $_SETTINGS["Template"], "HTML");
 					$this->register("Session",  array(), "CLIENT");
 				}
@@ -84,7 +84,7 @@ class Controller
 					die($e->getMessage());
 				}
 		}
-		
+
 		/**
 		 * destructor
 		 *
@@ -95,7 +95,7 @@ class Controller
 		public function __destruct()
 		{
 		}
-		
+
 		/**
 		 * register new session-object, if not allready present
 		 *
@@ -118,7 +118,7 @@ class Controller
 					$_SESSION[$classname] =& new $classname($parameters);
 				}
 		}
-		
+
 		/**
 		 * unregister
 		 *
@@ -140,7 +140,7 @@ class Controller
 					unset($_SESSION[$alias]);
 				}
 		}
-		
+
 		/**
 		 * to string returns null
 		 *
@@ -154,7 +154,7 @@ class Controller
 		{
 			return;
 		}
-		
+
 		/**
 		 * creates user menu or not
 		 *
@@ -178,7 +178,7 @@ class Controller
 			$_SESSION["HTML"]->menu_insert_entry("[<u>KOMMEN</u>]", "./?action=book&amp;id=1", "K");
 			$_SESSION["HTML"]->menu_insert_entry("[<u>GEHEN</u>]", "./?action=book&amp;id=0", "G");
 		}
-		
+
 		/**
 		 * creates user specific page
 		 *
@@ -216,16 +216,16 @@ class Controller
 						case "setup":
 							$select = array("-1" => "");
 							$edit   = array("name1" => "", "name2" => "", "pass" => "");
-							
+
 							$query  = "SELECT mid, email FROM tr_users ORDER BY email;";
 							$array  = $_SESSION[$_SESSION["_SqlType"]]->query_all($query);
-							
+
 							// reformat array for creating select menu
 							foreach($array as $key => $value)
 							{
 								$select[$value["mid"]] = $value["email"];
 							}
-							
+
 							// check for selected item
 							$selected = "";
 							if (isset($_POST["edit_mid"]))
@@ -240,16 +240,16 @@ class Controller
 										}
 									else if ($_POST["submit"] == "SPEICHERN")
 										{
-										
+
 										}
 								}
-								
+
 							$options = $_SESSION["HTML"]->create_select($select, $selected);
 							$_SESSION["HTML"]->assign("setup.html", "{{EDIT_FIRSTNAME}}", $edit["name1"]);
 							$_SESSION["HTML"]->assign("setup.html", "{{EDIT_LASTNAME}}",  $edit["name2"]);
 							$_SESSION["HTML"]->assign("setup.html", "{{EDIT_PASSWORD}}",  $edit["pass"]);
 							$_SESSION["HTML"]->assign("setup.html", "<!--USER_SELECT-->", $options);
-							
+
 							$_SESSION["HTML"]->output("setup.html");
 							break;
 						case "home":
@@ -260,10 +260,10 @@ class Controller
 							$_SESSION["HTML"]->assign("index.html", "<!--LOGIN_NAME-->", $_SESSION["_UserData"]["email"]);
 							$_SESSION["HTML"]->assign("index.html", "<!--IP-->", $_SESSION["_UserData"]["ip"]);
 							$_SESSION["HTML"]->assign("index.html", "<!--GROUP_NAME-->", $_SESSION["_UserData"]["groupname"]);
-							
+
 							// list last bookings
 							$this->show_last_bookings();
-							
+
 							// summary calculation and assignment for current week and month
 							$array = $this->get_booking_sums("WEEK");
 							$_SESSION["HTML"]->assign("index.html", "<!--SUM_WEEK_NOW-->",$array["Stunden"]);
@@ -271,7 +271,7 @@ class Controller
 							$array = $this->get_booking_sums("MONTH");
 							$_SESSION["HTML"]->assign("index.html", "<!--SUM_MONTH_NOW-->",$array["Stunden"]);
 							$_SESSION["HTML"]->assign("index.html", "{{SUM_MONTH_NOW_TL}}",$array["Von"]." - ".$array["Bis"]);
-							
+
 							// summary calculation and assignment for last week and month
 							$array = $this->get_booking_sums("WEEK", 1);
 							$_SESSION["HTML"]->assign("index.html", "<!--SUM_WEEK_LAST-->",$array["Stunden"]);
@@ -279,14 +279,14 @@ class Controller
 							$array = $this->get_booking_sums("MONTH", 1);
 							$_SESSION["HTML"]->assign("index.html", "<!--SUM_MONTH_LAST-->",$array["Stunden"]);
 							$_SESSION["HTML"]->assign("index.html", "{{SUM_MONTH_LAST_TL}}",$array["Von"]." - ".$array["Bis"]);
-							
+
 							// send page to browser
 							$_SESSION["HTML"]->output("index.html");
 							break;
 						}
 				}
 		}
-		
+
 		/**
 		 * prepare templates for session
 		 *
@@ -303,7 +303,7 @@ class Controller
 					$_SESSION["_cached"] = true;
 				}
 		}
-		
+
 		/**
 		 * returns sum array of bookings (week, month - current and last)
 		 *
@@ -355,7 +355,7 @@ class Controller
 					$range = "SameDay";
 					break;
 				}
-				
+
 			$query  = "SELECT DATE_FORMAT( $redat, '$group' ) AS $range, ";
 			$query .= "DATE_FORMAT( $start , '%d.%m.%Y' ) AS Von, ";
 			$query .= "DATE_FORMAT( $stop , '%d.%m.%Y' ) AS Bis, ";
@@ -363,18 +363,18 @@ class Controller
 			$query .= "IF( bookid = NULL, 0, COUNT( bookid ) ) AS Besuche FROM tr_bookings ";
 			$query .= "WHERE mid = '".$_SESSION["_UserData"]["mid"]."' AND ";
 			$query .= "DATE( stamp_1 ) >= DATE( $start ) AND DATE( stamp_1 ) <= DATE( $stop );";
-			
+
 			$array = $_SESSION[$_SESSION["_SqlType"]]->query_all($query);
-			
+
 			// future use, if multiple row read implemented
 			if ($limit > 1)
 				{
 					return $array;
 				}
-				
+
 			return $array[0];
 		}
-		
+
 		/**
 		 * returns array of all tables in database
 		 *
@@ -391,9 +391,9 @@ class Controller
 			$query  = "SELECT COUNT( stamp_1 ) AS total FROM tr_bookings ";
 			$query .= "WHERE mid = '".$_SESSION["_UserData"]["mid"]."' GROUP BY mid;";
 			$entry  = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
-			
+
 			$plink = new PageLink($entry["total"]);
-			
+
 			$query  = "SELECT DATE_FORMAT( stamp_1, '%d.%m.%Y' ) AS Datum, ";
 			$query .= "DATE_FORMAT( stamp_1, '%T Uhr' ) AS Gekommen, ";
 			$query .= "DATE_FORMAT( stamp_2, '%T Uhr' ) AS Gegangen, ";
@@ -401,12 +401,12 @@ class Controller
 			$query .= "FROM tr_bookings ";
 			$query .= "WHERE mid = '".$_SESSION["_UserData"]["mid"]."' ";
 			$query .= "ORDER BY stamp_1 DESC ".$plink->get_query_limit();
-			
+
 			$book = $this->query2table($query,"last_bookings");
 			$_SESSION["HTML"]->assign("index.html", "<!--HISTORY_DATA-->",$book);
 			$_SESSION["HTML"]->assign("index.html", "<!--HISTORY_PAGE_LINK-->",$plink);
 		}
-		
+
 		/**
 		 * generate html user table
 		 *
@@ -418,9 +418,9 @@ class Controller
 		{
 			$query  = "SELECT COUNT( email ) AS total FROM tr_users;";
 			$entry  = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
-			
+
 			$plink = new PageLink($entry["total"]);
-			
+
 			$query  = "SELECT u.mid AS MitarbeiterID, u.email AS Email, ";
 			$query .= "u.firstname AS Vorname, u.lastname AS Nachname, g.groupname AS Gruppe ";
 			//$query .= "IF( b.stamp_2 = NULL, 'Nein', 'Ja' ) AS Anwesend ";
@@ -428,13 +428,12 @@ class Controller
 			//$query .= "LEFT JOIN tr_bookings b USING ( mid ) ";
 			$query .= "LEFT JOIN tr_groups g USING ( gid ) ";
 			$query .= "ORDER BY mid ASC ".$plink->get_query_limit();
-			
+
 			$users = $this->query2table($query,"user_table");
 			$_SESSION["HTML"]->assign("users.html", "<!--USER_TABLE-->",$users);
 			$_SESSION["HTML"]->assign("users.html", "<!--USER_PAGE_LINK-->",$plink);
 		}
-		
-		
+
 		/**
 		 * private query to html table converter
 		 *
@@ -471,7 +470,7 @@ class Controller
 			$dump  .= "</table>";
 			return $dump;
 		}
-		
+
 		/**
 		 * manage page actions and execute state-dependend methods
 		 *
@@ -483,7 +482,7 @@ class Controller
 		{
 			// clean previous errors
 			$_SESSION["_Errors"] = "";
-			
+
 			// save post or get value from "page"
 			if (isset($_POST["page"]))
 				{
@@ -500,7 +499,7 @@ class Controller
 					$_SESSION["_PageID.current"] = "home";
 					$_SESSION["_PageID.last"] = "home";
 				}
-				
+
 			// save post or get value from "action"
 			if (isset($_POST["action"]))
 				{
@@ -514,10 +513,10 @@ class Controller
 				{
 					$_SESSION["_Action"] = "";
 				}
-				
+
 			// extend session of user, if valid
 			$_SESSION["CLIENT"]->extend();
-			
+
 			// try to execute session actions
 			try
 				{
@@ -555,6 +554,7 @@ class Controller
 					$_SESSION["_ErrNo"]   = $e->getCode();
 				}
 		}
-		
+
 	}
+
 ?>
