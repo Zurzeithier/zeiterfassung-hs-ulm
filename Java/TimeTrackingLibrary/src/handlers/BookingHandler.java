@@ -8,7 +8,7 @@ import exceptions.DBException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-import pool.ObjectPoolException;
+import exceptions.ObjectPoolException;
 
 /**
  *

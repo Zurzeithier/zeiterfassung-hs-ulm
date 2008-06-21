@@ -1,7 +1,7 @@
 package database;
 
 import application.ConfigDataProvider;
-import pool.ObjectPoolException;
+import exceptions.ObjectPoolException;
 
 /**
  *
