@@ -11,7 +11,7 @@
  */
 class Session extends Controller
 	{
-	
+
 		/**
 		 * constructor
 		 *
@@ -22,7 +22,7 @@ class Session extends Controller
 		public function __construct()
 		{
 		}
-		
+
 		/**
 		 * destructor (nop)
 		 *
@@ -33,7 +33,7 @@ class Session extends Controller
 		public function __destruct()
 		{
 		}
-		
+
 		/**
 		 * logout destroys session and starts
 		 * a new one in guest mode and reload page
@@ -48,12 +48,12 @@ class Session extends Controller
 			session_unset();
 			session_destroy();
 			session_regenerate_id(true);
-			
+
 			// savely remove complete array and reload page
 			$_SESSION = array();
 			$this->return_to("./");
 		}
-		
+
 		/**
 		 * perform login with POST values $_POST["LoginUsername"] and $_POST["LoginPassword"]
 		 *
@@ -79,30 +79,30 @@ class Session extends Controller
 					// if no post values for user and pass, init save state (guest)
 					$this->logout();
 				}
-				
+
 			// check, if user with md5-pass exists in database
 			$query  = "SELECT u.mid, u.gid, u.email, u.firstname, u.lastname, g.groupname ";
 			$query .= "FROM tr_users u LEFT JOIN ";
 			$query .= "tr_groups g USING ( gid ) ";
 			$query .= "WHERE u.email = '$username' AND u.password = '$password';";
 			$found = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
-			
+
 			if (! isset($found["mid"]))
 				{
 					throw new Exception("Die Email oder das Kennwort ist falsch!",302);
 				}
-				
+
 			$_SESSION["_UserData"] = $found;
-			
+
 			// save current timestamp and ip to verify session
 			$_SESSION["_UserData"]["timestamp"] = time();
 			$_SESSION["_UserData"]["ip"]        = $_SERVER["REMOTE_ADDR"];
-			
+
 			$this->extend();
-			
+
 			return true;
 		}
-		
+
 		/**
 		 * reset a password for a given username (email)
 		 * and returns new generated password
@@ -129,11 +129,11 @@ class Session extends Controller
 				{
 					throw new Exception("Sie haben keine Emailadresse angegeben!",303);
 				}
-				
+
 			// check, if user with md5-pass exists in database
 			$query  = "SELECT mid, firstname, lastname FROM tr_users WHERE email = '$username';";
 			$result = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
-			
+
 			// only if one hit
 			if (! isset($result["mid"]))
 				{
@@ -146,12 +146,12 @@ class Session extends Controller
 					$query   = "UPDATE tr_users SET password = '$passmd5' WHERE email = '$username';";
 					$_SESSION[$_SESSION["_SqlType"]]->query($query);
 					$count   = $_SESSION[$_SESSION["_SqlType"]]->affected_rows();
-					
+
 					// successful updated database
 					if ($count == 1)
 						{
 							$tpl = "passwd.email.html";
-							
+
 							$email = new Email(array($tpl,"Sie haben Ihr Passwort vergessen?"));
 							$email->set_sender("omega2k@omega2k.de","Webmaster");
 							$email->set_to($username, $result["firstname"]." ".$result["lastname"]);
@@ -173,7 +173,7 @@ class Session extends Controller
 						}
 				}
 		}
-		
+
 		/**
 		 * get new token and save in session
 		 *
@@ -188,7 +188,7 @@ class Session extends Controller
 			$_SESSION["_AsyncToken"] = md5($this->generate_password(10));
 			return $_SESSION["_AsyncToken"];
 		}
-		
+
 		/**
 		 * validate token and return true, if valid
 		 *
@@ -201,17 +201,17 @@ class Session extends Controller
 		public function is_valid_token()
 		{
 			$ignore = false;
-			
+
 			// for async booking, check if token is valid
 			if (isset($_SESSION["_AsyncToken"]) && isset($_POST["ig"]))
 				{
 					$ignore = ($_SESSION["_AsyncToken"] == $_POST["ig"]);
 					unset($_SESSION["_AsyncToken"]);
 				}
-				
+
 			return $ignore;
 		}
-		
+
 		/**
 		 * booking method with symbol for userid
 		 *
@@ -230,7 +230,7 @@ class Session extends Controller
 			$ignore = $this->is_valid_token();
 			$symid  = (isset($_GET["id"])) ? intval($_GET["id"]) : -1;
 			$symid  = (isset($_POST["id"]) && $symid == -1) ? intval($_POST["id"]) : $symid;
-			
+
 			if (! $this->is_user())
 				{
 					throw new Exception("Sie sind kein bekannter Benutzer!",308);
@@ -242,15 +242,15 @@ class Session extends Controller
 			else
 				{
 					$mid    = $_SESSION["_UserData"]["mid"];
-					
+
 					// check if booking is out of cycle
 					$query  = "SELECT bookid, stamp_1, ( UNIX_TIMESTAMP() - UNIX_TIMESTAMP( stamp_1 ) ) AS away, stamp_2 FROM tr_bookings ";
 					$query .= "WHERE mid = '$mid' ORDER BY bookid DESC;";
 					$last   = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
-					
+
 					$case_1 = ($symid == 1 && isset($last["stamp_1"]) && $last["stamp_2"] == NULL);
 					$case_2 = ($last["away"] > ($_SESSION["_MaxWorkingH"] * 3600) && $symid == 0);
-					
+
 					// case_1: new check in but last check out is missing (async booking!)
 					if ($case_1 && $ignore)
 						{
@@ -271,7 +271,7 @@ class Session extends Controller
 							$question .= "<input type=\"submit\" name=\"submit\" value=\"Ignorieren\" />";
 							$question .= "<input type=\"button\" onclick=\"location.href='./?page=home';\" value=\"Abbrechen\" />";
 							$question .= "</form>";
-							
+
 							throw new Exception("Azyklische Buchungen sind nicht zugelassen!$question",311);
 						}
 					// case_2: more than maximum hours
@@ -301,7 +301,7 @@ class Session extends Controller
 						}
 				}
 		}
-		
+
 		/**
 		 * get complete array of users [mid] => [email]
 		 *
@@ -317,16 +317,16 @@ class Session extends Controller
 			$query  = "SELECT mid, CONCAT( lastname, ', ', firstname, ' &lt;', email, '&gt;' ) AS name ";
 			$query .= "FROM tr_users ORDER BY lastname, firstname, email;";
 			$array  = $_SESSION[$_SESSION["_SqlType"]]->query_all($query);
-			
+
 			// reformat array for creating select menu
 			foreach($array as $key => $value)
 			{
 				$select[$value["mid"]] = $value["name"];
 			}
-			
+
 			return $select;
 		}
-		
+
 		/**
 		 * prepare update save values, if not set
 		 *
@@ -341,7 +341,7 @@ class Session extends Controller
 					$_SESSION["_updated"] = array("user"=>-1,"group"=>-1,"edit"=>array("name1" => "", "name2" => ""),"new" => array("name1"=>"","name2"=>"","email"=>"","passw"=>""));
 				}
 		}
-		
+
 		/**
 		 * update method
 		 *
@@ -353,11 +353,11 @@ class Session extends Controller
 		{
 			$this->init_update_forms();
 			$edit = array("name1" => "", "name2" => "");
-			
+
 			// check for selected item
 			$selected_user  = (isset($_POST["edit_mid"]))?intval($_POST["edit_mid"]):-1;
 			$selected_group = (isset($_POST["new_group"])&&$selected_user!=-1)?intval($_POST["new_group"]):-1;
-			
+
 			if ($selected_user >= 0)
 				{
 					$edit["name1"]  = ucfirst(trim($_POST["new_firstname"]));
@@ -399,7 +399,7 @@ class Session extends Controller
 					else if ($_POST["submit"] == "LOESCHEN")
 						{
 							$ignore = $this->is_valid_token();
-							
+
 							if ($ignore && $selected_user == 0)
 								{
 									$_SESSION["_Errors"] .= "Der Administrator kann nicht gel&ouml;scht werden!";
@@ -411,7 +411,7 @@ class Session extends Controller
 							else
 								{
 									$token  = $this->get_token();
-									
+
 									$question  = "<form action=\"./\" method=\"post\" id=\"question\">";
 									$question .= "<input type=\"hidden\" name=\"ig\"       value=\"$token\"/>";
 									$question .= "<input type=\"hidden\" name=\"edit_mid\" value=\"$selected_user\"/>";
@@ -421,7 +421,7 @@ class Session extends Controller
 									$question .= "<input type=\"submit\" name=\"submit\"   value=\"LOESCHEN\" />";
 									$question .= "<input type=\"submit\" name=\"submit\"   value=\"ABBRECHEN\" />";
 									$question .= "</form>";
-									
+
 									$_SESSION["_Errors"] .= "Sind Sie sicher, dass Sie den Benutzer l&ouml;schen wollen? $question";
 								}
 						}
@@ -430,7 +430,7 @@ class Session extends Controller
 			$_SESSION["_updated"]["group"] = $selected_group;
 			$_SESSION["_updated"]["edit"]  = $edit;
 		}
-		
+
 		/**
 		 * delete method
 		 *
@@ -443,7 +443,7 @@ class Session extends Controller
 			$query  = "DELETE FROM tr_users ";
 			$query .= "WHERE mid='$userid' LIMIT 1;";
 			$result = $_SESSION[$_SESSION["_SqlType"]]->query($query);
-			
+
 			if ($_SESSION[$_SESSION["_SqlType"]]->affected_rows($result))
 				{
 					$_SESSION["_Errors"] .= "Der Benutzer wurde gel&ouml;scht!";
@@ -453,7 +453,7 @@ class Session extends Controller
 					$_SESSION["_Errors"] .= "Fehler! Benutzer nicht gefunden!";
 				}
 		}
-		
+
 		/**
 		 * create method
 		 *
@@ -468,28 +468,28 @@ class Session extends Controller
 			$new["name2"] = (isset($_POST["new_lastname"]))?ucfirst(trim($_POST["new_lastname"])):"";
 			$new["passw"] = (isset($_POST["new_password"]))?$_POST["new_password"]:"";
 			$_SESSION["_updated"]["new"] = $new;
-			
+
 			if (! empty($new["passw"]))
 				{
 					$new["passw"] = md5($new["passw"]);
 				}
-				
-			if ($this->valid_email($new["email"], true) && $_POST["submit"] != "RESET")
+
+			if ( $_POST["submit"] == "ERSTELLEN" && $this->valid_email($new["email"], true) )
 				{
 					$_SESSION["_updated"]["new"] = array("email"=>"","name1"=>"","name2"=>"","passw"=>"");
-					
+
 					$query  = "INSERT INTO tr_users ( email, firstname, lastname, password ) ";
 					$query .= "VALUES ( '".$new["email"]."','".$new["name1"]."','".$new["name2"]."','".$new["passw"]."' );";
 					$_SESSION[$_SESSION["_SqlType"]]->query($query);
-					
+
 					$_SESSION["_Errors"] .= "Neuer Benutzer '".$new["email"]."' wurde erstellt! ";
 				}
-			elseif($_POST["submit"] == "RESET")
+			elseif( $_POST["submit"] == "RESET" )
 			{
 				$_SESSION["_updated"]["new"] = array("email"=>"","name1"=>"","name2"=>"","passw"=>"");
 			}
 		}
-		
+
 		/**
 		 * generates a new random password with $length
 		 *
@@ -518,7 +518,7 @@ class Session extends Controller
 				}
 			return $password;
 		}
-		
+
 		/**
 		 * checks current user for admin rights
 		 *
@@ -533,7 +533,7 @@ class Session extends Controller
 			if (! isset($_SESSION["_UserData"]["gid"])) return false;
 			return ($_SESSION["_UserData"]["gid"] == 0);
 		}
-		
+
 		/**
 		 * checks current user for admin rights
 		 *
@@ -548,7 +548,7 @@ class Session extends Controller
 			if (! isset($_SESSION["_UserData"]["gid"])) return false;
 			return ($_SESSION["_UserData"]["gid"] == 3);
 		}
-		
+
 		/**
 		 * checks current user for user rights
 		 *
@@ -563,7 +563,7 @@ class Session extends Controller
 			if (! isset($_SESSION["_UserData"]["gid"])) return false;
 			return ($_SESSION["_UserData"]["gid"] != 1);
 		}
-		
+
 		/**
 		 * redirect to any $url using header-location
 		 *
@@ -577,7 +577,7 @@ class Session extends Controller
 			header("Location: ".$url);
 			exit();
 		}
-		
+
 		/**
 		 * extend current session, if valid anymore, or logout after timeout const SESSION_TIMEOUT seconds
 		 *
@@ -605,7 +605,7 @@ class Session extends Controller
 					$_SESSION["_UserData"]["ip"] = $_SERVER["REMOTE_ADDR"];
 				}
 		}
-		
+
 		/**
 		 * checks, if current session is started and valid (logout after timeout const SESSION_TIMEOUT seconds)
 		 *
@@ -627,7 +627,7 @@ class Session extends Controller
 			$away = (time() - $_SESSION["_UserData"]["timestamp"]);
 			return (($_SERVER["REMOTE_ADDR"] == $_SESSION["_UserData"]["ip"]) && ($away < $_SESSION["_TimeOut"]));
 		}
-		
+
 		/**
 		 * checks, if current session is started
 		 *
@@ -642,7 +642,7 @@ class Session extends Controller
 			// only if having timestamp and ip return true
 			return (isset($_SESSION["_UserData"]["timestamp"]) && isset($_SESSION["_UserData"]["ip"]));
 		}
-		
+
 		/**
 		 * restarts the mt_srand with some better randomized init values
 		 *
@@ -655,7 +655,7 @@ class Session extends Controller
 			list($usec, $sec) = explode(' ', microtime());
 			mt_srand((float) $sec + ((float) $usec * 100000));
 		}
-		
+
 		/**
 		 * check, is an $email is in database
 		 *
@@ -671,7 +671,7 @@ class Session extends Controller
 		{
 			$query  = "SELECT mid FROM tr_users WHERE email='$email';";
 			$result = $_SESSION[$_SESSION["_SqlType"]]->query($query);
-			
+
 			if ($_SESSION[$_SESSION["_SqlType"]]->num_rows($result) == 1)
 				{
 					$_SESSION["_Errors"] .= "Diese Email existiert bereits in der Datenbank! ";
@@ -679,7 +679,7 @@ class Session extends Controller
 				}
 			return false;
 		}
-		
+
 		/**
 		 * check, is an $email is valid (RegEx, DB and MX-check)
 		 *
@@ -695,26 +695,26 @@ class Session extends Controller
 		public function valid_email($email, $check_db = false)
 		{
 			$error = false;
-			
+
 			if (! isset($_SESSION["_UserData"]["valid_mails"]))
 				{
 					$_SESSION["_UserData"]["valid_mails"] = array();
 				}
-				
+
 			// avoid queries to mail servers, use session buffer
 			if (in_array($email, $_SESSION["_UserData"]["valid_mails"]))
 				{
 					return (! $check_db) ? true : ! $this->email_exists($email);
 				}
-				
+
 			$email = strtolower($email);
-			
+
 			// regex for checking syntactically correct email addresses
 			if (ereg("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$", $email))
 				{
 					list($username, $domain) = split('@', $email);
 					$smtp = array("mail.$domain", "smtp.$domain");
-					
+
 					if (! function_exists("checkdnsrr"))
 						{
 							$error = true;
@@ -730,13 +730,13 @@ class Session extends Controller
 							$error = true;
 							echo("function fsockopen() not found!\n");
 						}
-						
+
 					if ($error)
 						{
 							$_SESSION["_Errors"] .= "Fehler! Es fehlen grundlegende Funktionen! ";
 							return false;
 						}
-						
+
 					// query MX-records
 					if (@checkdnsrr($domain, "MX"))
 						{
@@ -750,7 +750,7 @@ class Session extends Controller
 							$_SESSION["_Errors"] .= "Fehler! Keine MX-Records gefunden! ";
 							return false;
 						}
-						
+
 					// contact each server
 					foreach($smtp as $server)
 					{
@@ -766,7 +766,7 @@ class Session extends Controller
 										$gto = fgets($sock, 1024);
 										fputs($sock, "QUIT\r\n");
 										fclose($sock);
-										
+
 										// if sender and recipient valid, TRUE
 										if ((ereg("^250", $gfr) && ereg("^250", $gto)) || (! empty($gfr) && ! ereg("unknown", $gfr)))
 											{
@@ -781,7 +781,7 @@ class Session extends Controller
 			$_SESSION["_Errors"] .= "Die Email $email ist ung&uuml;ltig! ";
 			return false;
 		}
-		
+
 		/**
 		 * get mx-records from host (optional: $type)
 		 *
@@ -811,7 +811,7 @@ class Session extends Controller
 				}
 			return false;
 		}
-		
+
 		/**
 		 * proof choosen password for a better security
 		 *
@@ -831,7 +831,7 @@ class Session extends Controller
 			        && preg_match("@[a-z]@", $password)
 			        && preg_match("@[0-9]@", $password));
 		}
-		
+
 	}
 
 ?>
