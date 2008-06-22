@@ -155,7 +155,7 @@ class Session extends Controller
 							$email = new Email(array($tpl,"Sie haben Ihr Passwort vergessen?"));
 							$email->set_sender("omega2k@omega2k.de","Webmaster");
 							$email->set_to($username, $result["firstname"]." ".$result["lastname"]);
-							$email->assign($tpl,"{{URL}}","http://www.omega2k.de/~omega2k/TimeRecording/");
+							$email->assign($tpl,"{{URL}}","http://".$_SERVER["HTTP_HOST"].dirname($_SERVER["SCRIPT_NAME"])."/");
 							$email->assign($tpl,"{{USER}}",$username);
 							$email->assign($tpl,"{{PASS}}",$passwd);
 							if ($email->send())
