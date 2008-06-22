@@ -140,8 +140,9 @@ FORM {
 #createform fieldset,
 #editform fieldset {
 	display: block;
-	width: 200px;
+	width: 320px;
 	border: 1px solid #a4daa5;
+	padding-left: 10px;
 	font-weight: bold;
 }
 

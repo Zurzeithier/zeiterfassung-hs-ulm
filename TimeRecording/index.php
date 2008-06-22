@@ -3,15 +3,17 @@
 /**
  * MAIN PROGRAM - TIMERECORDING
  *
- * @abstract
+ * @abstract	Zeiterfassungssystem mit PHP5 und MySQL bzw. MSSQL
  *
- * @see
+ * @see			Zeiterfassungssystem mit PHP5 und MySQL bzw. MSSQL
  *
  * @copyright 	Patrick Kracht <patrick.kracht@googlemail.com>
  * @copyright	Thorsten Moll <thorsten.moll@googlemail.com>
  *
  * @author		Patrick Kracht <patrick.kracht@googlemail.com>
  * @author		Thorsten Moll <thorsten.moll@googlemail.com>
+ *
+ * @version 	1.2beta
  */
 
 // warn, if php version older than 5
