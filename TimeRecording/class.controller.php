@@ -12,7 +12,7 @@
  */
 class Controller
 	{
-		private $cache_on = false;
+		private $cache_on = true;
 		
 		/**
 		 * constructor loads global config file and initializes
