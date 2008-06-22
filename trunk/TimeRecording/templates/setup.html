@@ -48,15 +48,15 @@
      <fieldset>
         <legend>Benutzer neu erstellen</legend>
         <label for="new_email">Email*</label>
-        <input id="new_email" type="text" name="new_email" value="" />
+        <input id="new_email" type="text" name="new_email" value="{{NEW_EMAIL}}" />
         <label for="new_firstname" >Vorname </label>
-        <input id="new_firstname" type="text" name="new_firstname" value="" />
+        <input id="new_firstname" type="text" name="new_firstname" value="{{NEW_FIRSTNAME}}" />
         <label for="new_lastname">Nachname </label>
-        <input id="new_lastname" type="text" name="new_lastname" value="" />
+        <input id="new_lastname" type="text" name="new_lastname" value="{{NEW_LASTNAME}}" />
         <label for="new_password">Kennwort </label>
-        <input id="new_password" type="password" name="new_password" value="" />
+        <input id="new_password" type="password" name="new_password" value="{{NEW_PASSWORD}}" />
         <br clear="all" />
-        <input class="submit" type="reset" value="RESET" name="submit" /> <input class="submit" type="submit" value="ERSTELLEN" name="submit" />
+        <input class="submit" type="submit" value="RESET" name="submit" /> <input class="submit" type="submit" value="ERSTELLEN" name="submit" />
      </fieldset>
  </form>
  <form enctype="multipart/form-data" action="" method="post"
@@ -81,14 +81,16 @@
         <br clear="all" />
         <input id="S_LOAD" class="submit" type="submit" value="LADEN" name="submit" /> 
         <input id="S_SAVE" class="submit" type="submit" value="SPEICHERN" name="submit" />
-        <input id="S_DEL" class="submit" type="submit" value="L&Ouml;SCHEN" name="submit" />
+        <input id="S_DEL" class="submit" type="submit" value="LOESCHEN" name="submit" />
      </fieldset>
  </form>
 </div>
 <div class="win_bg_right" style="height: 240px;"></div>
 <br clear="all" />
 <div class="win_corner_lb"></div>
-<div class="win_bg_bottom" style="width: 930px;"></div>
+<div class="win_bg_bottom" style="width: 930px;">
+ <div class="timers"><!--TIMERS_MYSQL--><!--TIMERS_MSSQL--></div>
+</div>
 <div class="win_corner_rb"></div>
 </div>
 <!-- ************* USER MESSAGES WINDOW ***** -->
@@ -105,7 +107,9 @@
 <div class="win_bg_right" style="height: 80px;"></div>
 <br clear="all" />
 <div class="win_corner_lb"></div>
-<div class="win_bg_bottom" style="width: 930px;"></div>
+<div class="win_bg_bottom" style="width: 930px;">
+ <div class="timers"><!--TIMERS_PHP--></div>
+</div>
 <div class="win_corner_rb"></div>
 </div>
 <!-- ************* FOOTER ******************* -->

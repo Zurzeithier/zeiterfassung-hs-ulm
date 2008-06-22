@@ -52,7 +52,7 @@ class PageLink
 		 */
 		private function prepare()
 		{
-			if (! is_array($_SESSION["_pageid"]))
+			if (! isset($_SESSION["_pageid"]) || ! is_array($_SESSION["_pageid"]))
 				{
 					$_SESSION["_pageid"] = array();
 				}
