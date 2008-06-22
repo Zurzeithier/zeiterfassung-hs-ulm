@@ -67,7 +67,7 @@
      <fieldset>
         <legend>Benutzer bearbeiten</legend>
         <label for="edit_mid">Email*</label>
-        <select id="edit_mid" name="edit_mid" >
+        <select id="edit_mid" name="edit_mid" onchange="$('S_LOAD').click();">
          <!--USER_SELECT-->
         </select>
         <label for="new_firstname" >Vorname </label>
@@ -79,9 +79,9 @@
          <!--GROUP_SELECT-->
         </select>
         <br clear="all" />
-        <input class="submit" type="submit" value="LADEN" name="submit" /> 
-        <input class="submit" type="submit" value="SPEICHERN" name="submit" />
-        <input class="submit" type="submit" value="L&Ouml;SCHEN" name="submit" />
+        <input id="S_LOAD" class="submit" type="submit" value="LADEN" name="submit" /> 
+        <input id="S_SAVE" class="submit" type="submit" value="SPEICHERN" name="submit" />
+        <input id="S_DEL" class="submit" type="submit" value="L&Ouml;SCHEN" name="submit" />
      </fieldset>
  </form>
 </div>

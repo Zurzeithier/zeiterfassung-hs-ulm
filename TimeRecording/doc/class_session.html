@@ -58,6 +58,8 @@ Inheritance diagram for Session:</div>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_session.html#128f7d6ee2f8559e12f9068142e92f03">is_admin</a> ()</td></tr>
 
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_session.html#33f9c77a5d3309cfe9667b5b77a62087">is_accounting</a> ()</td></tr>
+
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_session.html#2e45f3abe5a353ff62710051a53839e7">is_user</a> ()</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_session.html#f4de338a307f4648876eafe901664475">return_to</a> ($url)</td></tr>
@@ -162,9 +164,9 @@ public<p>
 
 <p>Definition at line <a class="el" href="class_8session_8php-source.html#l00045">45</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
 
-<p>References <a class="el" href="class_8session_8php-source.html#l00377">return_to()</a>.</p>
+<p>References <a class="el" href="class_8session_8php-source.html#l00392">return_to()</a>.</p>
 
-<p>Referenced by <a class="el" href="class_8session_8php-source.html#l00391">extend()</a>, and <a class="el" href="class_8session_8php-source.html#l00066">login()</a>.</p>
+<p>Referenced by <a class="el" href="class_8session_8php-source.html#l00406">extend()</a>, and <a class="el" href="class_8session_8php-source.html#l00066">login()</a>.</p>
 
 </div>
 </div><p>
@@ -191,7 +193,7 @@ public<p>
 
 <p>Definition at line <a class="el" href="class_8session_8php-source.html#l00066">66</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
 
-<p>References <a class="el" href="class_8session_8php-source.html#l00391">extend()</a>, and <a class="el" href="class_8session_8php-source.html#l00045">logout()</a>.</p>
+<p>References <a class="el" href="class_8session_8php-source.html#l00406">extend()</a>, and <a class="el" href="class_8session_8php-source.html#l00045">logout()</a>.</p>
 
 </div>
 </div><p>
@@ -256,7 +258,7 @@ public<p>
 
 <p>Definition at line <a class="el" href="class_8session_8php-source.html#l00189">189</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
 
-<p>References <a class="el" href="class_8session_8php-source.html#l00322">generate_password()</a>, and <a class="el" href="class_8session_8php-source.html#l00364">is_user()</a>.</p>
+<p>References <a class="el" href="class_8session_8php-source.html#l00322">generate_password()</a>, and <a class="el" href="class_8session_8php-source.html#l00379">is_user()</a>.</p>
 
 </div>
 </div><p>
@@ -361,7 +363,7 @@ public<p>
 
 <p>Definition at line <a class="el" href="class_8session_8php-source.html#l00322">322</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
 
-<p>References <a class="el" href="class_8session_8php-source.html#l00456">randomize()</a>.</p>
+<p>References <a class="el" href="class_8session_8php-source.html#l00471">randomize()</a>.</p>
 
 <p>Referenced by <a class="el" href="class_8session_8php-source.html#l00189">book()</a>, and <a class="el" href="class_8session_8php-source.html#l00118">passwd()</a>.</p>
 
@@ -392,6 +394,31 @@ public<p>
 
 </div>
 </div><p>
+<a class="anchor" name="33f9c77a5d3309cfe9667b5b77a62087"></a><!-- doxytag: member="Session::is_accounting" ref="33f9c77a5d3309cfe9667b5b77a62087" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Session.is_accounting           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+checks current user for admin rights<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>boolean TRUE = is admin</dd></dl>
+public<p>
+<dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
+
+<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00364">364</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
+
+</div>
+</div><p>
 <a class="anchor" name="2e45f3abe5a353ff62710051a53839e7"></a><!-- doxytag: member="Session::is_user" ref="2e45f3abe5a353ff62710051a53839e7" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -413,7 +440,7 @@ checks current user for user rights<p>
 public<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00364">364</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00379">379</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
 
 <p>Referenced by <a class="el" href="class_8session_8php-source.html#l00189">book()</a>.</p>
 
@@ -440,7 +467,7 @@ redirect to any $url using header-location<p>
 public<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00377">377</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00392">392</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
 
 <p>Referenced by <a class="el" href="class_8session_8php-source.html#l00045">logout()</a>.</p>
 
@@ -466,9 +493,9 @@ extend current session, if valid anymore, or logout after timeout const SESSION_
 public<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00391">391</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00406">406</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
 
-<p>References <a class="el" href="class_8session_8php-source.html#l00045">logout()</a>, <a class="el" href="class_8session_8php-source.html#l00443">started()</a>, and <a class="el" href="class_8session_8php-source.html#l00421">valid()</a>.</p>
+<p>References <a class="el" href="class_8session_8php-source.html#l00045">logout()</a>, <a class="el" href="class_8session_8php-source.html#l00458">started()</a>, and <a class="el" href="class_8session_8php-source.html#l00436">valid()</a>.</p>
 
 <p>Referenced by <a class="el" href="class_8session_8php-source.html#l00066">login()</a>.</p>
 
@@ -495,9 +522,9 @@ checks, if current session is started and valid (logout after timeout const SESS
 public<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00421">421</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00436">436</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
 
-<p>Referenced by <a class="el" href="class_8session_8php-source.html#l00391">extend()</a>.</p>
+<p>Referenced by <a class="el" href="class_8session_8php-source.html#l00406">extend()</a>.</p>
 
 </div>
 </div><p>
@@ -522,9 +549,9 @@ checks, if current session is started<p>
 public<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00443">443</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00458">458</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
 
-<p>Referenced by <a class="el" href="class_8session_8php-source.html#l00391">extend()</a>.</p>
+<p>Referenced by <a class="el" href="class_8session_8php-source.html#l00406">extend()</a>.</p>
 
 </div>
 </div><p>
@@ -548,7 +575,7 @@ restarts the mt_srand with some better randomized init values<p>
 public<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00456">456</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00471">471</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
 
 <p>Referenced by <a class="el" href="class_8session_8php-source.html#l00322">generate_password()</a>.</p>
 
@@ -591,7 +618,7 @@ check, is an $email is valid (RegEx, DB and MX-check)<p>
 public<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00474">474</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00489">489</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
 
 </div>
 </div><p>
@@ -632,7 +659,7 @@ get mx-records from host (optional: $type)<p>
 public<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00565">565</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00580">580</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
 
 </div>
 </div><p>
@@ -673,14 +700,14 @@ proof choosen password for a better security<p>
 public<p>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>patrick.kracht, thorsten.moll </dd></dl>
 
-<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00595">595</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
+<p>Definition at line <a class="el" href="class_8session_8php-source.html#l00610">610</a> of file <a class="el" href="class_8session_8php-source.html">class.session.php</a>.</p>
 
 </div>
 </div><p>
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>C:/xampp/htdocs/TimeRecording/<a class="el" href="class_8session_8php-source.html">class.session.php</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sat Jun 21 18:32:54 2008 for TimeRecording by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Sun Jun 22 12:09:38 2008 for TimeRecording by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
 </body>
