@@ -12,6 +12,8 @@
  */
 class Controller
 	{
+		private $cache_on = true;
+		
 		/**
 		 * constructor loads global config file and initializes
 		 * default session variables, register session-objects if
@@ -193,7 +195,13 @@ class Controller
 			$_SESSION["HTML"]->menu_insert_spacer();
 			$_SESSION["HTML"]->menu_insert_entry("&Uuml;bersicht", "./?page=home", "H", $is_home);
 			$_SESSION["HTML"]->menu_insert_entry("Mitarbeiter", "./?page=users", "E", $is_users);
-			$_SESSION["HTML"]->menu_insert_entry("Einstellungen", "./?page=setup", "S", $is_setup);
+			
+			// only admins can edit users
+			if ($_SESSION["CLIENT"]->is_admin())
+				{
+					$_SESSION["HTML"]->menu_insert_entry("Einstellungen", "./?page=setup", "S", $is_setup);
+				}
+				
 			$_SESSION["HTML"]->menu_insert_spacer();
 			$_SESSION["HTML"]->menu_insert_entry("[<u>KOMMEN</u>]", "./?action=book&amp;id=1", "K");
 			$_SESSION["HTML"]->menu_insert_entry("[<u>GEHEN</u>]", "./?action=book&amp;id=0", "G");
@@ -238,44 +246,13 @@ class Controller
 							$_SESSION["HTML"]->output("details.html");
 							break;
 						case "setup":
-							$select = array("-1" => "");
-							$edit   = array("name1" => "", "name2" => "", "pass" => "");
-							
-							$query  = "SELECT mid, email FROM tr_users ORDER BY email;";
-							$array  = $_SESSION[$_SESSION["_SqlType"]]->query_all($query);
-							
-							// reformat array for creating select menu
-							foreach($array as $key => $value)
-							{
-								$select[$value["mid"]] = $value["email"];
-							}
-							
-							// check for selected item
-							$selected = "";
-							if (isset($_POST["edit_mid"]))
+							if ($_SESSION["CLIENT"]->is_admin())
 								{
-									$selected = $_POST["edit_mid"];
-									if ($_POST["submit"] == "LADEN")
-										{
-											$query  = "SELECT * FROM tr_users WHERE mid='$selected';";
-											$array  = $_SESSION[$_SESSION["_SqlType"]]->query_all($query);
-											$edit["name1"] = $array[0]["firstname"];
-											$edit["name2"] = $array[0]["lastname"];
-										}
-									else if ($_POST["submit"] == "SPEICHERN")
-										{
-										
-										}
+									$this->show_setup();
+									$_SESSION["HTML"]->output("setup.html");
+									break;
 								}
-								
-							$options = $_SESSION["HTML"]->create_select($select, $selected);
-							$_SESSION["HTML"]->assign("setup.html", "{{EDIT_FIRSTNAME}}", $edit["name1"]);
-							$_SESSION["HTML"]->assign("setup.html", "{{EDIT_LASTNAME}}",  $edit["name2"]);
-							$_SESSION["HTML"]->assign("setup.html", "{{EDIT_PASSWORD}}",  $edit["pass"]);
-							$_SESSION["HTML"]->assign("setup.html", "<!--USER_SELECT-->", $options);
-							
-							$_SESSION["HTML"]->output("setup.html");
-							break;
+							$_SESSION["_Errors"] = "Warnung! Sie sind dazu nicht berechtig!";
 						case "home":
 						default:
 							$_SESSION["HTML"]->assign("index.html", "<!--MID-->", $_SESSION["_UserData"]["mid"]);
@@ -324,7 +301,7 @@ class Controller
 				{
 					$_SESSION["HTML"]->import();
 					$_SESSION["HTML"]->preload();
-					$_SESSION["_cached"] = true;
+					$_SESSION["_cached"] = $this->cache_on;
 				}
 		}
 		
@@ -462,6 +439,78 @@ class Controller
 		}
 		
 		/**
+		 * show setup page, if admin
+		 *
+		 * @access  protected
+		 *
+		 * @author  patrick.kracht, thorsten.moll
+		 */
+		protected function show_setup()
+		{
+			$select = array("-1" => "");
+			$edit   = array("name1" => "", "name2" => "", "pass" => "");
+			
+			$query  = "SELECT mid, email FROM tr_users ORDER BY email;";
+			$array  = $_SESSION[$_SESSION["_SqlType"]]->query_all($query);
+			
+			// reformat array for creating select menu
+			foreach($array as $key => $value)
+			{
+				$select[$value["mid"]] = $value["email"];
+			}
+			
+			// check for selected item
+			$selected_user  = -1;
+			$selected_group = -1;
+			
+			if (isset($_POST["edit_mid"]))
+				{
+					$selected_user = @intval($_POST["edit_mid"]);
+					if ($_POST["submit"] == "LADEN" && $selected_user >= 0)
+						{
+							$query  = "SELECT mid, firstname, lastname, gid FROM ";
+							$query .= "tr_users WHERE mid='$selected_user';";
+							$array  = $_SESSION[$_SESSION["_SqlType"]]->query_all($query);
+							
+							$edit["name1"]  = $array[0]["firstname"];
+							$edit["name2"]  = $array[0]["lastname"];
+							$selected_user  = $array[0]["mid"];
+							$selected_group = $array[0]["gid"];
+						}
+					else if ($_POST["submit"] == "SPEICHERN" && $selected_user >= 0)
+						{
+							$edit["name1"]  = ucfirst(trim($_POST["new_firstname"]));
+							$edit["name2"]  = ucfirst(trim($_POST["new_lastname"]));
+							$selected_user  = @intval($_POST["edit_mid"]);
+							$selected_group = @intval($_POST["new_group"]);
+							
+							if ($selected_group == 1 || $selected_group < 0 || $selected_group > 3)
+								{
+									$_SESSION["_Errors"] = "Sie haben keine bekannte Gruppe selektiert!";
+								}
+							else
+								{
+									$query  = "UPDATE tr_users SET ";
+									$query .= "firstname = '".$edit["name1"]."', ";
+									$query .= "lastname = '".$edit["name2"]."', ";
+									$query .= "gid = '$selected_group' ";
+									$query .= "WHERE mid='$selected_user';";
+									$result = $_SESSION[$_SESSION["_SqlType"]]->query($query);
+								}
+						}
+				}
+				
+			$users_select = $_SESSION["HTML"]->create_select($select, $selected_user);
+			$group_select = $_SESSION["HTML"]->create_select(array(1=>"",0=>"Administrator",2=>"Mitarbeiter",3=>"Buchhaltung"), $selected_group);
+			
+			$_SESSION["HTML"]->assign("setup.html", "{{EDIT_FIRSTNAME}}", $edit["name1"]);
+			$_SESSION["HTML"]->assign("setup.html", "{{EDIT_LASTNAME}}",  $edit["name2"]);
+			$_SESSION["HTML"]->assign("setup.html", "{{EDIT_PASSWORD}}",  $edit["pass"]);
+			$_SESSION["HTML"]->assign("setup.html", "<!--USER_SELECT-->", $users_select);
+			$_SESSION["HTML"]->assign("setup.html", "<!--GROUP_SELECT-->", $group_select);
+		}
+		
+		/**
 		 * generate html details for specific userid
 		 *
 		 * @access  public
@@ -474,9 +523,9 @@ class Controller
 				{
 					throw new Exception("Sie haben keine Benutzer-ID angegeben!",999);
 				}
-			else if (! $_SESSION["CLIENT"]->is_admin())
+			else if (! $_SESSION["CLIENT"]->is_admin() && ! $_SESSION["CLIENT"]->is_accounting())
 				{
-					throw new Exception("Sie sind kein Administrator!",998);
+					throw new Exception("Sie sind dazu nicht berechtigt!",998);
 				}
 				
 			$mid = intval($_GET["id"]);
@@ -548,7 +597,7 @@ class Controller
 		 */
 		protected function query2table($query,$id,$width = array(),$details = false, $orderon = false)
 		{
-			$details = $details && $_SESSION["CLIENT"]->is_admin();
+			$details = $details && ($_SESSION["CLIENT"]->is_admin() || $_SESSION["CLIENT"]->is_accounting());
 			$result  = $_SESSION[$_SESSION["_SqlType"]]->query($query);
 			$first   = true;
 			$dump    = "<table id=\"$id\">";

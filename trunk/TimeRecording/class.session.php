@@ -353,6 +353,21 @@ class Session extends Controller
 		}
 		
 		/**
+		 * checks current user for admin rights
+		 *
+		 * @return  boolean   TRUE = is admin
+		 *
+		 * @access  public
+		 *
+		 * @author  patrick.kracht, thorsten.moll
+		 */
+		public function is_accounting()
+		{
+			if (! isset($_SESSION["_UserData"]["gid"])) return false;
+			return ($_SESSION["_UserData"]["gid"] == 3);
+		}
+		
+		/**
 		 * checks current user for user rights
 		 *
 		 * @return  boolean   TRUE = is user

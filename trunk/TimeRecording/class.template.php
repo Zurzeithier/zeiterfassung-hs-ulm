@@ -353,6 +353,16 @@ class Template
 			// fix special html-characters
 			$this->special_chars($buffer);
 			
+			// fix replacements of {{SID}}
+			if (ini_get("session.use_cookies") != "1")
+				{
+					$buffer = str_replace("{{SID}}", session_id(), $buffer);
+				}
+			else
+				{
+					$buffer = str_replace("{{SID}}", "", $buffer);
+				}
+				
 			// compress html source, if set
 			if ($this->do_compress)
 				{
@@ -561,13 +571,16 @@ class Template
 		{
 			$ret = "";
 			
-			if (! is_array($array)) $array = explode("|", $array);
-			
-			if (is_array($array) && count($array) > 1)
+			if (! is_array($array))
+				{
+					$array = explode("|", $array);
+				}
+				
+			if (is_array($array) && count($array) > 0)
 				{
 					foreach($array as $key => $value)
 					{
-						if ($selected != "" && ($selected == $value || $selected == $key))
+						if ("$selected" == "$value" || "$selected" == "$key")
 							{
 								$ret.="<option value=\"$key\" selected=\"selected\">$value</option>";
 							}
