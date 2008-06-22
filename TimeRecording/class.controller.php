@@ -498,12 +498,14 @@ class Controller
 			$details  = $_SESSION[$_SESSION["_SqlType"]]->query_first($query);
 			
 			$query  = "SELECT DATE_FORMAT( stamp_1, '%d.%m.%Y' ) AS Datum, ";
-			$query .= "SEC_TO_TIME( IFNULL( SUM( UNIX_TIMESTAMP( stamp_2 ) - UNIX_TIMESTAMP( stamp_1 ) ), 0 ) ) as 'Stunden anwesend', ";
+			$query .= "DATE_FORMAT( MIN( stamp_1 ) , '%T Uhr' ) AS 'Morgens gekommen', ";
+			$query .= "DATE_FORMAT( MAX( stamp_2 ) , '%T Uhr' ) AS 'Abends gegangen', ";
+			$query .= "SEC_TO_TIME( IFNULL( SUM( UNIX_TIMESTAMP( stamp_2 ) - UNIX_TIMESTAMP( stamp_1 ) ), 0 ) ) AS 'Stunden anwesend', ";
 			$query .= "IF( bookid = NULL, 0, COUNT( bookid ) ) AS 'Anzahl Buchungen' ";
 			$query .= "FROM tr_bookings ";
 			$query .= "WHERE mid = '$mid' GROUP BY Datum ORDER BY Datum ASC";
 			
-			$content = $this->query2table($query,"booking_details");
+			$content = $this->query2table($query,"booking_details",array(160,170,170,210,150));
 			
 			$_SESSION["HTML"]->assign("details.html", "<!--FIRST_NAME-->",$details["firstname"]);
 			$_SESSION["HTML"]->assign("details.html", "<!--LAST_NAME-->", $details["lastname"]);
