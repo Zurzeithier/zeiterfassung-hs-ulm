@@ -41,6 +41,12 @@ public class BookingHandler
         }
     }
 
+    /**
+     * Verifies if the last booking was GO
+     * @param mid
+     * @return True if next booking is COME, false if not
+     * @throws exceptions.DBException
+     */
     public static boolean nextBookingIsCome(int mid) throws DBException
     {
         try
@@ -95,6 +101,12 @@ public class BookingHandler
         }
     }
 
+    /**
+     * Verifies if the last booking was COME
+     * @param mid
+     * @return True if next booking is GO, false if not
+     * @throws exceptions.DBException
+     */
     public static boolean nextBookingIsGo(int mid) throws DBException
     {
         try

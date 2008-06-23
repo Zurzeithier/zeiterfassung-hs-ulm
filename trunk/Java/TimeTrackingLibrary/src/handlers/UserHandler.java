@@ -49,6 +49,13 @@ public class UserHandler
         }
     }
 
+    /**
+     * Changes the password of one user
+     * @param mid
+     * @param bean
+     * @return Whether the operation was successful
+     * @throws exceptions.DBException
+     */
     public static boolean changeUser(int mid, UserBean bean) throws DBException
     {
         try
@@ -75,6 +82,12 @@ public class UserHandler
         }
     }
 
+    /**
+     * Sends a generated password to the user by email
+     * @param username
+     * @return Whether the operation was successful
+     * @throws exceptions.DBException
+     */
     public static boolean sendNewPassword(String username) throws DBException
     {
         // test if user is in db

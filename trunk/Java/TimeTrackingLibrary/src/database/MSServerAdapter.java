@@ -22,6 +22,13 @@ import utils.LocalizeUtils;
 public class MSServerAdapter extends Database implements DBAdapter
 {
 
+    /**
+     * 
+     * @param adress
+     * @param username
+     * @param password
+     * @throws java.sql.SQLException
+     */
     MSServerAdapter(String adress, String username, String password) throws SQLException
     {
         super("com.microsoft.sqlserver.jdbc.SQLServerDriver",
@@ -30,6 +37,12 @@ public class MSServerAdapter extends Database implements DBAdapter
 
     }
 
+    /**
+     * Returns the description of a booking type from MSServer
+     * @param typId
+     * @return TPTypeBean
+     * @throws exceptions.DBException
+     */
     public TPTypeBean getType(int typId) throws DBException
     {
         try
@@ -64,11 +77,21 @@ public class MSServerAdapter extends Database implements DBAdapter
         }
     }
 
+    /**
+     * 
+     * @return null
+     */
     public TimeAccountBean getTimeAccount()
     {
         return null;
     }
 
+    /**
+     * Returns one user by username from MSServer
+     * @param username
+     * @return UserBean
+     * @throws exceptions.DBException
+     */
     public UserBean getUser(String username) throws DBException
     {
         try
@@ -104,6 +127,12 @@ public class MSServerAdapter extends Database implements DBAdapter
         }
     }
 
+    /**
+     * Returns one user by ID from MSServer
+     * @param mid
+     * @return UserBean
+     * @throws exceptions.DBException
+     */
     public UserBean getUser(int mid) throws DBException
     {
         try
@@ -139,6 +168,12 @@ public class MSServerAdapter extends Database implements DBAdapter
         }
     }
 
+    /**
+     * Modifies user data on MSServer
+     * @param user
+     * @return Whether the operation was successful
+     * @throws exceptions.DBException
+     */
     public boolean changeUser(UserBean user) throws DBException
     {
         try
@@ -186,7 +221,12 @@ public class MSServerAdapter extends Database implements DBAdapter
         }
     }
 
-    // nicht getestet ob der MSServer die MID automatisch erhöht
+    /**
+     * Inserts one user on MSServer
+     * @param user
+     * @return Whether the operation was successful
+     * @throws exceptions.DBException
+     */
     public boolean insertUser(UserBean user) throws DBException
     {
         try
@@ -213,6 +253,13 @@ public class MSServerAdapter extends Database implements DBAdapter
         }
     }
 
+    /**
+     * Returns a list of time bookings by ID from MSServer
+     * @param mid
+     * @param number
+     * @return List for table entry
+     * @throws exceptions.DBException
+     */
     public List<TimeBookingTableEntryBean> getTimeBookings(int mid, int number) throws DBException
     {
         try
@@ -261,6 +308,12 @@ public class MSServerAdapter extends Database implements DBAdapter
         }
     }
 
+    /**
+     * Adds one time booking to the MSServer database
+     * @param bean
+     * @return Whether the operation was successful
+     * @throws exceptions.DBException
+     */
     public boolean addTimeBooking(TimeBookingBean bean) throws DBException
     {
         try
@@ -293,6 +346,12 @@ public class MSServerAdapter extends Database implements DBAdapter
         }
     }
 
+    /**
+     * Returns the last time booking from MSServer
+     * @param mid
+     * @return TimeBookingBean
+     * @throws exceptions.DBException
+     */
     public TimeBookingBean getLastBooking(int mid) throws DBException
     {
         try

@@ -15,7 +15,6 @@ public class SecurityUtils
      */
     public static String makeMD5Checksum(String s)
     {
-
         try
         {   
             // calculate

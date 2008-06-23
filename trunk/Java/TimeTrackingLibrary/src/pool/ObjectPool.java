@@ -13,11 +13,30 @@ import java.util.Queue;
 public abstract class ObjectPool<E>
 {
 
+    /**
+     * Active pool objects
+     */
     private Queue<E> m_Active = new LinkedList<E>();
+    
+    /**
+     * Idle pool objects
+     */
     private Queue<E> m_Idle = new LinkedList<E>();
+    
+    /**
+     * Maximum pool size
+     */
     private int m_Size = 8;
+    
+    /**
+     * Possible latency
+     */
     private long m_WaitTime = 100000;
 
+    /**
+     * 
+     * @param size
+     */
     public ObjectPool(int size)
     {
         m_Size = size;
@@ -107,6 +126,10 @@ public abstract class ObjectPool<E>
         return m_Active.size();
     }
 
+    /**
+     * 
+     * @return m_Size
+     */
     public synchronized int size()
     {
         return m_Size;

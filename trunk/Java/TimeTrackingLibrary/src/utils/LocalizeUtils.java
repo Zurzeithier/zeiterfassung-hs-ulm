@@ -9,6 +9,11 @@ import java.util.TimeZone;
  */
 public class LocalizeUtils 
 {
+    /**
+     * 
+     * @param date
+     * @return
+     */
     public static Date localizeDate(Date date)
     {
         int offset = TimeZone.getDefault().getOffset(date.getTime());

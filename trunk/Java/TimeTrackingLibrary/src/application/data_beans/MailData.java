@@ -1,7 +1,8 @@
 package application.data_beans;
 
 /**
- *
+ * Contains the address, username and password
+ * for the mail server 
  * @author Popeye
  */
 public class MailData
