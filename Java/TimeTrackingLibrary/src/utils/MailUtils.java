@@ -9,12 +9,23 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- *
+ * Provides methods for mail processing
  * @author Popeye
  */
 public class MailUtils
 {
 
+    /**
+     * Sends a mail using an external server 
+     * @param address
+     * @param user
+     * @param password
+     * @param transmitter
+     * @param receiver
+     * @param subject
+     * @param content
+     * @return Whether the operation was successful
+     */
     public static boolean sendMail(String address, String user, String password, String transmitter, String receiver, String subject, String content)
     {
         MailAuthenticator authentication = new MailAuthenticator(user, password);
@@ -48,6 +59,11 @@ public class MailUtils
         }
     }
 
+    /**
+     * Generates a new password
+     * @param length
+     * @return Password string
+     */
     public static String genertateRandomPassword(int length)
     {
         StringBuilder pwd = new StringBuilder();

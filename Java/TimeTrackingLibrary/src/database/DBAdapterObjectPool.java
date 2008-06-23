@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package database;
 
 import pool.ObjectPool;
@@ -16,11 +12,20 @@ import java.sql.SQLException;
 public class DBAdapterObjectPool extends ObjectPool<DBAdapter>
 {
 
+    /**
+     * Initializes the pool size
+     * @param size
+     */
     DBAdapterObjectPool(int size)
     {
         super(size);
     }
 
+    /**
+     * Creates new MSServerAdapter
+     * @return New DBAdapter
+     * @throws pool.ObjectPoolException
+     */
     @Override
     protected DBAdapter createObject() throws ObjectPoolException
     {
