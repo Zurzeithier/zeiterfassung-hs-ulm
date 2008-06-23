@@ -1,6 +1,5 @@
 package pool;
 
-import pool.ObjectPoolException;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Queue;
