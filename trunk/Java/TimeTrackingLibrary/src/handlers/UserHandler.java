@@ -50,7 +50,7 @@ public class UserHandler
     }
 
     /**
-     * Changes the password of one user
+     * Changes the attributes of an user
      * @param mid
      * @param bean
      * @return Whether the operation was successful
