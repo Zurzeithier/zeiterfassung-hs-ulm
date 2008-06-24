@@ -516,6 +516,7 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
     <target depends="init" if="dist.ear.dir" name="library-inclusion-in-manifest">
         <basename file="${reference.TimeTrackingLibrary.jar}" property="included.lib.reference.TimeTrackingLibrary.jar"/>
         <copy-ear-war file="${reference.TimeTrackingLibrary.jar}" propname="included.lib.reference.TimeTrackingLibrary.jar.X"/>
+        <copy file="${libs.MSServer.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update">
             <attribute name="Class-Path" value="${included.lib.reference.TimeTrackingLibrary.jar} "/>
@@ -524,6 +525,7 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
     </target>
     <target depends="init" name="library-inclusion-in-archive" unless="dist.ear.dir">
         <copy file="${reference.TimeTrackingLibrary.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copy file="${libs.MSServer.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
     </target>
     <target depends="init,compile,compile-jsps,-pre-dist,library-inclusion-in-manifest" name="do-ear-dist">
         <dirname file="${dist.ear.war}" property="dist.jar.dir"/>

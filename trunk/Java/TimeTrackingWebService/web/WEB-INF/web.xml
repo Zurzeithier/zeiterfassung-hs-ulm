@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <context-param>
+        <param-name>config.dbUser</param-name>
+        <param-value>sa</param-value>
+    </context-param>
+    <context-param>
+        <param-name>config.dbPwd</param-name>
+        <param-value>odysee2001</param-value>
+    </context-param>
+    <context-param>
+        <param-name>config.dbUrl</param-name>
+        <param-value>www.illertech.net;databaseName=Zeiterfassung</param-value>
+    </context-param>
+    <context-param>
+        <param-name>config.dbPoolSize</param-name>
+        <param-value>10</param-value>
+    </context-param>
+    <listener>
+        <listener-class>listeners.ConfigListener</listener-class>
+    </listener>
     <session-config>
         <session-timeout>
             30
