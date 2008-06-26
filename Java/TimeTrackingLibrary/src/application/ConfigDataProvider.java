@@ -5,7 +5,7 @@ import application.data_beans.MailData;
 
 /**
  * Provides connection data
- * @author manuel
+ * @author manuel, steffen
  */
 public class ConfigDataProvider
 {

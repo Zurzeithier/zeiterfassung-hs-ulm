@@ -1,13 +1,18 @@
-/*
- * TimeTrackingClientAboutBox.java
- */
-
 package timetrackingclient;
 
 import org.jdesktop.application.Action;
 
+
+/**
+ * 
+ * @author manuel, steffen
+ */
 public class TimeTrackingClientAboutBox extends javax.swing.JDialog {
 
+    /**
+     * 
+     * @param parent
+     */
     public TimeTrackingClientAboutBox(java.awt.Frame parent) {
         super(parent);
         initComponents();

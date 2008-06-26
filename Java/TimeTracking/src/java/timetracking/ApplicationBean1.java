@@ -1,9 +1,3 @@
-/*
- * ApplicationBean1.java
- *
- * Created on 16.06.2008, 14:24:26
- */
- 
 package timetracking;
 
 import com.sun.rave.web.ui.appbase.AbstractApplicationBean;
@@ -19,7 +13,7 @@ import javax.faces.FacesException;
  * or method binding expression that references a managed bean using
  * this class.</p>
  *
- * @author manuel
+ * @author manuel, steffen
  */
 public class ApplicationBean1 extends AbstractApplicationBean {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">

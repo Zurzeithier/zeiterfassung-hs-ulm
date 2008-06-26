@@ -12,7 +12,7 @@ import utils.SecurityUtils;
 
 /**
  * Handler for all user operations
- * @author manuel
+ * @author manuel, steffen
  */
 public class UserHandler
 {

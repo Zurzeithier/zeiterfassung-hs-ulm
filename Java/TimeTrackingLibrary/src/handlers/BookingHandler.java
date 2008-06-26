@@ -11,7 +11,7 @@ import pool.ObjectPoolException;
 
 /**
  * Handler for all booking operations
- * @author manuel
+ * @author manuel, steffen
  */
 public class BookingHandler
 {

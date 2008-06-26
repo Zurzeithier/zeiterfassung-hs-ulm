@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 /**
  * Superclass for database connections
- * @author manuel
+ * @author manuel, steffen
  */
 public class Database
 {

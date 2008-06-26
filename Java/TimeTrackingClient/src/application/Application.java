@@ -1,39 +1,42 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package application;
 
 import time_tracking.UserBean;
 
 /**
  *
- * @author manuel
+ * @author manuel, steffen
  */
 public class Application
 {
     private time_tracking.UserBean user = null;
+    static private Application m_Instance = null;
     
     private Application()
     {
     }
 
+    /**
+     * 
+     * @return user
+     */
     public UserBean getUser()
     {
         return user;
     }
 
+    /**
+     * 
+     * @param user
+     */
     public void setUser(UserBean user)
     {
         this.user = user;
     }
-    
-    
-    
-    
 
-    static private Application m_Instance = null;
-
+    /**
+     * 
+     * @return m_Instance
+     */
     static public Application getInstance()
     {
         if (m_Instance == null)

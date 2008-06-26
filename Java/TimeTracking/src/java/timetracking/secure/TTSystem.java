@@ -1,8 +1,3 @@
-/*
- * TTSystem.java
- *
- * Created on 17.06.2008, 17:56:01
- */
 package timetracking.secure;
 
 import beans.TimeBookingTableEntryBean;
@@ -25,7 +20,7 @@ import timetracking.SessionBean1;
  * lifecycle methods and event handlers where you may add behavior
  * to respond to incoming events.</p>
  *
- * @author manuel
+ * @author manuel, steffen
  */
 public class TTSystem extends AbstractPageBean
 {
@@ -43,59 +38,97 @@ public class TTSystem extends AbstractPageBean
     private String status = null;
     private boolean message = false;
     private ObjectListDataProvider bookings = new ObjectListDataProvider(TimeBookingTableEntryBean.class);
+    private DateTimeConverter dateTimeConverter = new DateTimeConverter();
+    private TabSet tabSet1 = new TabSet();
 
+    /**
+     * 
+     * @return status
+     */
     public String getStatus()
     {
         return status;
     }
 
+    /**
+     * 
+     * @param status
+     */
     public void setStatus(String status)
     {
         this.status = status;
     }
 
+    /**
+     * 
+     * @return message
+     */
     public boolean isMessage()
     {
         return message;
     }
 
+    /**
+     * 
+     * @param message
+     */
     public void setMessage(boolean message)
     {
         this.message = message;
     }
 
+    /**
+     * 
+     * @return bookings
+     */
     public ObjectListDataProvider getBookings()
     {
         return bookings;
     }
 
+    /**
+     * 
+     * @param bookings
+     */
     public void setBookings(ObjectListDataProvider bookings)
     {
         this.bookings = bookings;
     }
 
-    private DateTimeConverter dateTimeConverter = new DateTimeConverter();
-
+    /**
+     * 
+     * @return dateTimeConverter
+     */
     public DateTimeConverter getDateTimeConverter()
     {
         return dateTimeConverter;
     }
 
-    public void setDateTimeConverter(DateTimeConverter dtc)
+    /**
+     * 
+     * @param dateTimeConverter
+     */
+    public void setDateTimeConverter(DateTimeConverter dateTimeConverter)
     {
-        this.dateTimeConverter = dtc;
+        this.dateTimeConverter = dateTimeConverter;
     }
 
-    private TabSet tabSet1 = new TabSet();
-
+    /**
+     * 
+     * @return tabSet1
+     */
     public TabSet getTabSet1()
     {
         return tabSet1;
     }
 
-    public void setTabSet1(TabSet ts)
+    /**
+     * 
+     * @param tabSet1
+     */
+    public void setTabSet1(TabSet tabSet1)
     {
-        this.tabSet1 = ts;
+        this.tabSet1 = tabSet1;
     }
 
     /**
@@ -215,6 +248,10 @@ public class TTSystem extends AbstractPageBean
         return (SessionBean1) getBean("SessionBean1");
     }
 
+    /**
+     * 
+     * @return "logout"
+     */
     public String logoutButton_action()
     {
         getSessionBean1().setUser(null);
@@ -222,16 +259,29 @@ public class TTSystem extends AbstractPageBean
         return "logout";
     }
 
+    /**
+     * 
+     * @return null
+     */
     public String tab1_action()
     {
         return null;
     }
 
+    /**
+     * 
+     * @return null
+     */
     public String tab2_action()
     {
         return null;
     }
 
+    /**
+     * Prefaces the change password routine
+     * @return null
+     * @throws exceptions.DBException
+     */
     public String changePasswordButton_action() throws DBException
     {
         if (UserHandler.changeUser(getSessionBean1().getUser().getMid(), getSessionBean1().getUser()))
@@ -246,6 +296,11 @@ public class TTSystem extends AbstractPageBean
         return null;
     }
 
+    /**
+     * Prefaces the COME booking routine
+     * @return null
+     * @throws exceptions.DBException
+     */
     public String comePushButton_action() throws DBException
     {
         UserBean user = getSessionBean1().getUser();
@@ -262,6 +317,11 @@ public class TTSystem extends AbstractPageBean
         return null;
     }
 
+    /**
+     * Prefaces the GO booking routine
+     * @return null
+     * @throws exceptions.DBException
+     */
     public String goPushButton_action() throws DBException
     {
         UserBean user = getSessionBean1().getUser();
@@ -278,6 +338,11 @@ public class TTSystem extends AbstractPageBean
         return null;
     }
 
+    /**
+     * Prefaces the offbeat booking routine
+     * @return null
+     * @throws exceptions.DBException
+     */
     public String bookPushButton_action() throws DBException
     {
         UserBean user = getSessionBean1().getUser();
@@ -296,6 +361,10 @@ public class TTSystem extends AbstractPageBean
         return null;
     }
 
+    /**
+     * 
+     * @return null
+     */
     public String dontBookPushButton_action()
     {
         message = false;

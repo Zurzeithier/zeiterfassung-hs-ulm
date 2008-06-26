@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * Represents one row of the gui output table
- * @author manuel
+ * @author manuel, steffen
  */
 public class TimeBookingTableEntryBean 
 {

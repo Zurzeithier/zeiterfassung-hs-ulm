@@ -5,7 +5,7 @@ import java.util.TimeZone;
 
 /**
  * Provides localization methods
- * @author manuel
+ * @author manuel, steffen
  */
 public class LocalizeUtils 
 {

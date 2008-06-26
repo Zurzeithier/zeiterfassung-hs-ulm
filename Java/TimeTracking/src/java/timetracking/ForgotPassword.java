@@ -1,15 +1,10 @@
-/*
- * ForgotPassword.java
- *
- * Created on 21.06.2008, 19:21:24
- */
- 
 package timetracking;
 
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import exceptions.DBException;
 import handlers.UserHandler;
 import javax.faces.FacesException;
+import timetracking.secure.TTSystem;
 
 /**
  * <p>Page bean that corresponds to a similarly named JSP page.  This
@@ -18,7 +13,7 @@ import javax.faces.FacesException;
  * lifecycle methods and event handlers where you may add behavior
  * to respond to incoming events.</p>
  *
- * @author manuel
+ * @author manuel, steffen
  */
 public class ForgotPassword extends AbstractPageBean {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
@@ -36,21 +31,37 @@ public class ForgotPassword extends AbstractPageBean {
     private String username = null;
     private String status = null;
 
+    /**
+     * 
+     * @return username
+     */
     public String getUsername()
     {
         return username;
     }
 
+    /**
+     * 
+     * @param username
+     */
     public void setUsername(String username)
     {
         this.username = username;
     }
 
+    /**
+     * 
+     * @return status
+     */
     public String getStatus()
     {
         return status;
     }
 
+    /**
+     * 
+     * @param status
+     */
     public void setStatus(String status)
     {
         this.status = status;
@@ -154,6 +165,11 @@ public class ForgotPassword extends AbstractPageBean {
         return (ApplicationBean1) getBean("ApplicationBean1");
     }
 
+    /**
+     * Prefaces the password send routine
+     * @return "passwordSend"
+     * @throws exceptions.DBException
+     */
     public String sendNewPassword_action() throws DBException
     {
         if (UserHandler.sendNewPassword(username))
@@ -166,6 +182,15 @@ public class ForgotPassword extends AbstractPageBean {
         }
         
         return null;
+    }
+
+    /**
+     * <p>Return a reference to the scoped data bean.</p>
+     *
+     * @return reference to the scoped data bean
+     */
+    protected TTSystem getsecure$TTSystem() {
+        return (TTSystem) getBean("secure$TTSystem");
     }
     
 }

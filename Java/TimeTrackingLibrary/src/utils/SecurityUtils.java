@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 
 /**
  * Provides security methods
- * @author manuel
+ * @author manuel, steffen
  */
 public class SecurityUtils
 {

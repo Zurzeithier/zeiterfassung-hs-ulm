@@ -4,7 +4,7 @@ package application.data_beans;
  *
  * Contains the address, username and password
  * for the database 
- * @author manuel
+ * @author manuel, steffen
  */
 public class DBData
 {
