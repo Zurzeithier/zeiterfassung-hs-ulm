@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package filters;
 
 import beans.UserBean;
@@ -18,18 +14,31 @@ import javax.servlet.http.HttpSession;
 import timetracking.SessionBean1;
 
 /**
- *
- * @author manuel
+ * Handles the user authentication
+ * @author manuel, steffen
  */
 public class UserAuthenticationFilter implements Filter
 {
 
     private final static String FILTER_APPLIED = "_authentication_filter_applied";
 
+    /**
+     * 
+     * @param config
+     * @throws javax.servlet.ServletException
+     */
     public void init(FilterConfig config) throws ServletException
     {
     }
 
+    /**
+     * Proves if the user is logged in
+     * @param request
+     * @param response
+     * @param chain
+     * @throws java.io.IOException
+     * @throws javax.servlet.ServletException
+     */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
     {
         HttpServletRequest hreq = (HttpServletRequest) request;

@@ -1,9 +1,3 @@
-/*
- * SessionBean1.java
- *
- * Created on 16.06.2008, 14:24:26
- */
- 
 package timetracking;
 
 import beans.UserBean;
@@ -20,7 +14,7 @@ import javax.faces.FacesException;
  * or method binding expression that references a managed bean using
  * this class.</p>
  *
- * @author manuel
+ * @author manuel, steffen
  */
 public class SessionBean1 extends AbstractSessionBean {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
@@ -36,11 +30,19 @@ public class SessionBean1 extends AbstractSessionBean {
 
     private UserBean user = null;
 
+    /**
+     * 
+     * @return user
+     */
     public UserBean getUser()
     {
         return user;
     }
 
+    /**
+     * 
+     * @param user
+     */
     public void setUser(UserBean user)
     {
         this.user = user;

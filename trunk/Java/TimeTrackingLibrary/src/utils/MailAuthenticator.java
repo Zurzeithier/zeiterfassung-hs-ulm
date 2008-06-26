@@ -6,7 +6,7 @@ import javax.mail.PasswordAuthentication;
 
 /**
  * Generates a PasswordAuthentication object for sendMail
- * @author Popeye
+ * @author manuel, steffen
  */
 class MailAuthenticator extends Authenticator
 {

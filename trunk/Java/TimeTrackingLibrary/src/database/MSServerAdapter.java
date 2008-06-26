@@ -17,7 +17,7 @@ import utils.LocalizeUtils;
 
 /**
  * Adapter for Microsoft database connections which contains all querys
- * @author manuel
+ * @author manuel, steffen
  */
 public class MSServerAdapter extends Database implements DBAdapter
 {

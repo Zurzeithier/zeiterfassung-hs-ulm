@@ -1,15 +1,10 @@
-/*
- * TTSystem.java
- *
- * Created on 24. Juni 2008, 17:18
- */
 package timetrackingclient;
 
 import application.Application;
 
 /**
  *
- * @author  manuel
+ * @author  manuel, steffen
  */
 public class TTSystem extends javax.swing.JDialog
 {

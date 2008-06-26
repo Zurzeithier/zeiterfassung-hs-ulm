@@ -1,9 +1,3 @@
-/*
- * DBError.java
- *
- * Created on 16.06.2008, 14:56:32
- */
- 
 package timetracking.error;
 
 import com.sun.rave.web.ui.appbase.AbstractPageBean;
@@ -18,7 +12,7 @@ import timetracking.ApplicationBean1;
  * lifecycle methods and event handlers where you may add behavior
  * to respond to incoming events.</p>
  *
- * @author manuel
+ * @author manuel, steffen
  */
 public class DBError extends AbstractPageBean {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">

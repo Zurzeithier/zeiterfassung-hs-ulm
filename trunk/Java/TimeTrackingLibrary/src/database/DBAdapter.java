@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Interface of database adapters
- * @author manuel
+ * @author manuel, steffen
  */
 public interface DBAdapter {
 

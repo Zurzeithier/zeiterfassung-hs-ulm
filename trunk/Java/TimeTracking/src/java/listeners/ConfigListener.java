@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package listeners;
 
 import application.ConfigDataProvider;
@@ -10,11 +6,15 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /**
- *
- * @author manuel
+ * Listener for the initialisation
+ * @author manuel, steffen
  */
 public class ConfigListener implements ServletContextListener
 {
+    /**
+     * Initialises the database and the pool size
+     * @param event
+     */
     public void contextInitialized(ServletContextEvent event)
     {
 
@@ -28,6 +28,10 @@ public class ConfigListener implements ServletContextListener
         ConfigDataProvider.setDBPoolSize(poolSize);
     }
 
+    /**
+     * 
+     * @param event
+     */
     public void contextDestroyed(ServletContextEvent event)
     {
     }

@@ -3,7 +3,7 @@ package application.data_beans;
 /**
  * Contains the address, username and password
  * for the mail server 
- * @author Popeye
+ * @author manuel, steffen
  */
 public class MailData
 {

@@ -1,8 +1,3 @@
-/*
- * Page1.java
- *
- * Created on 16.06.2008, 14:24:26
- */
 package timetracking;
 
 import beans.UserBean;
@@ -19,7 +14,7 @@ import javax.faces.FacesException;
  * lifecycle methods and event handlers where you may add behavior
  * to respond to incoming events.</p>
  *
- * @author manuel
+ * @author manuel, steffen
  */
 public class Login extends AbstractPageBean
 {
@@ -39,41 +34,73 @@ public class Login extends AbstractPageBean
     private String status = null;
     private boolean message = false;
 
+    /**
+     * 
+     * @return password
+     */
     public String getPassword()
     {
         return password;
     }
 
+    /**
+     * 
+     * @param password
+     */
     public void setPassword(String password)
     {
         this.password = password;
     }
 
+    /**
+     * 
+     * @return username
+     */
     public String getUsername()
     {
         return username;
     }
 
+    /**
+     * 
+     * @param username
+     */
     public void setUsername(String username)
     {
         this.username = username;
     }
 
+    /**
+     * 
+     * @return status
+     */
     public String getStatus()
     {
         return status;
     }
 
+    /**
+     * 
+     * @param status
+     */
     public void setStatus(String status)
     {
         this.status = status;
     }
 
+    /**
+     * 
+     * @return message
+     */
     public boolean isMessage()
     {
         return message;
     }
 
+    /**
+     * 
+     * @param message
+     */
     public void setMessage(boolean message)
     {
         this.message = message;
@@ -194,6 +221,11 @@ public class Login extends AbstractPageBean
         return (ApplicationBean1) getBean("ApplicationBean1");
     }
 
+    /**
+     * Prefaces the login routine
+     * @return "loginSucessfull"
+     * @throws exceptions.DBException
+     */
     public String loginButton_action() throws DBException
     {
         UserBean user = UserHandler.loginUser(username, password);
@@ -210,6 +242,11 @@ public class Login extends AbstractPageBean
         return null;
     }
 
+    /**
+     * Prefaces the COME booking routine
+     * @return "loginSucessfull"
+     * @throws exceptions.DBException
+     */
     public String kommenPushButton_action() throws DBException
     {
         UserBean user = UserHandler.loginUser(username, password);
@@ -237,6 +274,11 @@ public class Login extends AbstractPageBean
         return null;
     }
 
+    /**
+     * Prefaces the GO booking routine
+     * @return "loginSucessfull"
+     * @throws exceptions.DBException
+     */
     public String gehenPushButton_action() throws DBException
     {
         UserBean user = UserHandler.loginUser(username, password);
@@ -264,16 +306,29 @@ public class Login extends AbstractPageBean
         return null;
     }
 
+    /**
+     * 
+     * @return null
+     */
     public String bookingTab_action()
     {
         return null;
     }
 
+    /**
+     * 
+     * @return null
+     */
     public String loginTab_action()
     {
         return null;
     }
 
+    /**
+     * Prefaces the offbeat booking routine
+     * @return "loginSucessfull"
+     * @throws exceptions.DBException
+     */
     public String bookPushButton_action() throws DBException
     {
         UserBean user = getSessionBean1().getUser();
@@ -301,12 +356,20 @@ public class Login extends AbstractPageBean
         return null;
     }
 
+    /**
+     * 
+     * @return null
+     */
     public String dontBookPushButton_action()
     {
         message = false;
         return null;
     }
 
+    /**
+     * 
+     * @return "forgotPassword"
+     */
     public String newPasswordHyperlink_action()
     {
         return "forgotPassword";

@@ -2,7 +2,7 @@ package beans;
 
 /**
  * Represents one row of the TimeAccount table
- * @author manuel
+ * @author manuel, steffen
  */
 public class TimeAccountBean
 {

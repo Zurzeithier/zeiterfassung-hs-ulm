@@ -7,7 +7,7 @@ import java.util.Queue;
 /**
  * Pool which contains adapter objects
  * @param <E> 
- * @author manuel
+ * @author manuel, steffen
  */
 public abstract class ObjectPool<E>
 {

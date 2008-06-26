@@ -1,6 +1,3 @@
-/*
- * TimeTrackingClientView.java
- */
 package timetrackingclient;
 
 import application.Application;
@@ -17,7 +14,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 /**
- * The application's main frame.
+ * The application's main frame
+ * @author manuel, steffen
  */
 public class TimeTrackingClientView extends FrameView
 {

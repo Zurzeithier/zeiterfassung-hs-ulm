@@ -10,7 +10,7 @@ import javax.mail.internet.MimeMessage;
 
 /**
  * Provides methods for mail processing
- * @author Popeye
+ * @author manuel, steffen
  */
 public class MailUtils
 {

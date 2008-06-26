@@ -7,7 +7,7 @@ package pool;
 
 /**
  * Exception which is occurring while ObjectPool access
- * @author manuel
+ * @author manuel, steffen
  */
 public class ObjectPoolException extends Exception
 {

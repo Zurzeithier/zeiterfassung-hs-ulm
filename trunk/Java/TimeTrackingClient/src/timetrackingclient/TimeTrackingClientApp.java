@@ -1,14 +1,11 @@
-/*
- * TimeTrackingClientApp.java
- */
-
 package timetrackingclient;
 
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
 /**
- * The main class of the application.
+ * The main class of the application
+ * @author manuel, steffen
  */
 public class TimeTrackingClientApp extends SingleFrameApplication {
 
