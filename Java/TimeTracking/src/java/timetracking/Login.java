@@ -247,7 +247,7 @@ public class Login extends AbstractPageBean
      * @return "loginSucessfull"
      * @throws exceptions.DBException
      */
-    public String kommenPushButton_action() throws DBException
+    public String comePushButton_action() throws DBException
     {
         UserBean user = UserHandler.loginUser(username, password);
         if (user != null)
@@ -279,7 +279,7 @@ public class Login extends AbstractPageBean
      * @return "loginSucessfull"
      * @throws exceptions.DBException
      */
-    public String gehenPushButton_action() throws DBException
+    public String goPushButton_action() throws DBException
     {
         UserBean user = UserHandler.loginUser(username, password);
         if (user != null)

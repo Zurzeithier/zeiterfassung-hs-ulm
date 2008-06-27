@@ -14,7 +14,7 @@ Author     : manuel
                 </webuijsf:head>
                 <webuijsf:body id="body1" style="-rave-layout: grid">
                     <webuijsf:form id="form1">
-                        <webuijsf:tabSet id="loginTabSet" selected="loginTab" style="height: 238px; left: 48px; top: 48px; position: absolute; width: 310px">
+                        <webuijsf:tabSet id="loginTabSet" selected="bookingTab" style="height: 238px; left: 48px; top: 48px; position: absolute; width: 310px">
                             <webuijsf:tab actionExpression="#{Login.loginTab_action}" id="loginTab" tabIndex="4" text="Login">
                                 <webuijsf:panelLayout id="layoutPanel1" style="height: 203px; position: relative; width: 311px; -rave-layout: grid">
                                     <webuijsf:label id="label1" style="height: 24px; left: 24px; top: 48px; position: absolute; width: 94px" text="Benutzername"/>
@@ -35,9 +35,9 @@ Author     : manuel
                             </webuijsf:tab>
                             <webuijsf:tab actionExpression="#{Login.bookingTab_action}" id="bookingTab" tabIndex="5" text="Buchen">
                                 <webuijsf:panelLayout id="layoutPanel2" style="height: 177px; position: relative; width: 311px; -rave-layout: grid">
-                                    <webuijsf:button actionExpression="#{Login.kommenPushButton_action}" id="kommenPushButton"
+                                    <webuijsf:button actionExpression="#{Login.comePushButton_action}" id="comePushButton"
                                         style="height: 24px; left: 23px; top: 131px; position: absolute; width: 96px" tabIndex="3" text="Kommen"/>
-                                    <webuijsf:button actionExpression="#{Login.gehenPushButton_action}" id="gehenPushButton"
+                                    <webuijsf:button actionExpression="#{Login.goPushButton_action}" id="goPushButton"
                                         style="height: 24px; left: 143px; top: 131px; position: absolute; width: 96px" tabIndex="4" text="Gehen"/>
                                     <webuijsf:label id="label3" style="height: 24px; left: 24px; top: 48px; position: absolute; width: 94px" text="Benutzername"/>
                                     <webuijsf:label id="label4" style="height: 24px; left: 24px; top: 83px; position: absolute; width: 94px" text="Passwort"/>
