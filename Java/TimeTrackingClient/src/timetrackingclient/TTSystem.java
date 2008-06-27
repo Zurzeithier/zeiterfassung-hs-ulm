@@ -1,6 +1,8 @@
 package timetrackingclient;
 
 import application.Application;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -10,6 +12,7 @@ public class TTSystem extends javax.swing.JDialog
 {
 
     private TimeTrackingClientView loginDialog;
+    private DefaultTableModel bookingTableModel = new DefaultTableModel();
 
     /** Creates new form TTSystem
      * @param caller 
@@ -28,11 +31,40 @@ public class TTSystem extends javax.swing.JDialog
     {
         statusMessage.setText(null);
         usernameTextField.setText(Application.getInstance().getUser().getUsername());
+        
+        bookingTableModel.addColumn("Vorname");
+        bookingTableModel.addColumn("Nachname");
+        bookingTableModel.addColumn("Kommen Buchung");
+        bookingTableModel.addColumn("Gehen Buchung");
+        
+        updateBookingTable();
     }
-    
+
     private void updateBookingTable()
     {
-        
+        try
+        {
+            // Call Web Service Operation for Go-Booking
+            time_tracking.BookingHandlerServiceService serviceBooking = new time_tracking.BookingHandlerServiceService();
+            time_tracking.BookingHandlerService portBooking = serviceBooking.getBookingHandlerServicePort();
+            List<time_tracking.TimeBookingTableEntryBean> bookingList = portBooking.getBookings(Application.getInstance().getUser().getMid(), 10);
+
+            for (time_tracking.TimeBookingTableEntryBean entry : bookingList)
+            {
+                Object[] rowData = new Object[4];
+                rowData[0] = entry.getFirstname();
+                rowData[1] = entry.getLastname();
+                rowData[2] = entry.getComeBooking();
+                rowData[3] = entry.getGoBooking();
+                bookingTableModel.addRow(rowData);
+            }
+
+        }
+        catch (Exception ex)
+        {
+            System.err.println(ex.toString());
+        }
+
     }
 
     /** This method is called from within the constructor to
@@ -93,31 +125,12 @@ public class TTSystem extends javax.swing.JDialog
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        bookingsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Vorname", "Nachname", "Kommen Buchung", "Gehen Buchung"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        bookingsTable.setModel(bookingTableModel);
+        bookingsTable.setColumnSelectionAllowed(true);
         bookingsTable.setName("bookingsTable"); // NOI18N
+        bookingsTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(bookingsTable);
+        bookingsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -290,7 +303,7 @@ private void comeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         time_tracking.BookingHandlerServiceService serviceBooking = new time_tracking.BookingHandlerServiceService();
         time_tracking.BookingHandlerService portBooking = serviceBooking.getBookingHandlerServicePort();
         boolean resultBooking = portBooking.makeGoBooking(Application.getInstance().getUser().getMid());
-        
+
         updateBookingTable();
     }
     catch (Exception ex)
@@ -306,7 +319,7 @@ private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         time_tracking.BookingHandlerServiceService serviceBooking = new time_tracking.BookingHandlerServiceService();
         time_tracking.BookingHandlerService portBooking = serviceBooking.getBookingHandlerServicePort();
         boolean resultBooking = portBooking.makeGoBooking(Application.getInstance().getUser().getMid());
-        
+
         updateBookingTable();
     }
     catch (Exception ex)
@@ -320,13 +333,21 @@ private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
      */
     public static void main(String args[])
     {
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
+        java.awt.EventQueue.invokeLater(new 
+        
 
-            public void run()
+              Runnable()
+            {
+
+                    public void run()
             {
                 TTSystem dialog = new TTSystem(null, new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter()
+                dialog.addWindowListener(new java.awt
+                
+
+                      .event.WindowAdapter 
+                    
+                        ()
                 {
 
                     public void windowClosing(java.awt.event.WindowEvent e)
