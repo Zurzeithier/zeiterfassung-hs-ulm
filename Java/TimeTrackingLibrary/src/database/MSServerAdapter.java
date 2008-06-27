@@ -13,13 +13,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
+import pool.ObjectPoolException;
 import utils.LocalizeUtils;
 
 /**
  * Adapter for Microsoft database connections which contains all querys
  * @author manuel, steffen
  */
-public class MSServerAdapter extends Database implements DBAdapter
+class MSServerAdapter extends Database implements DBAdapter
 {
 
     /**
@@ -389,6 +390,41 @@ public class MSServerAdapter extends Database implements DBAdapter
         catch (SQLException ex)
         {
             throw new DBException(ex);
+        }
+    }
+
+    /**
+     * This function is called when the object was created from the pool
+     * @throws pool.ObjectPoolException
+     */
+    public void init() throws ObjectPoolException
+    {
+    }
+
+    /**
+     * Tests if the connection is still established.
+     * The MSServer doesn't support the function isValid.
+     * So we return always true 
+     * @return always true at the moment
+     */
+    public boolean validate()
+    {
+        return true;
+    }
+
+    /**
+     * This function is called when the pool destroys the object.
+     * @throws pool.ObjectPoolException
+     */
+    public void destroy() throws ObjectPoolException
+    {
+        try
+        {
+            getConnection().close();
+        }
+        catch (SQLException ex)
+        {
+            throw new ObjectPoolException(ex);
         }
     }
 

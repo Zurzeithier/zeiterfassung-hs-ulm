@@ -5,12 +5,13 @@ import beans.TimeBookingTableEntryBean;
 import beans.UserBean;
 import exceptions.DBException;
 import java.util.List;
+import pool.PoolObject;
 
 /**
  * Interface of database adapters
  * @author manuel, steffen
  */
-public interface DBAdapter {
+public interface DBAdapter extends PoolObject {
 
     /**
      * Modifies user data

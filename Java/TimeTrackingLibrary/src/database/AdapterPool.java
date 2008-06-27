@@ -27,8 +27,9 @@ public class AdapterPool
     /**
      * Returns DBAdapter back to the pool
      * @param adapter
+     * @throws ObjectPoolException 
      */
-    public synchronized static void releaseDBAdapter(DBAdapter adapter)
+    public synchronized static void releaseDBAdapter(DBAdapter adapter) throws ObjectPoolException
     {
         pool.returnObject(adapter);
     }
