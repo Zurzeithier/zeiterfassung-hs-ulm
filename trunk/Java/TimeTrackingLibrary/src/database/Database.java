@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  * Superclass for database connections
  * @author manuel, steffen
  */
-public class Database
+class Database
 {
     private final String m_Adress;
     private final String m_Username;

@@ -9,7 +9,7 @@ import java.sql.SQLException;
  * Pool which handles database adapter objects
  * @author manuel, steffen
  */
-public class DBAdapterObjectPool extends ObjectPool<DBAdapter>
+class DBAdapterObjectPool extends ObjectPool<DBAdapter>
 {
 
     /**

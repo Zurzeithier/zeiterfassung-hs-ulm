@@ -6,10 +6,11 @@ import java.util.Queue;
 
 /**
  * Pool which contains adapter objects
- * @param <E> 
+ * @param <E> must extend the PoolObject Interfaces.
+ * This promise the pool that the neccesary Methodes are implementet
  * @author manuel, steffen
  */
-public abstract class ObjectPool<E>
+public abstract class ObjectPool<E extends PoolObject>
 {
 
     /**
@@ -42,11 +43,24 @@ public abstract class ObjectPool<E>
     }
 
     /**
-     * Creates a new object for the pool.
+     * Creates a new object for the pool (FactoryMethod).
      * @return created object
      * @throws ObjectPoolException 
      */
     abstract protected E createObject() throws ObjectPoolException;
+     
+    /**
+     * Creates a new object for the pool while using createObject and calls init on the created Object.
+     * If you need a new object use this function.
+     * @return created object
+     * @throws ObjectPoolException 
+     */
+    private E newObject() throws ObjectPoolException
+    {
+        E obj = createObject();
+        obj.init();
+        return obj;
+    }
 
     /**
      * Obtains an instance from this pool. 
@@ -58,7 +72,7 @@ public abstract class ObjectPool<E>
         // if size is 0 and max size is not reached create new object
         if (m_Idle.size() == 0 && m_Active.size() < m_Size)
         {
-            m_Idle.add(createObject());
+            m_Idle.add(newObject());
         }
 
         // if no object ist idle
@@ -72,7 +86,7 @@ public abstract class ObjectPool<E>
                 if (m_Idle.isEmpty())
                 {
                     m_Active.remove();  
-                    m_Idle.add(createObject());
+                    m_Idle.add(newObject());
                 }
             }
             catch (InterruptedException ex)
@@ -97,12 +111,20 @@ public abstract class ObjectPool<E>
     /**
      * Return an instance to the pool.
      * @param object Instance which was borrowed from the pool
+     * @throws ObjectPoolException 
      */
-    public synchronized void returnObject(E object)
+    public synchronized void returnObject(E object) throws ObjectPoolException
     {
         if (m_Active.remove(object))
         {
-            m_Idle.add(object);
+            if (object.validate())
+            {
+                m_Idle.add(object);
+            }
+            else
+            {
+                m_Idle.add(newObject());
+            }
             notify();
         }
     }
