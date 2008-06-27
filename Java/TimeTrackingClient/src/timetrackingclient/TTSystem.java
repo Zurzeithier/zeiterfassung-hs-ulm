@@ -8,17 +8,21 @@ import application.Application;
  */
 public class TTSystem extends javax.swing.JDialog
 {
+    private TimeTrackingClientView loginDialog;
 
     /** Creates new form TTSystem
+     * @param caller 
      * @param parent
      * @param modal 
      */
-    public TTSystem(java.awt.Frame parent, boolean modal)
+    public TTSystem(TimeTrackingClientView caller, java.awt.Frame parent, boolean modal)
     {
         super(parent, modal);
+        this.loginDialog = caller;
         initComponents();
         reset();
     }
+
 
     private void reset()
     {
@@ -225,7 +229,10 @@ public class TTSystem extends javax.swing.JDialog
 
 private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
     Application.getInstance().setUser(null);
-    
+    if (loginDialog != null)
+    {
+        loginDialog.reset();
+    }
     this.setVisible(false);
 }//GEN-LAST:event_logoutButtonActionPerformed
 
@@ -276,7 +283,7 @@ private void changeUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
             public void run()
             {
-                TTSystem dialog = new TTSystem(new javax.swing.JFrame(), true);
+                TTSystem dialog = new TTSystem(null, new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter()
                 {
 
