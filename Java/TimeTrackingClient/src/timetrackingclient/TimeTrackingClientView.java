@@ -223,7 +223,7 @@ public class TimeTrackingClientView extends FrameView
                                 .addComponent(goPushButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(passwordTextField2)
                             .addComponent(usernameTextField2))))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,11 +286,11 @@ public class TimeTrackingClientView extends FrameView
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -324,18 +324,19 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         if (result != null)
         {
             Application.getInstance().setUser(result);
+            reset();
 
             if (ttSystem == null)
             {
                 JFrame mainFrame = TimeTrackingClientApp.getApplication().getMainFrame();
-                ttSystem = new TTSystem(this, mainFrame, true);
+                ttSystem = new TTSystem(mainFrame, true);
                 ttSystem.setLocationRelativeTo(mainFrame);
             }
             TimeTrackingClientApp.getApplication().show(ttSystem);
         }
         else
         {
-            statusMessage.setText("Benutzername/ Passwort ist falsch!");
+            statusMessage2.setText("Benutzername/ Passwort ist falsch!");
         }
     }
     catch (Exception ex)
@@ -355,6 +356,7 @@ private void comePushButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         if (resultUser != null)
         {
             Application.getInstance().setUser(resultUser);
+            reset();
 
            // Call Web Service Operation for Come-Booking
             time_tracking.BookingHandlerServiceService bookingService = new time_tracking.BookingHandlerServiceService();
@@ -365,7 +367,7 @@ private void comePushButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             if (ttSystem == null)
             {
                 JFrame mainFrame = TimeTrackingClientApp.getApplication().getMainFrame();
-                ttSystem = new TTSystem(this, mainFrame, true);
+                ttSystem = new TTSystem(mainFrame, true);
                 ttSystem.setLocationRelativeTo(mainFrame);
             }
             TimeTrackingClientApp.getApplication().show(ttSystem);
@@ -403,7 +405,7 @@ private void goPushButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             if (ttSystem == null)
             {
                 JFrame mainFrame = TimeTrackingClientApp.getApplication().getMainFrame();
-                ttSystem = new TTSystem(this, mainFrame, true);
+                ttSystem = new TTSystem(mainFrame, true);
                 ttSystem.setLocationRelativeTo(mainFrame);
             }
             TimeTrackingClientApp.getApplication().show(ttSystem);
@@ -422,33 +424,19 @@ private void goPushButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton comePushButton;
     private javax.swing.JButton goPushButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel loginWindow;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JPasswordField passwordTextField;
-    private javax.swing.JPasswordField passwordTextField1;
     private javax.swing.JPasswordField passwordTextField2;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JLabel statusAnimationLabel;
-    private javax.swing.JLabel statusMessage;
-    private javax.swing.JLabel statusMessage1;
     private javax.swing.JLabel statusMessage2;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
-    private javax.swing.JTextField usernameTextField;
-    private javax.swing.JTextField usernameTextField1;
     private javax.swing.JTextField usernameTextField2;
     // End of variables declaration//GEN-END:variables
     private final Timer messageTimer;

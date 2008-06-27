@@ -2,7 +2,6 @@ package timetrackingclient;
 
 import application.Application;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,18 +12,15 @@ import javax.swing.table.DefaultTableModel;
 public class TTSystem extends javax.swing.JDialog
 {
 
-    private TimeTrackingClientView loginDialog;
     private DefaultTableModel bookingTableModel = new DefaultTableModel();
 
     /** Creates new form TTSystem
-     * @param caller 
      * @param parent
      * @param modal 
      */
-    public TTSystem(TimeTrackingClientView caller, java.awt.Frame parent, boolean modal)
+    public TTSystem(java.awt.Frame parent, boolean modal)
     {
         super(parent, modal);
-        this.loginDialog = caller;
         initComponents();
         reset();
     }
@@ -98,6 +94,7 @@ public class TTSystem extends javax.swing.JDialog
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("Form"); // NOI18N
+        setResizable(false);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(timetrackingclient.TimeTrackingClientApp.class).getContext().getResourceMap(TTSystem.class);
         logoutButton.setText(resourceMap.getString("logoutButton.text")); // NOI18N
@@ -131,11 +128,8 @@ public class TTSystem extends javax.swing.JDialog
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
         bookingsTable.setModel(bookingTableModel);
-        bookingsTable.setColumnSelectionAllowed(true);
         bookingsTable.setName("bookingsTable"); // NOI18N
-        bookingsTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(bookingsTable);
-        bookingsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -144,11 +138,11 @@ public class TTSystem extends javax.swing.JDialog
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(comeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
-                        .addComponent(goButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 301, Short.MAX_VALUE)
+                        .addComponent(goButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -159,8 +153,8 @@ public class TTSystem extends javax.swing.JDialog
                     .addComponent(comeButton)
                     .addComponent(goButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(resourceMap.getString("jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
@@ -209,7 +203,7 @@ public class TTSystem extends javax.swing.JDialog
                             .addComponent(passwordTextField)
                             .addComponent(changeUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(statusMessage))
-                .addContainerGap(320, Short.MAX_VALUE))
+                .addContainerGap(391, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,7 +220,7 @@ public class TTSystem extends javax.swing.JDialog
                     .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(changeUserButton)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab(resourceMap.getString("jPanel3.TabConstraints.tabTitle"), jPanel3); // NOI18N
@@ -238,8 +232,8 @@ public class TTSystem extends javax.swing.JDialog
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                    .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -248,8 +242,7 @@ public class TTSystem extends javax.swing.JDialog
                 .addContainerGap()
                 .addComponent(logoutButton)
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE))
         );
 
         pack();
@@ -257,15 +250,10 @@ public class TTSystem extends javax.swing.JDialog
 
 private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
     Application.getInstance().setUser(null);
-    if (loginDialog != null)
-    {
-        loginDialog.reset();
-    }
     this.setVisible(false);
 }//GEN-LAST:event_logoutButtonActionPerformed
 
 private void passwordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextFieldActionPerformed
-// TODO add your handling code here:
 }//GEN-LAST:event_passwordTextFieldActionPerformed
 
 private void changeUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeUserButtonActionPerformed
@@ -302,12 +290,12 @@ private void changeUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_changeUserButtonActionPerformed
 
 private void comeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comeButtonActionPerformed
-    try
+try
     {
         // Call Web Service Operation for Go-Booking
         time_tracking.BookingHandlerServiceService serviceBooking = new time_tracking.BookingHandlerServiceService();
         time_tracking.BookingHandlerService portBooking = serviceBooking.getBookingHandlerServicePort();
-        boolean resultBooking = portBooking.makeGoBooking(Application.getInstance().getUser().getMid());
+        boolean resultBooking = portBooking.makeComeBooking(Application.getInstance().getUser().getMid());
 
         updateBookingTable();
     }
@@ -318,7 +306,7 @@ private void comeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_comeButtonActionPerformed
 
 private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButtonActionPerformed
-    try
+try
     {
         // Call Web Service Operation for Go-Booking
         time_tracking.BookingHandlerServiceService serviceBooking = new time_tracking.BookingHandlerServiceService();
@@ -346,7 +334,7 @@ private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
                     public void run()
             {
-                TTSystem dialog = new TTSystem(null, new javax.swing.JFrame(), true);
+                TTSystem dialog = new TTSystem(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt
                 
 
