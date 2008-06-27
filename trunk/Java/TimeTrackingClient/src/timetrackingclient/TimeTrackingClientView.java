@@ -312,7 +312,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if (ttSystem == null)
                 {
                     JFrame mainFrame = TimeTrackingClientApp.getApplication().getMainFrame();
-                    ttSystem = new TTSystem(mainFrame, true);
+                    ttSystem = new TTSystem(this, mainFrame, true);
                     ttSystem.setLocationRelativeTo(mainFrame);
                 }
                 TimeTrackingClientApp.getApplication().show(ttSystem);
