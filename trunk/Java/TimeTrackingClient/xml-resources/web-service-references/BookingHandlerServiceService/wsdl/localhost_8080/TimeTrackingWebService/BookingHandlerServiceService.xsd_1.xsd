@@ -52,18 +52,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="nextBookingIsCome">
-<xs:sequence>
-<xs:element name="mid" type="xs:int"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="nextBookingIsComeResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:boolean"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="makeComeBooking">
 <xs:sequence>
 <xs:element name="mid" type="xs:int"></xs:element>
@@ -71,6 +59,18 @@
 </xs:complexType>
 
 <xs:complexType name="makeComeBookingResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="nextBookingIsCome">
+<xs:sequence>
+<xs:element name="mid" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="nextBookingIsComeResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean"></xs:element>
 </xs:sequence>
