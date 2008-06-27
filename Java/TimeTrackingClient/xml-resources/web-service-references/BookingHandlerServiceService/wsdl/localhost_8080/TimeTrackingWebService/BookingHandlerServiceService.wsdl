@@ -4,26 +4,14 @@
 <xsd:import namespace="http://time_tracking/" schemaLocation="http://localhost:8080/TimeTrackingWebService/BookingHandlerServiceService?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
-<message name="nextBookingIsGo">
-<part name="parameters" element="tns:nextBookingIsGo"></part>
+<message name="getBookings">
+<part name="parameters" element="tns:getBookings"></part>
 </message>
-<message name="nextBookingIsGoResponse">
-<part name="parameters" element="tns:nextBookingIsGoResponse"></part>
+<message name="getBookingsResponse">
+<part name="parameters" element="tns:getBookingsResponse"></part>
 </message>
 <message name="DBException">
 <part name="fault" element="tns:DBException"></part>
-</message>
-<message name="makeComeBooking">
-<part name="parameters" element="tns:makeComeBooking"></part>
-</message>
-<message name="makeComeBookingResponse">
-<part name="parameters" element="tns:makeComeBookingResponse"></part>
-</message>
-<message name="makeGoBooking">
-<part name="parameters" element="tns:makeGoBooking"></part>
-</message>
-<message name="makeGoBookingResponse">
-<part name="parameters" element="tns:makeGoBookingResponse"></part>
 </message>
 <message name="nextBookingIsCome">
 <part name="parameters" element="tns:nextBookingIsCome"></part>
@@ -31,26 +19,28 @@
 <message name="nextBookingIsComeResponse">
 <part name="parameters" element="tns:nextBookingIsComeResponse"></part>
 </message>
-<message name="getBookings">
-<part name="parameters" element="tns:getBookings"></part>
+<message name="makeComeBooking">
+<part name="parameters" element="tns:makeComeBooking"></part>
 </message>
-<message name="getBookingsResponse">
-<part name="parameters" element="tns:getBookingsResponse"></part>
+<message name="makeComeBookingResponse">
+<part name="parameters" element="tns:makeComeBookingResponse"></part>
+</message>
+<message name="nextBookingIsGo">
+<part name="parameters" element="tns:nextBookingIsGo"></part>
+</message>
+<message name="nextBookingIsGoResponse">
+<part name="parameters" element="tns:nextBookingIsGoResponse"></part>
+</message>
+<message name="makeGoBooking">
+<part name="parameters" element="tns:makeGoBooking"></part>
+</message>
+<message name="makeGoBookingResponse">
+<part name="parameters" element="tns:makeGoBookingResponse"></part>
 </message>
 <portType name="BookingHandlerService">
-<operation name="nextBookingIsGo">
-<input message="tns:nextBookingIsGo"></input>
-<output message="tns:nextBookingIsGoResponse"></output>
-<fault message="tns:DBException" name="DBException"></fault>
-</operation>
-<operation name="makeComeBooking">
-<input message="tns:makeComeBooking"></input>
-<output message="tns:makeComeBookingResponse"></output>
-<fault message="tns:DBException" name="DBException"></fault>
-</operation>
-<operation name="makeGoBooking">
-<input message="tns:makeGoBooking"></input>
-<output message="tns:makeGoBookingResponse"></output>
+<operation name="getBookings">
+<input message="tns:getBookings"></input>
+<output message="tns:getBookingsResponse"></output>
 <fault message="tns:DBException" name="DBException"></fault>
 </operation>
 <operation name="nextBookingIsCome">
@@ -58,39 +48,25 @@
 <output message="tns:nextBookingIsComeResponse"></output>
 <fault message="tns:DBException" name="DBException"></fault>
 </operation>
-<operation name="getBookings">
-<input message="tns:getBookings"></input>
-<output message="tns:getBookingsResponse"></output>
+<operation name="makeComeBooking">
+<input message="tns:makeComeBooking"></input>
+<output message="tns:makeComeBookingResponse"></output>
+<fault message="tns:DBException" name="DBException"></fault>
+</operation>
+<operation name="nextBookingIsGo">
+<input message="tns:nextBookingIsGo"></input>
+<output message="tns:nextBookingIsGoResponse"></output>
+<fault message="tns:DBException" name="DBException"></fault>
+</operation>
+<operation name="makeGoBooking">
+<input message="tns:makeGoBooking"></input>
+<output message="tns:makeGoBookingResponse"></output>
 <fault message="tns:DBException" name="DBException"></fault>
 </operation>
 </portType>
 <binding name="BookingHandlerServicePortBinding" type="tns:BookingHandlerService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"></soap:binding>
-<operation name="nextBookingIsGo">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal"></soap:body>
-</input>
-<output>
-<soap:body use="literal"></soap:body>
-</output>
-<fault name="DBException">
-<soap:fault name="DBException" use="literal"></soap:fault>
-</fault>
-</operation>
-<operation name="makeComeBooking">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal"></soap:body>
-</input>
-<output>
-<soap:body use="literal"></soap:body>
-</output>
-<fault name="DBException">
-<soap:fault name="DBException" use="literal"></soap:fault>
-</fault>
-</operation>
-<operation name="makeGoBooking">
+<operation name="getBookings">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -114,7 +90,31 @@
 <soap:fault name="DBException" use="literal"></soap:fault>
 </fault>
 </operation>
-<operation name="getBookings">
+<operation name="makeComeBooking">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+<fault name="DBException">
+<soap:fault name="DBException" use="literal"></soap:fault>
+</fault>
+</operation>
+<operation name="nextBookingIsGo">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+<fault name="DBException">
+<soap:fault name="DBException" use="literal"></soap:fault>
+</fault>
+</operation>
+<operation name="makeGoBooking">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>

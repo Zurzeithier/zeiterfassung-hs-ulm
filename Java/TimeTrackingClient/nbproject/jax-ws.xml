@@ -14,6 +14,7 @@
       <package-name>time_tracking</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <use-dispatch>true</use-dispatch>
+      <wsimport-options/>
     </client>
   </clients>
   <jsr109>false</jsr109>
