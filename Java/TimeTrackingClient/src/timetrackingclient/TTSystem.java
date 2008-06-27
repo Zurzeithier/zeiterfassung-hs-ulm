@@ -17,12 +17,13 @@ public class TTSystem extends javax.swing.JDialog
     {
         super(parent, modal);
         initComponents();
-        init();
+        reset();
     }
 
-    private void init()
+    private void reset()
     {
         statusMessage.setText(null);
+        usernameTextField.setText(Application.getInstance().getUser().getUsername());
     }
     
     
@@ -224,6 +225,7 @@ public class TTSystem extends javax.swing.JDialog
 
 private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
     Application.getInstance().setUser(null);
+    
     this.setVisible(false);
 }//GEN-LAST:event_logoutButtonActionPerformed
 
