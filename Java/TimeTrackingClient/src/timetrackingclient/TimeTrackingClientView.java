@@ -102,14 +102,13 @@ public class TimeTrackingClientView extends FrameView
         });
     }
 
-    
     public void reset()
     {
-        usernameTextField.setText("");
-        passwordTextField.setText("");
+        statusMessage2.setText("");
+        usernameTextField2.setText("");
+        passwordTextField2.setText("");
     }
-    
-    
+
     /**
      * 
      */
@@ -136,14 +135,15 @@ public class TimeTrackingClientView extends FrameView
 
         loginWindow = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        usernameTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        passwordTextField = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        statusMessage = new javax.swing.JLabel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        usernameTextField2 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        passwordTextField2 = new javax.swing.JPasswordField();
+        jButton3 = new javax.swing.JButton();
+        statusMessage2 = new javax.swing.JLabel();
+        comePushButton = new javax.swing.JButton();
+        goPushButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -160,74 +160,93 @@ public class TimeTrackingClientView extends FrameView
 
         jTabbedPane1.setName("jTabbedPane1"); // NOI18N
 
-        jPanel1.setName("jPanel1"); // NOI18N
+        jPanel3.setName("jPanel1"); // NOI18N
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(timetrackingclient.TimeTrackingClientApp.class).getContext().getResourceMap(TimeTrackingClientView.class);
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
+        jLabel5.setText(resourceMap.getString("jLabel1.text")); // NOI18N
+        jLabel5.setName("jLabel1"); // NOI18N
 
-        usernameTextField.setText(resourceMap.getString("usernameTextField.text")); // NOI18N
-        usernameTextField.setName("usernameTextField"); // NOI18N
+        usernameTextField2.setText(resourceMap.getString("usernameTextField.text")); // NOI18N
+        usernameTextField2.setName("usernameTextField"); // NOI18N
 
-        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-        jLabel2.setName("jLabel2"); // NOI18N
+        jLabel6.setText(resourceMap.getString("jLabel2.text")); // NOI18N
+        jLabel6.setName("jLabel2"); // NOI18N
 
-        passwordTextField.setText(resourceMap.getString("passwordTextField.text")); // NOI18N
-        passwordTextField.setName("passwordTextField"); // NOI18N
+        passwordTextField2.setText(resourceMap.getString("passwordTextField.text")); // NOI18N
+        passwordTextField2.setName("passwordTextField"); // NOI18N
 
-        jButton1.setText(resourceMap.getString("loginPushButton.text")); // NOI18N
-        jButton1.setName("loginPushButton"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setText(resourceMap.getString("loginPushButton.text")); // NOI18N
+        jButton3.setName("loginPushButton"); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        statusMessage.setText(resourceMap.getString("statusMessage.text")); // NOI18N
-        statusMessage.setName("statusMessage"); // NOI18N
+        statusMessage2.setText(resourceMap.getString("statusMessage.text")); // NOI18N
+        statusMessage2.setName("statusMessage"); // NOI18N
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        comePushButton.setText(resourceMap.getString("comePushButton.text")); // NOI18N
+        comePushButton.setName("comePushButton"); // NOI18N
+        comePushButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comePushButtonActionPerformed(evt);
+            }
+        });
+
+        goPushButton.setText(resourceMap.getString("goPushButton.text")); // NOI18N
+        goPushButton.setName("goPushButton"); // NOI18N
+        goPushButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goPushButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(statusMessage)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(statusMessage2)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(passwordTextField)
-                                .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(129, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(comePushButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(goPushButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(passwordTextField2)
+                            .addComponent(usernameTextField2))))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(statusMessage)
+                .addComponent(statusMessage2)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(usernameTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(passwordTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(comePushButton)
+                    .addComponent(goPushButton))
+                .addContainerGap())
         );
 
-        jTabbedPane1.addTab(resourceMap.getString("jPanel1.TabConstraints.tabTitle"), jPanel1); // NOI18N
-
-        jTabbedPane2.setName("jTabbedPane2"); // NOI18N
-        jTabbedPane1.addTab(resourceMap.getString("jTabbedPane2.TabConstraints.tabTitle"), jTabbedPane2); // NOI18N
+        jTabbedPane1.addTab(resourceMap.getString("jPanel1.TabConstraints.tabTitle"), jPanel3); // NOI18N
 
         loginWindow.add(jTabbedPane1);
 
@@ -267,11 +286,11 @@ public class TimeTrackingClientView extends FrameView
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -295,56 +314,142 @@ public class TimeTrackingClientView extends FrameView
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    try
+    { // Call Web Service Operation
+        time_tracking.UserHandlerServiceService service = new time_tracking.UserHandlerServiceService();
+        time_tracking.UserHandlerService port = service.getUserHandlerServicePort();
+        String pwd = new String(passwordTextField2.getPassword());
+        time_tracking.UserBean result = port.loginUser(usernameTextField2.getText(), pwd);
 
-        try
-        { // Call Web Service Operation
-            time_tracking.UserHandlerServiceService service = new time_tracking.UserHandlerServiceService();
-            time_tracking.UserHandlerService port = service.getUserHandlerServicePort();
-
-            // TODO process result here
-            String pwd = new String(passwordTextField.getPassword());
-            time_tracking.UserBean result = port.loginUser(usernameTextField.getText(), pwd);
-
-            if (result != null)
-            {
-                Application.getInstance().setUser(result);
- 
-                if (ttSystem == null)
-                {
-                    JFrame mainFrame = TimeTrackingClientApp.getApplication().getMainFrame();
-                    ttSystem = new TTSystem(this, mainFrame, true);
-                    ttSystem.setLocationRelativeTo(mainFrame);
-                }
-                TimeTrackingClientApp.getApplication().show(ttSystem);
-            }
-            else
-            {
-                statusMessage.setText("Benutzername/ Passwort ist falsch!");
-            }
-        }
-        catch (Exception ex)
+        if (result != null)
         {
-            // TODO handle custom exceptions here
-        }
+            Application.getInstance().setUser(result);
 
+            if (ttSystem == null)
+            {
+                JFrame mainFrame = TimeTrackingClientApp.getApplication().getMainFrame();
+                ttSystem = new TTSystem(this, mainFrame, true);
+                ttSystem.setLocationRelativeTo(mainFrame);
+            }
+            TimeTrackingClientApp.getApplication().show(ttSystem);
+        }
+        else
+        {
+            statusMessage.setText("Benutzername/ Passwort ist falsch!");
+        }
     }
-//GEN-LAST:event_jButton1ActionPerformed
+    catch (Exception ex)
+    {
+        System.err.println(ex.toString());
+    }
+}//GEN-LAST:event_jButton1ActionPerformed
+
+private void comePushButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comePushButtonActionPerformed
+    try
+    { // Call Web Service Operation
+        time_tracking.UserHandlerServiceService serviceUser = new time_tracking.UserHandlerServiceService();
+        time_tracking.UserHandlerService portUser = serviceUser.getUserHandlerServicePort();
+        String pwd = new String(passwordTextField2.getPassword());
+        time_tracking.UserBean resultUser = portUser.loginUser(usernameTextField2.getText(), pwd);
+
+        if (resultUser != null)
+        {
+            Application.getInstance().setUser(resultUser);
+
+           // Call Web Service Operation for Come-Booking
+            time_tracking.BookingHandlerServiceService bookingService = new time_tracking.BookingHandlerServiceService();
+            time_tracking.BookingHandlerService portBooking = bookingService.getBookingHandlerServicePort();
+            boolean resultBooking = portBooking.makeComeBooking(resultUser.getMid());
+            
+            
+            if (ttSystem == null)
+            {
+                JFrame mainFrame = TimeTrackingClientApp.getApplication().getMainFrame();
+                ttSystem = new TTSystem(this, mainFrame, true);
+                ttSystem.setLocationRelativeTo(mainFrame);
+            }
+            TimeTrackingClientApp.getApplication().show(ttSystem);
+        }
+        else
+        {
+            statusMessage2.setText("Benutzername/ Passwort ist falsch!");
+        }
+    }
+    catch (Exception ex)
+    {
+        System.err.println(ex.toString());
+    }
+}//GEN-LAST:event_comePushButtonActionPerformed
+
+private void goPushButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goPushButtonActionPerformed
+    try
+    {
+        // Call Web Service Operation
+        time_tracking.UserHandlerServiceService serviceUser = new time_tracking.UserHandlerServiceService();
+        time_tracking.UserHandlerService portUser = serviceUser.getUserHandlerServicePort();
+        String pwd = new String(passwordTextField2.getPassword());
+        time_tracking.UserBean resultUser = portUser.loginUser(usernameTextField2.getText(), pwd);
+
+        if (resultUser != null)
+        {
+            Application.getInstance().setUser(resultUser);
+
+            // Call Web Service Operation for Go-Booking
+            time_tracking.BookingHandlerServiceService serviceBooking = new time_tracking.BookingHandlerServiceService();
+            time_tracking.BookingHandlerService portBooking = serviceBooking.getBookingHandlerServicePort();
+            boolean resultBooking = portBooking.makeGoBooking(resultUser.getMid());
+
+
+            if (ttSystem == null)
+            {
+                JFrame mainFrame = TimeTrackingClientApp.getApplication().getMainFrame();
+                ttSystem = new TTSystem(this, mainFrame, true);
+                ttSystem.setLocationRelativeTo(mainFrame);
+            }
+            TimeTrackingClientApp.getApplication().show(ttSystem);
+        }
+        else
+        {
+            statusMessage2.setText("Benutzername/ Passwort ist falsch!");
+        }
+    }
+    catch (Exception ex)
+    {
+        System.err.println(ex.toString());
+    }
+}//GEN-LAST:event_goPushButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton comePushButton;
+    private javax.swing.JButton goPushButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JPanel loginWindow;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JPasswordField passwordTextField;
+    private javax.swing.JPasswordField passwordTextField1;
+    private javax.swing.JPasswordField passwordTextField2;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessage;
+    private javax.swing.JLabel statusMessage1;
+    private javax.swing.JLabel statusMessage2;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
     private javax.swing.JTextField usernameTextField;
+    private javax.swing.JTextField usernameTextField1;
+    private javax.swing.JTextField usernameTextField2;
     // End of variables declaration//GEN-END:variables
     private final Timer messageTimer;
     private final Timer busyIconTimer;
