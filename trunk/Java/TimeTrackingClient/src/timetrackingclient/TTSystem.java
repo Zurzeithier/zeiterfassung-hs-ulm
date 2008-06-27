@@ -1,6 +1,8 @@
 package timetrackingclient;
 
 import application.Application;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -49,13 +51,16 @@ public class TTSystem extends javax.swing.JDialog
             time_tracking.BookingHandlerService portBooking = serviceBooking.getBookingHandlerServicePort();
             List<time_tracking.TimeBookingTableEntryBean> bookingList = portBooking.getBookings(Application.getInstance().getUser().getMid(), 10);
 
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy 'um' HH:mm 'Uhr'");
+            
+            bookingTableModel.setRowCount(0);
             for (time_tracking.TimeBookingTableEntryBean entry : bookingList)
             {
                 Object[] rowData = new Object[4];
                 rowData[0] = entry.getFirstname();
                 rowData[1] = entry.getLastname();
-                rowData[2] = entry.getComeBooking();
-                rowData[3] = entry.getGoBooking();
+                rowData[2] = dateFormatter.format(entry.getComeBooking().toGregorianCalendar().getTime());
+                rowData[3] = dateFormatter.format(entry.getGoBooking().toGregorianCalendar().getTime());
                 bookingTableModel.addRow(rowData);
             }
 
@@ -350,6 +355,7 @@ private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         ()
                 {
 
+                    @Override
                     public void windowClosing(java.awt.event.WindowEvent e)
                     {
                         System.exit(0);
