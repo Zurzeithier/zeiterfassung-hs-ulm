@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--!DOCTYPE TypeManagement 
+[
+	<!ELEMENT TypeManagement (Types?, Locations?, IrresolvableTypes?)>
+	<!ATTLIST TypeManagement projectID ID #REQUIRED>
+
+	<!ELEMENT Locations (Location*)>
+	<!ATTLIST Locations
+			nextID CDATA #IMPLIED >
+
+	<!ELEMENT Location ANY>
+	<!ATTLIST Location
+			locID ID #IMPLIED
+			href CDATA #IMPLIED
+			importProjectLoc CDATA #IMPLIED
+			importProjID CDATA #IMPLIED >
+
+	<!ELEMENT Types (Type*)>
+	<!ELEMENT Type ANY>
+	<!ATTLIST Type
+			id ID #IMPLIED
+			location IDREF #IMPLIED
+			name CDATA #IMPLIED >
+
+	<!ELEMENT IrresolvableTypes (Irresolvable*)>
+	<!ELEMENT Irresolvable ANY>
+	<!ATTLIST Irresolvable 
+		   id CDATA #IMPLIED >
+]--><TypeManagement projectID="DCE.7394554C-D083-4B66-FFE9-9B26D1465E9D">
+	<Locations nextID="1">
+	<Location locID="T.0" href="./TimeTrackingLibrary-Model.etup"/></Locations>
+
+   <Types>
+   <Type id="DCE.470A22E4-63CC-540F-8E18-B5595004AA15" location="T.0" name="Unnamed"/></Types>
+
+	<IrresolvableTypes>
+	</IrresolvableTypes>
+
+</TypeManagement>
