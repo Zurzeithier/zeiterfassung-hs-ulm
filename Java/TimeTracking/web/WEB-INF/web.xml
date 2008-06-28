@@ -121,7 +121,7 @@
         <location>/error/ExceptionHandler</location>
     </error-page>
     <error-page>
-        <exception-type>exceptions.DBException</exception-type>
+        <error-code>500</error-code>
         <location>/error/DBError.jsp</location>
     </error-page>
     <jsp-config>

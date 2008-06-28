@@ -14,7 +14,7 @@ Author     : manuel
                 </webuijsf:head>
                 <webuijsf:body id="body1" style="-rave-layout: grid">
                     <webuijsf:form id="form1">
-                        <webuijsf:tabSet id="loginTabSet" selected="bookingTab" style="height: 238px; left: 48px; top: 48px; position: absolute; width: 310px">
+                        <webuijsf:tabSet id="loginTabSet" selected="loginTab" style="height: 238px; left: 48px; top: 48px; position: absolute; width: 310px">
                             <webuijsf:tab actionExpression="#{Login.loginTab_action}" id="loginTab" tabIndex="4" text="Login">
                                 <webuijsf:panelLayout id="layoutPanel1" style="height: 203px; position: relative; width: 311px; -rave-layout: grid">
                                     <webuijsf:label id="label1" style="height: 24px; left: 24px; top: 48px; position: absolute; width: 94px" text="Benutzername"/>
