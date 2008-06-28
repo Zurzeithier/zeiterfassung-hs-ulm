@@ -39,7 +39,7 @@ public class TTSystem extends AbstractPageBean
     private boolean message = false;
     private ObjectListDataProvider bookings = new ObjectListDataProvider(TimeBookingTableEntryBean.class);
     private DateTimeConverter dateTimeConverter = new DateTimeConverter();
-    private TabSet tabSet1 = new TabSet();
+    private TabSet ttSystemTabSet = new TabSet();
 
     /**
      * 
@@ -117,18 +117,18 @@ public class TTSystem extends AbstractPageBean
      * 
      * @return tabSet1
      */
-    public TabSet getTabSet1()
+    public TabSet getTtSystemTabSet()
     {
-        return tabSet1;
+        return ttSystemTabSet;
     }
 
     /**
      * 
      * @param tabSet1
      */
-    public void setTabSet1(TabSet tabSet1)
+    public void setTtSystemTabSet(TabSet tabSet1)
     {
-        this.tabSet1 = tabSet1;
+        this.ttSystemTabSet = tabSet1;
     }
 
     /**
@@ -263,7 +263,7 @@ public class TTSystem extends AbstractPageBean
      * 
      * @return null
      */
-    public String tab1_action()
+    public String buchungenTab_action()
     {
         return null;
     }
@@ -272,7 +272,7 @@ public class TTSystem extends AbstractPageBean
      * 
      * @return null
      */
-    public String tab2_action()
+    public String einstellungenTab_action()
     {
         return null;
     }
