@@ -16,7 +16,7 @@ Author     : manuel
                     <webuijsf:form id="form1">
                         <webuijsf:tabSet id="loginTabSet" selected="loginTab" style="height: 238px; left: 48px; top: 48px; position: absolute; width: 310px">
                             <webuijsf:tab actionExpression="#{Login.loginTab_action}" id="loginTab" tabIndex="4" text="Login">
-                                <webuijsf:panelLayout id="layoutPanel1" style="height: 203px; position: relative; width: 311px; -rave-layout: grid">
+                                <webuijsf:panelLayout id="layoutPanel1" style="height: 203px; position: relative; width: 311px; -rave-layout: grid" styleClass="tab-content">
                                     <webuijsf:label id="label1" style="height: 24px; left: 24px; top: 48px; position: absolute; width: 94px" text="Benutzername"/>
                                     <webuijsf:label id="label2" style="height: 24px; left: 24px; top: 83px; position: absolute; width: 94px" text="Passwort"/>
                                     <webuijsf:textField id="usernameTextField" style="position: absolute; left: 120px; top: 48px; width: 120px; height: 24px"
@@ -28,13 +28,13 @@ Author     : manuel
                                     <webuijsf:label id="statusLabel" style="height: 24px; left: 24px; top: 10px; position: absolute; width: 262px"
                                         styleClass="errorMessage" text="#{Login.status}"/>
                                     <webuijsf:label id="label5"
-                                        style="font-weight: normal; height: 22px; left: 24px; top: 168px; position: absolute; width: 118px" text="Passwort vergessen?"/>
+                                        style="font-weight: normal; height: 22px; left: 24px; top: 168px; position: absolute; width: 142px" text="Passwort vergessen?"/>
                                     <webuijsf:hyperlink actionExpression="#{Login.newPasswordHyperlink_action}" id="newPasswordHyperlink"
-                                        style="height: 22px; left: 144px; top: 168px; position: absolute; width: 70px" text="hier klicken"/>
+                                        style="height: 22px; left: 168px; top: 168px; position: absolute; width: 70px" text="hier klicken"/>
                                 </webuijsf:panelLayout>
                             </webuijsf:tab>
-                            <webuijsf:tab actionExpression="#{Login.bookingTab_action}" id="bookingTab" tabIndex="5" text="Buchen">
-                                <webuijsf:panelLayout id="layoutPanel2" style="height: 177px; position: relative; width: 311px; -rave-layout: grid">
+                            <webuijsf:tab actionExpression="#{Login.bookingTab_action}" id="bookingTab" styleClass="tab-header" tabIndex="5" text="Buchen">
+                                <webuijsf:panelLayout id="layoutPanel2" style="height: 202px; position: relative; width: 311px; -rave-layout: grid" styleClass="tab-content">
                                     <webuijsf:button actionExpression="#{Login.comePushButton_action}" id="comePushButton"
                                         style="height: 24px; left: 23px; top: 131px; position: absolute; width: 96px" tabIndex="3" text="Kommen"/>
                                     <webuijsf:button actionExpression="#{Login.goPushButton_action}" id="goPushButton"

@@ -17,7 +17,7 @@
                         <webuijsf:textField columns="25" id="textField1" style="height: 24px; left: 144px; top: 72px; position: absolute; width: 168px" text="#{ForgotPassword.username}"/>
                         <webuijsf:label id="label1" style="height: 24px; left: 48px; top: 72px; position: absolute; width: 94px" text="Benutzername"/>
                         <webuijsf:button actionExpression="#{ForgotPassword.sendNewPassword_action}" id="sendNewPassword"
-                            style="height: 24px; left: 143px; top: 120px; position: absolute; width: 167px" text="neues Passwort zusenden"/>
+                            style="height: 24px; left: 143px; top: 120px; position: absolute; width: 192px" styleClass="button" text="neues Passwort zusenden"/>
                         <webuijsf:label id="statusLabel1" style="height: 24px; left: 48px; top: 24px; position: absolute; width: 262px"
                             styleClass="errorMessage" text="#{ForgotPassword.status}"/>
                     </webuijsf:form>
